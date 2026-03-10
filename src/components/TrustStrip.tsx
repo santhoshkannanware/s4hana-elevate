@@ -1,33 +1,20 @@
-import { motion } from "framer-motion";
-
-const trustItems = [
-  "Founded 2021 · Chennai",
-  "India Innovation Centre",
-  "UAE Presence",
-  "USA Office",
-  "SAP Partner",
-  "ISO 27001:2022",
+const items = [
+  "SAP S/4HANA", "Finance & Controlling", "SAP SuccessFactors", "SAP Ariba",
+  "AI-Accelerated SAP", "SAP Analytics Cloud", "SAP CX Suite", "Group Reporting",
+  "SAP Treasury", "SAP BTP", "GROW with SAP", "SAP Datasphere",
 ];
 
 export default function TrustStrip() {
   return (
-    <section className="border-y border-border/30 py-6">
-      <div className="section-container">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 md:gap-x-12">
-          {trustItems.map((item, i) => (
-            <motion.span
-              key={item}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="font-body text-xs md:text-sm text-muted-foreground"
-            >
-              {item}
-            </motion.span>
-          ))}
-        </div>
+    <div className="overflow-hidden py-3 bg-white border-y border-border">
+      <div className="flex w-max" style={{ animation: "ticker 45s linear infinite" }}>
+        {[...items, ...items].map((item, i) => (
+          <div key={i} className="flex items-center gap-6 px-6 text-[.75rem] text-muted-foreground whitespace-nowrap">
+            <span className={i % 2 === 0 ? "font-semibold text-foreground/80" : ""}>{item}</span>
+            <span className="w-1 h-1 rounded-full bg-border" />
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
