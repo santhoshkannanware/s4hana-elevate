@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const orbitModules = [
   { label: "S/4HANA Finance", sub: "Real-time GL & Close", color: "#E8A000", icon: "M12 2v20M2 12h20M7 7l10 10M17 7l-10 10" },
