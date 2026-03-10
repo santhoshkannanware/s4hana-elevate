@@ -2,44 +2,21 @@ import { motion } from "framer-motion";
 
 export default function FinalCTA() {
   return (
-    <section className="section-spacing relative overflow-hidden" id="contact">
-      {/* Gradient backdrop */}
-      <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(ellipse at center, hsl(var(--electric-blue) / 0.08), transparent 70%)" }} />
-
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center"
-        >
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-            Bring clarity to your{" "}
-            <span className="text-gradient-blue">SAP finance landscape</span>
-          </h2>
-          <p className="font-body text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">
-            Partner with Kannanware to modernize finance operations, unlock better decisions, and accelerate transformation with SAP expertise and AI‑enabled thinking.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <a
-              href="mailto:partner@kannanware.com?subject=Strategy%20Call%20Request"
-              className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground font-body font-bold text-base rounded-md hover:bg-primary/90 transition-colors duration-200"
-            >
-              Schedule a Strategy Call
-            </a>
-            <a
-              href="mailto:partner@kannanware.com?subject=RFP%20Submission"
-              className="inline-flex items-center px-8 py-4 glass-panel glass-panel-hover text-foreground font-body font-bold text-base rounded-md transition-all duration-200"
-            >
-              Submit an RFP
-            </a>
-          </div>
-          <a href="mailto:partner@kannanware.com" className="font-body text-sm text-muted-foreground hover:text-electric-blue transition-colors duration-200">
-            partner@kannanware.com
-          </a>
-        </motion.div>
-      </div>
-    </section>
+    <div className="py-32 px-5 md:px-10 relative overflow-hidden text-center" id="cta" style={{ background: "hsl(var(--bg2))" }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[22vw] font-bold text-[rgba(232,160,0,.06)] whitespace-nowrap pointer-events-none leading-none select-none tracking-tight">SAP</div>
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 max-w-[820px] mx-auto">
+        <div className="eyebrow justify-center">Let's Talk</div>
+        <h2 className="font-bold leading-none tracking-tight text-foreground mb-4" style={{ fontSize: "clamp(2.6rem, 6.5vw, 6.5rem)" }}>
+          Ready to transform<br /><em className="italic text-gold">with SAP?</em>
+        </h2>
+        <p className="text-base text-muted-foreground max-w-[480px] mx-auto mb-10 leading-[1.7] font-light">
+          Whether starting a new SAP journey, optimising an existing landscape, or seeking managed support — Kannanware is your AI-first SAP partner.
+        </p>
+        <div className="flex gap-3.5 justify-center flex-wrap">
+          <button className="px-10 py-4 bg-gold text-black text-[.88rem] font-semibold rounded-full cursor-none shadow-[0_4px_20px_rgba(232,160,0,.3)] hover:translate-y-[-3px] hover:shadow-[0_14px_40px_rgba(232,160,0,.45)] transition-all duration-250">Book a Meeting →</button>
+          <button className="px-10 py-4 bg-transparent text-foreground text-[.88rem] font-normal border-[1.5px] border-border rounded-full cursor-none hover:border-gold hover:text-gold hover:translate-y-[-3px] transition-all duration-250">Download Capability Deck</button>
+        </div>
+      </motion.div>
+    </div>
   );
 }
