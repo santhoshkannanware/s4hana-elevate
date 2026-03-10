@@ -34,9 +34,9 @@ export default function IndustryFocus() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card border border-border rounded p-5 hover:border-electric-blue/30 transition-colors duration-200 flex items-start gap-2"
+              className="bg-card border border-border rounded-md p-5 hover:border-warm-gold/30 transition-colors duration-200 flex items-start gap-2"
             >
-              <span className="text-electric-blue text-lg leading-none">•</span>
+              <span className="text-warm-gold text-lg leading-none">•</span>
               <span className="font-body text-sm font-medium text-foreground">{ind}</span>
             </motion.div>
           ))}

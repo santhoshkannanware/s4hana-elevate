@@ -11,7 +11,7 @@ const themes = [
 
 export default function CultureSection() {
   return (
-    <section className="section-spacing">
+    <section className="section-spacing bg-card">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -38,7 +38,7 @@ export default function CultureSection() {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="flex items-start gap-3 p-4"
               >
-                <span className="text-electric-blue text-lg leading-none mt-0.5">•</span>
+                <span className="text-warm-gold text-lg leading-none mt-0.5">•</span>
                 <div>
                   <div className="font-heading text-sm font-bold text-foreground">{title}</div>
                   <div className="font-body text-xs text-muted-foreground">{desc}</div>

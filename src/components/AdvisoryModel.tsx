@@ -9,7 +9,7 @@ const pillars = [
 
 export default function AdvisoryModel() {
   return (
-    <section className="section-spacing">
+    <section className="section-spacing bg-card">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,13 +34,13 @@ export default function AdvisoryModel() {
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className="relative"
             >
-              <div className="text-electric-blue font-heading text-4xl md:text-5xl font-bold opacity-20 mb-2">
+              <div className="text-warm-gold font-heading text-4xl md:text-5xl font-bold opacity-30 mb-2">
                 {p.question}
               </div>
               <div className="font-heading text-lg font-bold text-foreground mb-2">{p.phase}</div>
               <div className="font-body text-sm text-muted-foreground leading-relaxed">{p.desc}</div>
               {i < pillars.length - 1 && (
-                <div className="hidden md:block absolute top-8 -right-3 text-electric-blue/30 text-2xl">→</div>
+                <div className="hidden md:block absolute top-8 -right-3 text-warm-gold/40 text-2xl">→</div>
               )}
             </motion.div>
           ))}

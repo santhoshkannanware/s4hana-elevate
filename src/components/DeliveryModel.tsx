@@ -34,7 +34,6 @@ export default function DeliveryModel() {
           </p>
         </motion.div>
 
-        {/* Models */}
         <div className="grid md:grid-cols-3 gap-4 mb-16">
           {models.map((m, i) => (
             <motion.div
@@ -43,7 +42,7 @@ export default function DeliveryModel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-card border border-border rounded p-5 hover:border-electric-blue/30 transition-colors duration-200"
+              className="bg-card border border-border rounded-md p-5 hover:border-warm-gold/30 transition-colors duration-200"
             >
               <div className="font-heading text-lg font-bold text-foreground mb-1">{m.name}</div>
               <div className="font-body text-sm text-muted-foreground">{m.desc}</div>
@@ -51,7 +50,6 @@ export default function DeliveryModel() {
           ))}
         </div>
 
-        {/* Phases timeline */}
         <div className="relative">
           <div className="hidden md:block absolute top-4 left-0 right-0 h-[1px] bg-border" />
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-2">
@@ -64,8 +62,8 @@ export default function DeliveryModel() {
                 transition={{ duration: 0.3, delay: i * 0.06 }}
                 className="text-center relative pt-6 md:pt-8"
               >
-                <div className="hidden md:block absolute top-2.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-background border-2 border-electric-blue/40" />
-                <div className="text-electric-blue font-heading text-xs font-bold mb-1">{String(i + 1).padStart(2, "0")}</div>
+                <div className="hidden md:block absolute top-2.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-background border-2 border-warm-gold/40" />
+                <div className="text-warm-gold font-heading text-xs font-bold mb-1">{String(i + 1).padStart(2, "0")}</div>
                 <div className="font-body text-xs text-foreground leading-snug">{phase}</div>
               </motion.div>
             ))}
