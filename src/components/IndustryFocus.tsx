@@ -1,72 +1,42 @@
 import { motion } from "framer-motion";
 
 const industries = [
-  {
-    name: "Manufacturing & Industrial",
-    stat: "20–40% cycle time reduction",
-    challenges: "Multi-plant cost allocation, production cost visibility, intercompany settlement at scale.",
-  },
-  {
-    name: "Energy & Natural Resources",
-    stat: "45% operational efficiency gain",
-    challenges: "Commodity price hedging, multi-jurisdiction compliance, capital asset lifecycle management.",
-  },
-  {
-    name: "Food, Beverage & Consumer",
-    stat: "70% manual effort reduction",
-    challenges: "POS and treasury reconciliation, margin optimization, revenue recognition complexity.",
-  },
-  {
-    name: "Agro & Automotive",
-    stat: "35% faster reporting",
-    challenges: "Seasonal demand planning, supply chain cost optimization, multi-currency consolidation.",
-  },
+  { code: "EN", title: "Energy & Natural Resources", desc: "JVA, production, asset management, hedging" },
+  { code: "MF", title: "Discrete Manufacturing", desc: "PP, cost controlling, supply chain, QM" },
+  { code: "FS", title: "Financial Services", desc: "IFRS 9, 17, regulatory reporting" },
+  { code: "PS", title: "Public Services", desc: "Fund management, grants, IPSAS reporting" },
+  { code: "CR", title: "Consumer & Retail", desc: "Trade promotions, D2C, revenue, inventory" },
+  { code: "FB", title: "Food & Beverage", desc: "Batch management, COGS, compliance" },
+  { code: "PR", title: "Professional Services", desc: "Project systems, resource billing, PSA" },
+  { code: "HL", title: "Healthcare & Life Sciences", desc: "GxP, materials, serialisation, clinical finance" },
 ];
 
 export default function IndustryFocus() {
   return (
-    <section className="section-spacing" id="industries">
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-20 max-w-3xl"
-        >
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-            Industry{" "}
-            <span className="text-gradient-blue">focus</span>
-          </h2>
-          <p className="font-body text-lg text-muted-foreground max-w-2xl">
-            SAP Finance transformation tailored to your industry's most critical challenges.
-          </p>
+    <section className="section-spacing bg-white" id="industries">
+      <div className="section-container mb-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <div className="eyebrow">Industries</div>
+          <h2 className="sec-h">Deep experience<br /><em>across every sector.</em></h2>
         </motion.div>
+      </div>
 
-        {/* Full-width editorial rows — no cards */}
-        <div className="space-y-0">
-          {industries.map((ind, i) => (
-            <motion.div
-              key={ind.name}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group grid md:grid-cols-[1fr_auto_1.5fr] gap-4 md:gap-12 items-baseline py-10 md:py-12 border-t border-border/40 cursor-default"
-            >
-              <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground group-hover:text-electric-blue transition-colors duration-300">
-                {ind.name}
-              </h3>
-              <span className="font-heading text-sm font-bold text-cyan-glow whitespace-nowrap">
-                {ind.stat}
-              </span>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/60 transition-colors duration-300">
-                {ind.challenges}
-              </p>
-            </motion.div>
-          ))}
-          <div className="border-t border-border/40" />
-        </div>
+      <div className="flex overflow-x-auto border-t border-border" style={{ scrollbarWidth: "none" }}>
+        {industries.map((ind, i) => (
+          <motion.div
+            key={ind.code}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+            className="w-[200px] shrink-0 px-5 py-7 border-r border-border bg-white cursor-none relative overflow-hidden transition-colors duration-200 hover:bg-bg2 group"
+          >
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gold transform scale-x-0 origin-left transition-transform duration-400 group-hover:scale-x-100" />
+            <div className="text-[.68rem] font-bold tracking-[.14em] text-gold bg-[rgba(232,160,0,.08)] border border-[rgba(232,160,0,.18)] inline-flex items-center justify-center w-9 h-7 mb-4 transition-all duration-200 group-hover:bg-[rgba(232,160,0,.2)] group-hover:border-[rgba(232,160,0,.35)]">{ind.code}</div>
+            <h4 className="text-[.86rem] font-bold text-foreground mb-1.5">{ind.title}</h4>
+            <p className="text-[.73rem] text-muted-foreground font-light leading-[1.55]">{ind.desc}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

@@ -2,121 +2,68 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const metrics = [
-  { value: 28, suffix: "+", label: "Delighted customers across regions" },
-  { value: 50, suffix: "K", label: "Project hours experience" },
-  { value: 500, suffix: "", label: "Years combined domain knowledge" },
-  { value: 75, suffix: "%", label: "SAP-certified consultants" },
-  { value: 45, suffix: "+", label: "Multi-regional industry experts" },
+  { target: 28, suffix: "+", label: "Delighted Customers Across Regions", sublabel: "Local Presence, Global Expertise", ghost: "28" },
+  { target: 50, suffix: "K", label: "Project Hours Experience", sublabel: "Maximized ROI", ghost: "50K" },
+  { target: 500, suffix: "", label: "Years Combined Domain Knowledge", sublabel: "Transformation Specialists", ghost: "500" },
+  { target: 75, suffix: "%", label: "SAP-Certified Consultants", sublabel: "Finance, Treasury & Analytics", ghost: "75" },
+  { target: 45, suffix: "+", label: "Multi-Regional Industry Experts", sublabel: "Innovation at Core", ghost: "45" },
 ];
 
-const capabilities = [
-  "Transformation Specialists",
-  "Finance, Treasury & Analytics",
-  "Innovation at Core",
-  "Local Presence, Global Expertise",
-  "Maximized ROI",
-  "Faster Response Times",
-];
-
-function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
+function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStarted(true); }, { threshold: 0.5 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
   }, []);
 
   useEffect(() => {
     if (!started) return;
-    const duration = 2000;
+    const dur = 2000;
     const steps = 60;
-    const increment = value / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [started, value]);
+    const inc = target / steps;
+    let cur = 0;
+    const t = setInterval(() => {
+      cur += inc;
+      if (cur >= target) { setCount(target); clearInterval(t); }
+      else setCount(Math.floor(cur));
+    }, dur / steps);
+    return () => clearInterval(t);
+  }, [started, target]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return <div ref={ref}>{count}{suffix}</div>;
 }
 
 export default function WhyKannanware() {
   return (
-    <section className="section-spacing" id="why">
-      <div className="section-container">
-        {/* Split layout */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start mb-24 md:mb-32">
+    <div className="relative overflow-hidden" style={{ background: "#0c0c0c" }}>
+      {/* Noise texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{
+        backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")"
+      }} />
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        {metrics.map((m, i) => (
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            key={m.label}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="relative overflow-hidden px-8 py-11 border-r border-white/[0.08] last:border-r-0 cursor-none transition-colors duration-300 hover:bg-[rgba(232,160,0,.06)]"
           >
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-              Why enterprises choose{" "}
-              <span className="text-gradient-blue">Kannanware</span>
-            </h2>
-            <p className="font-body text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-lg">
-              We don't just implement SAP. We transform how finance organizations think, operate, and compete — with advisory depth and execution precision that larger firms can't match.
-            </p>
-            <div className="w-16 h-[2px] bg-electric-blue/40" />
+            <div className="text-[3.6rem] font-bold text-white leading-none tracking-[-0.04em] mb-2 relative z-10">
+              <CountUp target={m.target} suffix={m.suffix} />
+            </div>
+            <div className="text-[.82rem] text-white/65 font-light leading-[1.5] relative z-10">{m.label}</div>
+            <div className="text-[.7rem] text-[rgba(232,160,0,.7)] font-normal leading-[1.45] mt-1.5 tracking-[.01em] relative z-10">{m.sublabel}</div>
+            <div className="absolute right-[-10px] bottom-[-24px] text-[8rem] text-[rgba(232,160,0,.07)] font-bold pointer-events-none leading-none">{m.ghost}</div>
           </motion.div>
-
-          <div className="space-y-8">
-            {metrics.map((m, i) => (
-              <motion.div
-                key={m.label}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="flex items-baseline gap-6 group"
-              >
-                <div className="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-gradient-blue min-w-[140px] md:min-w-[180px]">
-                  <AnimatedCounter value={m.value} suffix={m.suffix} />
-                </div>
-                <div className="font-body text-sm md:text-base text-muted-foreground leading-snug flex-1 group-hover:text-foreground transition-colors duration-300">
-                  {m.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Capability strip — flowing text, no boxes */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="border-t border-border/50 pt-10"
-        >
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 md:gap-x-12">
-            {capabilities.map((cap, i) => (
-              <span
-                key={cap}
-                className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-default"
-              >
-                {i > 0 && <span className="text-electric-blue/30 mr-8 md:mr-12">·</span>}
-                {cap}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
