@@ -1,7 +1,7 @@
 import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import TrustStrip from "@/components/TrustStrip";
+
 import WhyKannanware from "@/components/WhyKannanware";
 import SolutionsSection from "@/components/SolutionsSection";
 import CultureSection from "@/components/CultureSection";
@@ -17,7 +17,7 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <HeroSection />
-      <TrustStrip />
+      
       <WhyKannanware />
       <SolutionsSection />
       <CultureSection />
