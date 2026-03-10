@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const orbitModules = [
   { label: "S/4HANA Finance", sub: "Real-time GL & Close", color: "#E8A000", icon: "M12 2v20M2 12h20M7 7l10 10M17 7l-10 10" },
@@ -12,22 +13,34 @@ const orbitModules = [
 ];
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const dotY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const orbitScale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
+  const orbitOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
   return (
-    <section className="min-h-screen flex flex-col pt-16 bg-background relative overflow-hidden" id="hero">
-      {/* Background gradients */}
-      <div className="absolute inset-0 pointer-events-none" style={{
+    <section ref={sectionRef} className="min-h-screen flex flex-col pt-16 bg-background relative overflow-hidden" id="hero">
+      {/* Background gradients — parallax */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{
+        y: bgY,
         background: "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(232,160,0,.07) 0%, transparent 65%), radial-gradient(ellipse 40% 30% at 15% 60%, rgba(232,160,0,.04) 0%, transparent 55%), radial-gradient(ellipse 40% 30% at 85% 60%, rgba(232,160,0,.04) 0%, transparent 55%)"
       }} />
 
-      {/* Dot grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-50" style={{
+      {/* Dot grid — parallax */}
+      <motion.div className="absolute inset-0 pointer-events-none opacity-50" style={{
+        y: dotY,
         backgroundImage: "radial-gradient(circle, rgba(0,0,0,.06) 1px, transparent 1px)",
         backgroundSize: "36px 36px",
         maskImage: "radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%)"
       }} />
 
       {/* Orbital system — hidden on mobile */}
-      <div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true">
+      <motion.div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true" style={{ scale: orbitScale, opacity: orbitOpacity }}>
         {/* Orbit rings with dashed/dotted styles */}
         <div
           className="absolute rounded-full"
@@ -165,7 +178,7 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Centered content */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-10 relative z-10 text-center">
