@@ -180,14 +180,15 @@ export default function SolutionsSection() {
               </div>
 
               {/* Capabilities */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-xl overflow-hidden border border-border">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 rounded-xl overflow-hidden border border-border bg-border">
                 {practice.capabilities.map((cap, i) => (
                   <motion.div
                     key={cap.title}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + i * 0.08 }}
-                    className="bg-background p-6 border-r border-b border-border last:border-r-0 hover:bg-gold/[0.03] transition-colors duration-300 cursor-none group"
+                    className="bg-background p-6 border border-border hover:bg-gold/[0.03] transition-colors duration-300 cursor-none group"
+                    style={{ margin: "-0.5px" }}
                   >
                     <h4 className="text-[.88rem] font-bold text-foreground mb-4 tracking-tight group-hover:text-gold transition-colors duration-300">
                       {cap.title}

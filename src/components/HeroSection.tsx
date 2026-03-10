@@ -178,7 +178,7 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Centered content */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-10 relative z-10 text-center">
