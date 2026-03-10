@@ -1,12 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import TrustStrip from "@/components/TrustStrip";
+import WhyKannanware from "@/components/WhyKannanware";
+import SolutionsSection from "@/components/SolutionsSection";
+import CFOSection from "@/components/CFOSection";
+import FunctionalCapability from "@/components/FunctionalCapability";
+import PlatformExpertise from "@/components/PlatformExpertise";
+import DeliveryModel from "@/components/DeliveryModel";
+import AdvisoryModel from "@/components/AdvisoryModel";
+import IndustryFocus from "@/components/IndustryFocus";
+import SuccessStories from "@/components/SuccessStories";
+import GlobalPresence from "@/components/GlobalPresence";
+import CultureSection from "@/components/CultureSection";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <Navbar />
+      <HeroSection />
+      <TrustStrip />
+      <WhyKannanware />
+      <SolutionsSection />
+      <CFOSection />
+      <FunctionalCapability />
+      <PlatformExpertise />
+      <DeliveryModel />
+      <AdvisoryModel />
+      <IndustryFocus />
+      <SuccessStories />
+      <GlobalPresence />
+      <CultureSection />
+      <FinalCTA />
+      <Footer />
     </div>
   );
 };

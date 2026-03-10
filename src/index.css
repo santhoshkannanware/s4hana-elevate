@@ -1,96 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Kannanware Design System — Graphite & Light */
+    --background: 220 26% 8%;          /* #0B1220 deep navy */
+    --foreground: 0 0% 100%;           /* white */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 20% 10%;               /* slightly lighter graphite */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 20% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;            /* #3B82F6 electric blue */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 28% 17%;          /* dark slate panel */
+    --secondary-foreground: 210 40% 72%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 19% 15%;
+    --muted-foreground: 215 16% 62%;   /* #94A3B8 slate */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 191 91% 53%;             /* #22D3EE cyan */
+    --accent-foreground: 220 26% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 19% 18%;
+    --input: 215 19% 18%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Extended tokens */
+    --graphite: 220 20% 10%;
+    --deep-navy: 220 26% 8%;
+    --electric-blue: 217 91% 60%;
+    --cyan-glow: 191 91% 53%;
+    --slate-text: 215 16% 62%;
+    --warm-gold: 43 100% 48%;
+    --soft-slate-bg: 210 20% 98%;      /* #F8FAFC */
+    --soft-slate-fg: 220 26% 14%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Sidebar tokens (keep for shadcn compat) */
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 215 16% 62%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 215 28% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 19% 18%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -99,7 +64,81 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Source Sans 3', 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--electric-blue)), hsl(var(--cyan-glow)));
+  }
+
+  .section-container {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12;
+  }
+
+  .section-spacing {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 40px -10px hsl(var(--electric-blue) / 0.3);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 30px -8px hsl(var(--cyan-glow) / 0.3);
+  }
+
+  .border-glow {
+    border-color: hsl(var(--electric-blue) / 0.2);
+  }
+
+  .bg-soft-slate {
+    background-color: hsl(var(--soft-slate-bg));
+    color: hsl(var(--soft-slate-fg));
+  }
+
+  /* Horizontal scroll for CFO section */
+  .horizontal-scroll {
+    @apply flex gap-8 overflow-x-auto snap-x snap-mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .horizontal-scroll > * {
+    @apply snap-center;
+  }
+
+  /* Scan line for hero */
+  .scan-line {
+    background: linear-gradient(90deg, transparent, hsl(var(--electric-blue)), transparent);
+    height: 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  /* Dot accent */
+  .dot-accent::before {
+    content: '•';
+    color: hsl(var(--electric-blue));
+    margin-right: 0.5rem;
+    font-size: 1.25em;
+    line-height: 1;
   }
 }
