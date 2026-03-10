@@ -112,21 +112,21 @@ export default function SolutionsSection() {
           </motion.div>
 
           {/* Tab bar */}
-          <div className="flex gap-1 mb-12 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+          <div className="inline-flex border border-border rounded-full p-1 mb-12 overflow-x-auto bg-background shadow-sm" style={{ scrollbarWidth: "none" }}>
             {practices.map((p, i) => (
               <button
                 key={p.id}
                 onClick={() => setActive(i)}
-                className={`relative px-6 py-3.5 rounded-full text-[.82rem] font-medium transition-all duration-300 cursor-none whitespace-nowrap ${
+                className={`relative px-7 py-3 rounded-full text-[.82rem] font-medium transition-all duration-300 cursor-none whitespace-nowrap ${
                   active === i
                     ? "text-white"
-                    : "text-foreground/50 hover:text-foreground/80 hover:bg-foreground/[0.04]"
+                    : "text-foreground/50 hover:text-foreground/80"
                 }`}
               >
                 {active === i && (
                   <motion.div
                     layoutId="activeTabSolutions"
-                    className="absolute inset-0 rounded-full"
+                    className="absolute inset-0 rounded-full shadow-md"
                     style={{ background: p.color }}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
