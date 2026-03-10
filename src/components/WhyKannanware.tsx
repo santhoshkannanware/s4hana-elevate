@@ -45,6 +45,9 @@ export default function WhyKannanware() {
         backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")"
       }} />
 
+      {/* Top gold accent line */}
+      <div className="h-[1px] w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.4), transparent)" }} />
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {metrics.map((m, i) => (
           <motion.div
@@ -64,6 +67,9 @@ export default function WhyKannanware() {
           </motion.div>
         ))}
       </div>
+
+      {/* Bottom gold accent line */}
+      <div className="h-[1px] w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.4), transparent)" }} />
     </div>
   );
 }

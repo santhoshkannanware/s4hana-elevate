@@ -17,7 +17,7 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <HeroSection />
-      <TrustStrip />
+      
       <WhyKannanware />
       <SolutionsSection />
       <CultureSection />
