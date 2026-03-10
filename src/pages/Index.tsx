@@ -8,7 +8,6 @@ import CultureSection from "@/components/CultureSection";
 import DeliveryModel from "@/components/DeliveryModel";
 import AdvisoryModel from "@/components/AdvisoryModel";
 import IndustryFocus from "@/components/IndustryFocus";
-import SuccessStories from "@/components/SuccessStories";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
@@ -25,7 +24,6 @@ const Index = () => {
       <DeliveryModel />
       <AdvisoryModel />
       <IndustryFocus />
-      <SuccessStories />
       <FinalCTA />
       <Footer />
     </div>
