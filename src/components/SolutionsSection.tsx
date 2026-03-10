@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Rocket, Database, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const pillars = [
   {
-    icon: Search,
+    num: "01",
     title: "Advisory",
     tagline: "See the path clearly",
     services: [
@@ -15,7 +15,7 @@ const pillars = [
     ],
   },
   {
-    icon: Rocket,
+    num: "02",
     title: "Execution",
     tagline: "Deliver with precision",
     services: [
@@ -26,7 +26,7 @@ const pillars = [
     ],
   },
   {
-    icon: Database,
+    num: "03",
     title: "Data & Analytics",
     tagline: "Turn data into decisions",
     services: [
@@ -37,7 +37,7 @@ const pillars = [
     ],
   },
   {
-    icon: Users,
+    num: "04",
     title: "Experts as a Service",
     tagline: "Expertise on demand",
     services: [
@@ -53,95 +53,77 @@ export default function SolutionsSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="section-spacing relative overflow-hidden" id="solutions">
+    <section className="section-spacing" id="solutions">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-20"
+          className="mb-20 max-w-3xl"
         >
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
             The transformation{" "}
             <span className="text-gradient-blue">architecture</span>
           </h2>
           <p className="font-body text-lg text-muted-foreground max-w-2xl">
-            Four pillars that take you from strategy to sustained value — each connected in a continuous transformation journey.
+            Four pillars that take you from strategy to sustained value — connected in a continuous transformation journey.
           </p>
         </motion.div>
 
-        {/* 4 Pillars */}
-        <div className="grid md:grid-cols-4 gap-0 relative">
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-[1px]">
-            <div className="w-full h-full bg-gradient-to-r from-electric-blue/0 via-electric-blue/30 to-electric-blue/0" />
-          </div>
-
+        {/* Editorial pillar list — no boxes, just clean rows */}
+        <div className="space-y-0">
           {pillars.map((pillar, i) => {
             const isActive = activeIndex === i;
             return (
               <motion.div
                 key={pillar.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 onMouseEnter={() => setActiveIndex(i)}
                 onMouseLeave={() => setActiveIndex(null)}
-                className={`relative px-6 py-10 md:py-12 border-l border-border first:border-l-0 transition-all duration-500 cursor-default ${
-                  isActive ? "bg-electric-blue/5" : ""
+                className={`group border-t border-border/40 py-10 md:py-14 transition-all duration-500 cursor-default ${
+                  isActive ? "bg-foreground/[0.02]" : ""
                 }`}
               >
-                {/* Step number */}
-                <div className="relative z-10">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-6 transition-all duration-500 ${
-                    isActive 
-                      ? "bg-electric-blue text-white shadow-lg shadow-electric-blue/30" 
-                      : "glass-panel text-electric-blue"
+                <div className="grid md:grid-cols-[120px_1fr_1.5fr] gap-6 md:gap-12 items-start">
+                  {/* Number */}
+                  <div className={`font-heading text-5xl md:text-6xl font-black transition-colors duration-500 ${
+                    isActive ? "text-electric-blue" : "text-foreground/10"
                   }`}>
-                    <pillar.icon className="w-4 h-4" />
+                    {pillar.num}
                   </div>
 
-                  <div className="text-electric-blue/40 font-heading text-xs font-bold tracking-widest uppercase mb-2">
-                    Phase {String(i + 1).padStart(2, "0")}
+                  {/* Title + tagline */}
+                  <div>
+                    <h3 className={`font-heading text-2xl md:text-3xl font-bold mb-2 transition-colors duration-300 ${
+                      isActive ? "text-electric-blue" : "text-foreground"
+                    }`}>
+                      {pillar.title}
+                    </h3>
+                    <p className="font-body text-base text-muted-foreground italic">
+                      {pillar.tagline}
+                    </p>
                   </div>
 
-                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    {pillar.title}
-                  </h3>
-                  <p className="font-body text-sm text-muted-foreground mb-8 italic">
-                    {pillar.tagline}
-                  </p>
-
-                  {/* Services list */}
-                  <div className="space-y-3">
-                    {pillar.services.map((service, si) => (
-                      <motion.div
-                        key={service}
-                        initial={false}
-                        animate={isActive ? { x: 8, opacity: 1 } : { x: 0, opacity: 0.7 }}
-                        transition={{ duration: 0.3, delay: si * 0.05 }}
-                        className="flex items-start gap-2"
-                      >
-                        <span className={`mt-1.5 w-1 h-1 rounded-full flex-shrink-0 transition-colors duration-300 ${
-                          isActive ? "bg-electric-blue" : "bg-muted-foreground/40"
-                        }`} />
-                        <span className="font-body text-sm text-muted-foreground">
-                          {service}
-                        </span>
-                      </motion.div>
+                  {/* Services — minimal inline list */}
+                  <div className={`flex flex-wrap gap-x-6 gap-y-2 items-start transition-opacity duration-500 ${
+                    isActive ? "opacity-100" : "opacity-50"
+                  }`}>
+                    {pillar.services.map((service) => (
+                      <span key={service} className="font-body text-sm text-muted-foreground flex items-center gap-2 group-hover:text-foreground/70 transition-colors duration-300">
+                        <ArrowRight className="w-3 h-3 text-electric-blue/40" />
+                        {service}
+                      </span>
                     ))}
                   </div>
                 </div>
-
-                {/* Bottom connector arrow */}
-                {i < pillars.length - 1 && (
-                  <div className="hidden md:block absolute top-12 -right-2 text-electric-blue/30 text-lg z-20">→</div>
-                )}
               </motion.div>
             );
           })}
+          <div className="border-t border-border/40" />
         </div>
       </div>
     </section>

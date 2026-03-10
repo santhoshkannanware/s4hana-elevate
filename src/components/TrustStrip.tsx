@@ -1,24 +1,30 @@
 import { motion } from "framer-motion";
 
 const trustItems = [
-  { label: "Founded 2021", sub: "Chennai" },
-  { label: "India", sub: "Innovation Centre" },
-  { label: "UAE", sub: "Regional Presence" },
-  { label: "USA", sub: "Americas Office" },
-  { label: "SAP Partner", sub: "Certified" },
-  { label: "ISO 27001:2022", sub: "Information Security" },
+  "Founded 2021 · Chennai",
+  "India Innovation Centre",
+  "UAE Presence",
+  "USA Office",
+  "SAP Partner",
+  "ISO 27001:2022",
 ];
 
 export default function TrustStrip() {
   return (
-    <section className="border-y border-border bg-secondary/50">
-      <div className="section-container py-8 md:py-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+    <section className="border-y border-border/30 py-6">
+      <div className="section-container">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 md:gap-x-12">
           {trustItems.map((item, i) => (
-            <motion.div key={item.label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }} className="text-center">
-              <div className="text-sm font-heading font-bold text-foreground">{item.label}</div>
-              <div className="text-xs font-body text-muted-foreground mt-0.5">{item.sub}</div>
-            </motion.div>
+            <motion.span
+              key={item}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="font-body text-xs md:text-sm text-muted-foreground"
+            >
+              {item}
+            </motion.span>
           ))}
         </div>
       </div>

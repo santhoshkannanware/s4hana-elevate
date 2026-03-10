@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import { Lightbulb, GraduationCap, Brain, Heart, Users, Award } from "lucide-react";
 
 const themes = [
-  { icon: Lightbulb, title: "Innovation Centre", desc: "R&D and emerging technology exploration" },
-  { icon: GraduationCap, title: "Continuous Mentoring", desc: "Structured growth for every team member" },
-  { icon: Brain, title: "AI, ML & Cloud Focus", desc: "Investing in next-generation skills" },
-  { icon: Heart, title: "Inclusive Culture", desc: "Diverse perspectives driving better outcomes" },
-  { icon: Users, title: "Low Attrition", desc: "A team that stays and grows together" },
-  { icon: Award, title: "Performance Recognition", desc: "Merit-driven culture of excellence" },
+  { title: "Innovation Centre", desc: "R&D and emerging technology exploration" },
+  { title: "Continuous Mentoring", desc: "Structured growth for every team member" },
+  { title: "AI, ML & Cloud Focus", desc: "Investing in next-generation skills" },
+  { title: "Inclusive Culture", desc: "Diverse perspectives driving better outcomes" },
+  { title: "Low Attrition", desc: "A team that stays and grows together" },
+  { title: "Performance Recognition", desc: "Merit-driven culture of excellence" },
 ];
 
 export default function CultureSection() {
@@ -25,24 +24,24 @@ export default function CultureSection() {
               Culture &{" "}
               <span className="text-gradient-blue">innovation</span>
             </h2>
-            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+            <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-lg">
               A young, modern team building the future of SAP Finance consulting. We invest in people because that's how transformation happens.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-6">
+          {/* Simple list — no cards, no icons */}
+          <div className="space-y-0">
             {themes.map((theme, i) => (
               <motion.div
                 key={theme.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="group cursor-default"
+                className="group py-5 border-b border-border/30 cursor-default"
               >
-                <theme.icon className="w-5 h-5 text-electric-blue mb-3 group-hover:text-cyan-glow transition-colors duration-300" />
-                <div className="font-heading text-sm font-bold text-foreground mb-1">{theme.title}</div>
-                <div className="font-body text-xs text-muted-foreground leading-relaxed">{theme.desc}</div>
+                <div className="font-heading text-base font-bold text-foreground group-hover:text-electric-blue transition-colors duration-300">{theme.title}</div>
+                <div className="font-body text-sm text-muted-foreground mt-0.5">{theme.desc}</div>
               </motion.div>
             ))}
           </div>
