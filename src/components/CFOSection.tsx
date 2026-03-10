@@ -14,7 +14,7 @@ export default function CFOSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="section-spacing" id="cfo">
+    <section className="section-spacing bg-card" id="cfo">
       <div className="section-container mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,6 @@ export default function CFOSection() {
         </motion.div>
       </div>
 
-      {/* Horizontal scroll filmstrip */}
       <div ref={scrollRef} className="horizontal-scroll pl-6 md:pl-12 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] pr-6 pb-4">
         {pillars.map((p, i) => (
           <motion.div
@@ -39,23 +38,23 @@ export default function CFOSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="flex-none w-72 md:w-80 bg-card border border-border rounded p-6 md:p-8 hover:border-electric-blue/30 transition-colors duration-200"
+            className="flex-none w-72 md:w-80 bg-background border border-border rounded-md p-6 md:p-8 hover:border-warm-gold/30 transition-colors duration-200"
           >
-            <div className="text-electric-blue font-heading text-sm font-bold tracking-widest uppercase mb-3">
+            <div className="text-warm-gold font-heading text-sm font-bold tracking-widest uppercase mb-3">
               {String(i + 1).padStart(2, "0")}
             </div>
             <h3 className="font-heading text-xl font-bold text-foreground mb-3">{p.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
             <div className="flex flex-wrap gap-1.5">
               {p.modules.map((m) => (
-                <span key={m} className="text-[10px] font-body font-medium text-electric-blue border border-electric-blue/20 rounded-sm px-2 py-0.5">
+                <span key={m} className="text-[10px] font-body font-medium text-warm-gold border border-warm-gold/20 rounded-sm px-2 py-0.5">
                   {m}
                 </span>
               ))}
             </div>
           </motion.div>
         ))}
-        <div className="flex-none w-6" /> {/* End padding */}
+        <div className="flex-none w-6" />
       </div>
     </section>
   );

@@ -19,7 +19,7 @@ const pillars = [
 
 export default function WhyKannanware() {
   return (
-    <section className="bg-soft-slate section-spacing" id="why">
+    <section className="bg-card section-spacing" id="why">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,10 +28,10 @@ export default function WhyKannanware() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4" style={{ color: "hsl(220, 26%, 8%)" }}>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
             Why Kannanware
           </h2>
-          <p className="font-body text-base max-w-2xl mx-auto" style={{ color: "hsl(215, 16%, 42%)" }}>
+          <p className="font-body text-base text-muted-foreground max-w-2xl mx-auto">
             Proof, not promises. Our numbers speak to the depth and scale of transformation we deliver.
           </p>
         </motion.div>
@@ -47,10 +47,10 @@ export default function WhyKannanware() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="font-heading text-3xl md:text-4xl font-bold mb-1" style={{ color: "hsl(217, 91%, 60%)" }}>
+              <div className="font-heading text-3xl md:text-4xl font-bold mb-1 text-warm-gold">
                 {m.value}
               </div>
-              <div className="font-body text-sm leading-snug" style={{ color: "hsl(215, 16%, 42%)" }}>
+              <div className="font-body text-sm leading-snug text-muted-foreground">
                 {m.label}
               </div>
             </motion.div>
@@ -66,10 +66,9 @@ export default function WhyKannanware() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-              className="flex items-start gap-2 font-body text-sm"
-              style={{ color: "hsl(220, 26%, 14%)" }}
+              className="flex items-start gap-2 font-body text-sm text-foreground"
             >
-              <span style={{ color: "hsl(217, 91%, 60%)" }} className="text-lg leading-none mt-0.5">•</span>
+              <span className="text-warm-gold text-lg leading-none mt-0.5">•</span>
               {p}
             </motion.div>
           ))}

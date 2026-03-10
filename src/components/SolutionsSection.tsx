@@ -66,14 +66,14 @@ export default function SolutionsSection() {
               transition={{ duration: 0.5, delay: gi * 0.1 }}
             >
               <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                <span className="text-electric-blue">•</span>
+                <span className="text-warm-gold">•</span>
                 {group.title}
               </h3>
               <div className="space-y-3">
                 {group.items.map((item) => (
                   <div
                     key={item.name}
-                    className="bg-card border border-border rounded p-4 hover:border-electric-blue/30 transition-colors duration-200"
+                    className="bg-card border border-border rounded-md p-4 hover:border-warm-gold/30 transition-colors duration-200"
                   >
                     <div className="font-body font-semibold text-sm text-foreground mb-0.5">{item.name}</div>
                     <div className="font-body text-xs text-muted-foreground">{item.desc}</div>

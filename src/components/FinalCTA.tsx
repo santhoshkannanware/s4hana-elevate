@@ -20,20 +20,20 @@ export default function FinalCTA() {
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <a
               href="mailto:partner@kannanware.com?subject=Strategy%20Call%20Request"
-              className="inline-flex items-center px-7 py-3 bg-primary text-primary-foreground font-body font-semibold text-sm rounded-sm hover:bg-primary/90 transition-colors duration-200"
+              className="inline-flex items-center px-7 py-3 bg-primary text-primary-foreground font-body font-semibold text-sm rounded-md hover:bg-primary/90 transition-colors duration-200"
             >
               Schedule a Strategy Call
             </a>
             <a
               href="mailto:partner@kannanware.com?subject=RFP%20Submission"
-              className="inline-flex items-center px-7 py-3 border border-border text-foreground font-body font-semibold text-sm rounded-sm hover:border-electric-blue hover:text-electric-blue transition-colors duration-200"
+              className="inline-flex items-center px-7 py-3 border border-foreground text-foreground font-body font-semibold text-sm rounded-md hover:border-warm-gold hover:text-warm-gold transition-colors duration-200"
             >
               Submit an RFP
             </a>
           </div>
           <a
             href="mailto:partner@kannanware.com"
-            className="font-body text-sm text-muted-foreground hover:text-electric-blue transition-colors duration-200"
+            className="font-body text-sm text-muted-foreground hover:text-warm-gold transition-colors duration-200"
           >
             partner@kannanware.com
           </a>

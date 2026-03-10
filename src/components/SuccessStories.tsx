@@ -41,7 +41,7 @@ const stories = [
 
 export default function SuccessStories() {
   return (
-    <section className="section-spacing border-t border-border" id="stories">
+    <section className="section-spacing bg-card" id="stories">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export default function SuccessStories() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card border border-border rounded p-6 hover:border-electric-blue/30 transition-colors duration-200"
+              className="bg-background border border-border rounded-md p-6 hover:border-warm-gold/30 transition-colors duration-200"
             >
               <h3 className="font-heading text-sm font-bold text-foreground mb-3 leading-snug">{s.title}</h3>
               <div className="space-y-2 text-xs font-body">
@@ -77,7 +77,7 @@ export default function SuccessStories() {
                   <span className="text-muted-foreground">{s.solution}</span>
                 </div>
                 <div>
-                  <span className="text-cyan-glow font-semibold">Outcome: </span>
+                  <span className="text-warm-gold font-semibold">Outcome: </span>
                   <span className="text-foreground font-medium">{s.outcome}</span>
                 </div>
               </div>

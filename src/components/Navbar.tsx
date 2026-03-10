@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
+        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="section-container flex items-center justify-between h-16 md:h-20">
@@ -30,7 +30,7 @@ export default function Navbar() {
           <span className="font-heading text-xl font-bold tracking-tight text-foreground">
             Kannanware
           </span>
-          <span className="text-electric-blue text-xs font-body font-medium tracking-widest uppercase">
+          <span className="text-warm-gold text-xs font-body font-medium tracking-widest uppercase">
             Innovations
           </span>
         </a>
@@ -41,14 +41,14 @@ export default function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-body font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-electric-blue after:transition-all after:duration-300 hover:after:w-full"
+              className="text-sm font-body font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-warm-gold after:transition-all after:duration-300 hover:after:w-full"
             >
               {item.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-sm hover:bg-primary/90 transition-colors duration-200"
+            className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-md hover:bg-primary/90 transition-colors duration-200"
           >
             Book a Consultation
           </a>
@@ -89,7 +89,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2.5 rounded-sm text-center mt-2"
+                className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2.5 rounded-md text-center mt-2"
               >
                 Book a Consultation
               </a>

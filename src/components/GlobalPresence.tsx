@@ -32,28 +32,27 @@ export default function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className={`border rounded p-6 transition-colors duration-200 ${
+              className={`border rounded-md p-6 transition-colors duration-200 ${
                 loc.primary
-                  ? "bg-card border-electric-blue/30"
-                  : "bg-card border-border hover:border-electric-blue/20"
+                  ? "bg-card border-warm-gold/30"
+                  : "bg-card border-border hover:border-warm-gold/20"
               }`}
             >
               {loc.primary && (
-                <div className="text-electric-blue text-[10px] font-body font-bold uppercase tracking-widest mb-2">HQ</div>
+                <div className="text-warm-gold text-[10px] font-body font-bold uppercase tracking-widest mb-2">HQ</div>
               )}
               <div className="font-heading text-lg font-bold text-foreground mb-0.5">{loc.city}</div>
-              <div className="font-body text-sm text-electric-blue mb-2">{loc.country}</div>
+              <div className="font-body text-sm text-warm-gold mb-2">{loc.country}</div>
               <div className="font-body text-xs text-muted-foreground">{loc.role}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* Connection visualization */}
         <div className="flex items-center justify-center mt-10 gap-2">
           {locations.map((_, i) => (
             <div key={i} className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-electric-blue/60" />
-              {i < locations.length - 1 && <div className="w-12 md:w-20 h-[1px] bg-electric-blue/20" />}
+              <div className="w-2 h-2 rounded-full bg-warm-gold/60" />
+              {i < locations.length - 1 && <div className="w-12 md:w-20 h-[1px] bg-warm-gold/20" />}
             </div>
           ))}
         </div>

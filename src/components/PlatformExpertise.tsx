@@ -14,7 +14,7 @@ const platforms = [
 
 export default function PlatformExpertise() {
   return (
-    <section className="section-spacing" id="expertise">
+    <section className="section-spacing bg-card" id="expertise">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,13 +37,13 @@ export default function PlatformExpertise() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="bg-card border border-border rounded p-4 md:p-5 hover:border-electric-blue/30 transition-colors duration-200"
+              className="bg-background border border-border rounded-md p-4 md:p-5 hover:border-warm-gold/30 transition-colors duration-200"
             >
               <div className="font-heading text-sm font-bold text-foreground mb-0.5">{p.name}</div>
               <div className="font-body text-xs text-muted-foreground">{p.sub}</div>
               <div className="mt-2">
                 <span className={`text-[9px] font-body font-semibold uppercase tracking-wider ${
-                  p.tier === "core" ? "text-electric-blue" : p.tier === "analytics" ? "text-cyan-glow" : "text-muted-foreground"
+                  p.tier === "core" ? "text-warm-gold" : p.tier === "analytics" ? "text-electric-blue" : "text-muted-foreground"
                 }`}>
                   {p.tier}
                 </span>
