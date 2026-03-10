@@ -40,7 +40,7 @@ export default function HeroSection() {
       }} />
 
       {/* Orbital system — hidden on mobile */}
-      <div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true">
+      <motion.div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true" style={{ scale: orbitScale, opacity: orbitOpacity }}>
         {/* Orbit rings with dashed/dotted styles */}
         <div
           className="absolute rounded-full"
