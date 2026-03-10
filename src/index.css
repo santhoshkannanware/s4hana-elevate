@@ -6,56 +6,55 @@
 
 @layer base {
   :root {
-    /* Kannanware Light Theme — White & Gold */
-    --background: 0 0% 100%;              /* white */
-    --foreground: 220 26% 10%;             /* near-black */
+    /* Kannanware Dark Cinematic Theme */
+    --background: 220 26% 8%;
+    --foreground: 0 0% 100%;
 
-    --card: 210 20% 97%;                   /* very light grey */
-    --card-foreground: 220 26% 10%;
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 26% 10%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 43 100% 48%;                /* warm gold #F4B400 */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 20% 94%;              /* light grey panel */
-    --secondary-foreground: 220 26% 30%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 210 40% 72%;
 
-    --muted: 210 15% 93%;
-    --muted-foreground: 215 16% 46%;       /* medium grey */
+    --muted: 215 19% 15%;
+    --muted-foreground: 215 16% 62%;
 
-    --accent: 43 100% 48%;                 /* warm gold */
-    --accent-foreground: 0 0% 100%;
+    --accent: 191 91% 53%;
+    --accent-foreground: 220 26% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 15% 89%;
-    --input: 210 15% 89%;
-    --ring: 43 100% 48%;
+    --border: 215 19% 18%;
+    --input: 215 19% 18%;
+    --ring: 217 91% 60%;
 
     --radius: 0.375rem;
 
     /* Extended tokens */
-    --graphite: 220 20% 14%;
-    --deep-navy: 220 26% 10%;
+    --graphite: 220 20% 12%;
+    --deep-navy: 220 26% 8%;
     --electric-blue: 217 91% 60%;
     --cyan-glow: 191 91% 53%;
-    --slate-text: 215 16% 46%;
+    --slate-text: 215 16% 62%;
     --warm-gold: 43 100% 48%;
-    --soft-slate-bg: 210 20% 98%;          /* #F8FAFC */
+    --soft-slate-bg: 210 20% 98%;
     --soft-slate-fg: 220 26% 14%;
 
-    /* Sidebar tokens (keep for shadcn compat) */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 215 16% 46%;
-    --sidebar-primary: 43 100% 48%;
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 215 16% 62%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 94%;
-    --sidebar-accent-foreground: 220 26% 10%;
-    --sidebar-border: 210 15% 89%;
-    --sidebar-ring: 43 100% 48%;
+    --sidebar-accent: 215 28% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 19% 18%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -111,6 +110,18 @@
     color: hsl(var(--soft-slate-fg));
   }
 
+  /* Glass panel */
+  .glass-panel {
+    background: hsl(var(--foreground) / 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--foreground) / 0.06);
+  }
+
+  .glass-panel-hover:hover {
+    background: hsl(var(--foreground) / 0.06);
+    border-color: hsl(var(--electric-blue) / 0.3);
+  }
+
   /* Horizontal scroll for CFO section */
   .horizontal-scroll {
     @apply flex gap-8 overflow-x-auto snap-x snap-mandatory;
@@ -133,10 +144,9 @@
     right: 0;
   }
 
-  /* Dot accent */
   .dot-accent::before {
     content: '•';
-    color: hsl(var(--warm-gold));
+    color: hsl(var(--electric-blue));
     margin-right: 0.5rem;
     font-size: 1.25em;
     line-height: 1;
@@ -166,5 +176,11 @@
     54% { top: 100%; opacity: 1; }
     55% { top: 100%; opacity: 0; }
     100% { top: 100%; opacity: 0; }
+  }
+
+  /* Orbital pulse */
+  @keyframes orbital-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
   }
 }

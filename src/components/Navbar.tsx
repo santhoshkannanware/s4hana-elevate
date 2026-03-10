@@ -20,79 +20,39 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="section-container flex items-center justify-between h-16 md:h-20">
         <a href="#" className="flex items-center gap-2">
-          <span className="font-heading text-xl font-bold tracking-tight text-foreground">
-            Kannanware
-          </span>
-          <span className="text-warm-gold text-xs font-body font-medium tracking-widest uppercase">
-            Innovations
-          </span>
+          <span className="font-heading text-xl font-bold tracking-tight" style={{ color: scrolled ? "hsl(var(--foreground))" : "hsl(var(--soft-slate-fg))" }}>Kannanware</span>
+          <span className="text-xs font-body font-medium tracking-widest uppercase" style={{ color: scrolled ? "hsl(var(--electric-blue))" : "hsl(var(--warm-gold))" }}>Innovations</span>
         </a>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm font-body font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-warm-gold after:transition-all after:duration-300 hover:after:w-full"
-            >
+            <a key={item.href} href={item.href} className="text-sm font-body font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-electric-blue after:transition-all after:duration-300 hover:after:w-full" style={{ color: scrolled ? "hsl(var(--muted-foreground))" : "hsl(var(--slate-text))" }}>
               {item.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-md hover:bg-primary/90 transition-colors duration-200"
-          >
+          <a href="#contact" className="text-sm font-body font-semibold px-5 py-2 rounded-md transition-colors duration-200" style={{ background: scrolled ? "hsl(var(--electric-blue))" : "hsl(var(--warm-gold))", color: "white" }}>
             Book a Consultation
           </a>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-[2px] bg-foreground transition-transform duration-200 ${mobileOpen ? "rotate-45 translate-y-[5px]" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-foreground transition-opacity duration-200 ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-foreground transition-transform duration-200 ${mobileOpen ? "-rotate-45 -translate-y-[5px]" : ""}`} />
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+          <span className={`block w-6 h-[2px] transition-transform duration-200 ${mobileOpen ? "rotate-45 translate-y-[5px]" : ""}`} style={{ background: scrolled ? "hsl(var(--foreground))" : "hsl(var(--soft-slate-fg))" }} />
+          <span className={`block w-6 h-[2px] transition-opacity duration-200 ${mobileOpen ? "opacity-0" : ""}`} style={{ background: scrolled ? "hsl(var(--foreground))" : "hsl(var(--soft-slate-fg))" }} />
+          <span className={`block w-6 h-[2px] transition-transform duration-200 ${mobileOpen ? "-rotate-45 -translate-y-[5px]" : ""}`} style={{ background: scrolled ? "hsl(var(--foreground))" : "hsl(var(--soft-slate-fg))" }} />
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden"
-          >
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden">
             <div className="section-container py-6 flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-base font-body text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {item.label}
-                </a>
+                <a key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="text-base font-body text-muted-foreground hover:text-foreground transition-colors">{item.label}</a>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2.5 rounded-md text-center mt-2"
-              >
-                Book a Consultation
-              </a>
+              <a href="#contact" onClick={() => setMobileOpen(false)} className="text-sm font-body font-semibold bg-primary text-primary-foreground px-5 py-2.5 rounded-md text-center mt-2">Book a Consultation</a>
             </div>
           </motion.div>
         )}
