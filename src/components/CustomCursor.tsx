@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import cursorK from "@/assets/k-cursor.png";
+import cursorK from "@/assets/k-cursor-clean.png";
 
 export default function CustomCursor() {
   const ref = useRef<HTMLDivElement>(null);
@@ -55,12 +55,13 @@ export default function CustomCursor() {
         src={cursorK}
         alt=""
         draggable={false}
-        className="w-8 h-8 block transition-transform duration-200"
+        className="cursor-k-img w-8 h-8 block transition-transform duration-200"
         style={{
-          filter: "drop-shadow(0 2px 6px rgba(0,0,0,.5))",
+          filter: "drop-shadow(0 2px 6px rgba(0,0,0,.4))",
         }}
       />
       <style>{`
+        body { cursor: none; }
         body.cursor-hover .cursor-k-img { transform: scale(1.35); filter: drop-shadow(0 4px 12px rgba(230,165,20,.6)) !important; }
         @media (max-width: 768px) { body { cursor: auto !important; } }
       `}</style>

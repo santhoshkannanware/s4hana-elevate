@@ -175,6 +175,16 @@
     50% { transform: scale(1.15); opacity: 1; }
   }
 
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes counter-orbit {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
+  }
+
   /* Scroll reveal */
   [data-rv] {
     opacity: 0;

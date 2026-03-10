@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 
-const floatingCards = [
-  { label: "S/4HANA Finance", sub: "Real-time GL & Close", color: "rgba(232,160,0,.1)", stroke: "#E8A000", pos: "top-[18%] left-[4%]", delay: 0.8 },
-  { label: "SuccessFactors", sub: "HR & Payroll", color: "rgba(5,150,105,.1)", stroke: "#059669", pos: "top-[30%] left-[8%]", delay: 1 },
-  { label: "Supply Chain", sub: "EWM & IBP", color: "rgba(99,102,241,.1)", stroke: "#6366f1", pos: "top-[55%] left-[3%]", delay: 1.2 },
-  { label: "SAP BTP", sub: "AI & Integration", color: "rgba(232,160,0,.1)", stroke: "#E8A000", pos: "top-[72%] left-[10%]", delay: 1.4 },
-  { label: "Analytics Cloud", sub: "BI & Planning", color: "rgba(239,68,68,.1)", stroke: "#ef4444", pos: "top-[18%] right-[4%]", delay: 0.9 },
-  { label: "SAP Ariba", sub: "Source-to-Pay", color: "rgba(14,165,233,.1)", stroke: "#0ea5e9", pos: "top-[35%] right-[6%]", delay: 1.1 },
-  { label: "SAP CX Suite", sub: "Sales & Service", color: "rgba(168,85,247,.1)", stroke: "#a855f7", pos: "top-[55%] right-[3%]", delay: 1.3 },
-  { label: "GROW with SAP", sub: "Public Cloud", color: "rgba(232,160,0,.1)", stroke: "#E8A000", pos: "top-[72%] right-[9%]", delay: 1.5 },
+const orbitModules = [
+  { label: "S/4HANA Finance", sub: "Real-time GL & Close", stroke: "#E8A000" },
+  { label: "SuccessFactors", sub: "HR & Payroll", stroke: "#059669" },
+  { label: "Supply Chain", sub: "EWM & IBP", stroke: "#6366f1" },
+  { label: "SAP BTP", sub: "AI & Integration", stroke: "#E8A000" },
+  { label: "Analytics Cloud", sub: "BI & Planning", stroke: "#ef4444" },
+  { label: "SAP Ariba", sub: "Source-to-Pay", stroke: "#0ea5e9" },
+  { label: "SAP CX Suite", sub: "Sales & Service", stroke: "#a855f7" },
+  { label: "GROW with SAP", sub: "Public Cloud", stroke: "#E8A000" },
 ];
 
 export default function HeroSection() {
@@ -26,27 +26,58 @@ export default function HeroSection() {
         maskImage: "radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%)"
       }} />
 
-      {/* Floating module cards — hidden on mobile */}
-      <div className="absolute inset-0 pointer-events-none z-0 hidden xl:block" aria-hidden="true">
-        {floatingCards.map((card) => (
-          <motion.div
-            key={card.label}
-            className={`absolute ${card.pos} bg-white border border-border rounded-[14px] px-3 py-2.5 flex items-center gap-2.5 shadow-[0_4px_20px_rgba(0,0,0,.07)]`}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: [0, -10, 0] }}
-            transition={{ delay: card.delay, duration: 5, repeat: Infinity, repeatType: "reverse" }}
-          >
-            <div className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0" style={{ background: card.color }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke={card.stroke} strokeWidth="1.5" strokeLinecap="round" className="w-[18px] h-[18px]">
-                <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
-              </svg>
-            </div>
-            <div>
-              <div className="text-[.72rem] font-semibold text-foreground whitespace-nowrap tracking-tight">{card.label}</div>
-              <div className="text-[.62rem] text-muted-foreground whitespace-nowrap">{card.sub}</div>
-            </div>
-          </motion.div>
-        ))}
+      {/* Orbital ring + modules — hidden on mobile */}
+      <div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true">
+        {/* Orbit ring visual */}
+        <div
+          className="absolute rounded-full border border-border/40"
+          style={{ width: "min(82vw, 1000px)", height: "min(82vw, 1000px)", opacity: 0.35 }}
+        />
+        <div
+          className="absolute rounded-full border border-border/20"
+          style={{ width: "min(66vw, 800px)", height: "min(66vw, 800px)", opacity: 0.2 }}
+        />
+
+        {/* Orbiting cards */}
+        <div
+          className="absolute"
+          style={{
+            width: "min(82vw, 1000px)",
+            height: "min(82vw, 1000px)",
+            animation: "orbit-spin 60s linear infinite",
+          }}
+        >
+          {orbitModules.map((card, i) => {
+            const angle = (i / orbitModules.length) * 360;
+            return (
+              <div
+                key={card.label}
+                className="absolute"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(min(41vw, 500px)) rotate(-${angle}deg)`,
+                }}
+              >
+                {/* Counter-rotate the card content so it stays upright */}
+                <div
+                  className="bg-white border border-border rounded-[14px] px-3 py-2.5 flex items-center gap-2.5 shadow-[0_4px_20px_rgba(0,0,0,.07)] -translate-x-1/2 -translate-y-1/2"
+                  style={{ animation: `counter-orbit 60s linear infinite` }}
+                >
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${card.stroke}15` }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke={card.stroke} strokeWidth="1.5" strokeLinecap="round" className="w-4 h-4">
+                      <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[.7rem] font-semibold text-foreground whitespace-nowrap tracking-tight">{card.label}</div>
+                    <div className="text-[.6rem] text-muted-foreground whitespace-nowrap">{card.sub}</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Centered content */}
