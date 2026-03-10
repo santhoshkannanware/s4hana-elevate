@@ -1,46 +1,25 @@
 import { motion } from "framer-motion";
-import { Factory, Flame, ShoppingBag, Wheat } from "lucide-react";
 
 const industries = [
   {
-    icon: Factory,
     name: "Manufacturing & Industrial",
-    gradient: "from-blue-900/60 to-slate-900/90",
-    challenges: [
-      "Complex multi-plant cost allocation",
-      "Real-time production cost visibility",
-      "Intercompany settlement at scale",
-    ],
+    stat: "20–40% cycle time reduction",
+    challenges: "Multi-plant cost allocation, production cost visibility, intercompany settlement at scale.",
   },
   {
-    icon: Flame,
     name: "Energy & Natural Resources",
-    gradient: "from-amber-900/50 to-slate-900/90",
-    challenges: [
-      "Commodity price volatility hedging",
-      "Multi-jurisdiction compliance",
-      "Capital asset lifecycle management",
-    ],
+    stat: "45% operational efficiency gain",
+    challenges: "Commodity price hedging, multi-jurisdiction compliance, capital asset lifecycle management.",
   },
   {
-    icon: ShoppingBag,
     name: "Food, Beverage & Consumer",
-    gradient: "from-emerald-900/50 to-slate-900/90",
-    challenges: [
-      "POS and treasury reconciliation",
-      "Margin optimization across channels",
-      "Revenue recognition complexity",
-    ],
+    stat: "70% manual effort reduction",
+    challenges: "POS and treasury reconciliation, margin optimization, revenue recognition complexity.",
   },
   {
-    icon: Wheat,
     name: "Agro & Automotive",
-    gradient: "from-cyan-900/50 to-slate-900/90",
-    challenges: [
-      "Seasonal demand financial planning",
-      "Supply chain cost optimization",
-      "Multi-currency consolidation",
-    ],
+    stat: "35% faster reporting",
+    challenges: "Seasonal demand planning, supply chain cost optimization, multi-currency consolidation.",
   },
 ];
 
@@ -53,7 +32,7 @@ export default function IndustryFocus() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-20 max-w-3xl"
         >
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
             Industry{" "}
@@ -64,47 +43,29 @@ export default function IndustryFocus() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Full-width editorial rows — no cards */}
+        <div className="space-y-0">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden cursor-default"
-              style={{ minHeight: "380px" }}
+              className="group grid md:grid-cols-[1fr_auto_1.5fr] gap-4 md:gap-12 items-baseline py-10 md:py-12 border-t border-border/40 cursor-default"
             >
-              {/* Background gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-b ${ind.gradient}`} />
-              <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors duration-500" />
-
-              {/* Content */}
-              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-                <div>
-                  <ind.icon className="w-8 h-8 text-electric-blue mb-6 group-hover:text-cyan-glow transition-colors duration-300" />
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-2">{ind.name}</h3>
-                </div>
-
-                {/* Challenges — revealed on hover */}
-                <div className="mt-auto">
-                  <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                    <div className="text-electric-blue text-[10px] font-body font-bold uppercase tracking-widest mb-3">
-                      Challenges we solve
-                    </div>
-                    <div className="space-y-2">
-                      {ind.challenges.map((c) => (
-                        <div key={c} className="flex items-start gap-2">
-                          <span className="w-1 h-1 rounded-full bg-electric-blue mt-1.5 flex-shrink-0" />
-                          <span className="font-body text-sm text-muted-foreground">{c}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground group-hover:text-electric-blue transition-colors duration-300">
+                {ind.name}
+              </h3>
+              <span className="font-heading text-sm font-bold text-cyan-glow whitespace-nowrap">
+                {ind.stat}
+              </span>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/60 transition-colors duration-300">
+                {ind.challenges}
+              </p>
             </motion.div>
           ))}
+          <div className="border-t border-border/40" />
         </div>
       </div>
     </section>

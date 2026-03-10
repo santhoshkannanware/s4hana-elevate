@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Lightbulb, BarChart3, Cpu, Globe, TrendingUp, Layers } from "lucide-react";
 
 const metrics = [
   { value: 28, suffix: "+", label: "Delighted customers across regions" },
@@ -11,12 +10,12 @@ const metrics = [
 ];
 
 const capabilities = [
-  { icon: Layers, label: "Transformation Specialists" },
-  { icon: BarChart3, label: "Finance, Treasury & Analytics" },
-  { icon: Cpu, label: "Innovation at Core" },
-  { icon: Globe, label: "Local Presence, Global Expertise" },
-  { icon: TrendingUp, label: "Maximized ROI" },
-  { icon: Lightbulb, label: "Faster Response Times" },
+  "Transformation Specialists",
+  "Finance, Treasury & Analytics",
+  "Innovation at Core",
+  "Local Presence, Global Expertise",
+  "Maximized ROI",
+  "Faster Response Times",
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -58,9 +57,8 @@ export default function WhyKannanware() {
   return (
     <section className="section-spacing" id="why">
       <div className="section-container">
-        {/* Split layout: text left, metrics right */}
+        {/* Split layout */}
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start mb-24 md:mb-32">
-          {/* Left: narrative */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -77,7 +75,6 @@ export default function WhyKannanware() {
             <div className="w-16 h-[2px] bg-electric-blue/40" />
           </motion.div>
 
-          {/* Right: animated metrics */}
           <div className="space-y-8">
             {metrics.map((m, i) => (
               <motion.div
@@ -99,28 +96,23 @@ export default function WhyKannanware() {
           </div>
         </div>
 
-        {/* Capability strip */}
+        {/* Capability strip — flowing text, no boxes */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="border-t border-border/50 pt-10"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 md:gap-x-12">
             {capabilities.map((cap, i) => (
-              <motion.div
-                key={cap.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-                className="glass-panel glass-panel-hover rounded-lg p-5 text-center transition-all duration-300 group"
+              <span
+                key={cap}
+                className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-default"
               >
-                <cap.icon className="w-5 h-5 mx-auto mb-3 text-electric-blue group-hover:text-cyan-glow transition-colors duration-300" />
-                <span className="font-body text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-snug block">
-                  {cap.label}
-                </span>
-              </motion.div>
+                {i > 0 && <span className="text-electric-blue/30 mr-8 md:mr-12">·</span>}
+                {cap}
+              </span>
             ))}
           </div>
         </motion.div>
