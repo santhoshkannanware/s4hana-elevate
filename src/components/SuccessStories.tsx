@@ -4,82 +4,73 @@ const stories = [
   {
     title: "GROW with SAP — Public Cloud Transformation",
     challenge: "Professional services firm on legacy ECC needing rapid cloud migration.",
-    solution: "End-to-end GROW with SAP implementation with finance process redesign.",
     outcome: "25% fewer go-live incidents, 35% faster reporting.",
   },
   {
     title: "Stores Capitalization Automation",
     challenge: "Manual asset capitalization consuming excessive finance team hours.",
-    solution: "Automated stores capitalization workflow with validation rules.",
     outcome: "90% manual effort reduction, near-zero errors.",
   },
   {
     title: "Treasury & POS Reconciliation",
-    challenge: "Food & beverage company with fragmented payment and treasury processes.",
-    solution: "Integrated payment, treasury, POS, and reconciliation automation.",
-    outcome: "70% manual effort reduction, 45% operational efficiency gain.",
+    challenge: "Fragmented payment and treasury processes at scale.",
+    outcome: "70% manual effort reduction, 45% efficiency gain.",
   },
   {
     title: "FICO Transformation & Valuation Correction",
-    challenge: "Heavy equipment provider with complex valuation and financial closing issues.",
-    solution: "FICO transformation support with systematic valuation correction.",
+    challenge: "Complex valuation and financial closing issues at a heavy equipment provider.",
     outcome: "One-week turnaround for a long-persistent issue.",
   },
   {
     title: "US-India Plant Integration Rollout",
-    challenge: "Manufacturing company integrating a US plant with India operations on SAP.",
-    solution: "Rollout services with cross-regional configuration and testing.",
-    outcome: "20–40% cycle time reduction across integrated processes.",
+    challenge: "Manufacturing company integrating a US plant with India operations.",
+    outcome: "20–40% cycle time reduction across processes.",
   },
   {
     title: "Data Migration — Dhaksha Unmanned Systems",
-    challenge: "Complex data migration and process automation for emerging drone technology company.",
-    solution: "End-to-end data migration, cleansing, and automation framework.",
-    outcome: "40% reduced manual effort, clean data foundation for growth.",
+    challenge: "Complex data migration for emerging drone technology company.",
+    outcome: "40% reduced manual effort, clean data foundation.",
   },
 ];
 
 export default function SuccessStories() {
   return (
-    <section className="section-spacing bg-card" id="stories">
+    <section className="section-spacing" id="stories">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Success Stories</h2>
-          <p className="font-body text-base text-muted-foreground max-w-2xl">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+            Success{" "}
+            <span className="text-gradient-blue">stories</span>
+          </h2>
+          <p className="font-body text-lg text-muted-foreground max-w-2xl">
             Outcome-led transformation, measured in real business impact.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-1">
           {stories.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-background border border-border rounded-md p-6 hover:border-warm-gold/30 transition-colors duration-200"
+              className="group grid md:grid-cols-[1fr,1.5fr,1fr] gap-4 md:gap-8 items-baseline py-6 border-b border-border/50 hover:border-electric-blue/20 transition-colors duration-300 cursor-default"
             >
-              <h3 className="font-heading text-sm font-bold text-foreground mb-3 leading-snug">{s.title}</h3>
-              <div className="space-y-2 text-xs font-body">
-                <div>
-                  <span className="text-muted-foreground font-semibold">Challenge: </span>
-                  <span className="text-muted-foreground">{s.challenge}</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground font-semibold">Solution: </span>
-                  <span className="text-muted-foreground">{s.solution}</span>
-                </div>
-                <div>
-                  <span className="text-warm-gold font-semibold">Outcome: </span>
-                  <span className="text-foreground font-medium">{s.outcome}</span>
-                </div>
+              <h3 className="font-heading text-sm font-bold text-foreground group-hover:text-electric-blue transition-colors duration-300 leading-snug">
+                {s.title}
+              </h3>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                {s.challenge}
+              </p>
+              <div className="font-body text-sm font-medium text-cyan-glow">
+                {s.outcome}
               </div>
             </motion.div>
           ))}
