@@ -1,13 +1,45 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse, Search, Compass, Code2, FlaskConical, Rocket, HeartHandshake } from "lucide-react";
+import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse, Search, Compass, Code2, FlaskConical, Rocket, HeartHandshake, Play, Pause } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import teamDiscovery from "@/assets/team-discovery.jpg";
+import teamDesign from "@/assets/team-design.jpg";
+import teamImplement from "@/assets/team-implement.jpg";
+import teamTesting from "@/assets/team-testing.jpg";
+import teamGolive from "@/assets/team-golive.jpg";
+import teamHypercare from "@/assets/team-hypercare.jpg";
 
 /* ─── Helpers ─── */
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [.22, 1, .36, 1] as [number, number, number, number] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
+
+function MetricCountUp({ value, inView }: { value: string; inView: boolean }) {
+  const numMatch = value.match(/(\d+)/);
+  const [count, setCount] = useState(0);
+  const hasNum = !!numMatch;
+  const target = hasNum ? parseInt(numMatch![1]) : 0;
+  const prefix = hasNum ? value.slice(0, value.indexOf(numMatch![1])) : "";
+  const suffix = hasNum ? value.slice(value.indexOf(numMatch![1]) + numMatch![1].length) : "";
+
+  useEffect(() => {
+    if (!inView || !hasNum) return;
+    let start = 0;
+    const dur = 1800;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.floor(eased * target));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, hasNum]);
+
+  if (!hasNum) return <span>{value}</span>;
+  return <span>{prefix}{count}{suffix}</span>;
+}
 
 function CountUp({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
