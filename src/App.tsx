@@ -10,6 +10,8 @@ import BtpPage from "./pages/BtpPage.tsx";
 import RecordToReportPage from "./pages/RecordToReportPage.tsx";
 import EnergyPage from "./pages/EnergyPage.tsx";
 import AdvisoryPage from "./pages/AdvisoryPage.tsx";
+import ExecutionPage from "./pages/ExecutionPage.tsx";
+import EaaSPage from "./pages/EaaSPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/capability/record-to-report" element={<RecordToReportPage />} />
           <Route path="/industry/energy" element={<EnergyPage />} />
           <Route path="/services/advisory" element={<AdvisoryPage />} />
+          <Route path="/services/execution" element={<ExecutionPage />} />
+          <Route path="/services/eaas" element={<EaaSPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
