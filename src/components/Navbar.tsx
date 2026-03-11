@@ -16,9 +16,37 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: "Products",
+    label: "Product Expertise",
     children: [
-      { label: "CV Optimizer", href: "#products" },
+      { label: "S4/HANA (Public & Private Cloud)", href: "/product-expertise/s4hana" },
+      { label: "SAP® - BTP", href: "/product-expertise/btp" },
+      { label: "SAP Data Sphere", href: "/product-expertise/data-sphere" },
+      { label: "SAP® ECC", href: "/product-expertise/ecc" },
+      { label: "SAP Analytics Cloud (Planning & Reporting)", href: "/product-expertise/analytics-cloud" },
+      { label: "SAP BW4 HANA", href: "/product-expertise/bw4-hana" },
+      { label: "Group Reporting", href: "/product-expertise/group-reporting" },
+      { label: "Billing and Revenue Innovation Management", href: "/product-expertise/brim" },
+      { label: "SAP Business Objects", href: "/product-expertise/business-objects" },
+      { label: "Multi Banking Connectivity", href: "/product-expertise/multi-banking" },
+      { label: "Agentic AI with Joule*", href: "/product-expertise/agentic-ai" },
+    ],
+  },
+  {
+    label: "Functional & Process Capability",
+    children: [
+      { label: "Record to Report", href: "/capability/record-to-report" },
+      { label: "Source to Pay", href: "/capability/source-to-pay" },
+      { label: "Treasury", href: "/capability/treasury" },
+      { label: "Projects", href: "/capability/projects" },
+      { label: "Operate and Maintain", href: "/capability/operate-and-maintain" },
+      { label: "Order to Cash", href: "/capability/order-to-cash" },
+    ],
+  },
+  {
+    label: "Programs",
+    children: [
+      { label: "Office of the CFO (Solutions & Services)", href: "/programs/office-of-cfo" },
+      { label: "Grow with SAP", href: "/programs/grow-with-sap" },
     ],
   },
   {
