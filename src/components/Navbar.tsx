@@ -32,8 +32,8 @@ const navItems: NavItem[] = [
       { label: "Agentic AI with Joule*", href: "/product-expertise/agentic-ai" },
     ],
   },
-  {
-    label: "Capabilities",
+    {
+    label: "Functions",
     children: [
       { label: "Record to Report", href: "/capability/record-to-report" },
       { label: "Source to Pay", href: "/capability/source-to-pay" },
@@ -56,7 +56,7 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Transformation Services",
+    label: "Services",
     children: [
       { label: "Advisory", href: "/services/advisory" },
       { label: "Execution", href: "/services/execution" },
