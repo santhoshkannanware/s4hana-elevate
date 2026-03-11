@@ -56,7 +56,8 @@ export default function WhyKannanware() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="relative overflow-hidden px-8 py-11 border-r border-white/[0.08] last:border-r-0 cursor-none transition-colors duration-300 hover:bg-[rgba(232,160,0,.06)]"
+            className="group relative overflow-hidden px-8 py-11 border-r border-white/[0.08] last:border-r-0 cursor-none transition-all duration-500 hover:bg-[rgba(232,160,0,.06)]"
+            whileHover={{ y: -4 }}
           >
             <div className="text-[3.6rem] font-bold text-white leading-none tracking-[-0.04em] mb-2 relative z-10">
               <CountUp target={m.target} suffix={m.suffix} />

@@ -28,7 +28,9 @@ export default function CultureSection() {
 
         <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex flex-col">
           {points.map((p) => (
-            <div key={p.n} className="flex gap-5 py-6 border-b border-white/[0.06] last:border-0 cursor-none transition-all duration-300 hover:pl-3">
+            <div key={p.n} className="group flex gap-5 py-6 border-b border-white/[0.06] last:border-0 cursor-none transition-all duration-500 hover:pl-5 hover:bg-white/[0.02] rounded-lg hover:border-gold/20">
+              {/* Hover gold line */}
+              <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gold scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
               <div className="text-[.82rem] text-white/[0.16] shrink-0 pt-0.5 font-light">{p.n}</div>
               <div>
                 <h4 className="text-[.9rem] font-semibold text-white mb-1.5">{p.title}</h4>

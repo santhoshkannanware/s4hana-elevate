@@ -19,7 +19,7 @@ export default function Footer() {
             <h5 className="text-[.62rem] font-bold tracking-[.2em] uppercase text-white/[0.22] mb-4">{col.title}</h5>
             <ul className="list-none space-y-1">
               {col.links.map((link) => (
-                <li key={link}><a href="#" className="text-[.78rem] text-white/45 no-underline font-light transition-colors duration-200 hover:text-gold cursor-none">{link}</a></li>
+                <li key={link}><a href="#" className="text-[.78rem] text-white/45 no-underline font-light transition-all duration-300 hover:text-gold hover:translate-x-1 inline-block cursor-none">{link}</a></li>
               ))}
             </ul>
           </div>
