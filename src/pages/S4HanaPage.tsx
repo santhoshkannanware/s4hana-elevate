@@ -290,50 +290,95 @@ function ExpertiseSection() {
   );
 }
 
-/* ─── Section 5: Timeline — always-visible descriptions ─── */
+/* ─── Section 5: Timeline — cinematic auto-looping with photos ─── */
 function TransformationTimeline() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [active, setActive] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const STEP_DURATION = 5000;
+
   const steps = [
-    { title: "Discovery", icon: Search, desc: "Assess your current landscape, define transformation goals, and build the business case for S/4HANA." },
-    { title: "Solution Design", icon: Compass, desc: "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting." },
-    { title: "Implementation", icon: Code2, desc: "Configure, develop, and integrate S/4HANA modules following agile delivery methodology." },
-    { title: "Testing", icon: FlaskConical, desc: "Execute comprehensive testing cycles including unit, integration, UAT, and performance testing." },
-    { title: "Go-Live", icon: Rocket, desc: "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies." },
-    { title: "Hypercare Support", icon: HeartHandshake, desc: "Dedicated post-go-live support, stabilization, and continuous optimization for lasting success." },
+    { title: "Discovery", icon: Search, desc: "Assess your current landscape, define transformation goals, and build the business case for S/4HANA. We map every process, interview stakeholders, and identify quick wins.", img: teamDiscovery },
+    { title: "Solution Design", icon: Compass, desc: "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting. Our SAP-certified architects design for scale.", img: teamDesign },
+    { title: "Implementation", icon: Code2, desc: "Configure, develop, and integrate S/4HANA modules following agile delivery methodology. Sprints, demos, and continuous stakeholder alignment.", img: teamImplement },
+    { title: "Testing", icon: FlaskConical, desc: "Execute comprehensive testing — unit, integration, UAT, performance, and regression. Automated test suites ensure zero-defect go-lives.", img: teamTesting },
+    { title: "Go-Live", icon: Rocket, desc: "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies and real-time monitoring dashboards.", img: teamGolive },
+    { title: "Hypercare Support", icon: HeartHandshake, desc: "Dedicated post-go-live support, stabilization, and continuous optimization. 24/7 war-room coverage for the critical first 90 days.", img: teamHypercare },
   ];
+
+  useEffect(() => {
+    if (!inView || paused) return;
+    const timer = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % steps.length);
+    }, STEP_DURATION);
+    return () => clearInterval(timer);
+  }, [inView, paused, steps.length]);
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10 overflow-hidden" style={{ background: "#0B0B0B" }}>
       <div className="max-w-[1200px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Methodology</motion.span>
-          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Transformation Journey</motion.h2>
+          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight mb-3">Transformation Journey</motion.h2>
+          <motion.p variants={fadeUp} className="text-sm" style={{ color: "#999" }}>Auto-playing • Click any phase to explore</motion.p>
         </motion.div>
-        {/* Vertical timeline on mobile, horizontal on lg */}
-        <div className="relative">
-          {/* Horizontal line (lg only) */}
-          <div className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px bg-white/8" />
-          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.8, ease: "easeOut" }} className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px origin-left" style={{ background: "linear-gradient(90deg, #F4B400 0%, rgba(244,180,0,.15) 100%)" }} />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-5">
+        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
+          {/* Left: step list */}
+          <div className="space-y-1">
             {steps.map((s, i) => {
-              const isActive = active === i;
+              const isActive = activeIdx === i;
               return (
-                <motion.div key={s.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .2 + i * .12 }} className="relative cursor-pointer group" onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
-                  {/* Node circle */}
-                  <div className="relative z-10 w-14 h-14 rounded-full border-2 flex items-center justify-center mx-auto lg:mx-auto mb-5 transition-all duration-300" style={{ borderColor: isActive ? "#F4B400" : "rgba(255,255,255,.1)", background: isActive ? "rgba(244,180,0,.12)" : "rgba(255,255,255,.03)", boxShadow: isActive ? "0 0 30px rgba(244,180,0,.3)" : "none" }}>
-                    <s.icon size={20} style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.4)" }} className="transition-colors" />
+                <motion.button key={s.title} onClick={() => { setActiveIdx(i); setPaused(true); }} initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: .2 + i * .08 }}
+                  className="w-full text-left flex items-center gap-4 rounded-xl px-5 py-4 transition-all duration-300 group"
+                  style={{ background: isActive ? "rgba(244,180,0,.08)" : "transparent", borderLeft: isActive ? "3px solid #F4B400" : "3px solid transparent" }}
+                >
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all" style={{ background: isActive ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.04)", boxShadow: isActive ? "0 0 20px rgba(244,180,0,.2)" : "none" }}>
+                    <s.icon size={18} style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.3)" }} />
                   </div>
-                  {/* Content */}
-                  <div className="text-center">
-                    <p className="text-sm font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{s.title}</p>
-                    <p className="text-[.78rem] leading-relaxed" style={{ color: "#999" }}>{s.desc}</p>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold transition-colors" style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.7)" }}>{s.title}</p>
+                    {isActive && (
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="overflow-hidden">
+                        {/* Progress bar */}
+                        <div className="h-0.5 rounded-full mt-2 mb-2 overflow-hidden" style={{ background: "rgba(255,255,255,.08)" }}>
+                          <motion.div key={`prog-${i}`} initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: STEP_DURATION / 1000, ease: "linear" }} className="h-full rounded-full" style={{ background: "#F4B400" }} />
+                        </div>
+                        <p className="text-[.78rem] leading-relaxed" style={{ color: "#999" }}>{s.desc}</p>
+                      </motion.div>
+                    )}
                   </div>
-                </motion.div>
+                </motion.button>
               );
             })}
+            {/* Play/Pause */}
+            <div className="flex justify-center pt-4">
+              <button onClick={() => setPaused(!paused)} className="flex items-center gap-2 text-[.75rem] font-medium transition-colors hover:text-white" style={{ color: "rgba(255,255,255,.4)" }}>
+                {paused ? <Play size={14} /> : <Pause size={14} />}
+                {paused ? "Resume Auto-Play" : "Playing"}
+              </button>
+            </div>
+          </div>
+
+          {/* Right: photo + overlay */}
+          <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+            <AnimatePresence mode="wait">
+              <motion.img key={activeIdx} src={steps[activeIdx].img} alt={steps[activeIdx].title} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: .97 }} transition={{ duration: .6 }} className="absolute inset-0 w-full h-full object-cover" />
+            </AnimatePresence>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(11,11,11,.85) 0%, rgba(11,11,11,.2) 50%, transparent 100%)" }} />
+            {/* Phase label */}
+            <div className="absolute bottom-6 left-6 right-6">
+              <span className="text-[.65rem] font-bold tracking-[.2em] uppercase" style={{ color: "#F4B400" }}>Phase {activeIdx + 1} of {steps.length}</span>
+              <h3 className="text-2xl font-bold text-white mt-1">{steps[activeIdx].title}</h3>
+            </div>
+            {/* Step indicators */}
+            <div className="absolute top-5 right-5 flex gap-1.5">
+              {steps.map((_, i) => (
+                <button key={i} onClick={() => { setActiveIdx(i); setPaused(true); }} className="w-2 h-2 rounded-full transition-all" style={{ background: i === activeIdx ? "#F4B400" : "rgba(255,255,255,.25)", boxShadow: i === activeIdx ? "0 0 8px rgba(244,180,0,.5)" : "none" }} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
