@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 const metrics = [
   { target: 28, suffix: "+", label: "Delighted Customers Across Regions", sublabel: "Local Presence, Global Expertise", ghost: "28" },
@@ -48,25 +47,21 @@ export default function WhyKannanware() {
       {/* Top gold accent line */}
       <div className="h-[1px] w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.4), transparent)" }} />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {metrics.map((m, i) => (
-          <motion.div
-            key={m.label}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group relative overflow-hidden px-8 py-11 border-r border-white/[0.08] last:border-r-0 cursor-none transition-all duration-500 hover:bg-[rgba(232,160,0,.06)]"
-            whileHover={{ y: -4 }}
-          >
-            <div className="text-[3.6rem] font-bold text-white leading-none tracking-[-0.04em] mb-2 relative z-10">
-              <CountUp target={m.target} suffix={m.suffix} />
+      <div className="py-10">
+        <div className="flex w-max" style={{ animation: "ticker 30s linear infinite" }}>
+          {[...metrics, ...metrics].map((m, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center px-12 shrink-0 min-w-[260px]"
+            >
+              <div className="text-[3.2rem] font-bold text-white leading-none tracking-[-0.04em] mb-2">
+                <CountUp target={m.target} suffix={m.suffix} />
+              </div>
+              <div className="text-[.92rem] text-white/65 font-light leading-[1.5] text-center">{m.label}</div>
+              <div className="text-[.82rem] text-[rgba(232,160,0,.7)] font-normal leading-[1.45] mt-1 tracking-[.01em] text-center">{m.sublabel}</div>
             </div>
-            <div className="text-[.92rem] text-white/65 font-light leading-[1.5] relative z-10">{m.label}</div>
-            <div className="text-[.82rem] text-[rgba(232,160,0,.7)] font-normal leading-[1.45] mt-1.5 tracking-[.01em] relative z-10">{m.sublabel}</div>
-            <div className="absolute right-[-10px] bottom-[-24px] text-[8rem] text-[rgba(232,160,0,.07)] font-bold pointer-events-none leading-none">{m.ghost}</div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Bottom gold accent line */}
