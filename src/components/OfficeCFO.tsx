@@ -205,7 +205,7 @@ function TransformationWheel() {
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
           >
-            <span className="text-[.55rem] font-bold uppercase tracking-[.2em] text-black/50 mb-0.5">SAP CFO</span>
+            <span className="text-[.65rem] font-bold uppercase tracking-[.2em] text-black/50 mb-0.5">SAP CFO</span>
             <span className="text-[1rem] font-extrabold text-black leading-tight">Transformation</span>
             <span className="text-[1rem] font-extrabold text-black leading-tight">Wheel</span>
             <motion.div
