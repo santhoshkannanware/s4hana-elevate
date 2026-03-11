@@ -100,7 +100,7 @@ function NavDropdown({ item }: { item: NavItem }) {
 
   return (
     <li className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button className={`flex items-center gap-1 text-[.78rem] font-normal no-underline transition-all duration-200 cursor-none bg-transparent border-none ${
+      <button className={`flex items-center gap-1 text-[.88rem] font-normal no-underline transition-all duration-200 cursor-none bg-transparent border-none ${
         isGlow
           ? "text-gold font-semibold drop-shadow-[0_0_8px_rgba(232,160,0,.5)]"
           : "text-white/60 hover:text-gold"
