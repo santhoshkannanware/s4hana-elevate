@@ -278,13 +278,7 @@ function InteractiveTimeline() {
     intervalRef.current = setInterval(() => {
       setActivePhase(p => (p + 1) % timelinePhases.length);
     }, 4000);
-  });
-
-  function useCallback(fn: () => void) {
-    const ref = useRef(fn);
-    ref.current = fn;
-    return useRef((...args: any[]) => ref.current(...args)).current;
-  }
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
