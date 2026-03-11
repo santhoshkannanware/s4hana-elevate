@@ -12,6 +12,7 @@ interface NavItem {
   label: string;
   href?: string;
   children?: DropdownItem[];
+  glow?: boolean;
 }
 
 const navItems: NavItem[] = [
