@@ -153,8 +153,8 @@ export default function AdvisoryModel() {
                     transition={{ delay: i * 0.08 + j * 0.05, duration: 0.4 }}
                     className="flex items-center gap-2.5"
                   >
-                    <span className="text-gold text-[.7rem] shrink-0">✦</span>
-                    <span className="text-[.8rem] text-foreground/60 font-light">{item}</span>
+                    <span className="text-gold text-[.82rem] shrink-0">✦</span>
+                    <span className="text-[.92rem] text-foreground/60 font-light">{item}</span>
                   </motion.div>
                 ))}
               </div>
