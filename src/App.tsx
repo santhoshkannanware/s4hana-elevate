@@ -9,6 +9,7 @@ import S4HanaPage from "./pages/S4HanaPage.tsx";
 import BtpPage from "./pages/BtpPage.tsx";
 import RecordToReportPage from "./pages/RecordToReportPage.tsx";
 import EnergyPage from "./pages/EnergyPage.tsx";
+import AdvisoryPage from "./pages/AdvisoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/product-expertise/btp" element={<BtpPage />} />
           <Route path="/capability/record-to-report" element={<RecordToReportPage />} />
           <Route path="/industry/energy" element={<EnergyPage />} />
+          <Route path="/services/advisory" element={<AdvisoryPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

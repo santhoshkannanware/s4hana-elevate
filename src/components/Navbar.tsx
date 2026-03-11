@@ -58,7 +58,7 @@ const navItems: NavItem[] = [
   {
     label: "Transformation Services",
     children: [
-      { label: "Advisory", href: "#services" },
+      { label: "Advisory", href: "/services/advisory" },
       { label: "Execution", href: "#services" },
       { label: "Data & Analytics", href: "#services" },
       { label: "Experts as a Service (EaaS)", href: "#services" },
