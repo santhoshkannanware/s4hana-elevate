@@ -4,28 +4,28 @@
 
 @layer base {
   :root {
-    /* Kannanware — White/Gold/Cream Light Theme */
+    /* Kannanware — Dark Premium Theme */
     --gold: 40 100% 45%;
     --gold-light: 43 100% 48%;
     --gold-glow: 40 100% 45%;
 
-    --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
 
-    --card: 40 20% 97%;
-    --card-foreground: 0 0% 5%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
 
     --primary: 40 100% 45%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 40 10% 96%;
-    --secondary-foreground: 0 0% 25%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 80%;
 
-    --muted: 40 10% 96%;
-    --muted-foreground: 30 5% 53%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
     --accent: 40 100% 45%;
     --accent-foreground: 0 0% 0%;
@@ -33,16 +33,16 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 15% 89%;
-    --input: 35 15% 89%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
     --ring: 40 100% 45%;
 
     --radius: 0rem;
 
     /* Extended tokens */
-    --ink: 0 0% 5%;
-    --bg2: 40 33% 97%;
-    --bg2-hsl: 40 33% 97%;
+    --ink: 0 0% 95%;
+    --bg2: 0 0% 7%;
+    --bg2-hsl: 0 0% 7%;
 
     --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 70%;
@@ -116,7 +116,7 @@
     font-size: clamp(1.9rem, 3.8vw, 3.4rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
-    color: hsl(var(--ink));
+    color: hsl(var(--foreground));
     margin-bottom: 14px;
   }
 
@@ -129,7 +129,7 @@
     font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.8;
-    color: #666;
+    color: hsl(var(--muted-foreground));
     max-width: 540px;
     margin-bottom: 44px;
   }
@@ -199,5 +199,5 @@
   /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: hsl(var(--bg2)); }
-  ::-webkit-scrollbar-thumb { background: #d5d0c8; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: hsl(0 0% 25%); border-radius: 4px; }
 }

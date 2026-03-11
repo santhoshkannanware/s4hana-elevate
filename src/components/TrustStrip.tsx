@@ -6,7 +6,7 @@ const items = [
 
 export default function TrustStrip() {
   return (
-    <div className="overflow-hidden py-3 bg-white border-y border-border">
+    <div className="overflow-hidden py-3 bg-secondary border-y border-border">
       <div className="flex w-max" style={{ animation: "ticker 45s linear infinite" }}>
         {[...items, ...items].map((item, i) => (
           <div key={i} className="flex items-center gap-6 px-6 text-[.75rem] text-muted-foreground whitespace-nowrap">
