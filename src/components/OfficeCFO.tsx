@@ -225,7 +225,7 @@ function TransformationWheel() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.35 }}
-          className="absolute -bottom-28 left-0 right-0 text-center px-4"
+          className="absolute -bottom-20 left-0 right-0 text-center px-4"
         >
           <p className="text-[.72rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
           <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
