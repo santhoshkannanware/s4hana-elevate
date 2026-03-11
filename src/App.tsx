@@ -10,6 +10,8 @@ import BtpPage from "./pages/BtpPage.tsx";
 import RecordToReportPage from "./pages/RecordToReportPage.tsx";
 import EnergyPage from "./pages/EnergyPage.tsx";
 import AdvisoryPage from "./pages/AdvisoryPage.tsx";
+import ExecutionPage from "./pages/ExecutionPage.tsx";
+import EaaSPage from "./pages/EaaSPage.tsx";
 
 const queryClient = new QueryClient();
 
