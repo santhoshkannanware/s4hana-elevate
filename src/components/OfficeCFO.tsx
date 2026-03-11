@@ -340,7 +340,7 @@ export default function OfficeCFO() {
                       <h4 className="text-[1rem] font-bold text-foreground mb-1.5 tracking-tight">
                         {sol.title}
                       </h4>
-                      <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] mb-3">
+                      <p className="text-[.92rem] font-light text-muted-foreground leading-[1.7] mb-3">
                         {sol.value}
                       </p>
                       <div className="flex flex-wrap gap-2">
