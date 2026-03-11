@@ -101,28 +101,47 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-bold leading-[1.0] tracking-[-0.04em] text-foreground mb-5"
-          style={{ fontSize: "clamp(2.6rem, 6.5vw, 6.8rem)" }}
+          className="font-bold leading-[1.05] tracking-[-0.04em] text-foreground mb-5"
+          style={{ fontSize: "clamp(2.4rem, 5.8vw, 5.8rem)" }}
         >
-          Accelerate Your<br />
-          Enterprise<br />
-          <span className="text-gold italic">with SAP.</span>
+          The AI-First{" "}
+          <span className="inline-flex items-baseline gap-[0.15em]">
+            <img src={sapLogo} alt="SAP" className="inline-block h-[0.75em] w-auto object-contain translate-y-[0.02em]" />
+          </span>
+          <br />
+          Consulting Partner<br />
+          <span className="text-gold italic">Built for Enterprises.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7 }}
-          className="text-muted-foreground font-light leading-[1.8] max-w-[560px] mx-auto mb-9"
+          className="text-muted-foreground font-light leading-[1.8] max-w-[560px] mx-auto mb-8"
           style={{ fontSize: "clamp(.92rem, 1.5vw, 1.1rem)" }}
         >
           Kannanware deploys SAP across <strong className="font-semibold text-foreground">Finance, Supply Chain, HR, CX &amp; beyond</strong> — with AI built into every stage of delivery.
         </motion.p>
 
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.7 }}
+          className="flex items-center justify-center gap-6 md:gap-8 mb-10 flex-wrap"
+        >
+          {["AI-Accelerated Delivery", "SAP Certified Partner", "Global Delivery Footprint"].map((badge, i) => (
+            <div key={badge} className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(232,160,0,.5)]" />
+              <span className="text-[.78rem] md:text-[.85rem] font-medium tracking-[.04em] text-muted-foreground">{badge}</span>
+            </div>
+          ))}
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.7 }}
+          transition={{ delay: 1.15, duration: 0.7 }}
           className="flex gap-3.5 justify-center flex-wrap mb-16"
         >
           <button
