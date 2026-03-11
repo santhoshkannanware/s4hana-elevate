@@ -518,9 +518,11 @@ function BusinessImpact() {
               className="group grid grid-cols-1 md:grid-cols-[120px_1fr_1.2fr] items-start gap-6 md:gap-10 py-10 border-b transition-all"
               style={{ borderColor: "rgba(255,255,255,.06)" }}
             >
-              {/* Metric */}
+              {/* Metric — animated count-up */}
               <div className="text-center md:text-left">
-                <span className="text-[2.5rem] font-bold leading-none group-hover:text-[#F4B400] transition-colors" style={{ color: "#F4B400" }}>{b.metric}</span>
+                <span className="text-[2.5rem] font-bold leading-none transition-colors" style={{ color: "#F4B400" }}>
+                  <MetricCountUp value={b.metric} inView={inView} />
+                </span>
                 <span className="block text-[.65rem] uppercase tracking-[.15em] mt-1" style={{ color: "rgba(255,255,255,.3)" }}>{b.metricLabel}</span>
               </div>
               {/* Title */}
