@@ -138,7 +138,7 @@ export default function AdvisoryModel() {
               </h3>
 
               {/* Description */}
-              <p className="text-[.82rem] font-light leading-[1.75] text-muted-foreground mb-5">
+              <p className="text-[.92rem] font-light leading-[1.75] text-muted-foreground mb-5">
                 {o.desc}
               </p>
 
