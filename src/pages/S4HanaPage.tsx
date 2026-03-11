@@ -1,13 +1,45 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse, Search, Compass, Code2, FlaskConical, Rocket, HeartHandshake } from "lucide-react";
+import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse, Search, Compass, Code2, FlaskConical, Rocket, HeartHandshake, Play, Pause } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import teamDiscovery from "@/assets/team-discovery.jpg";
+import teamDesign from "@/assets/team-design.jpg";
+import teamImplement from "@/assets/team-implement.jpg";
+import teamTesting from "@/assets/team-testing.jpg";
+import teamGolive from "@/assets/team-golive.jpg";
+import teamHypercare from "@/assets/team-hypercare.jpg";
 
 /* ─── Helpers ─── */
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [.22, 1, .36, 1] as [number, number, number, number] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
+
+function MetricCountUp({ value, inView }: { value: string; inView: boolean }) {
+  const numMatch = value.match(/(\d+)/);
+  const [count, setCount] = useState(0);
+  const hasNum = !!numMatch;
+  const target = hasNum ? parseInt(numMatch![1]) : 0;
+  const prefix = hasNum ? value.slice(0, value.indexOf(numMatch![1])) : "";
+  const suffix = hasNum ? value.slice(value.indexOf(numMatch![1]) + numMatch![1].length) : "";
+
+  useEffect(() => {
+    if (!inView || !hasNum) return;
+    let start = 0;
+    const dur = 1800;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.floor(eased * target));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, hasNum]);
+
+  if (!hasNum) return <span>{value}</span>;
+  return <span>{prefix}{count}{suffix}</span>;
+}
 
 function CountUp({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -258,50 +290,95 @@ function ExpertiseSection() {
   );
 }
 
-/* ─── Section 5: Timeline — always-visible descriptions ─── */
+/* ─── Section 5: Timeline — cinematic auto-looping with photos ─── */
 function TransformationTimeline() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [active, setActive] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const STEP_DURATION = 5000;
+
   const steps = [
-    { title: "Discovery", icon: Search, desc: "Assess your current landscape, define transformation goals, and build the business case for S/4HANA." },
-    { title: "Solution Design", icon: Compass, desc: "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting." },
-    { title: "Implementation", icon: Code2, desc: "Configure, develop, and integrate S/4HANA modules following agile delivery methodology." },
-    { title: "Testing", icon: FlaskConical, desc: "Execute comprehensive testing cycles including unit, integration, UAT, and performance testing." },
-    { title: "Go-Live", icon: Rocket, desc: "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies." },
-    { title: "Hypercare Support", icon: HeartHandshake, desc: "Dedicated post-go-live support, stabilization, and continuous optimization for lasting success." },
+    { title: "Discovery", icon: Search, desc: "Assess your current landscape, define transformation goals, and build the business case for S/4HANA. We map every process, interview stakeholders, and identify quick wins.", img: teamDiscovery },
+    { title: "Solution Design", icon: Compass, desc: "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting. Our SAP-certified architects design for scale.", img: teamDesign },
+    { title: "Implementation", icon: Code2, desc: "Configure, develop, and integrate S/4HANA modules following agile delivery methodology. Sprints, demos, and continuous stakeholder alignment.", img: teamImplement },
+    { title: "Testing", icon: FlaskConical, desc: "Execute comprehensive testing — unit, integration, UAT, performance, and regression. Automated test suites ensure zero-defect go-lives.", img: teamTesting },
+    { title: "Go-Live", icon: Rocket, desc: "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies and real-time monitoring dashboards.", img: teamGolive },
+    { title: "Hypercare Support", icon: HeartHandshake, desc: "Dedicated post-go-live support, stabilization, and continuous optimization. 24/7 war-room coverage for the critical first 90 days.", img: teamHypercare },
   ];
+
+  useEffect(() => {
+    if (!inView || paused) return;
+    const timer = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % steps.length);
+    }, STEP_DURATION);
+    return () => clearInterval(timer);
+  }, [inView, paused, steps.length]);
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10 overflow-hidden" style={{ background: "#0B0B0B" }}>
       <div className="max-w-[1200px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Methodology</motion.span>
-          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Transformation Journey</motion.h2>
+          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight mb-3">Transformation Journey</motion.h2>
+          <motion.p variants={fadeUp} className="text-sm" style={{ color: "#999" }}>Auto-playing • Click any phase to explore</motion.p>
         </motion.div>
-        {/* Vertical timeline on mobile, horizontal on lg */}
-        <div className="relative">
-          {/* Horizontal line (lg only) */}
-          <div className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px bg-white/8" />
-          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.8, ease: "easeOut" }} className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px origin-left" style={{ background: "linear-gradient(90deg, #F4B400 0%, rgba(244,180,0,.15) 100%)" }} />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-5">
+        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
+          {/* Left: step list */}
+          <div className="space-y-1">
             {steps.map((s, i) => {
-              const isActive = active === i;
+              const isActive = activeIdx === i;
               return (
-                <motion.div key={s.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .2 + i * .12 }} className="relative cursor-pointer group" onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
-                  {/* Node circle */}
-                  <div className="relative z-10 w-14 h-14 rounded-full border-2 flex items-center justify-center mx-auto lg:mx-auto mb-5 transition-all duration-300" style={{ borderColor: isActive ? "#F4B400" : "rgba(255,255,255,.1)", background: isActive ? "rgba(244,180,0,.12)" : "rgba(255,255,255,.03)", boxShadow: isActive ? "0 0 30px rgba(244,180,0,.3)" : "none" }}>
-                    <s.icon size={20} style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.4)" }} className="transition-colors" />
+                <motion.button key={s.title} onClick={() => { setActiveIdx(i); setPaused(true); }} initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: .2 + i * .08 }}
+                  className="w-full text-left flex items-center gap-4 rounded-xl px-5 py-4 transition-all duration-300 group"
+                  style={{ background: isActive ? "rgba(244,180,0,.08)" : "transparent", borderLeft: isActive ? "3px solid #F4B400" : "3px solid transparent" }}
+                >
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all" style={{ background: isActive ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.04)", boxShadow: isActive ? "0 0 20px rgba(244,180,0,.2)" : "none" }}>
+                    <s.icon size={18} style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.3)" }} />
                   </div>
-                  {/* Content */}
-                  <div className="text-center">
-                    <p className="text-sm font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{s.title}</p>
-                    <p className="text-[.78rem] leading-relaxed" style={{ color: "#999" }}>{s.desc}</p>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold transition-colors" style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.7)" }}>{s.title}</p>
+                    {isActive && (
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="overflow-hidden">
+                        {/* Progress bar */}
+                        <div className="h-0.5 rounded-full mt-2 mb-2 overflow-hidden" style={{ background: "rgba(255,255,255,.08)" }}>
+                          <motion.div key={`prog-${i}`} initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: STEP_DURATION / 1000, ease: "linear" }} className="h-full rounded-full" style={{ background: "#F4B400" }} />
+                        </div>
+                        <p className="text-[.78rem] leading-relaxed" style={{ color: "#999" }}>{s.desc}</p>
+                      </motion.div>
+                    )}
                   </div>
-                </motion.div>
+                </motion.button>
               );
             })}
+            {/* Play/Pause */}
+            <div className="flex justify-center pt-4">
+              <button onClick={() => setPaused(!paused)} className="flex items-center gap-2 text-[.75rem] font-medium transition-colors hover:text-white" style={{ color: "rgba(255,255,255,.4)" }}>
+                {paused ? <Play size={14} /> : <Pause size={14} />}
+                {paused ? "Resume Auto-Play" : "Playing"}
+              </button>
+            </div>
+          </div>
+
+          {/* Right: photo + overlay */}
+          <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+            <AnimatePresence mode="wait">
+              <motion.img key={activeIdx} src={steps[activeIdx].img} alt={steps[activeIdx].title} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: .97 }} transition={{ duration: .6 }} className="absolute inset-0 w-full h-full object-cover" />
+            </AnimatePresence>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(11,11,11,.85) 0%, rgba(11,11,11,.2) 50%, transparent 100%)" }} />
+            {/* Phase label */}
+            <div className="absolute bottom-6 left-6 right-6">
+              <span className="text-[.65rem] font-bold tracking-[.2em] uppercase" style={{ color: "#F4B400" }}>Phase {activeIdx + 1} of {steps.length}</span>
+              <h3 className="text-2xl font-bold text-white mt-1">{steps[activeIdx].title}</h3>
+            </div>
+            {/* Step indicators */}
+            <div className="absolute top-5 right-5 flex gap-1.5">
+              {steps.map((_, i) => (
+                <button key={i} onClick={() => { setActiveIdx(i); setPaused(true); }} className="w-2 h-2 rounded-full transition-all" style={{ background: i === activeIdx ? "#F4B400" : "rgba(255,255,255,.25)", boxShadow: i === activeIdx ? "0 0 8px rgba(244,180,0,.5)" : "none" }} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -309,52 +386,107 @@ function TransformationTimeline() {
   );
 }
 
-/* ─── Section 6: Architecture — responsive, not collapsed ─── */
+/* ─── Section 6: Architecture — Interactive Solar System ─── */
 function ArchitectureViz() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [rotation, setRotation] = useState(0);
+  const animRef = useRef<number>(0);
+  const pausedRef = useRef(false);
+
   const nodes = [
-    { label: "SAP BTP", desc: "Business Technology Platform for extensions and integrations" },
-    { label: "SAP Datasphere", desc: "Unified data layer across hybrid landscapes" },
-    { label: "SAP Analytics Cloud", desc: "Planning, reporting, and predictive analytics" },
-    { label: "SAP BW/4HANA", desc: "Next-gen data warehousing for enterprise insights" },
-    { label: "SAP Integration Suite", desc: "Connect applications, processes, and people" },
+    { label: "SAP BTP", desc: "Business Technology Platform — build extensions, automate workflows, and integrate with any system using low-code and pro-code tools.", color: "#F4B400" },
+    { label: "SAP Datasphere", desc: "Unified data layer that harmonizes data across SAP and non-SAP sources for trusted, real-time business insights.", color: "#FFD54F" },
+    { label: "SAP Analytics Cloud", desc: "Enterprise planning, BI reporting, and predictive analytics unified in a single cloud solution.", color: "#FFA726" },
+    { label: "SAP BW/4HANA", desc: "Next-generation data warehousing optimized for S/4HANA with real-time operational reporting capabilities.", color: "#FFB74D" },
+    { label: "SAP Integration Suite", desc: "Connect cloud and on-premise applications, automate processes, and manage APIs at enterprise scale.", color: "#FFCA28" },
   ];
+
+  useEffect(() => {
+    if (!inView) return;
+    const animate = () => {
+      if (!pausedRef.current) {
+        setRotation(prev => prev + 0.15);
+      }
+      animRef.current = requestAnimationFrame(animate);
+    };
+    animRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [inView]);
+
+  const r = 180; // orbit radius
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
-      <div className="max-w-[1100px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
+      <div className="max-w-[1200px] mx-auto">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-10">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Architecture</motion.span>
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">S/4HANA Ecosystem</motion.h2>
+          <motion.p variants={fadeUp} className="text-sm mt-3" style={{ color: "#999" }}>Hover to pause • Click a node to explore</motion.p>
         </motion.div>
 
-        {/* Center hub + radial nodes — replaced with clean list layout that never collapses */}
-        <div className="flex flex-col items-center">
-          {/* Center node */}
-          <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: .5 }} className="w-32 h-32 rounded-full flex items-center justify-center text-center mb-4" style={{ background: "radial-gradient(circle, rgba(244,180,0,.2), rgba(244,180,0,.05))", border: "2px solid rgba(244,180,0,.4)", boxShadow: "0 0 60px rgba(244,180,0,.15)" }}>
-            <span className="text-base font-bold text-white leading-tight">SAP<br />S/4HANA</span>
-          </motion.div>
-          {/* Connector line */}
-          <motion.div initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: .3, duration: .4 }} className="w-px h-10 origin-top" style={{ background: "linear-gradient(to bottom, rgba(244,180,0,.5), rgba(244,180,0,.1))" }} />
-          {/* Connected systems */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
-            {nodes.map((n, i) => {
-              const isH = hovered === n.label;
-              return (
-                <motion.div key={n.label} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .5 + i * .1 }}
-                  onMouseEnter={() => setHovered(n.label)} onMouseLeave={() => setHovered(null)}
-                  className="relative rounded-xl p-5 border text-center cursor-pointer transition-all duration-300"
-                  style={{ background: isH ? "rgba(244,180,0,.08)" : "rgba(255,255,255,.02)", borderColor: isH ? "rgba(244,180,0,.4)" : "rgba(255,255,255,.06)", boxShadow: isH ? "0 0 30px rgba(244,180,0,.15)" : "none" }}
-                >
-                  {/* Top connector dot */}
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 transition-colors" style={{ borderColor: isH ? "#F4B400" : "rgba(255,255,255,.15)", background: isH ? "rgba(244,180,0,.3)" : "rgba(255,255,255,.05)" }} />
-                  <h4 className="text-sm font-bold text-white mb-2 mt-1">{n.label}</h4>
-                  <p className="text-[.72rem] leading-relaxed" style={{ color: "#999" }}>{n.desc}</p>
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
+          {/* Solar system */}
+          <div className="relative flex justify-center" onMouseEnter={() => { pausedRef.current = true; }} onMouseLeave={() => { pausedRef.current = false; }}>
+            <div className="relative" style={{ width: r * 2 + 120, height: r * 2 + 120 }}>
+              {/* Orbit rings */}
+              {[1, .7, .4].map((opacity, i) => (
+                <div key={i} className="absolute rounded-full border" style={{ inset: `${30 + i * 20}px`, borderColor: `rgba(244,180,0,${opacity * .08})` }} />
+              ))}
+              {/* Sun center */}
+              <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full flex items-center justify-center z-10" style={{ background: "radial-gradient(circle, rgba(244,180,0,.35) 0%, rgba(244,180,0,.08) 70%)", border: "2px solid rgba(244,180,0,.5)", boxShadow: "0 0 60px rgba(244,180,0,.2), 0 0 120px rgba(244,180,0,.08)" }}>
+                <span className="text-sm font-bold text-white text-center leading-tight">SAP<br/>S/4HANA</span>
+              </motion.div>
+              {/* Orbiting nodes */}
+              {nodes.map((n, i) => {
+                const angle = rotation + (i * 360 / nodes.length);
+                const rad = (angle - 90) * Math.PI / 180;
+                const x = Math.cos(rad) * r;
+                const y = Math.sin(rad) * r;
+                const isSelected = selected === i;
+                return (
+                  <motion.div key={n.label} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: .5 + i * .1 }}
+                    className="absolute z-20 cursor-pointer"
+                    style={{ left: `calc(50% + ${x}px - 38px)`, top: `calc(50% + ${y}px - 38px)`, transition: "left 0.05s linear, top 0.05s linear" }}
+                    onClick={() => setSelected(isSelected ? null : i)}
+                  >
+                    {/* Connection line to center */}
+                    <svg className="absolute pointer-events-none" style={{ left: 38, top: 38, width: 1, height: 1, overflow: "visible" }}>
+                      <line x1="0" y1="0" x2={-x} y2={-y} stroke={isSelected ? "rgba(244,180,0,.4)" : "rgba(244,180,0,.1)"} strokeWidth="1" />
+                    </svg>
+                    <div className="w-[76px] h-[76px] rounded-full flex items-center justify-center transition-all duration-300" style={{
+                      background: isSelected ? "rgba(244,180,0,.2)" : "rgba(244,180,0,.06)",
+                      border: `2px solid ${isSelected ? n.color : "rgba(244,180,0,.2)"}`,
+                      boxShadow: isSelected ? `0 0 30px ${n.color}40` : "none",
+                    }}>
+                      <span className="text-[.6rem] font-bold text-white text-center leading-tight px-1">{n.label}</span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: details panel */}
+          <div className="min-h-[300px] flex items-center">
+            <AnimatePresence mode="wait">
+              {selected !== null ? (
+                <motion.div key={selected} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="rounded-2xl p-8 border w-full" style={{ background: "rgba(255,255,255,.02)", borderColor: `${nodes[selected].color}30` }}>
+                  <div className="w-3 h-3 rounded-full mb-4" style={{ background: nodes[selected].color, boxShadow: `0 0 12px ${nodes[selected].color}60` }} />
+                  <h3 className="text-xl font-bold text-white mb-3">{nodes[selected].label}</h3>
+                  <p className="text-[.92rem] leading-[1.8]" style={{ color: "#C9C9C9" }}>{nodes[selected].desc}</p>
+                  <div className="mt-5 flex items-center gap-2 text-[.75rem] font-semibold" style={{ color: "#F4B400" }}>
+                    <span>Connected to SAP S/4HANA</span>
+                    <div className="flex-1 h-px" style={{ background: "rgba(244,180,0,.2)" }} />
+                  </div>
                 </motion.div>
-              );
-            })}
+              ) : (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center w-full">
+                  <p className="text-lg text-white/40">Click any orbiting node to explore its connection to the S/4HANA core</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -386,9 +518,11 @@ function BusinessImpact() {
               className="group grid grid-cols-1 md:grid-cols-[120px_1fr_1.2fr] items-start gap-6 md:gap-10 py-10 border-b transition-all"
               style={{ borderColor: "rgba(255,255,255,.06)" }}
             >
-              {/* Metric */}
+              {/* Metric — animated count-up */}
               <div className="text-center md:text-left">
-                <span className="text-[2.5rem] font-bold leading-none group-hover:text-[#F4B400] transition-colors" style={{ color: "#F4B400" }}>{b.metric}</span>
+                <span className="text-[2.5rem] font-bold leading-none transition-colors" style={{ color: "#F4B400" }}>
+                  <MetricCountUp value={b.metric} inView={inView} />
+                </span>
                 <span className="block text-[.65rem] uppercase tracking-[.15em] mt-1" style={{ color: "rgba(255,255,255,.3)" }}>{b.metricLabel}</span>
               </div>
               {/* Title */}
