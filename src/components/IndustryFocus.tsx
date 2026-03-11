@@ -81,7 +81,7 @@ export default function IndustryFocus() {
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 border-l-2 border-l-transparent"
                 }`}
               >
-                <span className="text-[.82rem] font-medium tracking-tight">{ind.title}</span>
+                <span className="text-[.95rem] font-medium tracking-tight">{ind.title}</span>
               </button>
             ))}
           </div>
