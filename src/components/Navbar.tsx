@@ -16,15 +16,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: "Products",
-    children: [
-      { label: "CV Optimiser", href: "/products/cv-optimiser" },
-      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
-      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
-    ],
-  },
-  {
-    label: "Product Expertise",
+    label: "SAP Product Expertise",
     children: [
       { label: "S4/HANA (Public & Private Cloud)", href: "/product-expertise/s4hana" },
       { label: "SAP® - BTP", href: "/product-expertise/btp" },
@@ -40,7 +32,7 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Functional & Process Capability",
+    label: "Capabilities",
     children: [
       { label: "Record to Report", href: "/capability/record-to-report" },
       { label: "Source to Pay", href: "/capability/source-to-pay" },
@@ -48,13 +40,6 @@ const navItems: NavItem[] = [
       { label: "Projects", href: "/capability/projects" },
       { label: "Operate and Maintain", href: "/capability/operate-and-maintain" },
       { label: "Order to Cash", href: "/capability/order-to-cash" },
-    ],
-  },
-  {
-    label: "Programs",
-    children: [
-      { label: "Office of the CFO (Solutions & Services)", href: "/programs/office-of-cfo" },
-      { label: "Grow with SAP", href: "/programs/grow-with-sap" },
     ],
   },
   {

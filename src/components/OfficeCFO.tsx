@@ -291,7 +291,7 @@ export default function OfficeCFO() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative pt-4 pb-36"
+            className="relative pt-4 pb-44"
           >
             <TransformationWheel />
           </motion.div>
