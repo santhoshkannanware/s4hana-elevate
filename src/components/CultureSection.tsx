@@ -351,8 +351,8 @@ function JouleLiveDemo() {
                       <MiniChart data={scenario.chartData} />
                     </div>
                     <div className="text-right">
-                      <div className="text-[.55rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.25)" }}>Model</div>
-                      <div className="text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.6)" }}>Joule v2.4</div>
+                      <div className="text-[.68rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.25)" }}>Model</div>
+                      <div className="text-[.82rem] font-mono" style={{ color: "rgba(232,160,0,.6)" }}>Joule v2.4</div>
                     </div>
                   </div>
                 </motion.div>
