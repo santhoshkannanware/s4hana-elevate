@@ -8,11 +8,11 @@ import CustomCursor from "@/components/CustomCursor";
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [.22, 1, .36, 1] as [number, number, number, number] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
-const HERO_IMG = "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=900&q=80";
-const OVERVIEW_IMG = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80";
-const ROADMAP_IMG = "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80";
-const INDUSTRY_IMG = "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80";
-const CTA_IMG = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80";
+const HERO_IMG = "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80";
+const OVERVIEW_IMG = "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80";
+const ROADMAP_IMG = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80";
+const INDUSTRY_IMG = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80";
+const CTA_IMG = "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80";
 
 /* ─── Hero ─── */
 function HeroSection() {
