@@ -109,7 +109,7 @@ export default function IndustryFocus() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/60 to-secondary" />
                 {/* Stat badge */}
-                <div className="absolute top-4 right-4 bg-gold/90 text-black text-[.65rem] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
+                <div className="absolute top-4 right-4 bg-gold/90 text-black text-[.78rem] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
                   {industries[active].stat}
                 </div>
               </div>
