@@ -17,9 +17,9 @@ const phases = [
   },
   {
     n: "02",
-    title: "Design & Configure",
-    desc: "Configure SAP to best-practice standards with detailed solution design and milestone sign-offs.",
-    detail: "Our certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team. We leverage SAP Activate methodology and accelerators to compress timelines.",
+    title: "Realise: Configure & Develop",
+    desc: "Configure SAP to best-practice standards with detailed solution design and milestone sign-offs using SAP Activate.",
+    detail: "Our certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team. We leverage SAP Activate's Realise phase methodology and accelerators to compress timelines while ensuring quality.",
     image: methodConfigure,
     deliverables: ["Detailed design documents", "Configured SAP environment", "Integration specifications", "Data migration strategy"],
     icon: "⚙️",
