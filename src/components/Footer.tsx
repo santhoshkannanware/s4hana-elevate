@@ -1,9 +1,9 @@
 const LOGO_SVG = "data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTQwIDcwIj48ZGVmcz48c3R5bGU+LmNscy0xLC5jbHMtMntmaWxsOm5vbmU7fS5jbHMtMXtjbGlwLXJ1bGU6ZXZlbm9kZDt9LmNscy0ze2ZpbGw6I2ZmZjt9LmNscy00e2ZpbGw6I2RiODYwNDt9LmNscy00LC5jbHMtOXtmaWxsLXJ1bGU6ZXZlbm9kZDt9LmNscy01e2NsaXAtcGF0aDp1cmwoI2NsaXAtcGF0aCk7fS5jbHMtNntjbGlwLXBhdGg6dXJsKCNjbGlwLXBhdGgtMik7fS5jbHMtN3tjbGlwLXBhdGg6dXJsKCNjbGlwLXBhdGgtMyk7fS5jbHMtOHtvcGFjaXR5OjAuNTt9LmNscy05e2ZpbGw6I2ZmYWMwMDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmZpbmFsX2thbm5hbndhcmVfbG9nby0wMDI8L3RpdGxlPjwvc3ZnPg==";
 
 const cols = [
-  { title: "Practice Areas", links: ["Finance & Controlling", "Human Resources", "Supply Chain", "Customer Experience", "Spend Management", "Analytics & BTP"] },
-  { title: "Services", links: ["Advisory Services", "SAP Implementation", "Enhancement & Maintenance", "Staff Augmentation", "Data Migration", "Managed AMS"] },
-  { title: "Company", links: ["About Kannanware", "GROW with SAP", "Industries", "Insights", "Contact Us", "Careers"] },
+  { title: "SAP Product Expertise", links: ["S4/HANA Cloud", "SAP BTP", "SAP Data Sphere", "SAP Analytics Cloud", "SAP BW4 HANA", "Group Reporting"] },
+  { title: "Capabilities", links: ["Record to Report", "Source to Pay", "Treasury", "Projects", "Order to Cash", "Operate & Maintain"] },
+  { title: "Company", links: ["About Kannanware", "Industries", "Transformation Services", "Insights", "Contact Us", "Careers"] },
 ];
 
 export default function Footer() {

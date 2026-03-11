@@ -12,19 +12,12 @@ interface NavItem {
   label: string;
   href?: string;
   children?: DropdownItem[];
+  glow?: boolean;
 }
 
 const navItems: NavItem[] = [
   {
-    label: "Products",
-    children: [
-      { label: "CV Optimiser", href: "/products/cv-optimiser" },
-      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
-      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
-    ],
-  },
-  {
-    label: "Product Expertise",
+    label: "SAP Product Expertise",
     children: [
       { label: "S4/HANA (Public & Private Cloud)", href: "/product-expertise/s4hana" },
       { label: "SAP® - BTP", href: "/product-expertise/btp" },
@@ -40,7 +33,7 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Functional & Process Capability",
+    label: "Capabilities",
     children: [
       { label: "Record to Report", href: "/capability/record-to-report" },
       { label: "Source to Pay", href: "/capability/source-to-pay" },
@@ -48,13 +41,6 @@ const navItems: NavItem[] = [
       { label: "Projects", href: "/capability/projects" },
       { label: "Operate and Maintain", href: "/capability/operate-and-maintain" },
       { label: "Order to Cash", href: "/capability/order-to-cash" },
-    ],
-  },
-  {
-    label: "Programs",
-    children: [
-      { label: "Office of the CFO (Solutions & Services)", href: "/programs/office-of-cfo" },
-      { label: "Grow with SAP", href: "/programs/grow-with-sap" },
     ],
   },
   {
@@ -86,6 +72,17 @@ const navItems: NavItem[] = [
       { label: "Knowledge Base", href: "#insights" },
     ],
   },
+  {
+    label: "KIN AI Expertise",
+    glow: true,
+    children: [
+      { label: "CV Optimiser", href: "/products/cv-optimiser" },
+      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
+      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
+      { label: "Office of the CFO", href: "/programs/office-of-cfo" },
+      { label: "Grow with SAP", href: "/programs/grow-with-sap" },
+    ],
+  },
 ];
 
 function NavDropdown({ item }: { item: NavItem }) {
@@ -100,19 +97,37 @@ function NavDropdown({ item }: { item: NavItem }) {
     timeout.current = setTimeout(() => setOpen(false), 150);
   };
 
+  const isGlow = item.glow;
+
   return (
     <li className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button className="flex items-center gap-1 text-[.78rem] font-normal text-white/60 no-underline transition-colors duration-200 hover:text-gold cursor-none bg-transparent border-none">
+      <button className={`flex items-center gap-1 text-[.78rem] font-normal no-underline transition-all duration-200 cursor-none bg-transparent border-none ${
+        isGlow
+          ? "text-gold font-semibold drop-shadow-[0_0_8px_rgba(232,160,0,.5)]"
+          : "text-white/60 hover:text-gold"
+      }`}>
+        {isGlow && <span className="mr-0.5">✦</span>}
         {item.label}
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-2 min-w-[220px] bg-[#181818] border border-white/10 rounded-md py-2 shadow-xl animate-fade-in z-50">
+        <div
+          className={`absolute top-full right-0 mt-2 min-w-[220px] rounded-md py-2 shadow-xl animate-fade-in z-50 ${
+            isGlow
+              ? "bg-[#1a1400] border border-gold/30"
+              : "bg-[#181818] border border-white/10"
+          }`}
+          style={isGlow ? { boxShadow: "0 8px 32px rgba(232,160,0,.2), 0 0 1px rgba(232,160,0,.4)" } : undefined}
+        >
           {item.children?.map((child) => (
             <a
               key={child.label}
               href={child.href}
-              className="block px-4 py-2 text-[.76rem] text-white/55 hover:text-gold hover:bg-white/5 transition-colors duration-150 no-underline cursor-none"
+              className={`block px-4 py-2 text-[.76rem] transition-colors duration-150 no-underline cursor-none ${
+                isGlow
+                  ? "text-gold/70 hover:text-gold hover:bg-gold/10"
+                  : "text-white/55 hover:text-gold hover:bg-white/5"
+              }`}
             >
               {child.label}
             </a>

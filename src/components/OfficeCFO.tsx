@@ -225,15 +225,15 @@ function TransformationWheel() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.35 }}
-          className="absolute -bottom-28 left-0 right-0 text-center px-4"
+          className="absolute -bottom-20 left-0 right-0 text-center px-4"
         >
           <p className="text-[.72rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
           <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
         </motion.div>
       </AnimatePresence>
 
-      {/* Progress dots */}
-      <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* Progress dots — moved further below text */}
+      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
         {wheelSegments.map((_, i) => (
           <button
             key={i}
@@ -291,7 +291,7 @@ export default function OfficeCFO() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative pt-4 pb-36"
+            className="relative pt-4 pb-44"
           >
             <TransformationWheel />
           </motion.div>
