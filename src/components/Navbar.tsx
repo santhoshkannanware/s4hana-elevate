@@ -122,7 +122,7 @@ function NavDropdown({ item }: { item: NavItem }) {
             <a
               key={child.label}
               href={child.href}
-              className={`block px-4 py-2 text-[.76rem] transition-colors duration-150 no-underline cursor-none ${
+              className={`block px-4 py-2 text-[.88rem] transition-colors duration-150 no-underline cursor-none ${
                 isGlow
                   ? "text-gold/70 hover:text-gold hover:bg-gold/10"
                   : "text-white/55 hover:text-gold hover:bg-white/5"
