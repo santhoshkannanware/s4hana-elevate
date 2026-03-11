@@ -23,6 +23,7 @@ const App = () => (
           <Route path="/product-expertise/s4hana" element={<S4HanaPage />} />
           <Route path="/product-expertise/btp" element={<BtpPage />} />
           <Route path="/capability/record-to-report" element={<RecordToReportPage />} />
+          <Route path="/industry/energy" element={<EnergyPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
