@@ -118,7 +118,7 @@ export default function DeliveryModel() {
                     />
                   </div>
                   <span
-                    className="text-[.6rem] font-bold tracking-[.2em] uppercase transition-colors duration-300"
+                    className="text-[.75rem] font-bold tracking-[.2em] uppercase transition-colors duration-300"
                     style={{ color: isActive ? "hsl(var(--gold))" : "hsl(var(--muted-foreground))" }}
                   >
                     Phase {p.n}
