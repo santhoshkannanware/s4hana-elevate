@@ -294,7 +294,7 @@ function JouleLiveDemo() {
               transition={{ duration: 0.4 }}
               className="flex-1"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(232,160,0,.4)" }}>
+              <div className="text-[.72rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(232,160,0,.4)" }}>
                 <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 8px rgba(232,160,0,.5)" }} />
                 AI Insight
               </div>
