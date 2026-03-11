@@ -8,9 +8,9 @@ import methodOptimise from "@/assets/method-optimise.jpg";
 const phases = [
   {
     n: "01",
-    title: "Discover & Blueprint",
-    desc: "Map processes, identify opportunities, and design an SAP roadmap aligned to strategic priorities.",
-    detail: "We immerse ourselves in your business — interviewing stakeholders, auditing current systems, and mapping every process. The result is a crystal-clear blueprint that aligns technology to your business strategy.",
+    title: "Explore: Design & Blueprint",
+    desc: "Map processes, identify opportunities, and design an SAP roadmap aligned to strategic priorities using SAP Activate methodology.",
+    detail: "We immerse ourselves in your business — interviewing stakeholders, auditing current systems, and mapping every process following SAP Activate's Explore phase. The result is a crystal-clear blueprint that aligns technology to your business strategy.",
     image: methodDiscover,
     deliverables: ["Process maps & gap analysis", "Solution architecture", "Risk-prioritised roadmap", "Business case & ROI model"],
     icon: "🔍",
