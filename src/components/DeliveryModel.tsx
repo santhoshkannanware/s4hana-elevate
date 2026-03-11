@@ -35,9 +35,9 @@ const phases = [
   },
   {
     n: "04",
-    title: "Optimise & Support",
-    desc: "Post go-live hypercare, AMS, and continuous optimisation delivering sustained SAP value.",
-    detail: "Our managed services team monitors, optimises, and evolves your SAP landscape — ensuring you extract maximum value continuously with proactive SLA management.",
+    title: "Stabilize & Support",
+    desc: "Post go-live hypercare, AMS, and continuous optimisation delivering sustained SAP value following SAP Activate Run phase.",
+    detail: "Our managed services team monitors, optimises, and evolves your SAP landscape — ensuring you extract maximum value continuously with proactive SLA management. This aligns with SAP Activate's Run phase for ongoing operations.",
     image: methodOptimise,
     deliverables: ["24/7 AMS coverage", "Quarterly optimisation reviews", "Release management", "Continuous improvement backlog"],
     icon: "📈",
