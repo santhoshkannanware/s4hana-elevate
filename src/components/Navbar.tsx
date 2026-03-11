@@ -72,6 +72,17 @@ const navItems: NavItem[] = [
       { label: "Knowledge Base", href: "#insights" },
     ],
   },
+  {
+    label: "KIN AI Expertise",
+    glow: true,
+    children: [
+      { label: "CV Optimiser", href: "/products/cv-optimiser" },
+      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
+      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
+      { label: "Office of the CFO", href: "/programs/office-of-cfo" },
+      { label: "Grow with SAP", href: "/programs/grow-with-sap" },
+    ],
+  },
 ];
 
 function NavDropdown({ item }: { item: NavItem }) {
