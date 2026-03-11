@@ -347,7 +347,7 @@ function JouleLiveDemo() {
                   {/* Mini chart */}
                   <div className="flex items-end justify-between p-3 rounded-lg" style={{ background: "rgba(232,160,0,.03)", border: "1px solid rgba(232,160,0,.06)" }}>
                     <div>
-                      <div className="text-[.55rem] font-mono uppercase mb-1" style={{ color: "rgba(255,255,255,.25)" }}>Trend</div>
+                      <div className="text-[.68rem] font-mono uppercase mb-1" style={{ color: "rgba(255,255,255,.25)" }}>Trend</div>
                       <MiniChart data={scenario.chartData} />
                     </div>
                     <div className="text-right">
