@@ -212,7 +212,7 @@ function JouleLiveDemo() {
             Query
           </div>
           <div className="flex items-start gap-3 p-3 rounded-lg" style={{ background: "rgba(232,160,0,.05)", border: "1px solid rgba(232,160,0,.1)" }}>
-            <span className="text-[.75rem] font-mono shrink-0 mt-0.5" style={{ color: "#E8A000" }}>›</span>
+            <span className="text-[.85rem] font-mono shrink-0 mt-0.5" style={{ color: "#E8A000" }}>›</span>
             <div className="flex-1">
               <span className="text-[.82rem] font-mono" style={{ color: "rgba(255,255,255,.8)" }}>
                 {phase === "idle" ? "" : typedQuery}
