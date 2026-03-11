@@ -258,47 +258,50 @@ function ExpertiseSection() {
   );
 }
 
-/* ─── Section 5: Timeline ─── */
+/* ─── Section 5: Timeline — always-visible descriptions ─── */
 function TransformationTimeline() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const steps = ["Discovery", "Solution Design", "Implementation", "Testing", "Go-Live", "Hypercare Support"];
   const [active, setActive] = useState<number | null>(null);
-  const descs = [
-    "Assess your current landscape, define transformation goals, and build the business case for S/4HANA.",
-    "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting.",
-    "Configure, develop, and integrate S/4HANA modules following agile delivery methodology.",
-    "Execute comprehensive testing cycles including unit, integration, UAT, and performance testing.",
-    "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies.",
-    "Provide dedicated post-go-live support, stabilization, and continuous optimization for lasting success.",
+  const steps = [
+    { title: "Discovery", icon: Search, desc: "Assess your current landscape, define transformation goals, and build the business case for S/4HANA." },
+    { title: "Solution Design", icon: Compass, desc: "Architect the target solution with fit-gap analysis, process mapping, and technical blueprinting." },
+    { title: "Implementation", icon: Code2, desc: "Configure, develop, and integrate S/4HANA modules following agile delivery methodology." },
+    { title: "Testing", icon: FlaskConical, desc: "Execute comprehensive testing cycles including unit, integration, UAT, and performance testing." },
+    { title: "Go-Live", icon: Rocket, desc: "Orchestrate cutover activities, data migration, and production deployment with zero-downtime strategies." },
+    { title: "Hypercare Support", icon: HeartHandshake, desc: "Dedicated post-go-live support, stabilization, and continuous optimization for lasting success." },
   ];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10 overflow-hidden" style={{ background: "#0B0B0B" }}>
       <div className="max-w-[1200px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Methodology</motion.span>
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Transformation Journey</motion.h2>
         </motion.div>
-        {/* Timeline */}
+        {/* Vertical timeline on mobile, horizontal on lg */}
         <div className="relative">
-          {/* Line */}
-          <div className="absolute top-6 left-0 right-0 h-px bg-white/10" />
-          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.5, ease: "easeOut" }} className="absolute top-6 left-0 right-0 h-px origin-left" style={{ background: "linear-gradient(90deg, #F4B400, rgba(244,180,0,.2))" }} />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {steps.map((s, i) => (
-              <motion.div key={s} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .3 + i * .12 }} className="relative cursor-pointer" onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
-                <div className="relative z-10 w-12 h-12 rounded-full border-2 flex items-center justify-center mx-auto mb-4 transition-all" style={{ borderColor: active === i ? "#F4B400" : "rgba(255,255,255,.15)", background: active === i ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.03)", boxShadow: active === i ? "0 0 20px rgba(244,180,0,.3)" : "none" }}>
-                  <span className="text-sm font-bold" style={{ color: active === i ? "#F4B400" : "rgba(255,255,255,.5)" }}>{i + 1}</span>
-                </div>
-                <p className="text-center text-sm font-semibold text-white mb-2">{s}</p>
-                <AnimatePresence>
-                  {active === i && (
-                    <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="text-center text-[.75rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{descs[i]}</motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
+          {/* Horizontal line (lg only) */}
+          <div className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px bg-white/8" />
+          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.8, ease: "easeOut" }} className="hidden lg:block absolute top-[28px] left-[60px] right-[60px] h-px origin-left" style={{ background: "linear-gradient(90deg, #F4B400 0%, rgba(244,180,0,.15) 100%)" }} />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-5">
+            {steps.map((s, i) => {
+              const isActive = active === i;
+              return (
+                <motion.div key={s.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .2 + i * .12 }} className="relative cursor-pointer group" onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
+                  {/* Node circle */}
+                  <div className="relative z-10 w-14 h-14 rounded-full border-2 flex items-center justify-center mx-auto lg:mx-auto mb-5 transition-all duration-300" style={{ borderColor: isActive ? "#F4B400" : "rgba(255,255,255,.1)", background: isActive ? "rgba(244,180,0,.12)" : "rgba(255,255,255,.03)", boxShadow: isActive ? "0 0 30px rgba(244,180,0,.3)" : "none" }}>
+                    <s.icon size={20} style={{ color: isActive ? "#F4B400" : "rgba(255,255,255,.4)" }} className="transition-colors" />
+                  </div>
+                  {/* Content */}
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{s.title}</p>
+                    <p className="text-[.78rem] leading-relaxed" style={{ color: "#999" }}>{s.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
