@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import S4HanaPage from "./pages/S4HanaPage.tsx";
 import BtpPage from "./pages/BtpPage.tsx";
 import RecordToReportPage from "./pages/RecordToReportPage.tsx";
+import EnergyPage from "./pages/EnergyPage.tsx";
 
 const queryClient = new QueryClient();
 
