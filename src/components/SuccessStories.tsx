@@ -40,12 +40,12 @@ export default function SuccessStories() {
                 ins.featured ? "md:col-span-2 bg-background hover:bg-secondary" : "bg-card hover:bg-secondary"
               }`}
             >
-              <div className="text-[.6rem] font-bold tracking-[.16em] uppercase mb-3 text-gold">{ins.tag}</div>
+              <div className="text-[.75rem] font-bold tracking-[.16em] uppercase mb-3 text-gold">{ins.tag}</div>
               <h3 className={`font-bold leading-[1.35] tracking-tight pb-5 mb-auto ${
                 ins.featured ? "text-xl md:text-2xl text-foreground" : "text-base text-foreground"
               }`}>{ins.title}</h3>
-              {ins.desc && <p className="text-[.8rem] font-light leading-[1.65] mb-3.5 text-muted-foreground">{ins.desc}</p>}
-              <div className="text-[.74rem] font-semibold flex items-center gap-1.5 transition-[gap] duration-200 hover:gap-2.5 text-gold">Read {ins.featured ? "article" : ""} →</div>
+              {ins.desc && <p className="text-[.92rem] font-light leading-[1.65] mb-3.5 text-muted-foreground">{ins.desc}</p>}
+              <div className="text-[.88rem] font-semibold flex items-center gap-1.5 transition-[gap] duration-200 hover:gap-2.5 text-gold">Read {ins.featured ? "article" : ""} →</div>
             </motion.div>
           ))}
         </div>
