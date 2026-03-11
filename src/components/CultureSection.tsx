@@ -308,7 +308,7 @@ function JouleLiveDemo() {
                   boxShadow: "0 0 20px rgba(232,160,0,.06)",
                 }}
               >
-                <p className="text-[.82rem] font-mono leading-[1.7]" style={{ color: "rgba(255,255,255,.75)" }}>
+                <p className="text-[.92rem] font-mono leading-[1.7]" style={{ color: "rgba(255,255,255,.75)" }}>
                   {typedAnswer}
                   {phase === "answering" && (
                     <motion.span
