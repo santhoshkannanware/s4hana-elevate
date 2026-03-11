@@ -197,7 +197,7 @@ function JouleLiveDemo() {
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffbd2e" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
-        <span className="ml-3 text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.5)" }}>SAP Joule AI Copilot</span>
+        <span className="ml-3 text-[.82rem] font-mono" style={{ color: "rgba(232,160,0,.5)" }}>SAP Joule AI Copilot</span>
         <div className="ml-auto flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#E8A000", boxShadow: "0 0 6px rgba(232,160,0,.6)" }} />
           <span className="text-[.6rem] font-mono" style={{ color: "rgba(232,160,0,.4)" }}>LIVE</span>
