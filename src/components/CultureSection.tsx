@@ -436,8 +436,8 @@ export default function CultureSection() {
             >
               <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 10px rgba(232,160,0,.4)" }} />
               <div className="text-2xl mb-4">{cap.icon}</div>
-              <h4 className="text-[.88rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
-              <p className="text-[.78rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
+              <h4 className="text-[1rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
+              <p className="text-[.9rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
             </motion.div>
           ))}
         </div>
