@@ -157,7 +157,7 @@ export default function Navbar() {
     >
       <a href="#" className="flex items-center gap-3 no-underline cursor-none">
         <img src={LOGO_SVG} alt="Kannanware" className="h-9 w-auto block" />
-        <span className="text-[.58rem] font-bold tracking-[.12em] uppercase text-gold border border-gold/35 px-2 py-0.5 ml-1">
+        <span className="text-[.7rem] font-bold tracking-[.12em] uppercase text-gold border border-gold/35 px-2 py-0.5 ml-1">
           AI-First SAP
         </span>
       </a>
