@@ -37,6 +37,7 @@ const Index = () => {
         <CultureSection />
         <DeliveryModel />
         <AdvisoryModel />
+        <OfficeCFO />
         <IndustryFocus />
         <FinalCTA />
         <Footer />
