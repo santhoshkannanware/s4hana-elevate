@@ -309,47 +309,49 @@ function TransformationTimeline() {
   );
 }
 
-/* ─── Section 6: Architecture ─── */
+/* ─── Section 6: Architecture — responsive, not collapsed ─── */
 function ArchitectureViz() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [hovered, setHovered] = useState<string | null>(null);
   const nodes = [
-    { label: "SAP BTP", angle: 0 },
-    { label: "SAP Datasphere", angle: 72 },
-    { label: "SAP Analytics Cloud", angle: 144 },
-    { label: "SAP BW/4HANA", angle: 216 },
-    { label: "SAP Integration Suite", angle: 288 },
+    { label: "SAP BTP", desc: "Business Technology Platform for extensions and integrations" },
+    { label: "SAP Datasphere", desc: "Unified data layer across hybrid landscapes" },
+    { label: "SAP Analytics Cloud", desc: "Planning, reporting, and predictive analytics" },
+    { label: "SAP BW/4HANA", desc: "Next-gen data warehousing for enterprise insights" },
+    { label: "SAP Integration Suite", desc: "Connect applications, processes, and people" },
   ];
-  const r = 160;
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
-      <div className="max-w-[900px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
+      <div className="max-w-[1100px] mx-auto">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Architecture</motion.span>
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">S/4HANA Ecosystem</motion.h2>
         </motion.div>
-        <div className="relative flex justify-center">
-          <div className="relative" style={{ width: r * 2 + 140, height: r * 2 + 140 }}>
-            {/* Center */}
-            <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: .5 }} className="absolute rounded-full flex items-center justify-center text-center" style={{ width: 120, height: 120, left: "50%", top: "50%", transform: "translate(-50%,-50%)", background: "radial-gradient(circle, rgba(244,180,0,.2), rgba(244,180,0,.05))", border: "2px solid rgba(244,180,0,.4)", boxShadow: "0 0 40px rgba(244,180,0,.15)" }}>
-              <span className="text-sm font-bold text-white leading-tight">SAP<br />S/4HANA</span>
-            </motion.div>
-            {/* Nodes */}
+
+        {/* Center hub + radial nodes — replaced with clean list layout that never collapses */}
+        <div className="flex flex-col items-center">
+          {/* Center node */}
+          <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: .5 }} className="w-32 h-32 rounded-full flex items-center justify-center text-center mb-4" style={{ background: "radial-gradient(circle, rgba(244,180,0,.2), rgba(244,180,0,.05))", border: "2px solid rgba(244,180,0,.4)", boxShadow: "0 0 60px rgba(244,180,0,.15)" }}>
+            <span className="text-base font-bold text-white leading-tight">SAP<br />S/4HANA</span>
+          </motion.div>
+          {/* Connector line */}
+          <motion.div initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: .3, duration: .4 }} className="w-px h-10 origin-top" style={{ background: "linear-gradient(to bottom, rgba(244,180,0,.5), rgba(244,180,0,.1))" }} />
+          {/* Connected systems */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
             {nodes.map((n, i) => {
-              const rad = (n.angle - 90) * Math.PI / 180;
-              const x = Math.cos(rad) * r;
-              const y = Math.sin(rad) * r;
               const isH = hovered === n.label;
               return (
-                <motion.div key={n.label} initial={{ opacity: 0, scale: 0 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: .5 + i * .12 }}>
-                  {/* Line */}
-                  <motion.div className="absolute" style={{ left: "50%", top: "50%", width: r, height: 1, transformOrigin: "0 0", transform: `rotate(${n.angle - 90}deg)`, background: isH ? "rgba(244,180,0,.5)" : "rgba(244,180,0,.15)" }} initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ delay: .7 + i * .1, duration: .5 }} />
-                  {/* Node */}
-                  <div onMouseEnter={() => setHovered(n.label)} onMouseLeave={() => setHovered(null)} className="absolute flex items-center justify-center rounded-full cursor-pointer transition-all" style={{ width: 90, height: 90, left: `calc(50% + ${x}px - 45px)`, top: `calc(50% + ${y}px - 45px)`, background: isH ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.04)", border: `1.5px solid ${isH ? "rgba(244,180,0,.5)" : "rgba(255,255,255,.1)"}`, boxShadow: isH ? "0 0 25px rgba(244,180,0,.25)" : "none" }}>
-                    <span className="text-[.65rem] font-semibold text-white text-center leading-tight px-2">{n.label}</span>
-                  </div>
+                <motion.div key={n.label} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .5 + i * .1 }}
+                  onMouseEnter={() => setHovered(n.label)} onMouseLeave={() => setHovered(null)}
+                  className="relative rounded-xl p-5 border text-center cursor-pointer transition-all duration-300"
+                  style={{ background: isH ? "rgba(244,180,0,.08)" : "rgba(255,255,255,.02)", borderColor: isH ? "rgba(244,180,0,.4)" : "rgba(255,255,255,.06)", boxShadow: isH ? "0 0 30px rgba(244,180,0,.15)" : "none" }}
+                >
+                  {/* Top connector dot */}
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 transition-colors" style={{ borderColor: isH ? "#F4B400" : "rgba(255,255,255,.15)", background: isH ? "rgba(244,180,0,.3)" : "rgba(255,255,255,.05)" }} />
+                  <h4 className="text-sm font-bold text-white mb-2 mt-1">{n.label}</h4>
+                  <p className="text-[.72rem] leading-relaxed" style={{ color: "#999" }}>{n.desc}</p>
                 </motion.div>
               );
             })}
@@ -360,29 +362,39 @@ function ArchitectureViz() {
   );
 }
 
-/* ─── Section 7: Business Impact ─── */
+/* ─── Section 7: Business Impact — large statement rows ─── */
 function BusinessImpact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const blocks = [
-    { title: "Real-Time Financial Insights", desc: "Instant visibility into financial performance across all dimensions." },
-    { title: "Accelerated Financial Close", desc: "Reduce close cycles from weeks to days with automated reconciliation." },
-    { title: "Simplified Data Architecture", desc: "Single source of truth with Universal Journal eliminating data redundancy." },
-    { title: "Future-Ready ERP Platform", desc: "AI-native, cloud-enabled platform built for the next decade of innovation." },
+    { title: "Real-Time Financial Insights", desc: "Instant visibility into financial performance across every dimension — entity, segment, profit center — with sub-second response times.", metric: "< 1s", metricLabel: "Query Response" },
+    { title: "Accelerated Financial Close", desc: "Reduce close cycles from weeks to days with automated reconciliation, parallel processing, and intelligent exception handling.", metric: "70%", metricLabel: "Faster Close" },
+    { title: "Simplified Data Architecture", desc: "Single source of truth with Universal Journal eliminating data redundancy, aggregate tables, and reconciliation complexity.", metric: "10x", metricLabel: "Less Redundancy" },
+    { title: "Future-Ready ERP Platform", desc: "AI-native, cloud-enabled platform built for the next decade of innovation with embedded machine learning and predictive capabilities.", metric: "∞", metricLabel: "Scalability" },
   ];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#0B0B0B" }}>
-      <div className="max-w-[1100px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
+      <div className="max-w-[1200px] mx-auto">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Results</motion.span>
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Business Impact</motion.h2>
         </motion.div>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-0">
           {blocks.map((b, i) => (
-            <motion.div key={b.title} initial={{ opacity: 0, scale: .92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .5 }} className="group rounded-2xl p-8 border text-center transition-all hover:border-[rgba(244,180,0,.3)]" style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#F4B400] transition-colors">{b.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#C9C9C9" }}>{b.desc}</p>
+            <motion.div key={b.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .6 }}
+              className="group grid grid-cols-1 md:grid-cols-[120px_1fr_1.2fr] items-start gap-6 md:gap-10 py-10 border-b transition-all"
+              style={{ borderColor: "rgba(255,255,255,.06)" }}
+            >
+              {/* Metric */}
+              <div className="text-center md:text-left">
+                <span className="text-[2.5rem] font-bold leading-none group-hover:text-[#F4B400] transition-colors" style={{ color: "#F4B400" }}>{b.metric}</span>
+                <span className="block text-[.65rem] uppercase tracking-[.15em] mt-1" style={{ color: "rgba(255,255,255,.3)" }}>{b.metricLabel}</span>
+              </div>
+              {/* Title */}
+              <h3 className="text-[clamp(1.2rem,2.5vw,1.6rem)] font-bold text-white leading-tight group-hover:text-[#F4B400] transition-colors">{b.title}</h3>
+              {/* Description */}
+              <p className="text-[.92rem] leading-[1.8]" style={{ color: "#C9C9C9" }}>{b.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -413,6 +425,7 @@ function CTASection() {
 export default function S4HanaPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
+      <CustomCursor />
       <Navbar />
       <HeroSection />
       <CloudToggle />
