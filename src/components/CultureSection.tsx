@@ -239,7 +239,7 @@ function JouleLiveDemo() {
               exit={{ opacity: 0, y: -8 }}
               className="mb-5"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(232,160,0,.4)" }}>
+              <div className="text-[.72rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(232,160,0,.4)" }}>
                 Processing
               </div>
               <div className="space-y-2">
