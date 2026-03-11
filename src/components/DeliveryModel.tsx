@@ -26,9 +26,9 @@ const phases = [
   },
   {
     n: "03",
-    title: "Test & Deploy",
-    desc: "AI-accelerated test automation ensures quality before every go-live. Zero surprises on cutover day.",
-    detail: "We leverage AI-driven test automation to compress cycles by 40%. Every scenario is validated before cutover — including end-to-end integration, performance, and user acceptance testing.",
+    title: "Deploy: Test & Go Live",
+    desc: "AI-accelerated test automation ensures quality before every go-live. Zero surprises on cutover day following SAP Activate Deploy phase.",
+    detail: "We leverage AI-driven test automation to compress cycles by 40%. Every scenario is validated before cutover — including end-to-end integration, performance, and user acceptance testing — following SAP Activate's Deploy methodology.",
     image: methodDeploy,
     deliverables: ["Automated test suites", "Cutover runbooks", "Hypercare team on standby", "Go-live certification"],
     icon: "🚀",
