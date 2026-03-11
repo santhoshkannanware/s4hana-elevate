@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, BookOpen, FileCheck, RefreshCw, Lock, BarChart3,
