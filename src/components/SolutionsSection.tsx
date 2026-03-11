@@ -164,7 +164,7 @@ export default function SolutionsSection() {
                 {step.detail}
               </p>
 
-              <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold/60 mb-4">
+              <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold/60 mb-4">
                 Key Deliverables
               </p>
               <div className="space-y-3">
