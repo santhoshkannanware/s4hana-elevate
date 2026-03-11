@@ -208,7 +208,7 @@ function JouleLiveDemo() {
       <div className="p-5 min-h-[380px] flex flex-col">
         {/* Query input area */}
         <div className="mb-5">
-          <div className="text-[.6rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(232,160,0,.4)" }}>
+          <div className="text-[.72rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(232,160,0,.4)" }}>
             Query
           </div>
           <div className="flex items-start gap-3 p-3 rounded-lg" style={{ background: "rgba(232,160,0,.05)", border: "1px solid rgba(232,160,0,.1)" }}>
