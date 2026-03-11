@@ -3,15 +3,18 @@ import cursorK from "@/assets/k-cursor-clean.png";
 
 export default function CustomCursor() {
   const ref = useRef<HTMLDivElement>(null);
-  const mx = useRef(0);
-  const my = useRef(0);
-  const cx = useRef(0);
-  const cy = useRef(0);
+  const pos = useRef({ mx: 0, my: 0, cx: 0, cy: 0 });
 
   useEffect(() => {
+    // Skip on touch devices
+    if (typeof matchMedia !== "undefined" && matchMedia("(pointer: coarse)").matches) return;
+
+    const el = ref.current;
+    if (!el) return;
+
     const onMove = (e: MouseEvent) => {
-      mx.current = e.clientX;
-      my.current = e.clientY;
+      pos.current.mx = e.clientX;
+      pos.current.my = e.clientY;
     };
 
     const onOver = (e: MouseEvent) => {
@@ -22,17 +25,17 @@ export default function CustomCursor() {
     };
     const onOut = () => document.body.classList.remove("cursor-hover");
 
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseover", onOver);
-    document.addEventListener("mouseout", onOut);
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
 
     let raf: number;
     const loop = () => {
-      cx.current += (mx.current - cx.current) * 0.14;
-      cy.current += (my.current - cy.current) * 0.14;
-      if (ref.current) {
-        ref.current.style.transform = `translate(${cx.current}px, ${cy.current}px)`;
-      }
+      const p = pos.current;
+      // Faster lerp factor (0.25 vs 0.14) for snappier feel
+      p.cx += (p.mx - p.cx) * 0.25;
+      p.cy += (p.my - p.cy) * 0.25;
+      el.style.transform = `translate3d(${p.cx}px, ${p.cy}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
@@ -55,13 +58,13 @@ export default function CustomCursor() {
         src={cursorK}
         alt=""
         draggable={false}
-        className="cursor-k-img w-8 h-8 block transition-transform duration-200"
+        className="cursor-k-img w-8 h-8 block transition-transform duration-150"
         style={{
           filter: "drop-shadow(0 2px 6px rgba(0,0,0,.4))",
         }}
       />
       <style>{`
-        body { cursor: none; }
+        @media (min-width: 769px) { body { cursor: none !important; } }
         body.cursor-hover .cursor-k-img { transform: scale(1.35); filter: drop-shadow(0 4px 12px rgba(230,165,20,.6)) !important; }
         @media (max-width: 768px) { body { cursor: auto !important; } }
       `}</style>
