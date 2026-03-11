@@ -170,7 +170,7 @@ export default function Navbar() {
             <li key={item.label}>
               <a
                 href={item.href}
-                className="text-[.78rem] font-normal text-white/60 no-underline transition-colors duration-200 hover:text-gold cursor-none"
+                className="text-[.88rem] font-normal text-white/60 no-underline transition-colors duration-200 hover:text-gold cursor-none"
               >
                 {item.label}
               </a>
