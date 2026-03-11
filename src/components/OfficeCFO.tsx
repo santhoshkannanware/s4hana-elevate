@@ -305,7 +305,7 @@ export default function OfficeCFO() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold mb-6 flex items-center gap-2">
+            <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold mb-6 flex items-center gap-2">
               <span className="w-5 h-px bg-gold inline-block" />
               Solution & Services
             </p>
