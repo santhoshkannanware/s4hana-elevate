@@ -232,8 +232,8 @@ function TransformationWheel() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Progress dots */}
-      <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* Progress dots — moved further below text */}
+      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
         {wheelSegments.map((_, i) => (
           <button
             key={i}
