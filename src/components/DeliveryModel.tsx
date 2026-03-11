@@ -126,7 +126,7 @@ export default function DeliveryModel() {
                 </div>
 
                 <h4
-                  className={`text-sm md:text-[.95rem] font-bold tracking-tight transition-colors duration-300 ${
+                  className={`text-[.95rem] md:text-[1.05rem] font-bold tracking-tight transition-colors duration-300 ${
                     isActive ? "text-foreground" : "text-foreground/50"
                   }`}
                 >
