@@ -71,30 +71,58 @@ function TransformationWheel() {
   const segCount = wheelSegments.length;
 
   return (
-    <div className="relative w-full max-w-[520px] mx-auto aspect-square">
-      {/* Outer ring glow */}
-      <div className="absolute inset-[-20px] rounded-full pointer-events-none" style={{
-        background: "radial-gradient(circle, rgba(232,160,0,.08) 40%, transparent 70%)",
+    <div className="relative w-full max-w-[540px] mx-auto aspect-square">
+      {/* Massive sun glow */}
+      <div className="absolute inset-[-60px] rounded-full pointer-events-none" style={{
+        background: "radial-gradient(circle, rgba(255,190,0,.25) 10%, rgba(232,160,0,.12) 35%, rgba(232,120,0,.04) 55%, transparent 70%)",
       }} />
-
-      {/* Outer circle border */}
-      <div className="absolute inset-0 rounded-full" style={{
-        border: "1px solid rgba(232,160,0,.12)",
-      }} />
-
-      {/* Rotating dashed ring */}
       <motion.div
-        className="absolute inset-3 rounded-full pointer-events-none"
-        style={{ border: "1px dashed rgba(232,160,0,.15)" }}
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
+        className="absolute inset-[-40px] rounded-full pointer-events-none"
+        animate={{ scale: [1, 1.06, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+        style={{ background: "radial-gradient(circle, rgba(255,200,0,.15) 20%, transparent 60%)" }}
       />
 
-      {/* Segment buttons around the wheel */}
+      {/* Bright outer ring */}
+      <div className="absolute inset-0 rounded-full" style={{
+        border: "2px solid rgba(255,190,0,.35)",
+        boxShadow: "0 0 30px rgba(255,180,0,.15), inset 0 0 30px rgba(255,180,0,.08)",
+      }} />
+
+      {/* Second glowing ring */}
+      <div className="absolute inset-4 rounded-full" style={{
+        border: "1px solid rgba(255,190,0,.2)",
+        boxShadow: "0 0 15px rgba(255,180,0,.08)",
+      }} />
+
+      {/* Rotating ray ring */}
+      <motion.div
+        className="absolute inset-[-2px] rounded-full pointer-events-none overflow-hidden"
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+      >
+        <svg className="w-full h-full" viewBox="0 0 200 200">
+          {Array.from({ length: 36 }).map((_, i) => {
+            const a = (i * 10 * Math.PI) / 180;
+            const x1 = 100 + 85 * Math.cos(a);
+            const y1 = 100 + 85 * Math.sin(a);
+            const x2 = 100 + 100 * Math.cos(a);
+            const y2 = 100 + 100 * Math.sin(a);
+            return (
+              <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke={i % 3 === 0 ? "rgba(255,200,0,.4)" : "rgba(255,180,0,.12)"}
+                strokeWidth={i % 3 === 0 ? "1.5" : "0.5"}
+              />
+            );
+          })}
+        </svg>
+      </motion.div>
+
+      {/* Segment buttons */}
       {wheelSegments.map((s, i) => {
-        const angle = (i * 360) / segCount - 90; // start from top
+        const angle = (i * 360) / segCount - 90;
         const rad = (angle * Math.PI) / 180;
-        const radius = 42; // percentage from center
+        const radius = 42;
         const x = 50 + radius * Math.cos(rad);
         const y = 50 + radius * Math.sin(rad);
         const isActive = i === activeIdx;
@@ -104,37 +132,33 @@ function TransformationWheel() {
             key={i}
             onClick={() => handleClick(i)}
             className="absolute cursor-none z-10"
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-            whileHover={{ scale: 1.1 }}
+            style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}
+            whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.95 }}
           >
             <motion.div
-              className="flex flex-col items-center gap-1.5"
-              animate={{
-                scale: isActive ? 1 : 0.85,
-                opacity: isActive ? 1 : 0.5,
-              }}
+              className="flex flex-col items-center gap-2"
+              animate={{ scale: isActive ? 1 : 0.8, opacity: isActive ? 1 : 0.45 }}
               transition={{ duration: 0.4 }}
             >
-              {/* Node dot */}
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center text-lg transition-all duration-500"
+              <motion.div
+                className="w-14 h-14 rounded-full flex items-center justify-center text-xl"
+                animate={isActive ? {
+                  boxShadow: ["0 0 20px rgba(255,190,0,.5)", "0 0 40px rgba(255,190,0,.7)", "0 0 20px rgba(255,190,0,.5)"],
+                } : { boxShadow: "0 0 0px rgba(255,190,0,0)" }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                 style={{
-                  background: isActive ? "rgba(232,160,0,.2)" : "rgba(255,255,255,.04)",
-                  border: isActive ? "2px solid hsl(var(--gold))" : "1px solid rgba(255,255,255,.1)",
-                  boxShadow: isActive ? "0 0 20px rgba(232,160,0,.3)" : "none",
+                  background: isActive
+                    ? "linear-gradient(135deg, rgba(255,200,0,.35), rgba(232,160,0,.2))"
+                    : "rgba(255,255,255,.03)",
+                  border: isActive ? "2px solid rgba(255,200,0,.7)" : "1px solid rgba(255,255,255,.08)",
                 }}
               >
                 {s.icon}
-              </div>
-              {/* Label */}
+              </motion.div>
               <span
-                className="text-[.6rem] font-semibold text-center leading-tight max-w-[90px] transition-colors duration-500"
-                style={{ color: isActive ? "hsl(var(--gold))" : "rgba(255,255,255,.35)" }}
+                className="text-[.62rem] font-bold text-center leading-tight max-w-[90px] transition-colors duration-400"
+                style={{ color: isActive ? "#ffcc00" : "rgba(255,255,255,.3)" }}
               >
                 {s.shortLabel}
               </span>
@@ -143,72 +167,82 @@ function TransformationWheel() {
         );
       })}
 
-      {/* Connector lines from center to active node */}
+      {/* Bright connector lines */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
         {wheelSegments.map((_, i) => {
           const angle = (i * 360) / segCount - 90;
           const rad = (angle * Math.PI) / 180;
           const radius = 42;
-          const x = 50 + radius * Math.cos(rad);
-          const y = 50 + radius * Math.sin(rad);
+          const x2 = 50 + radius * Math.cos(rad);
+          const y2 = 50 + radius * Math.sin(rad);
           const isActive = i === activeIdx;
-
           return (
-            <line
-              key={i}
-              x1="50" y1="50" x2={x} y2={y}
-              stroke={isActive ? "rgba(232,160,0,.4)" : "rgba(255,255,255,.04)"}
-              strokeWidth={isActive ? "0.4" : "0.15"}
-              strokeDasharray={isActive ? "none" : "1 1"}
-              style={{ transition: "all 0.5s" }}
+            <line key={i} x1="50" y1="50" x2={x2} y2={y2}
+              stroke={isActive ? "rgba(255,200,0,.6)" : "rgba(255,180,0,.06)"}
+              strokeWidth={isActive ? "0.5" : "0.15"}
+              style={{ transition: "all 0.5s", filter: isActive ? "drop-shadow(0 0 4px rgba(255,200,0,.4))" : "none" }}
             />
           );
         })}
       </svg>
 
-      {/* Center hub */}
+      {/* Center hub — bright sun core */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        {/* Outer glow ring */}
         <motion.div
-          className="w-36 h-36 md:w-40 md:h-40 rounded-full flex flex-col items-center justify-center text-center p-4"
+          className="absolute -inset-5 rounded-full pointer-events-none"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+          style={{ background: "radial-gradient(circle, rgba(255,200,0,.3), transparent 70%)" }}
+        />
+        <motion.div
+          className="w-40 h-40 md:w-44 md:h-44 rounded-full flex flex-col items-center justify-center text-center p-4 relative"
           style={{
-            background: "linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)))",
-            boxShadow: "0 0 40px rgba(232,160,0,.3), inset 0 1px 0 rgba(255,255,255,.2)",
+            background: "linear-gradient(135deg, #FFB800, #E8A000, #FF9500)",
+            boxShadow: "0 0 60px rgba(255,180,0,.5), 0 0 120px rgba(255,150,0,.2), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -2px 4px rgba(0,0,0,.15)",
           }}
-          animate={{ scale: [1, 1.03, 1] }}
-          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         >
-          <span className="text-[.6rem] font-bold uppercase tracking-[.15em] text-black/60 mb-1">SAP CFO</span>
-          <span className="text-[.85rem] font-bold text-black leading-tight">Transformation</span>
-          <span className="text-[.85rem] font-bold text-black leading-tight">Wheel</span>
+          <span className="text-[.55rem] font-bold uppercase tracking-[.2em] text-black/50 mb-0.5">SAP CFO</span>
+          <span className="text-[1rem] font-extrabold text-black leading-tight">Transformation</span>
+          <span className="text-[1rem] font-extrabold text-black leading-tight">Wheel</span>
+          {/* Inner shimmer */}
+          <motion.div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            animate={{ rotate: [0, 360] }}
+            transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+            style={{ background: "conic-gradient(from 0deg, transparent, rgba(255,255,255,.15), transparent, rgba(255,255,255,.1), transparent)" }}
+          />
         </motion.div>
       </div>
 
-      {/* Active segment detail - below wheel on mobile, overlay on desktop */}
+      {/* Active segment detail */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIdx}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
+          exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.35 }}
           className="absolute -bottom-28 left-0 right-0 text-center px-4"
         >
-          <p className="text-[.72rem] font-bold text-gold tracking-[.1em] uppercase mb-1.5">{seg.shortLabel}</p>
+          <p className="text-[.72rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
           <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
         </motion.div>
       </AnimatePresence>
 
       {/* Progress dots */}
-      <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-1.5">
+      <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
         {wheelSegments.map((_, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
-            className="w-1.5 h-1.5 rounded-full transition-all duration-500 cursor-none"
+            className="w-2 h-2 rounded-full transition-all duration-500 cursor-none"
             style={{
-              background: i === activeIdx ? "hsl(var(--gold))" : "rgba(255,255,255,.15)",
-              transform: i === activeIdx ? "scale(1.5)" : "scale(1)",
-              boxShadow: i === activeIdx ? "0 0 8px rgba(232,160,0,.4)" : "none",
+              background: i === activeIdx ? "#ffcc00" : "rgba(255,255,255,.12)",
+              transform: i === activeIdx ? "scale(1.6)" : "scale(1)",
+              boxShadow: i === activeIdx ? "0 0 12px rgba(255,200,0,.6)" : "none",
             }}
           />
         ))}
