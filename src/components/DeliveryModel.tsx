@@ -172,7 +172,7 @@ export default function DeliveryModel() {
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
                 {phase.title}: <span className="text-gold">{phase.subtitle}</span>
               </h3>
-              <p className="text-muted-foreground text-[.88rem] font-light leading-[1.85] mb-8">
+              <p className="text-muted-foreground text-[.95rem] font-light leading-[1.85] mb-8">
                 {phase.detail}
               </p>
 
