@@ -228,8 +228,8 @@ function TransformationWheel() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35 }}
           >
-            <p className="text-[.72rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
-            <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
+            <p className="text-[.85rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
+            <p className="text-[.92rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
           </motion.div>
         </AnimatePresence>
       </div>
