@@ -1,213 +1,215 @@
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import stepAdvisory from "@/assets/step-advisory.jpg";
+import stepExecution from "@/assets/step-execution.jpg";
+import stepAnalytics from "@/assets/step-analytics.jpg";
+import stepExperts from "@/assets/step-experts.jpg";
 
-const practices = [
+const steps = [
   {
-    id: "fin",
-    label: "Finance",
-    color: "#E8A000",
-    eyebrow: "S/4HANA Finance",
-    title: "Record to Report, Reimagined",
-    desc: "End-to-end financial transformation — from GL to close, treasury to consolidation, billing to analytics.",
-    capabilities: [
-      { title: "Financial Accounting", items: ["General Ledger", "AP & AR", "Asset Accounting", "Bank Accounting"] },
-      { title: "Controlling", items: ["Cost Centers", "Profit Centers", "Internal Orders", "Product Costing"] },
-      { title: "Treasury & Risk", items: ["Cash Management", "Liquidity Planning", "Risk Mitigation", "Bank Comms"] },
-      { title: "Group Reporting", items: ["Consolidation", "Intercompany Elim.", "IFRS / GAAP", "Currency Translation"] },
-    ],
-    stats: [
-      { val: "R2R", label: "End-to-end close" },
-      { val: "AFC", label: "Accelerated cycles" },
-      { val: "Group", label: "Consolidation & IFRS" },
-      { val: "AI+", label: "Anomaly detection" },
-    ],
+    num: "01",
+    title: "Advisory",
+    text: "We assess your SAP landscape, define transformation strategies, and build the blueprint for future-ready finance operations.",
+    image: stepAdvisory,
   },
   {
-    id: "hr",
-    label: "Human Capital",
-    color: "#059669",
-    eyebrow: "SAP SuccessFactors",
-    title: "Hire to Retire, Reimagined",
-    desc: "Connect talent, payroll, learning, and workforce analytics on a single AI-powered HR platform.",
-    capabilities: [
-      { title: "Employee Central", items: ["Core HR & Org Mgmt", "Position Management", "Time & Attendance", "Global Benefits"] },
-      { title: "Recruiting", items: ["Recruiting Management", "Recruiting Marketing", "Onboarding 2.0", "Background Verification"] },
-      { title: "Performance & Goals", items: ["Goal Management", "Performance Reviews", "360° Feedback", "Calibration"] },
-      { title: "Learning", items: ["Learning Management", "Compliance Training", "Skills Catalogue", "Mobile Learning"] },
-    ],
-    stats: [
-      { val: "H2R", label: "Hire-to-Retire" },
-      { val: "Global", label: "Multi-country payroll" },
-      { val: "Cloud", label: "Full SuccessFactors" },
-      { val: "AI+", label: "Talent insights" },
-    ],
+    num: "02",
+    title: "Execution",
+    text: "Our specialists deliver SAP implementation, rollout, and S/4HANA conversions with structured project governance.",
+    image: stepExecution,
   },
   {
-    id: "sc",
-    label: "Supply Chain",
-    color: "#6366f1",
-    eyebrow: "Supply Chain Management",
-    title: "Resilient, Visible, End-to-End",
-    desc: "From procurement to production, warehouse to transportation — AI-driven efficiency at every node.",
-    capabilities: [
-      { title: "Materials Mgmt", items: ["Procurement (P2P)", "Inventory Management", "Invoice Verification", "Material Valuation"] },
-      { title: "Production Planning", items: ["MRP & MPS", "Shop Floor Control", "Capacity Planning", "Manufacturing Exec."] },
-      { title: "Warehouse Mgmt", items: ["Ext. Warehouse Mgmt", "Slotting & Replenish.", "Labour Management", "Shipping & Receiving"] },
-      { title: "Transportation", items: ["Freight Order Mgmt", "Carrier Selection", "Route Optimisation", "Freight Settlement"] },
-    ],
-    stats: [
-      { val: "P2P", label: "Procure-to-Pay" },
-      { val: "S&OP", label: "SAP IBP with AI" },
-      { val: "EWM", label: "Warehouse automation" },
-      { val: "AI+", label: "Demand forecasting" },
-    ],
+    num: "03",
+    title: "Data & Analytics",
+    text: "We turn enterprise data into decision-ready intelligence through analytics, visualization, and data governance.",
+    image: stepAnalytics,
   },
   {
-    id: "cx",
-    label: "Customer Experience",
-    color: "#a855f7",
-    eyebrow: "Customer Experience",
-    title: "Connected Journeys at Scale",
-    desc: "Unify sales, service, marketing, and commerce — connected to your SAP back-office core.",
-    capabilities: [
-      { title: "Sales Cloud", items: ["CRM & Opportunity", "Sales Performance", "CPQ", "Revenue Intelligence"] },
-      { title: "Service Cloud", items: ["Case Management", "Field Service", "Knowledge Base", "Self-Service Portal"] },
-      { title: "Marketing Cloud", items: ["Campaign Mgmt", "Segmentation", "Lead Nurturing", "CDP"] },
-      { title: "Commerce Cloud", items: ["B2B/B2C Storefronts", "Product Content", "Order Management", "Merchandising"] },
-    ],
-    stats: [
-      { val: "360°", label: "Unified customer view" },
-      { val: "OTC", label: "Order-to-Cash" },
-      { val: "B2B/C", label: "Commerce Cloud" },
-      { val: "AI+", label: "Lead scoring" },
-    ],
+    num: "04",
+    title: "Experts as a Service",
+    text: "Access specialized SAP experts on demand through flexible subscription-based engagement models.",
+    image: stepExperts,
   },
 ];
 
 export default function SolutionsSection() {
-  const [active, setActive] = useState(0);
-  const practice = practices[active];
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const stepEls = sectionRef.current?.querySelectorAll<HTMLElement>("[data-step]");
+    if (!stepEls) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.step);
+            setActiveStep(idx);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
+
+    stepEls.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="relative overflow-hidden" id="expertise">
-      {/* Spacer / visual break — white section with eyebrow */}
-      <div className="py-24 md:py-32 bg-[hsl(var(--bg2))] relative">
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: "radial-gradient(circle, rgba(0,0,0,.03) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }} />
+    <section
+      ref={sectionRef}
+      id="expertise"
+      className="relative"
+      style={{ background: "#0c0c0c" }}
+    >
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-2.5 text-[.65rem] font-bold tracking-[.2em] uppercase mb-4" style={{ color: "hsl(40 100% 45%)" }}>
+            <span className="w-5 h-0.5" style={{ background: "hsl(40 100% 45%)" }} />
+            Our Approach
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.1] mb-4" style={{ color: "#fff" }}>
+            How Kannanware Delivers<br />
+            <span style={{ color: "hsl(40 100% 45%)" }}>Transformation</span>
+          </h2>
+          <p className="text-[.95rem] font-light leading-[1.8] max-w-xl" style={{ color: "rgba(255,255,255,.5)" }}>
+            We combine advisory insight, technical execution, and data intelligence to transform enterprise finance operations.
+          </p>
+        </motion.div>
+      </div>
 
-        <div className="max-w-7xl mx-auto px-5 md:px-10 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-14"
-          >
-            <div className="eyebrow">SAP Expertise</div>
-            <h2 className="sec-h">
-              Full-spectrum SAP<br /><em>practice areas.</em>
-            </h2>
-            <p className="sec-p">From core ERP to edge innovation — our certified consultants deliver end-to-end SAP solutions across every business function.</p>
-          </motion.div>
-
-          {/* Tab bar */}
-          <div className="inline-flex border border-border rounded-full p-1 mb-12 overflow-x-auto bg-background shadow-sm" style={{ scrollbarWidth: "none" }}>
-            {practices.map((p, i) => (
-              <button
-                key={p.id}
-                onClick={() => setActive(i)}
-                className={`relative px-7 py-3 rounded-full text-[.82rem] font-medium transition-all duration-300 cursor-none whitespace-nowrap ${
-                  active === i
-                    ? "text-white"
-                    : "text-foreground/50 hover:text-foreground/80"
-                }`}
+      {/* Scroll storytelling */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16">
+          {/* Left — scrolling text steps */}
+          <div className="relative">
+            {steps.map((step, i) => (
+              <div
+                key={step.num}
+                data-step={i}
+                className="min-h-[70vh] flex items-center py-16 lg:py-24"
               >
-                {active === i && (
-                  <motion.div
-                    layoutId="activeTabSolutions"
-                    className="absolute inset-0 rounded-full shadow-md"
-                    style={{ background: p.color }}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-20%" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {/* Step number */}
+                  <div
+                    className="text-[4rem] md:text-[5rem] font-bold leading-none mb-4 transition-colors duration-500"
+                    style={{
+                      color: activeStep === i ? "hsl(40 100% 45%)" : "rgba(255,255,255,.08)",
+                    }}
+                  >
+                    {step.num}
+                  </div>
+
+                  {/* Title */}
+                  <h3
+                    className="text-2xl md:text-3xl font-bold tracking-tight mb-4 transition-colors duration-500"
+                    style={{
+                      color: activeStep === i ? "#fff" : "rgba(255,255,255,.2)",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className="text-base md:text-lg font-light leading-[1.8] max-w-md transition-colors duration-500"
+                    style={{
+                      color: activeStep === i ? "rgba(255,255,255,.65)" : "rgba(255,255,255,.12)",
+                    }}
+                  >
+                    {step.text}
+                  </p>
+
+                  {/* Gold accent line */}
+                  <div
+                    className="mt-6 h-0.5 transition-all duration-700"
+                    style={{
+                      width: activeStep === i ? "60px" : "0px",
+                      background: "hsl(40 100% 45%)",
+                    }}
                   />
-                )}
-                <span className="relative z-10">{p.label}</span>
-              </button>
+                </motion.div>
+
+                {/* Mobile image — only visible on small screens */}
+                <div className="lg:hidden mt-8">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="rounded-xl overflow-hidden"
+                  >
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-64 object-cover"
+                    />
+                  </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Content */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Hero row */}
-              <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-start mb-12">
-                <div>
-                  <span
-                    className="text-[.6rem] font-bold tracking-[.2em] uppercase mb-3 block"
-                    style={{ color: practice.color }}
-                  >
-                    {practice.eyebrow}
-                  </span>
-                  <h3 className="text-foreground text-2xl md:text-3xl font-bold tracking-tight mb-3 leading-tight">
-                    {practice.title}
-                  </h3>
-                  <p className="text-muted-foreground text-[.92rem] font-light leading-[1.8] max-w-xl">
-                    {practice.desc}
-                  </p>
-                </div>
+          {/* Right — sticky image */}
+          <div className="hidden lg:flex items-center sticky top-0 h-screen">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+              {/* Gold glow behind image */}
+              <div
+                className="absolute -inset-4 rounded-3xl blur-3xl opacity-20 transition-opacity duration-700"
+                style={{ background: "hsl(40 100% 45%)" }}
+              />
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-3 min-w-[260px]">
-                  {practice.stats.map((s, i) => (
-                    <motion.div
-                      key={s.val}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.08 }}
-                      className="border border-border rounded-lg p-4 transition-all duration-300 hover:border-gold/30 hover:bg-gold/[0.03] cursor-none"
-                    >
-                      <div className="text-xl font-bold mb-1" style={{ color: practice.color }}>{s.val}</div>
-                      <div className="text-[.68rem] text-muted-foreground leading-snug">{s.label}</div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeStep}
+                  src={steps[activeStep].image}
+                  alt={steps[activeStep].title}
+                  className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                />
+              </AnimatePresence>
 
-              {/* Capabilities */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 rounded-xl overflow-hidden border border-border bg-border">
-                {practice.capabilities.map((cap, i) => (
-                  <motion.div
-                    key={cap.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.08 }}
-                    className="bg-background p-6 border border-border hover:bg-gold/[0.03] transition-colors duration-300 cursor-none group"
-                    style={{ margin: "-0.5px" }}
-                  >
-                    <h4 className="text-[.88rem] font-bold text-foreground mb-4 tracking-tight group-hover:text-gold transition-colors duration-300">
-                      {cap.title}
-                    </h4>
-                    <ul className="space-y-2">
-                      {cap.items.map((item) => (
-                        <li key={item} className="text-[.76rem] text-muted-foreground font-light flex items-center gap-2 group-hover:text-foreground/70 transition-colors duration-300">
-                          <span className="w-1 h-1 rounded-full shrink-0" style={{ background: practice.color }} />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
+              {/* Overlay gradient */}
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: "linear-gradient(180deg, transparent 50%, rgba(12,12,12,.6) 100%)",
+                }}
+              />
+
+              {/* Step indicator dots */}
+              <div className="absolute bottom-6 left-6 flex gap-2">
+                {steps.map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-2 h-2 rounded-full transition-all duration-500"
+                    style={{
+                      background: activeStep === i ? "hsl(40 100% 45%)" : "rgba(255,255,255,.3)",
+                      transform: activeStep === i ? "scale(1.3)" : "scale(1)",
+                    }}
+                  />
                 ))}
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Bottom spacer */}
+      <div className="h-16" />
     </section>
   );
 }
