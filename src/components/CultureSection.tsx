@@ -265,7 +265,7 @@ function JouleLiveDemo() {
                         <div className="w-full h-full rounded-full" style={{ background: "conic-gradient(from 0deg, transparent, rgba(232,160,0,.4))" }} />
                       </motion.div>
                     )}
-                    <span className="text-[.75rem] font-mono" style={{ color: i < thinkingStep ? "rgba(232,160,0,.7)" : "rgba(255,255,255,.2)" }}>
+                    <span className="text-[.85rem] font-mono" style={{ color: i < thinkingStep ? "rgba(232,160,0,.7)" : "rgba(255,255,255,.2)" }}>
                       {step}
                     </span>
                   </motion.div>
