@@ -20,12 +20,6 @@ const steps = [
   },
   {
     num: "03",
-    title: "Data & Analytics",
-    text: "We turn enterprise data into decision-ready intelligence through analytics, visualization, and data governance.",
-    image: stepAnalytics,
-  },
-  {
-    num: "04",
     title: "Experts as a Service",
     text: "Access specialized SAP experts on demand through flexible subscription-based engagement models.",
     image: stepExperts,
