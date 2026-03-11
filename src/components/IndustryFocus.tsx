@@ -123,7 +123,7 @@ export default function IndustryFocus() {
                   {industries[active].desc}
                 </p>
 
-                <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold mb-4">Challenges we solve</p>
+                <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold mb-4">Challenges we solve</p>
                 <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
                   {industries[active].challenges.map((c, i) => (
                     <motion.div
