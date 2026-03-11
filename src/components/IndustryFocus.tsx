@@ -1,14 +1,55 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import industryEnergy from "@/assets/industry-energy.jpg";
+import industryManufacturing from "@/assets/industry-manufacturing.jpg";
+import industryFinance from "@/assets/industry-finance.jpg";
 import industryTech from "@/assets/industry-tech.jpg";
+import teamCollab from "@/assets/team-collab.jpg";
+import deliveryPhase from "@/assets/delivery-phase.jpg";
 
 const industries = [
-  { title: "Energy & Natural Resources", challenges: ["JVA & production accounting", "Asset lifecycle management", "Commodity hedging & risk", "Regulatory & sustainability reporting"] },
-  { title: "Discrete Manufacturing", challenges: ["Production planning & scheduling", "Cost controlling & variance analysis", "Integrated supply chain & QM", "Shop floor integration"] },
-  { title: "Financial Services", challenges: ["IFRS 9, 16 & 17 compliance", "Regulatory reporting automation", "Real-time risk analytics", "Treasury & cash management"] },
-  { title: "Public Services", challenges: ["Fund management & grants", "IPSAS reporting standards", "Budget execution & monitoring", "Citizen service portals"] },
-  { title: "Consumer & Retail", challenges: ["Trade promotion management", "D2C & omnichannel commerce", "Revenue recognition", "Demand-driven inventory"] },
-  { title: "Food & Beverage", challenges: ["Batch & shelf-life management", "COGS optimisation", "Compliance & traceability", "Recipe & formula management"] },
+  {
+    title: "Energy & Natural Resources",
+    image: industryEnergy,
+    desc: "Powering the future with intelligent SAP solutions for upstream, midstream, and downstream operations.",
+    challenges: ["JVA & production accounting", "Asset lifecycle management", "Commodity hedging & risk", "Regulatory & sustainability reporting"],
+    stat: "40+ energy clients served",
+  },
+  {
+    title: "Discrete Manufacturing",
+    image: industryManufacturing,
+    desc: "Driving operational excellence from shop floor to top floor with integrated SAP manufacturing solutions.",
+    challenges: ["Production planning & scheduling", "Cost controlling & variance analysis", "Integrated supply chain & QM", "Shop floor integration"],
+    stat: "30% avg. efficiency uplift",
+  },
+  {
+    title: "Financial Services",
+    image: industryFinance,
+    desc: "Transforming financial institutions with real-time analytics, compliance automation, and risk management.",
+    challenges: ["IFRS 9, 16 & 17 compliance", "Regulatory reporting automation", "Real-time risk analytics", "Treasury & cash management"],
+    stat: "100% audit compliance",
+  },
+  {
+    title: "Public Services",
+    image: industryTech,
+    desc: "Modernising public sector operations with transparent, citizen-centric SAP solutions.",
+    challenges: ["Fund management & grants", "IPSAS reporting standards", "Budget execution & monitoring", "Citizen service portals"],
+    stat: "15+ government agencies",
+  },
+  {
+    title: "Consumer & Retail",
+    image: teamCollab,
+    desc: "Enabling omnichannel excellence and demand-driven supply chains for modern retail.",
+    challenges: ["Trade promotion management", "D2C & omnichannel commerce", "Revenue recognition", "Demand-driven inventory"],
+    stat: "2x faster order fulfilment",
+  },
+  {
+    title: "Food & Beverage",
+    image: deliveryPhase,
+    desc: "Ensuring compliance, traceability, and profitability across the entire food value chain.",
+    challenges: ["Batch & shelf-life management", "COGS optimisation", "Compliance & traceability", "Recipe & formula management"],
+    stat: "99.9% traceability accuracy",
+  },
 ];
 
 export default function IndustryFocus() {
@@ -17,25 +58,17 @@ export default function IndustryFocus() {
   return (
     <section className="py-24 md:py-32 bg-card" id="industries">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="eyebrow">Industries</div>
-            <h2 className="sec-h">
-              Deep experience<br /><em>across every sector.</em>
-            </h2>
-          </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
+          <div className="eyebrow">Industries</div>
+          <h2 className="sec-h">
+            Deep experience<br /><em>across every sector.</em>
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mt-4 font-light leading-relaxed">
+            We bring domain-specific SAP expertise to the industries that matter most — combining deep functional knowledge with proven delivery frameworks.
+          </p>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="rounded-2xl overflow-hidden border border-border hidden lg:block"
-          >
-            <img src={industryTech} alt="Enterprise technology" className="w-full h-[240px] object-cover" />
-          </motion.div>
-        </div>
-
-        <div className="grid md:grid-cols-[280px_1fr] gap-0 rounded-xl overflow-hidden border border-border">
+        <div className="grid lg:grid-cols-[300px_1fr] gap-0 rounded-xl overflow-hidden border border-border">
           {/* Left — industry list */}
           <div className="flex flex-col bg-background">
             {industries.map((ind, i) => (
@@ -53,29 +86,45 @@ export default function IndustryFocus() {
             ))}
           </div>
 
-          {/* Right — expanded detail */}
+          {/* Right — expanded detail with image */}
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="relative min-h-[320px] flex flex-col justify-center p-10 md:p-16 bg-secondary overflow-hidden"
+              transition={{ duration: 0.35 }}
+              className="relative min-h-[420px] flex flex-col bg-secondary overflow-hidden"
             >
-              {/* Subtle pattern */}
-              <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{
-                backgroundImage: "radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px)",
-                backgroundSize: "24px 24px"
-              }} />
+              {/* Background image */}
+              <div className="relative h-[200px] md:h-[220px] overflow-hidden">
+                <motion.img
+                  key={industries[active].image}
+                  src={industries[active].image}
+                  alt={industries[active].title}
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/60 to-secondary" />
+                {/* Stat badge */}
+                <div className="absolute top-4 right-4 bg-gold/90 text-black text-[.65rem] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
+                  {industries[active].stat}
+                </div>
+              </div>
 
-              <div className="relative z-10">
+              {/* Content */}
+              <div className="relative z-10 p-8 md:p-10 flex-1">
                 <h3 className="text-foreground text-2xl md:text-3xl font-bold tracking-tight mb-2">
                   {industries[active].title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-8">Challenges we solve</p>
+                <p className="text-muted-foreground text-sm mb-6 font-light leading-relaxed max-w-lg">
+                  {industries[active].desc}
+                </p>
 
-                <div className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
+                <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold mb-4">Challenges we solve</p>
+                <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
                   {industries[active].challenges.map((c, i) => (
                     <motion.div
                       key={c}

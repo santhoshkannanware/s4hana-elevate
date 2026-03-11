@@ -1,34 +1,45 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import deliveryPhase from "@/assets/delivery-phase.jpg";
+import methodDiscover from "@/assets/method-discover.jpg";
+import methodConfigure from "@/assets/method-configure.jpg";
+import methodDeploy from "@/assets/method-deploy.jpg";
+import methodOptimise from "@/assets/method-optimise.jpg";
 
 const phases = [
   {
     n: "01",
     title: "Discover & Blueprint",
     desc: "Map processes, identify opportunities, and design an SAP roadmap aligned to strategic priorities.",
-    detail: "We immerse ourselves in your business — interviewing stakeholders, auditing current systems, and mapping every process. The result is a crystal-clear blueprint.",
+    detail: "We immerse ourselves in your business — interviewing stakeholders, auditing current systems, and mapping every process. The result is a crystal-clear blueprint that aligns technology to your business strategy.",
+    image: methodDiscover,
+    deliverables: ["Process maps & gap analysis", "Solution architecture", "Risk-prioritised roadmap", "Business case & ROI model"],
     icon: "🔍",
   },
   {
     n: "02",
     title: "Design & Configure",
     desc: "Configure SAP to best-practice standards with detailed solution design and milestone sign-offs.",
-    detail: "Our certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team.",
+    detail: "Our certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team. We leverage SAP Activate methodology and accelerators to compress timelines.",
+    image: methodConfigure,
+    deliverables: ["Detailed design documents", "Configured SAP environment", "Integration specifications", "Data migration strategy"],
     icon: "⚙️",
   },
   {
     n: "03",
     title: "Test & Deploy",
     desc: "AI-accelerated test automation ensures quality before every go-live. Zero surprises on cutover day.",
-    detail: "We leverage AI-driven test automation to compress cycles by 40%. Every scenario is validated before cutover — so go-live is a non-event.",
+    detail: "We leverage AI-driven test automation to compress cycles by 40%. Every scenario is validated before cutover — including end-to-end integration, performance, and user acceptance testing.",
+    image: methodDeploy,
+    deliverables: ["Automated test suites", "Cutover runbooks", "Hypercare team on standby", "Go-live certification"],
     icon: "🚀",
   },
   {
     n: "04",
     title: "Optimise & Support",
     desc: "Post go-live hypercare, AMS, and continuous optimisation delivering sustained SAP value.",
-    detail: "Our managed services team monitors, optimises, and evolves your SAP landscape — ensuring you extract maximum value continuously.",
+    detail: "Our managed services team monitors, optimises, and evolves your SAP landscape — ensuring you extract maximum value continuously with proactive SLA management.",
+    image: methodOptimise,
+    deliverables: ["24/7 AMS coverage", "Quarterly optimisation reviews", "Release management", "Continuous improvement backlog"],
     icon: "📈",
   },
 ];
@@ -43,18 +54,18 @@ function PhaseTimeline() {
     if (!autoPlay || !isInView) return;
     const interval = setInterval(() => {
       setActivePhase((p) => (p + 1) % phases.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [autoPlay, isInView]);
 
   const handleClick = (i: number) => {
     setActivePhase(i);
     setAutoPlay(false);
-    setTimeout(() => setAutoPlay(true), 12000);
+    setTimeout(() => setAutoPlay(true), 15000);
   };
 
   return (
-    <div ref={containerRef} className="grid lg:grid-cols-[1fr_1.2fr] gap-0 min-h-[520px]">
+    <div ref={containerRef} className="grid lg:grid-cols-[1fr_1.3fr] gap-0 min-h-[560px]">
       {/* Left — phase selector */}
       <div className="flex flex-col justify-center py-10 lg:py-16 lg:pr-12">
         {phases.map((p, i) => (
@@ -88,7 +99,7 @@ function PhaseTimeline() {
                   className="h-full bg-gold"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 4, ease: "linear" }}
+                  transition={{ duration: 5, ease: "linear" }}
                   key={`progress-${activePhase}`}
                 />
               </div>
@@ -97,7 +108,7 @@ function PhaseTimeline() {
         ))}
       </div>
 
-      {/* Right — detail card */}
+      {/* Right — detail card with image */}
       <div className="flex items-center justify-center p-6 lg:p-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -106,32 +117,59 @@ function PhaseTimeline() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-[480px] aspect-[4/3] rounded-2xl overflow-hidden border border-border"
+            className="relative w-full max-w-[520px] rounded-2xl overflow-hidden border border-border"
           >
-            {/* Background image */}
-            <img src={deliveryPhase} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
-            <div className="absolute inset-0 bg-gradient-to-br from-background/90 to-background/70" />
+            {/* Hero image */}
+            <div className="relative h-[200px] overflow-hidden">
+              <motion.img
+                src={phases[activePhase].image}
+                alt={phases[activePhase].title}
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
+              <div className="absolute top-4 left-4">
+                <span className="text-4xl">{phases[activePhase].icon}</span>
+              </div>
+            </div>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-between p-10">
-              <div>
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="text-5xl mb-6">
-                  {phases[activePhase].icon}
-                </motion.div>
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
-                  <span className="text-[.6rem] font-bold tracking-[.2em] uppercase text-muted-foreground mb-3 block">
-                    Phase {phases[activePhase].n}
-                  </span>
-                  <h3 className="text-foreground text-2xl font-bold tracking-tight mb-4">
-                    {phases[activePhase].title}
-                  </h3>
-                  <p className="text-muted-foreground text-[.88rem] font-light leading-[1.8]">
-                    {phases[activePhase].detail}
-                  </p>
-                </motion.div>
-              </div>
+            <div className="relative z-10 p-8 bg-background">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+                <span className="text-[.6rem] font-bold tracking-[.2em] uppercase text-gold mb-2 block">
+                  Phase {phases[activePhase].n}
+                </span>
+                <h3 className="text-foreground text-2xl font-bold tracking-tight mb-3">
+                  {phases[activePhase].title}
+                </h3>
+                <p className="text-muted-foreground text-[.85rem] font-light leading-[1.8] mb-6">
+                  {phases[activePhase].detail}
+                </p>
+              </motion.div>
 
-              <div className="flex gap-2">
+              {/* Deliverables */}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+                <p className="text-[.6rem] font-bold tracking-[.2em] uppercase text-gold/70 mb-3">Key Deliverables</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {phases[activePhase].deliverables.map((d, i) => (
+                    <motion.div
+                      key={d}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 + i * 0.06 }}
+                      className="flex items-center gap-2 text-[.78rem] text-foreground/60 font-light"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-gold shrink-0" />
+                      {d}
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Progress dots */}
+              <div className="flex gap-2 mt-6">
                 {phases.map((_, i) => (
                   <div key={i} className={`h-1 rounded-full transition-all duration-300 ${
                     i === activePhase ? "w-8 bg-gold" : "w-2 bg-border"
@@ -149,7 +187,6 @@ function PhaseTimeline() {
 export default function DeliveryModel() {
   return (
     <section className="py-24 md:py-32 bg-card" id="approach">
-      {/* Top accent */}
       <div className="h-px w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.2), transparent)" }} />
       <div className="max-w-7xl mx-auto px-5 md:px-10 pt-8">
         <motion.div
@@ -160,6 +197,9 @@ export default function DeliveryModel() {
         >
           <div className="eyebrow">Methodology</div>
           <h2 className="sec-h">How we deliver<br /><em>every time.</em></h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mt-4 font-light leading-relaxed">
+            Our proven four-phase methodology combines SAP Activate best practices with AI-powered accelerators to deliver predictable outcomes — on time, every time.
+          </p>
         </motion.div>
 
         <PhaseTimeline />

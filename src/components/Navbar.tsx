@@ -16,6 +16,14 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
+    label: "Products",
+    children: [
+      { label: "CV Optimiser", href: "/products/cv-optimiser" },
+      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
+      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
+    ],
+  },
+  {
     label: "Product Expertise",
     children: [
       { label: "S4/HANA (Public & Private Cloud)", href: "/product-expertise/s4hana" },
