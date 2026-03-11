@@ -337,7 +337,7 @@ export default function OfficeCFO() {
 
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h4 className="text-[.92rem] font-bold text-foreground mb-1.5 tracking-tight">
+                      <h4 className="text-[1rem] font-bold text-foreground mb-1.5 tracking-tight">
                         {sol.title}
                       </h4>
                       <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] mb-3">
