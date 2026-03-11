@@ -96,59 +96,156 @@ function ChallengesSection() {
   );
 }
 
-/* ─── Section 3: Interactive Value Chain ─── */
+/* ─── Section 3: Interactive Value Chain — cinematic auto-playing ─── */
 function ValueChain() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [activeIdx, setActiveIdx] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
+  const DURATION = 4000;
 
   const steps = [
-    { icon: Flame, title: "Exploration & Production", desc: "Energy generation and resource extraction across upstream operations." },
-    { icon: Wrench, title: "Asset Management", desc: "Monitoring infrastructure performance, maintenance scheduling, and lifecycle tracking." },
-    { icon: Network, title: "Energy Distribution", desc: "Managing energy networks, logistics, and supply chain coordination." },
-    { icon: DollarSign, title: "Finance & Revenue", desc: "Handling billing, financial planning, trading, and revenue management." },
-    { icon: BarChart3, title: "Analytics & Forecasting", desc: "Predicting demand, costs, and market changes with advanced analytics." },
+    { icon: Flame, title: "Exploration & Production", desc: "Energy generation and resource extraction across upstream operations. From seismic surveys to drilling programs, this phase captures the raw potential of natural resources.", num: "01", accent: "#F4B400" },
+    { icon: Wrench, title: "Asset Management", desc: "Monitoring infrastructure performance, predictive maintenance scheduling, and full lifecycle tracking across refineries, pipelines, and generation facilities.", num: "02", accent: "#FFD54F" },
+    { icon: Network, title: "Energy Distribution", desc: "Managing complex energy networks, transmission logistics, and supply chain coordination from source to end consumer across geographies.", num: "03", accent: "#FFA726" },
+    { icon: DollarSign, title: "Finance & Revenue", desc: "End-to-end financial operations including billing, hedging, trading, financial planning, and revenue recognition across volatile energy markets.", num: "04", accent: "#FFB74D" },
+    { icon: BarChart3, title: "Analytics & Forecasting", desc: "Predictive demand modeling, cost optimization, market trend analysis, and AI-driven scenario planning for strategic decision-making.", num: "05", accent: "#FFCA28" },
   ];
 
+  // Auto-advance
+  useEffect(() => {
+    if (!inView || hovered !== null) return;
+    const timer = setInterval(() => setActiveIdx(prev => (prev + 1) % steps.length), DURATION);
+    return () => clearInterval(timer);
+  }, [inView, hovered, steps.length]);
+
   return (
-    <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#0B0B0B" }}>
-      <div className="max-w-[1200px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
+    <section ref={ref} className="py-32 px-6 md:px-10 overflow-hidden" style={{ background: "#0B0B0B" }}>
+      <div className="max-w-[1300px] mx-auto">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>End-to-End Process</motion.span>
-          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">The Energy Value Chain</motion.h2>
+          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight mb-3">The Energy Value Chain</motion.h2>
+          <motion.p variants={fadeUp} className="text-sm" style={{ color: "#999" }}>Hover any stage to explore • Auto-cycles through the full lifecycle</motion.p>
         </motion.div>
 
-        {/* Horizontal chain */}
-        <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-0">
-          {/* Connecting line */}
-          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.2, delay: .3 }} className="hidden md:block absolute top-[40px] left-[60px] right-[60px] h-[2px] origin-left" style={{ background: "linear-gradient(90deg, rgba(244,180,0,.15), rgba(244,180,0,.4), rgba(244,180,0,.15))" }} />
+        {/* ── Top: animated horizontal pipeline ── */}
+        <div className="relative mb-16">
+          {/* Background pipeline track */}
+          <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.5, ease: "easeOut" }}
+            className="hidden md:block absolute top-[44px] left-[8%] right-[8%] h-[3px] origin-left rounded-full"
+            style={{ background: "rgba(244,180,0,.08)" }}
+          />
+          {/* Active progress line */}
+          <motion.div
+            className="hidden md:block absolute top-[44px] left-[8%] h-[3px] rounded-full origin-left"
+            animate={{ width: `${(activeIdx / (steps.length - 1)) * 84}%` }}
+            transition={{ duration: .6, ease: [.22, 1, .36, 1] }}
+            style={{ background: "linear-gradient(90deg, #F4B400, #FFD54F)", boxShadow: "0 0 20px rgba(244,180,0,.3)" }}
+          />
 
-          {steps.map((s, i) => {
-            const isHovered = hovered === i;
-            return (
-              <motion.div key={s.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .4 + i * .12 }}
-                className="relative flex-1 flex flex-col items-center text-center cursor-pointer z-10"
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <motion.div animate={{ scale: isHovered ? 1.15 : 1, boxShadow: isHovered ? "0 0 40px rgba(244,180,0,.35)" : "0 0 0px transparent" }} transition={{ duration: .3 }}
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-4 transition-all"
-                  style={{ background: isHovered ? "rgba(244,180,0,.2)" : "rgba(244,180,0,.06)", border: `2px solid ${isHovered ? "#F4B400" : "rgba(244,180,0,.2)"}` }}
+          {/* Nodes */}
+          <div className="relative flex flex-col md:flex-row items-start md:items-start justify-between gap-8 md:gap-0">
+            {steps.map((s, i) => {
+              const isActive = activeIdx === i;
+              const isHover = hovered === i;
+              const highlight = isActive || isHover;
+              return (
+                <motion.div key={s.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: .3 + i * .1, duration: .7, ease: [.22, 1, .36, 1] }}
+                  className="relative flex-1 flex flex-col items-center text-center cursor-pointer z-10"
+                  onMouseEnter={() => { setHovered(i); setActiveIdx(i); }}
+                  onMouseLeave={() => setHovered(null)}
                 >
-                  <s.icon size={24} style={{ color: isHovered ? "#F4B400" : "rgba(255,255,255,.5)" }} />
-                </motion.div>
-                <h3 className="text-sm font-bold text-white mb-1 transition-colors" style={{ color: isHovered ? "#F4B400" : "white" }}>{s.title}</h3>
-                <AnimatePresence>
-                  {isHovered && (
-                    <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="text-[.78rem] leading-relaxed max-w-[180px]" style={{ color: "#999" }}>
-                      {s.desc}
-                    </motion.p>
+                  {/* Glow ring behind node */}
+                  <motion.div
+                    animate={{ scale: highlight ? 1 : 0, opacity: highlight ? 1 : 0 }}
+                    transition={{ duration: .4 }}
+                    className="absolute top-0 w-[88px] h-[88px] rounded-full"
+                    style={{ background: `radial-gradient(circle, ${s.accent}20, transparent 70%)`, filter: "blur(12px)" }}
+                  />
+                  {/* Node circle */}
+                  <motion.div
+                    animate={{
+                      scale: highlight ? 1.12 : 1,
+                      borderColor: highlight ? s.accent : "rgba(244,180,0,.15)",
+                      background: highlight ? `${s.accent}25` : "rgba(244,180,0,.04)",
+                    }}
+                    transition={{ duration: .35, ease: "easeOut" }}
+                    className="relative w-[88px] h-[88px] rounded-full flex flex-col items-center justify-center mb-5 border-2"
+                    style={{ boxShadow: highlight ? `0 0 40px ${s.accent}30, inset 0 0 20px ${s.accent}10` : "none" }}
+                  >
+                    <motion.div animate={{ rotate: highlight ? 360 : 0 }} transition={{ duration: .6, ease: "easeOut" }}>
+                      <s.icon size={26} style={{ color: highlight ? s.accent : "rgba(255,255,255,.35)" }} />
+                    </motion.div>
+                    <span className="text-[.55rem] font-bold tracking-wider mt-1" style={{ color: highlight ? s.accent : "rgba(255,255,255,.2)" }}>{s.num}</span>
+                  </motion.div>
+                  {/* Title */}
+                  <motion.h3
+                    animate={{ color: highlight ? s.accent : "rgba(255,255,255,.8)" }}
+                    className="text-[.82rem] font-bold leading-tight max-w-[140px]"
+                  >{s.title}</motion.h3>
+                  {/* Active progress bar under node */}
+                  {isActive && (
+                    <motion.div className="h-[2px] w-16 rounded-full mt-3 overflow-hidden" style={{ background: "rgba(255,255,255,.06)" }}>
+                      <motion.div
+                        key={`bar-${i}`}
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: hovered !== null ? 99999 : DURATION / 1000, ease: "linear" }}
+                        className="h-full rounded-full"
+                        style={{ background: s.accent }}
+                      />
+                    </motion.div>
                   )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
+
+        {/* ── Bottom: expanded detail panel ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIdx}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: .5, ease: [.22, 1, .36, 1] }}
+            className="rounded-2xl border overflow-hidden"
+            style={{ background: "rgba(255,255,255,.02)", borderColor: `${steps[activeIdx].accent}20` }}
+          >
+            <div className="grid md:grid-cols-[auto_1fr] items-center">
+              {/* Left accent bar */}
+              <div className="hidden md:block w-1.5 self-stretch" style={{ background: `linear-gradient(to bottom, ${steps[activeIdx].accent}, transparent)` }} />
+              <div className="p-8 md:p-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: `${steps[activeIdx].accent}15`, border: `1px solid ${steps[activeIdx].accent}30` }}>
+                    {(() => { const Icon = steps[activeIdx].icon; return <Icon size={22} style={{ color: steps[activeIdx].accent }} />; })()}
+                  </div>
+                  <div>
+                    <span className="text-[.6rem] font-bold tracking-[.2em] uppercase" style={{ color: steps[activeIdx].accent }}>Phase {steps[activeIdx].num}</span>
+                    <h3 className="text-xl font-bold text-white leading-tight">{steps[activeIdx].title}</h3>
+                  </div>
+                </div>
+                <p className="text-[.95rem] leading-[1.85] max-w-2xl" style={{ color: "#C9C9C9" }}>{steps[activeIdx].desc}</p>
+                <div className="flex items-center gap-3 mt-6">
+                  <span className="text-[.7rem] font-semibold" style={{ color: steps[activeIdx].accent }}>SAP-Powered Transformation</span>
+                  <div className="flex-1 h-px" style={{ background: `${steps[activeIdx].accent}20` }} />
+                  <div className="flex gap-1.5">
+                    {steps.map((_, i) => (
+                      <button key={i} onClick={() => { setActiveIdx(i); setHovered(i); setTimeout(() => setHovered(null), 100); }}
+                        className="w-2 h-2 rounded-full transition-all"
+                        style={{ background: i === activeIdx ? steps[activeIdx].accent : "rgba(255,255,255,.15)", boxShadow: i === activeIdx ? `0 0 8px ${steps[activeIdx].accent}60` : "none" }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
