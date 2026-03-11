@@ -134,7 +134,7 @@ export default function IndustryFocus() {
                       className="flex items-start gap-3"
                     >
                       <span className="text-gold text-sm mt-0.5 shrink-0">→</span>
-                      <span className="text-foreground/70 text-[.88rem] font-light leading-relaxed">{c}</span>
+                      <span className="text-foreground/70 text-[.95rem] font-light leading-relaxed">{c}</span>
                     </motion.div>
                   ))}
                 </div>

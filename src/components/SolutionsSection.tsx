@@ -179,7 +179,7 @@ export default function SolutionsSection() {
                     <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 bg-gold/10 border border-gold/20 transition-transform duration-300 group-hover/item:scale-110">
                       <ChevronRight className="w-3 h-3 text-gold" />
                     </div>
-                    <span className="text-[.85rem] text-foreground/70 font-light group-hover/item:text-foreground transition-colors duration-300">
+                    <span className="text-[.95rem] text-foreground/70 font-light group-hover/item:text-foreground transition-colors duration-300">
                       {d}
                     </span>
                   </motion.div>

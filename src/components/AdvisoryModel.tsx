@@ -203,7 +203,7 @@ export default function AdvisoryModel() {
 
             <a
               href="#cta"
-              className="inline-block px-7 py-3 bg-gold text-black text-[.8rem] font-semibold tracking-[.04em] rounded-full cursor-none relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.35)]"
+              className="inline-block px-7 py-3 bg-gold text-black text-[.92rem] font-semibold tracking-[.04em] rounded-full cursor-none relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.35)]"
             >
               Start Your Journey
             </a>

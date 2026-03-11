@@ -347,7 +347,7 @@ export default function OfficeCFO() {
                         {sol.kpis.map((kpi) => (
                           <span
                             key={kpi}
-                            className="text-[.65rem] font-medium px-2.5 py-1 rounded-full transition-all duration-300"
+                            className="text-[.78rem] font-medium px-2.5 py-1 rounded-full transition-all duration-300"
                             style={{
                               background: hoveredRow === i ? "rgba(232,160,0,.12)" : "rgba(255,255,255,.04)",
                               color: hoveredRow === i ? "hsl(var(--gold))" : "rgba(255,255,255,.4)",
