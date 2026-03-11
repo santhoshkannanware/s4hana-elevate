@@ -62,8 +62,8 @@ export default function WhyKannanware() {
             <div className="text-[3.6rem] font-bold text-white leading-none tracking-[-0.04em] mb-2 relative z-10">
               <CountUp target={m.target} suffix={m.suffix} />
             </div>
-            <div className="text-[.82rem] text-white/65 font-light leading-[1.5] relative z-10">{m.label}</div>
-            <div className="text-[.7rem] text-[rgba(232,160,0,.7)] font-normal leading-[1.45] mt-1.5 tracking-[.01em] relative z-10">{m.sublabel}</div>
+            <div className="text-[.92rem] text-white/65 font-light leading-[1.5] relative z-10">{m.label}</div>
+            <div className="text-[.82rem] text-[rgba(232,160,0,.7)] font-normal leading-[1.45] mt-1.5 tracking-[.01em] relative z-10">{m.sublabel}</div>
             <div className="absolute right-[-10px] bottom-[-24px] text-[8rem] text-[rgba(232,160,0,.07)] font-bold pointer-events-none leading-none">{m.ghost}</div>
           </motion.div>
         ))}

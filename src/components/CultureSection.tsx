@@ -197,10 +197,10 @@ function JouleLiveDemo() {
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffbd2e" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
-        <span className="ml-3 text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.5)" }}>SAP Joule AI Copilot</span>
+        <span className="ml-3 text-[.82rem] font-mono" style={{ color: "rgba(232,160,0,.5)" }}>SAP Joule AI Copilot</span>
         <div className="ml-auto flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#E8A000", boxShadow: "0 0 6px rgba(232,160,0,.6)" }} />
-          <span className="text-[.6rem] font-mono" style={{ color: "rgba(232,160,0,.4)" }}>LIVE</span>
+          <span className="text-[.72rem] font-mono" style={{ color: "rgba(232,160,0,.4)" }}>LIVE</span>
         </div>
       </div>
 
@@ -208,13 +208,13 @@ function JouleLiveDemo() {
       <div className="p-5 min-h-[380px] flex flex-col">
         {/* Query input area */}
         <div className="mb-5">
-          <div className="text-[.6rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(232,160,0,.4)" }}>
+          <div className="text-[.72rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(232,160,0,.4)" }}>
             Query
           </div>
           <div className="flex items-start gap-3 p-3 rounded-lg" style={{ background: "rgba(232,160,0,.05)", border: "1px solid rgba(232,160,0,.1)" }}>
-            <span className="text-[.75rem] font-mono shrink-0 mt-0.5" style={{ color: "#E8A000" }}>›</span>
+            <span className="text-[.85rem] font-mono shrink-0 mt-0.5" style={{ color: "#E8A000" }}>›</span>
             <div className="flex-1">
-              <span className="text-[.82rem] font-mono" style={{ color: "rgba(255,255,255,.8)" }}>
+              <span className="text-[.92rem] font-mono" style={{ color: "rgba(255,255,255,.8)" }}>
                 {phase === "idle" ? "" : typedQuery}
               </span>
               {(phase === "typing") && (
@@ -239,7 +239,7 @@ function JouleLiveDemo() {
               exit={{ opacity: 0, y: -8 }}
               className="mb-5"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(232,160,0,.4)" }}>
+              <div className="text-[.72rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(232,160,0,.4)" }}>
                 Processing
               </div>
               <div className="space-y-2">
@@ -265,7 +265,7 @@ function JouleLiveDemo() {
                         <div className="w-full h-full rounded-full" style={{ background: "conic-gradient(from 0deg, transparent, rgba(232,160,0,.4))" }} />
                       </motion.div>
                     )}
-                    <span className="text-[.75rem] font-mono" style={{ color: i < thinkingStep ? "rgba(232,160,0,.7)" : "rgba(255,255,255,.2)" }}>
+                    <span className="text-[.85rem] font-mono" style={{ color: i < thinkingStep ? "rgba(232,160,0,.7)" : "rgba(255,255,255,.2)" }}>
                       {step}
                     </span>
                   </motion.div>
@@ -294,7 +294,7 @@ function JouleLiveDemo() {
               transition={{ duration: 0.4 }}
               className="flex-1"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(232,160,0,.4)" }}>
+              <div className="text-[.72rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(232,160,0,.4)" }}>
                 <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 8px rgba(232,160,0,.5)" }} />
                 AI Insight
               </div>
@@ -308,7 +308,7 @@ function JouleLiveDemo() {
                   boxShadow: "0 0 20px rgba(232,160,0,.06)",
                 }}
               >
-                <p className="text-[.82rem] font-mono leading-[1.7]" style={{ color: "rgba(255,255,255,.75)" }}>
+                <p className="text-[.92rem] font-mono leading-[1.7]" style={{ color: "rgba(255,255,255,.75)" }}>
                   {typedAnswer}
                   {phase === "answering" && (
                     <motion.span
@@ -338,8 +338,8 @@ function JouleLiveDemo() {
                         className="text-center p-2 rounded-lg"
                         style={{ background: "rgba(232,160,0,.04)", border: "1px solid rgba(232,160,0,.08)" }}
                       >
-                        <div className="text-[.6rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.3)" }}>{m.label}</div>
-                        <div className="text-[.85rem] font-bold font-mono mt-0.5" style={{ color: m.color }}>{m.value}</div>
+                        <div className="text-[.72rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.3)" }}>{m.label}</div>
+                        <div className="text-[.95rem] font-bold font-mono mt-0.5" style={{ color: m.color }}>{m.value}</div>
                       </motion.div>
                     ))}
                   </div>
@@ -347,12 +347,12 @@ function JouleLiveDemo() {
                   {/* Mini chart */}
                   <div className="flex items-end justify-between p-3 rounded-lg" style={{ background: "rgba(232,160,0,.03)", border: "1px solid rgba(232,160,0,.06)" }}>
                     <div>
-                      <div className="text-[.55rem] font-mono uppercase mb-1" style={{ color: "rgba(255,255,255,.25)" }}>Trend</div>
+                      <div className="text-[.68rem] font-mono uppercase mb-1" style={{ color: "rgba(255,255,255,.25)" }}>Trend</div>
                       <MiniChart data={scenario.chartData} />
                     </div>
                     <div className="text-right">
-                      <div className="text-[.55rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.25)" }}>Model</div>
-                      <div className="text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.6)" }}>Joule v2.4</div>
+                      <div className="text-[.68rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.25)" }}>Model</div>
+                      <div className="text-[.82rem] font-mono" style={{ color: "rgba(232,160,0,.6)" }}>Joule v2.4</div>
                     </div>
                   </div>
                 </motion.div>
@@ -436,8 +436,8 @@ export default function CultureSection() {
             >
               <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 10px rgba(232,160,0,.4)" }} />
               <div className="text-2xl mb-4">{cap.icon}</div>
-              <h4 className="text-[.88rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
-              <p className="text-[.78rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
+              <h4 className="text-[1rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
+              <p className="text-[.9rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
             </motion.div>
           ))}
         </div>

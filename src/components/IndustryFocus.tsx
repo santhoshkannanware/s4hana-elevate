@@ -81,7 +81,7 @@ export default function IndustryFocus() {
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 border-l-2 border-l-transparent"
                 }`}
               >
-                <span className="text-[.82rem] font-medium tracking-tight">{ind.title}</span>
+                <span className="text-[.95rem] font-medium tracking-tight">{ind.title}</span>
               </button>
             ))}
           </div>
@@ -109,7 +109,7 @@ export default function IndustryFocus() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/60 to-secondary" />
                 {/* Stat badge */}
-                <div className="absolute top-4 right-4 bg-gold/90 text-black text-[.65rem] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
+                <div className="absolute top-4 right-4 bg-gold/90 text-black text-[.78rem] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">
                   {industries[active].stat}
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default function IndustryFocus() {
                   {industries[active].desc}
                 </p>
 
-                <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold mb-4">Challenges we solve</p>
+                <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold mb-4">Challenges we solve</p>
                 <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
                   {industries[active].challenges.map((c, i) => (
                     <motion.div
@@ -134,7 +134,7 @@ export default function IndustryFocus() {
                       className="flex items-start gap-3"
                     >
                       <span className="text-gold text-sm mt-0.5 shrink-0">→</span>
-                      <span className="text-foreground/70 text-[.88rem] font-light leading-relaxed">{c}</span>
+                      <span className="text-foreground/70 text-[.95rem] font-light leading-relaxed">{c}</span>
                     </motion.div>
                   ))}
                 </div>

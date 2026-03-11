@@ -81,7 +81,7 @@ export default function AdvisoryModel() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-[.95rem] font-light leading-[1.85] text-muted-foreground">
+            <p className="text-[1rem] font-light leading-[1.85] text-muted-foreground">
               Kannanware's GROW with SAP offering enables fast-growing mid-market businesses to adopt{" "}
               <span className="text-foreground font-medium">SAP S/4HANA Cloud, Public Edition</span>{" "}
               with speed, precision, and confidence. We deliver industry best practices, preconfigured processes,
@@ -138,7 +138,7 @@ export default function AdvisoryModel() {
               </h3>
 
               {/* Description */}
-              <p className="text-[.82rem] font-light leading-[1.75] text-muted-foreground mb-5">
+              <p className="text-[.92rem] font-light leading-[1.75] text-muted-foreground mb-5">
                 {o.desc}
               </p>
 
@@ -153,8 +153,8 @@ export default function AdvisoryModel() {
                     transition={{ delay: i * 0.08 + j * 0.05, duration: 0.4 }}
                     className="flex items-center gap-2.5"
                   >
-                    <span className="text-gold text-[.7rem] shrink-0">✦</span>
-                    <span className="text-[.8rem] text-foreground/60 font-light">{item}</span>
+                    <span className="text-gold text-[.82rem] shrink-0">✦</span>
+                    <span className="text-[.92rem] text-foreground/60 font-light">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -197,13 +197,13 @@ export default function AdvisoryModel() {
             <h3 className="text-lg font-bold text-foreground mb-3 relative z-10">
               Ready to Grow?
             </h3>
-            <p className="text-[.82rem] font-light text-muted-foreground mb-6 max-w-[240px] relative z-10">
+            <p className="text-[.92rem] font-light text-muted-foreground mb-6 max-w-[240px] relative z-10">
               Let's build your roadmap to SAP S/4HANA Cloud together.
             </p>
 
             <a
               href="#cta"
-              className="inline-block px-7 py-3 bg-gold text-black text-[.8rem] font-semibold tracking-[.04em] rounded-full cursor-none relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.35)]"
+              className="inline-block px-7 py-3 bg-gold text-black text-[.92rem] font-semibold tracking-[.04em] rounded-full cursor-none relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.35)]"
             >
               Start Your Journey
             </a>

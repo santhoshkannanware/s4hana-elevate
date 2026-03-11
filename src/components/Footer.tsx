@@ -12,22 +12,22 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-11 px-5 md:px-10 py-16 max-w-[1240px] mx-auto border-b border-white/[0.06]">
         <div>
           <img src={LOGO_SVG} alt="Kannanware" className="h-10 w-auto block mb-4 opacity-90" />
-          <p className="text-[.78rem] text-white/35 font-light leading-[1.7]">AI-First SAP Consulting & Implementation Partner. Advisory, Enterprise Performance, and Managed Solutions across the full SAP suite.</p>
+          <p className="text-[.9rem] text-white/35 font-light leading-[1.7]">AI-First SAP Consulting & Implementation Partner. Advisory, Enterprise Performance, and Managed Solutions across the full SAP suite.</p>
         </div>
         {cols.map((col) => (
           <div key={col.title}>
-            <h5 className="text-[.62rem] font-bold tracking-[.2em] uppercase text-white/[0.22] mb-4">{col.title}</h5>
+            <h5 className="text-[.75rem] font-bold tracking-[.2em] uppercase text-white/[0.22] mb-4">{col.title}</h5>
             <ul className="list-none space-y-1">
               {col.links.map((link) => (
-                <li key={link}><a href="#" className="text-[.78rem] text-white/45 no-underline font-light transition-all duration-300 hover:text-gold hover:translate-x-1 inline-block cursor-none">{link}</a></li>
+                <li key={link}><a href="#" className="text-[.9rem] text-white/45 no-underline font-light transition-all duration-300 hover:text-gold hover:translate-x-1 inline-block cursor-none">{link}</a></li>
               ))}
             </ul>
           </div>
         ))}
       </div>
       <div className="flex items-center justify-between px-5 md:px-10 py-4 max-w-[1240px] mx-auto">
-        <div className="text-[.7rem] text-white/[0.22]">© 2025 Kannanware. All rights reserved.</div>
-        <div className="text-[.7rem] text-white/[0.22]">AI-First SAP Certified Consulting & Implementation Partner</div>
+        <div className="text-[.82rem] text-white/[0.22]">© 2025 Kannanware. All rights reserved.</div>
+        <div className="text-[.82rem] text-white/[0.22]">AI-First SAP Certified Consulting & Implementation Partner</div>
       </div>
     </footer>
   );

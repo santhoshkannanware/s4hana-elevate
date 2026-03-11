@@ -159,7 +159,7 @@ function TransformationWheel() {
                   {s.icon}
                 </motion.div>
                 <span
-                  className="text-[.62rem] font-bold text-center leading-tight max-w-[90px] transition-colors duration-400"
+                  className="text-[.75rem] font-bold text-center leading-tight max-w-[90px] transition-colors duration-400"
                   style={{ color: isActive ? "#ffcc00" : "rgba(255,255,255,.3)" }}
                 >
                   {s.shortLabel}
@@ -205,7 +205,7 @@ function TransformationWheel() {
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
           >
-            <span className="text-[.55rem] font-bold uppercase tracking-[.2em] text-black/50 mb-0.5">SAP CFO</span>
+            <span className="text-[.65rem] font-bold uppercase tracking-[.2em] text-black/50 mb-0.5">SAP CFO</span>
             <span className="text-[1rem] font-extrabold text-black leading-tight">Transformation</span>
             <span className="text-[1rem] font-extrabold text-black leading-tight">Wheel</span>
             <motion.div
@@ -228,8 +228,8 @@ function TransformationWheel() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35 }}
           >
-            <p className="text-[.72rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
-            <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
+            <p className="text-[.85rem] font-bold tracking-[.1em] uppercase mb-1.5" style={{ color: "#ffcc00" }}>{seg.shortLabel}</p>
+            <p className="text-[.92rem] font-light text-muted-foreground leading-[1.7] max-w-[360px] mx-auto">{seg.desc}</p>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -305,7 +305,7 @@ export default function OfficeCFO() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold mb-6 flex items-center gap-2">
+            <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold mb-6 flex items-center gap-2">
               <span className="w-5 h-px bg-gold inline-block" />
               Solution & Services
             </p>
@@ -337,17 +337,17 @@ export default function OfficeCFO() {
 
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h4 className="text-[.92rem] font-bold text-foreground mb-1.5 tracking-tight">
+                      <h4 className="text-[1rem] font-bold text-foreground mb-1.5 tracking-tight">
                         {sol.title}
                       </h4>
-                      <p className="text-[.8rem] font-light text-muted-foreground leading-[1.7] mb-3">
+                      <p className="text-[.92rem] font-light text-muted-foreground leading-[1.7] mb-3">
                         {sol.value}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {sol.kpis.map((kpi) => (
                           <span
                             key={kpi}
-                            className="text-[.65rem] font-medium px-2.5 py-1 rounded-full transition-all duration-300"
+                            className="text-[.78rem] font-medium px-2.5 py-1 rounded-full transition-all duration-300"
                             style={{
                               background: hoveredRow === i ? "rgba(232,160,0,.12)" : "rgba(255,255,255,.04)",
                               color: hoveredRow === i ? "hsl(var(--gold))" : "rgba(255,255,255,.4)",

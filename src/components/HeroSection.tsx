@@ -65,8 +65,8 @@ export default function HeroSection() {
                       </svg>
                     </div>
                     <div>
-                      <div className="text-[.72rem] font-bold text-foreground whitespace-nowrap tracking-[-0.02em]">{card.label}</div>
-                      <div className="text-[.6rem] text-muted-foreground whitespace-nowrap font-light">{card.sub}</div>
+                      <div className="text-[.82rem] font-bold text-foreground whitespace-nowrap tracking-[-0.02em]">{card.label}</div>
+                      <div className="text-[.72rem] text-muted-foreground whitespace-nowrap font-light">{card.sub}</div>
                     </div>
                     <div className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full opacity-60" style={{ background: `linear-gradient(90deg, transparent, ${card.color}, transparent)` }} />
                   </div>
@@ -94,7 +94,7 @@ export default function HeroSection() {
           className="inline-flex items-center gap-2 bg-secondary border border-border px-4 py-1.5 rounded-full mb-8 shadow-[0_2px_12px_rgba(232,160,0,.08)]"
         >
           <span className="w-[7px] h-[7px] bg-gold rounded-full" style={{ animation: "pulseDot 2s ease-in-out infinite" }} />
-          <span className="text-[.68rem] font-semibold tracking-[.1em] uppercase text-gold">SAP Certified AI-First Implementation Partner</span>
+          <span className="text-[.8rem] font-semibold tracking-[.1em] uppercase text-gold">SAP Certified AI-First Implementation Partner</span>
         </motion.div>
 
         <motion.h1
@@ -118,7 +118,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7 }}
           className="text-muted-foreground font-light leading-[1.8] max-w-[560px] mx-auto mb-8"
-          style={{ fontSize: "clamp(.92rem, 1.5vw, 1.1rem)" }}
+          style={{ fontSize: "clamp(1rem, 1.6vw, 1.2rem)" }}
         >
           Kannanware deploys SAP across <strong className="font-semibold text-foreground">Finance, Supply Chain, HR, CX &amp; beyond</strong> — with AI built into every stage of delivery.
         </motion.p>
@@ -130,10 +130,10 @@ export default function HeroSection() {
           transition={{ delay: 1.0, duration: 0.7 }}
           className="flex items-center justify-center gap-6 md:gap-8 mb-10 flex-wrap"
         >
-          {["AI-Accelerated Delivery", "SAP Certified Partner", "Global Delivery Footprint"].map((badge, i) => (
+          {["AI-Accelerated Delivery", "SAP Certified Partner", "Global Delivery Footprint"].map((badge) => (
             <div key={badge} className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(232,160,0,.5)]" />
-              <span className="text-[.78rem] md:text-[.85rem] font-medium tracking-[.04em] text-muted-foreground">{badge}</span>
+              <span className="text-[.9rem] md:text-[.95rem] font-medium tracking-[.04em] text-muted-foreground">{badge}</span>
             </div>
           ))}
         </motion.div>
@@ -146,15 +146,15 @@ export default function HeroSection() {
         >
           <button
             onClick={() => document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-9 py-4 bg-gold text-black text-[.88rem] font-semibold rounded-full cursor-none shadow-[0_4px_20px_rgba(232,160,0,.3)] hover:translate-y-[-3px] hover:shadow-[0_14px_40px_rgba(232,160,0,.45)] transition-all duration-250"
+            className="px-9 py-4 bg-gold text-black text-[1rem] font-semibold rounded-full cursor-none shadow-[0_4px_20px_rgba(232,160,0,.3)] hover:translate-y-[-3px] hover:shadow-[0_14px_40px_rgba(232,160,0,.45)] transition-all duration-250"
           >
             Book a Consultation →
           </button>
           <button
             onClick={() => document.getElementById("expertise")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-9 py-4 bg-transparent text-foreground text-[.88rem] font-normal border-[1.5px] border-border rounded-full cursor-none flex items-center gap-2 hover:border-gold hover:text-gold hover:translate-y-[-3px] transition-all duration-250"
+            className="px-9 py-4 bg-transparent text-foreground text-[1rem] font-normal border-[1.5px] border-border rounded-full cursor-none flex items-center gap-2 hover:border-gold hover:text-gold hover:translate-y-[-3px] transition-all duration-250"
           >
-            <span className="w-5 h-5 rounded-full border-[1.5px] border-current flex items-center justify-center text-[.45rem]">▶</span>
+            <span className="w-5 h-5 rounded-full border-[1.5px] border-current flex items-center justify-center text-[.5rem]">▶</span>
             Explore SAP Services
           </button>
         </motion.div>

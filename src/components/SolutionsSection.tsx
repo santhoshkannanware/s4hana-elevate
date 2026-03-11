@@ -106,7 +106,7 @@ export default function SolutionsSection() {
                     />
                   </div>
                   <span
-                    className="text-[.6rem] font-bold tracking-[.2em] uppercase transition-colors duration-300"
+                    className="text-[.75rem] font-bold tracking-[.2em] uppercase transition-colors duration-300"
                     style={{ color: isActive ? "hsl(var(--gold))" : "hsl(var(--muted-foreground))" }}
                   >
                     Step {s.n}
@@ -114,14 +114,14 @@ export default function SolutionsSection() {
                 </div>
 
                 <h4
-                  className={`text-sm md:text-[.95rem] font-bold tracking-tight transition-colors duration-300 ${
+                  className={`text-[.95rem] md:text-[1.05rem] font-bold tracking-tight transition-colors duration-300 ${
                     isActive ? "text-foreground" : "text-foreground/50"
                   }`}
                 >
                   {s.title}: {s.subtitle}
                 </h4>
                 <p
-                  className={`text-xs font-light leading-relaxed mt-1.5 transition-colors duration-300 line-clamp-2 ${
+                  className={`text-[.85rem] font-light leading-relaxed mt-1.5 transition-colors duration-300 line-clamp-2 ${
                     isActive ? "text-muted-foreground" : "text-muted-foreground/50"
                   }`}
                 >
@@ -160,11 +160,11 @@ export default function SolutionsSection() {
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
                 {step.title}: <span className="text-gold">{step.subtitle}</span>
               </h3>
-              <p className="text-muted-foreground text-[.88rem] font-light leading-[1.85] mb-8">
+              <p className="text-muted-foreground text-[.95rem] font-light leading-[1.85] mb-8">
                 {step.detail}
               </p>
 
-              <p className="text-[.65rem] font-bold tracking-[.2em] uppercase text-gold/60 mb-4">
+              <p className="text-[.78rem] font-bold tracking-[.2em] uppercase text-gold/60 mb-4">
                 Key Deliverables
               </p>
               <div className="space-y-3">
@@ -179,7 +179,7 @@ export default function SolutionsSection() {
                     <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 bg-gold/10 border border-gold/20 transition-transform duration-300 group-hover/item:scale-110">
                       <ChevronRight className="w-3 h-3 text-gold" />
                     </div>
-                    <span className="text-[.85rem] text-foreground/70 font-light group-hover/item:text-foreground transition-colors duration-300">
+                    <span className="text-[.95rem] text-foreground/70 font-light group-hover/item:text-foreground transition-colors duration-300">
                       {d}
                     </span>
                   </motion.div>

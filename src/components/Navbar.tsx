@@ -100,7 +100,7 @@ function NavDropdown({ item }: { item: NavItem }) {
 
   return (
     <li className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button className={`flex items-center gap-1 text-[.78rem] font-normal no-underline transition-all duration-200 cursor-none bg-transparent border-none ${
+      <button className={`flex items-center gap-1 text-[.88rem] font-normal no-underline transition-all duration-200 cursor-none bg-transparent border-none ${
         isGlow
           ? "text-gold font-semibold drop-shadow-[0_0_8px_rgba(232,160,0,.5)]"
           : "text-white/60 hover:text-gold"
@@ -122,7 +122,7 @@ function NavDropdown({ item }: { item: NavItem }) {
             <a
               key={child.label}
               href={child.href}
-              className={`block px-4 py-2 text-[.76rem] transition-colors duration-150 no-underline cursor-none ${
+              className={`block px-4 py-2 text-[.88rem] transition-colors duration-150 no-underline cursor-none ${
                 isGlow
                   ? "text-gold/70 hover:text-gold hover:bg-gold/10"
                   : "text-white/55 hover:text-gold hover:bg-white/5"
@@ -157,7 +157,7 @@ export default function Navbar() {
     >
       <a href="#" className="flex items-center gap-3 no-underline cursor-none">
         <img src={LOGO_SVG} alt="Kannanware" className="h-9 w-auto block" />
-        <span className="text-[.58rem] font-bold tracking-[.12em] uppercase text-gold border border-gold/35 px-2 py-0.5 ml-1">
+        <span className="text-[.7rem] font-bold tracking-[.12em] uppercase text-gold border border-gold/35 px-2 py-0.5 ml-1">
           AI-First SAP
         </span>
       </a>
@@ -170,7 +170,7 @@ export default function Navbar() {
             <li key={item.label}>
               <a
                 href={item.href}
-                className="text-[.78rem] font-normal text-white/60 no-underline transition-colors duration-200 hover:text-gold cursor-none"
+                className="text-[.88rem] font-normal text-white/60 no-underline transition-colors duration-200 hover:text-gold cursor-none"
               >
                 {item.label}
               </a>
@@ -181,7 +181,7 @@ export default function Navbar() {
 
       <button
         onClick={() => document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" })}
-        className="hidden md:block px-5 py-2.5 bg-gold text-black text-[.74rem] font-medium tracking-[.06em] border-none cursor-none transition-all duration-250 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.5)]"
+        className="hidden md:block px-5 py-2.5 bg-gold text-black text-[.85rem] font-medium tracking-[.06em] border-none cursor-none transition-all duration-250 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.5)]"
       >
         BOOK A MEETING →
       </button>
