@@ -8,6 +8,7 @@ import SolutionsSection from "@/components/SolutionsSection";
 import CultureSection from "@/components/CultureSection";
 import DeliveryModel from "@/components/DeliveryModel";
 import AdvisoryModel from "@/components/AdvisoryModel";
+import OfficeCFO from "@/components/OfficeCFO";
 import IndustryFocus from "@/components/IndustryFocus";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
