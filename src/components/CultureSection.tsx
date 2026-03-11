@@ -338,8 +338,8 @@ function JouleLiveDemo() {
                         className="text-center p-2 rounded-lg"
                         style={{ background: "rgba(232,160,0,.04)", border: "1px solid rgba(232,160,0,.08)" }}
                       >
-                        <div className="text-[.6rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.3)" }}>{m.label}</div>
-                        <div className="text-[.85rem] font-bold font-mono mt-0.5" style={{ color: m.color }}>{m.value}</div>
+                        <div className="text-[.72rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.3)" }}>{m.label}</div>
+                        <div className="text-[.95rem] font-bold font-mono mt-0.5" style={{ color: m.color }}>{m.value}</div>
                       </motion.div>
                     ))}
                   </div>
