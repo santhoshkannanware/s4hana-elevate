@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse } from "lucide-react";
+import { ArrowRight, Cloud, Server, Zap, Shield, Settings, Database, BarChart3, TrendingUp, DollarSign, PieChart, Activity, Brain, ChevronRight, Target, Layers, RefreshCw, FileCheck, Gauge, HeartPulse, Search, Compass, Code2, FlaskConical, Rocket, HeartHandshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 /* ─── Helpers ─── */
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [.22, 1, .36, 1] as [number, number, number, number] } } };
