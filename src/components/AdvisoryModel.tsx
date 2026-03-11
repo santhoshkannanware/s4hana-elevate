@@ -197,7 +197,7 @@ export default function AdvisoryModel() {
             <h3 className="text-lg font-bold text-foreground mb-3 relative z-10">
               Ready to Grow?
             </h3>
-            <p className="text-[.82rem] font-light text-muted-foreground mb-6 max-w-[240px] relative z-10">
+            <p className="text-[.92rem] font-light text-muted-foreground mb-6 max-w-[240px] relative z-10">
               Let's build your roadmap to SAP S/4HANA Cloud together.
             </p>
 
