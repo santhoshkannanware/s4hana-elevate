@@ -213,37 +213,43 @@ function LiveDemo() {
   );
 }
 
-/* ─── Section 4: Expertise ─── */
+/* ─── Section 4: Expertise — cinematic full-width rows ─── */
 function ExpertiseSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const capabilities = [
-    { icon: Target, title: "Greenfield Implementation", desc: "Build your S/4HANA environment from the ground up with modern best practices and clean architecture." },
-    { icon: RefreshCw, title: "Brownfield System Conversion", desc: "Convert your existing ECC system to S/4HANA preserving your customizations and historical data." },
-    { icon: Layers, title: "Bluefield Selective Transformation", desc: "Selectively migrate processes and data, combining the best of greenfield and brownfield approaches." },
-    { icon: DollarSign, title: "Finance Transformation (FI/CO)", desc: "Reimagine your financial processes with Universal Journal, real-time reporting, and integrated planning." },
-    { icon: FileCheck, title: "Data Migration & Validation", desc: "End-to-end data migration strategy with automated validation, cleansing, and reconciliation frameworks." },
-    { icon: Gauge, title: "S/4HANA System Optimization", desc: "Maximize your existing S/4HANA investment through performance tuning, process optimization, and feature activation." },
+    { icon: Target, title: "Greenfield Implementation", desc: "Build your S/4HANA environment from the ground up with modern best practices, clean architecture, and zero legacy baggage — delivering a future-proof foundation for enterprise finance.", num: "01" },
+    { icon: RefreshCw, title: "Brownfield System Conversion", desc: "Convert your existing ECC system to S/4HANA while preserving customizations, historical data, and organizational knowledge — minimizing disruption and accelerating time-to-value.", num: "02" },
+    { icon: Layers, title: "Bluefield Selective Transformation", desc: "Selectively migrate processes and data, combining the best of greenfield and brownfield approaches for a tailored transformation that balances innovation with continuity.", num: "03" },
+    { icon: DollarSign, title: "Finance Transformation (FI/CO)", desc: "Reimagine your financial processes with Universal Journal, real-time reporting, margin analysis, and integrated planning — unlocking the full power of S/4HANA Finance.", num: "04" },
+    { icon: FileCheck, title: "Data Migration & Validation", desc: "End-to-end data migration strategy with automated validation, cleansing, reconciliation frameworks, and rigorous quality gates ensuring data integrity at every stage.", num: "05" },
+    { icon: Gauge, title: "S/4HANA System Optimization", desc: "Maximize your existing S/4HANA investment through performance tuning, process optimization, feature activation, and continuous improvement roadmaps.", num: "06" },
   ];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
-      <div className="max-w-[1100px] mx-auto">
-        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
+      <div className="max-w-[1200px] mx-auto">
+        <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-20">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Implementation Excellence</motion.span>
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Our S/4HANA Implementation Expertise</motion.h2>
         </motion.div>
-        <div className="space-y-4">
+        <div className="space-y-0">
           {capabilities.map((c, i) => (
-            <motion.div key={c.title} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .5 }} className="group flex items-start gap-6 rounded-xl p-6 border transition-all hover:border-[rgba(244,180,0,.25)]" style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.05)" }}>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-shadow group-hover:shadow-[0_0_20px_rgba(244,180,0,.2)]" style={{ background: "rgba(244,180,0,.1)" }}>
-                <c.icon size={22} style={{ color: "#F4B400" }} />
+            <motion.div key={c.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .06, duration: .6 }}
+              className="group grid grid-cols-1 md:grid-cols-[80px_1fr_1fr] items-start gap-6 md:gap-10 py-10 border-b transition-all"
+              style={{ borderColor: "rgba(255,255,255,.06)" }}
+            >
+              {/* Number + Icon */}
+              <div className="flex items-center gap-4 md:flex-col md:items-start">
+                <span className="text-[2rem] font-bold leading-none tracking-tight transition-colors group-hover:text-[#F4B400]" style={{ color: "rgba(255,255,255,.12)" }}>{c.num}</span>
+                <div className="w-11 h-11 rounded-lg flex items-center justify-center transition-shadow group-hover:shadow-[0_0_24px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
+                  <c.icon size={20} style={{ color: "#F4B400" }} />
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#F4B400] transition-colors">{c.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#C9C9C9" }}>{c.desc}</p>
-              </div>
-              <ChevronRight size={20} className="text-white/20 group-hover:text-[#F4B400] ml-auto shrink-0 mt-1 transition-colors" />
+              {/* Title */}
+              <h3 className="text-[clamp(1.2rem,2.5vw,1.6rem)] font-bold text-white leading-tight group-hover:text-[#F4B400] transition-colors">{c.title}</h3>
+              {/* Description */}
+              <p className="text-[.92rem] leading-[1.8]" style={{ color: "#C9C9C9" }}>{c.desc}</p>
             </motion.div>
           ))}
         </div>
