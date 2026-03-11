@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import consultingTeam from "@/assets/consulting-team.jpg";
 
 const phases = [
   { num: "01", title: "Advisory", desc: "Business case, roadmap, and programme design that fits your timeline and budget.", icon: "◈" },
@@ -17,20 +18,30 @@ const capabilities = [
 
 export default function AdvisoryModel() {
   return (
-    <section className="py-24 md:py-32 bg-bg2 relative overflow-hidden" id="grow">
+    <section className="py-24 md:py-32 bg-background relative overflow-hidden" id="grow">
       {/* Subtle accent */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.04]" style={{ background: "radial-gradient(circle, hsl(var(--gold)), transparent 70%)" }} />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.06]" style={{ background: "radial-gradient(circle, hsl(var(--gold)), transparent 70%)" }} />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 max-w-2xl">
-          <div className="eyebrow">GROW with SAP</div>
-          <h2 className="sec-h">The right path to<br /><em>SAP Public Cloud.</em></h2>
-          <p className="sec-p">We guide enterprises through GROW with SAP — adopting S/4HANA Public Cloud with enterprise rigour and AI-first agility.</p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="eyebrow">GROW with SAP</div>
+            <h2 className="sec-h">The right path to<br /><em>SAP Public Cloud.</em></h2>
+            <p className="sec-p">We guide enterprises through GROW with SAP — adopting S/4HANA Public Cloud with enterprise rigour and AI-first agility.</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="rounded-2xl overflow-hidden border border-border"
+          >
+            <img src={consultingTeam} alt="Consulting team" className="w-full h-[320px] object-cover" />
+          </motion.div>
+        </div>
 
         {/* Phases — horizontal timeline */}
         <div className="relative mb-20">
-          {/* Connecting line */}
           <div className="hidden md:block absolute top-[52px] left-[10%] right-[10%] h-px bg-border" />
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-0">
@@ -43,8 +54,7 @@ export default function AdvisoryModel() {
                 transition={{ delay: i * 0.15 }}
                 className="flex flex-col items-center text-center px-6"
               >
-                {/* Number circle */}
-                <div className="w-[72px] h-[72px] rounded-full border-2 border-gold bg-white flex items-center justify-center mb-5 relative z-10 shadow-[0_4px_20px_rgba(232,160,0,.12)]">
+                <div className="w-[72px] h-[72px] rounded-full border-2 border-gold bg-secondary flex items-center justify-center mb-5 relative z-10 shadow-[0_4px_20px_rgba(232,160,0,.15)]">
                   <span className="text-gold text-xl font-bold">{phase.num}</span>
                 </div>
                 <h4 className="text-lg font-bold text-foreground mb-2">{phase.title}</h4>
@@ -54,17 +64,12 @@ export default function AdvisoryModel() {
           </div>
         </div>
 
-        {/* Capabilities — clean inline list */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="border-t border-border pt-10"
-        >
+        {/* Capabilities */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="border-t border-border pt-10">
           <p className="text-[.68rem] font-bold tracking-[.14em] uppercase text-gold mb-6">What's included</p>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-3">
             {capabilities.map((cap) => (
-              <div key={cap} className="flex items-center gap-2.5 text-[.86rem] text-foreground/80 font-light">
+              <div key={cap} className="flex items-center gap-2.5 text-[.86rem] text-foreground/70 font-light">
                 <span className="text-gold text-xs">✓</span>
                 {cap}
               </div>
@@ -73,12 +78,7 @@ export default function AdvisoryModel() {
         </motion.div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12"
-        >
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12">
           <a href="#cta" className="inline-block px-8 py-3.5 bg-gold text-black text-[.82rem] font-semibold tracking-[.04em] rounded-full cursor-none transition-all duration-250 hover:translate-y-[-2px] hover:shadow-[0_8px_24px_rgba(232,160,0,.35)]">
             Start Your GROW Journey →
           </a>

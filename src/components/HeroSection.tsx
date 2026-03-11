@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const orbitModules = [
   { label: "S/4HANA Finance", sub: "Real-time GL & Close", color: "#E8A000", icon: "M12 2v20M2 12h20M7 7l10 10M17 7l-10 10" },
@@ -25,107 +26,39 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="min-h-screen flex flex-col pt-16 bg-background relative overflow-hidden" id="hero">
-      {/* Background gradients — parallax */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{
-        y: bgY,
-        background: "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(232,160,0,.07) 0%, transparent 65%), radial-gradient(ellipse 40% 30% at 15% 60%, rgba(232,160,0,.04) 0%, transparent 55%), radial-gradient(ellipse 40% 30% at 85% 60%, rgba(232,160,0,.04) 0%, transparent 55%)"
-      }} />
+      {/* Background image with overlay */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
+        <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.08]" />
+        <div className="absolute inset-0" style={{
+          background: "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(232,160,0,.12) 0%, transparent 65%), radial-gradient(ellipse 40% 30% at 15% 60%, rgba(232,160,0,.06) 0%, transparent 55%)"
+        }} />
+      </motion.div>
 
       {/* Dot grid — parallax */}
-      <motion.div className="absolute inset-0 pointer-events-none opacity-50" style={{
+      <motion.div className="absolute inset-0 pointer-events-none opacity-30" style={{
         y: dotY,
-        backgroundImage: "radial-gradient(circle, rgba(0,0,0,.06) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px)",
         backgroundSize: "36px 36px",
         maskImage: "radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%)"
       }} />
 
       {/* Orbital system — hidden on mobile */}
       <motion.div className="absolute inset-0 pointer-events-none z-0 hidden xl:flex items-center justify-center" aria-hidden="true" style={{ scale: orbitScale, opacity: orbitOpacity }}>
-        {/* Orbit rings with dashed/dotted styles */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: "min(82vw, 1000px)",
-            height: "min(82vw, 1000px)",
-            border: "1px dashed rgba(232,160,0,.12)",
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: "min(66vw, 800px)",
-            height: "min(66vw, 800px)",
-            border: "1px solid rgba(232,160,0,.06)",
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: "min(50vw, 600px)",
-            height: "min(50vw, 600px)",
-            border: "1px dotted rgba(232,160,0,.08)",
-          }}
-        />
+        <div className="absolute rounded-full" style={{ width: "min(82vw, 1000px)", height: "min(82vw, 1000px)", border: "1px dashed rgba(232,160,0,.15)" }} />
+        <div className="absolute rounded-full" style={{ width: "min(66vw, 800px)", height: "min(66vw, 800px)", border: "1px solid rgba(232,160,0,.08)" }} />
+        <div className="absolute rounded-full" style={{ width: "min(50vw, 600px)", height: "min(50vw, 600px)", border: "1px dotted rgba(232,160,0,.1)" }} />
 
-        {/* Pulsating center glow */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 120,
-            height: 120,
-            background: "radial-gradient(circle, rgba(232,160,0,.15) 0%, transparent 70%)",
-            animation: "glowPulse 3s ease-in-out infinite",
-          }}
-        />
+        <div className="absolute rounded-full" style={{ width: 120, height: 120, background: "radial-gradient(circle, rgba(232,160,0,.2) 0%, transparent 70%)", animation: "glowPulse 3s ease-in-out infinite" }} />
 
-        {/* Orbiting cards */}
-        <div
-          className="absolute"
-          style={{
-            width: "min(82vw, 1000px)",
-            height: "min(82vw, 1000px)",
-            animation: "orbit-spin 60s linear infinite",
-          }}
-        >
+        <div className="absolute" style={{ width: "min(82vw, 1000px)", height: "min(82vw, 1000px)", animation: "orbit-spin 60s linear infinite" }}>
           {orbitModules.map((card, i) => {
             const angle = (i / orbitModules.length) * 360;
             return (
-              <div
-                key={card.label}
-                className="absolute"
-                style={{
-                  top: "50%",
-                  left: "50%",
-                  transform: `rotate(${angle}deg) translateX(min(41vw, 500px)) rotate(-${angle}deg)`,
-                }}
-              >
-                <div
-                  className="group -translate-x-1/2 -translate-y-1/2 relative"
-                  style={{ animation: `counter-orbit 60s linear infinite` }}
-                >
-                  {/* Glow behind card */}
-                  <div
-                    className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: card.color, transform: "scale(1.3)" }}
-                  />
-
-                  {/* Card */}
-                  <div
-                    className="relative backdrop-blur-md rounded-2xl px-4 py-3.5 flex items-center gap-3 border transition-all duration-500 hover:scale-110"
-                    style={{
-                      background: "rgba(255,255,255,.92)",
-                      borderColor: `${card.color}25`,
-                      boxShadow: `0 8px 32px ${card.color}15, 0 2px 8px rgba(0,0,0,.06)`,
-                    }}
-                  >
-                    {/* Icon circle */}
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden"
-                      style={{
-                        background: `linear-gradient(135deg, ${card.color}20, ${card.color}08)`,
-                        border: `1px solid ${card.color}30`,
-                      }}
-                    >
+              <div key={card.label} className="absolute" style={{ top: "50%", left: "50%", transform: `rotate(${angle}deg) translateX(min(41vw, 500px)) rotate(-${angle}deg)` }}>
+                <div className="group -translate-x-1/2 -translate-y-1/2 relative" style={{ animation: `counter-orbit 60s linear infinite` }}>
+                  <div className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: card.color, transform: "scale(1.3)" }} />
+                  <div className="relative backdrop-blur-md rounded-2xl px-4 py-3.5 flex items-center gap-3 border transition-all duration-500 hover:scale-110" style={{ background: "rgba(12,12,12,.85)", borderColor: `${card.color}30`, boxShadow: `0 8px 32px ${card.color}15, 0 2px 8px rgba(0,0,0,.3)` }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${card.color}25, ${card.color}08)`, border: `1px solid ${card.color}30` }}>
                       <svg viewBox="0 0 24 24" fill="none" stroke={card.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
                         <path d={card.icon} />
                       </svg>
@@ -134,12 +67,7 @@ export default function HeroSection() {
                       <div className="text-[.72rem] font-bold text-foreground whitespace-nowrap tracking-[-0.02em]">{card.label}</div>
                       <div className="text-[.6rem] text-muted-foreground whitespace-nowrap font-light">{card.sub}</div>
                     </div>
-
-                    {/* Accent line */}
-                    <div
-                      className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full opacity-60"
-                      style={{ background: `linear-gradient(90deg, transparent, ${card.color}, transparent)` }}
-                    />
+                    <div className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full opacity-60" style={{ background: `linear-gradient(90deg, transparent, ${card.color}, transparent)` }} />
                   </div>
                 </div>
               </div>
@@ -147,34 +75,10 @@ export default function HeroSection() {
           })}
         </div>
 
-        {/* Small orbiting dots on inner ring */}
-        <div
-          className="absolute"
-          style={{
-            width: "min(50vw, 600px)",
-            height: "min(50vw, 600px)",
-            animation: "orbit-spin 35s linear infinite reverse",
-          }}
-        >
+        <div className="absolute" style={{ width: "min(50vw, 600px)", height: "min(50vw, 600px)", animation: "orbit-spin 35s linear infinite reverse" }}>
           {[0, 90, 180, 270].map((angle) => (
-            <div
-              key={angle}
-              className="absolute"
-              style={{
-                top: "50%",
-                left: "50%",
-                transform: `rotate(${angle}deg) translateX(min(25vw, 300px))`,
-              }}
-            >
-              <div
-                className="w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  background: "#E8A000",
-                  boxShadow: "0 0 12px rgba(232,160,0,.5)",
-                  animation: "glowPulse 2s ease-in-out infinite",
-                  animationDelay: `${angle * 10}ms`,
-                }}
-              />
+            <div key={angle} className="absolute" style={{ top: "50%", left: "50%", transform: `rotate(${angle}deg) translateX(min(25vw, 300px))` }}>
+              <div className="w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2" style={{ background: "#E8A000", boxShadow: "0 0 12px rgba(232,160,0,.5)", animation: "glowPulse 2s ease-in-out infinite", animationDelay: `${angle * 10}ms` }} />
             </div>
           ))}
         </div>
@@ -182,18 +86,16 @@ export default function HeroSection() {
 
       {/* Centered content */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-10 relative z-10 text-center">
-        {/* Trust badge */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6 }}
-          className="inline-flex items-center gap-2 bg-white border border-border px-4 py-1.5 rounded-full mb-8 shadow-[0_2px_12px_rgba(0,0,0,.06)]"
+          className="inline-flex items-center gap-2 bg-secondary border border-border px-4 py-1.5 rounded-full mb-8 shadow-[0_2px_12px_rgba(232,160,0,.08)]"
         >
           <span className="w-[7px] h-[7px] bg-gold rounded-full" style={{ animation: "pulseDot 2s ease-in-out infinite" }} />
           <span className="text-[.68rem] font-semibold tracking-[.1em] uppercase text-gold">SAP Certified AI-First Implementation Partner</span>
         </motion.div>
 
-        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -206,7 +108,6 @@ export default function HeroSection() {
           <span className="text-gold italic">with SAP.</span>
         </motion.h1>
 
-        {/* Sub */}
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -214,10 +115,9 @@ export default function HeroSection() {
           className="text-muted-foreground font-light leading-[1.8] max-w-[560px] mx-auto mb-9"
           style={{ fontSize: "clamp(.92rem, 1.5vw, 1.1rem)" }}
         >
-          Kannanware deploys SAP across <strong className="font-semibold text-foreground">Finance, Supply Chain, HR, CX &amp; beyond</strong> — with AI built into every stage of delivery. Faster implementations. Better outcomes.
+          Kannanware deploys SAP across <strong className="font-semibold text-foreground">Finance, Supply Chain, HR, CX &amp; beyond</strong> — with AI built into every stage of delivery.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
