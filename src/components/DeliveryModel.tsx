@@ -133,7 +133,7 @@ export default function DeliveryModel() {
                   {p.title}: {p.subtitle}
                 </h4>
                 <p
-                  className={`text-xs font-light leading-relaxed mt-1.5 transition-colors duration-300 line-clamp-2 ${
+                  className={`text-[.85rem] font-light leading-relaxed mt-1.5 transition-colors duration-300 line-clamp-2 ${
                     isActive ? "text-muted-foreground" : "text-muted-foreground/50"
                   }`}
                 >
