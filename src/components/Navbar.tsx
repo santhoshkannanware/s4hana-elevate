@@ -46,7 +46,7 @@ const navItems: NavItem[] = [
   {
     label: "Industries",
     children: [
-      { label: "Energy & Natural Resources", href: "#industries" },
+      { label: "Energy & Natural Resources", href: "/industry/energy" },
       { label: "Discrete Manufacturing", href: "#industries" },
       { label: "Services Management", href: "#industries" },
       { label: "Financial Services", href: "#industries" },
