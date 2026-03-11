@@ -159,7 +159,7 @@ function TransformationWheel() {
                   {s.icon}
                 </motion.div>
                 <span
-                  className="text-[.62rem] font-bold text-center leading-tight max-w-[90px] transition-colors duration-400"
+                  className="text-[.75rem] font-bold text-center leading-tight max-w-[90px] transition-colors duration-400"
                   style={{ color: isActive ? "#ffcc00" : "rgba(255,255,255,.3)" }}
                 >
                   {s.shortLabel}
