@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ClientLogos from "@/components/ClientLogos";
 import WhyKannanware from "@/components/WhyKannanware";
 import SolutionsSection from "@/components/SolutionsSection";
 import CultureSection from "@/components/CultureSection";
