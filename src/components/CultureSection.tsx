@@ -31,11 +31,11 @@ const demoScenarios = [
     answer: "Revenue decline of $2.4M detected in Region A due to delayed receivables — 68% linked to 3 key accounts.",
     metrics: [
       { label: "Variance", value: "-$2.4M", color: "#ff4d6a" },
-      { label: "Region", value: "APAC-A", color: "#00e5ff" },
+      { label: "Region", value: "APAC-A", color: "#E8A000" },
       { label: "Accounts", value: "3 flagged", color: "#ffb800" },
-      { label: "Confidence", value: "94%", color: "#00e5ff" },
+      { label: "Confidence", value: "94%", color: "#E8A000" },
     ],
-    chartData: [42, 58, 65, 47, 38, 29, 35], // Q3 weekly trend
+    chartData: [42, 58, 65, 47, 38, 29, 35],
   },
   {
     query: "Show me overdue invoices above $100K",
@@ -43,28 +43,28 @@ const demoScenarios = [
     answer: "Found 7 overdue invoices totaling $1.8M. Largest: $420K from Meridian Corp — 47 days past due.",
     metrics: [
       { label: "Total Due", value: "$1.8M", color: "#ff4d6a" },
-      { label: "Invoices", value: "7", color: "#00e5ff" },
+      { label: "Invoices", value: "7", color: "#E8A000" },
       { label: "Oldest", value: "47 days", color: "#ffb800" },
       { label: "Risk Level", value: "High", color: "#ff4d6a" },
     ],
-    chartData: [420, 310, 280, 260, 210, 180, 140], // Invoice amounts
+    chartData: [420, 310, 280, 260, 210, 180, 140],
   },
   {
     query: "Forecast next quarter cash position",
     thinking: ["Analyzing cash flow patterns…", "Running ML prediction model…", "Factoring seasonal trends…"],
     answer: "Projected Q4 cash position: $14.2M. Operating cash flow expected to increase 12% driven by improved collections.",
     metrics: [
-      { label: "Projected", value: "$14.2M", color: "#00e5ff" },
+      { label: "Projected", value: "$14.2M", color: "#E8A000" },
       { label: "Growth", value: "+12%", color: "#00ff88" },
-      { label: "Model", value: "ARIMA", color: "#00e5ff" },
-      { label: "Accuracy", value: "91%", color: "#00e5ff" },
+      { label: "Model", value: "ARIMA", color: "#E8A000" },
+      { label: "Accuracy", value: "91%", color: "#E8A000" },
     ],
-    chartData: [10, 11, 10.5, 12, 13, 13.5, 14.2], // Cash trend
+    chartData: [10, 11, 10.5, 12, 13, 13.5, 14.2],
   },
 ];
 
 // Animated mini bar chart
-function MiniChart({ data, color = "#00e5ff" }: { data: number[]; color?: string }) {
+function MiniChart({ data, color = "#E8A000" }: { data: number[]; color?: string }) {
   const max = Math.max(...data);
   return (
     <div className="flex items-end gap-[3px] h-12">
@@ -75,7 +75,7 @@ function MiniChart({ data, color = "#00e5ff" }: { data: number[]; color?: string
           initial={{ height: 0 }}
           animate={{ height: `${(v / max) * 100}%` }}
           transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          style={{ background: `linear-gradient(180deg, ${color}, rgba(0,180,230,.3))` }}
+          style={{ background: `linear-gradient(180deg, ${color}, rgba(232,160,0,.3))` }}
         />
       ))}
     </div>
@@ -116,8 +116,8 @@ function NetworkNodes() {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
       const w = canvas.offsetWidth, h = canvas.offsetHeight;
       nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if (n.x < 0 || n.x > w) n.vx *= -1; if (n.y < 0 || n.y > h) n.vy *= -1; });
-      for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) { const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < 120) { ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.strokeStyle = `rgba(0,180,230,${.15 * (1 - dist / 120)})`; ctx.lineWidth = .5; ctx.stroke(); } }
-      nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fillStyle = "rgba(0,200,255,.5)"; ctx.fill(); });
+      for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) { const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < 120) { ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.strokeStyle = `rgba(232,160,0,${.15 * (1 - dist / 120)})`; ctx.lineWidth = .5; ctx.stroke(); } }
+      nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fillStyle = "rgba(232,160,0,.5)"; ctx.fill(); });
       animId = requestAnimationFrame(draw);
     };
     draw();
@@ -139,7 +139,6 @@ function JouleLiveDemo() {
   const typedQuery = useTypewriter(scenario.query, 35, phase === "typing");
   const typedAnswer = useTypewriter(scenario.answer, 18, phase === "answering");
 
-  // Intersection observer to start animation when visible
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -148,7 +147,6 @@ function JouleLiveDemo() {
     return () => obs.disconnect();
   }, []);
 
-  // Animation state machine
   useEffect(() => {
     if (!inView) return;
     if (phase === "idle") {
@@ -157,7 +155,6 @@ function JouleLiveDemo() {
     }
   }, [inView, phase]);
 
-  // When typing completes, move to thinking
   useEffect(() => {
     if (phase === "typing" && typedQuery === scenario.query) {
       const t = setTimeout(() => { setPhase("thinking"); setThinkingStep(0); }, 400);
@@ -165,7 +162,6 @@ function JouleLiveDemo() {
     }
   }, [phase, typedQuery, scenario.query]);
 
-  // Thinking steps
   useEffect(() => {
     if (phase !== "thinking") return;
     if (thinkingStep < scenario.thinking.length) {
@@ -177,7 +173,6 @@ function JouleLiveDemo() {
     }
   }, [phase, thinkingStep, scenario.thinking.length]);
 
-  // When answer completes, move to complete
   useEffect(() => {
     if (phase === "answering" && typedAnswer === scenario.answer) {
       const t = setTimeout(() => setPhase("complete"), 200);
@@ -185,7 +180,6 @@ function JouleLiveDemo() {
     }
   }, [phase, typedAnswer, scenario.answer]);
 
-  // Auto-cycle to next scenario
   useEffect(() => {
     if (phase !== "complete") return;
     const t = setTimeout(() => {
@@ -197,16 +191,16 @@ function JouleLiveDemo() {
   }, [phase]);
 
   return (
-    <div ref={ref} className="relative rounded-2xl overflow-hidden" style={{ background: "#080d14", border: "1px solid rgba(0,180,230,.15)" }}>
+    <div ref={ref} className="relative rounded-2xl overflow-hidden" style={{ background: "#0c0a06", border: "1px solid rgba(232,160,0,.15)" }}>
       {/* Terminal header */}
-      <div className="flex items-center gap-2 px-5 py-3" style={{ borderBottom: "1px solid rgba(0,180,230,.08)", background: "rgba(0,180,230,.03)" }}>
+      <div className="flex items-center gap-2 px-5 py-3" style={{ borderBottom: "1px solid rgba(232,160,0,.08)", background: "rgba(232,160,0,.03)" }}>
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffbd2e" }} />
         <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
-        <span className="ml-3 text-[.7rem] font-mono" style={{ color: "rgba(0,229,255,.5)" }}>SAP Joule AI Copilot</span>
+        <span className="ml-3 text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.5)" }}>SAP Joule AI Copilot</span>
         <div className="ml-auto flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#00e5ff", boxShadow: "0 0 6px rgba(0,229,255,.6)" }} />
-          <span className="text-[.6rem] font-mono" style={{ color: "rgba(0,229,255,.4)" }}>LIVE</span>
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#E8A000", boxShadow: "0 0 6px rgba(232,160,0,.6)" }} />
+          <span className="text-[.6rem] font-mono" style={{ color: "rgba(232,160,0,.4)" }}>LIVE</span>
         </div>
       </div>
 
@@ -214,11 +208,11 @@ function JouleLiveDemo() {
       <div className="p-5 min-h-[380px] flex flex-col">
         {/* Query input area */}
         <div className="mb-5">
-          <div className="text-[.6rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(0,180,230,.4)" }}>
+          <div className="text-[.6rem] font-mono uppercase tracking-wider mb-2" style={{ color: "rgba(232,160,0,.4)" }}>
             Query
           </div>
-          <div className="flex items-start gap-3 p-3 rounded-lg" style={{ background: "rgba(0,180,230,.05)", border: "1px solid rgba(0,180,230,.1)" }}>
-            <span className="text-[.75rem] font-mono shrink-0 mt-0.5" style={{ color: "#00b4e6" }}>›</span>
+          <div className="flex items-start gap-3 p-3 rounded-lg" style={{ background: "rgba(232,160,0,.05)", border: "1px solid rgba(232,160,0,.1)" }}>
+            <span className="text-[.75rem] font-mono shrink-0 mt-0.5" style={{ color: "#E8A000" }}>›</span>
             <div className="flex-1">
               <span className="text-[.82rem] font-mono" style={{ color: "rgba(255,255,255,.8)" }}>
                 {phase === "idle" ? "" : typedQuery}
@@ -226,7 +220,7 @@ function JouleLiveDemo() {
               {(phase === "typing") && (
                 <motion.span
                   className="inline-block w-[2px] h-[14px] ml-0.5 align-middle"
-                  style={{ background: "#00e5ff" }}
+                  style={{ background: "#E8A000" }}
                   animate={{ opacity: [1, 0] }}
                   transition={{ repeat: Infinity, duration: 0.6 }}
                 />
@@ -245,7 +239,7 @@ function JouleLiveDemo() {
               exit={{ opacity: 0, y: -8 }}
               className="mb-5"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(0,229,255,.4)" }}>
+              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3" style={{ color: "rgba(232,160,0,.4)" }}>
                 Processing
               </div>
               <div className="space-y-2">
@@ -258,30 +252,30 @@ function JouleLiveDemo() {
                     className="flex items-center gap-2"
                   >
                     {i < thinkingStep ? (
-                      <div className="w-3.5 h-3.5 rounded-full flex items-center justify-center" style={{ background: "rgba(0,229,255,.15)" }}>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.2 5.7L6.5 2.3" stroke="#00e5ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      <div className="w-3.5 h-3.5 rounded-full flex items-center justify-center" style={{ background: "rgba(232,160,0,.15)" }}>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.2 5.7L6.5 2.3" stroke="#E8A000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       </div>
                     ) : (
                       <motion.div
                         className="w-3.5 h-3.5 rounded-full"
-                        style={{ border: "1.5px solid rgba(0,229,255,.3)" }}
+                        style={{ border: "1.5px solid rgba(232,160,0,.3)" }}
                         animate={{ rotate: 360 }}
                         transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
                       >
-                        <div className="w-full h-full rounded-full" style={{ background: "conic-gradient(from 0deg, transparent, rgba(0,229,255,.4))" }} />
+                        <div className="w-full h-full rounded-full" style={{ background: "conic-gradient(from 0deg, transparent, rgba(232,160,0,.4))" }} />
                       </motion.div>
                     )}
-                    <span className="text-[.75rem] font-mono" style={{ color: i < thinkingStep ? "rgba(0,229,255,.7)" : "rgba(255,255,255,.2)" }}>
+                    <span className="text-[.75rem] font-mono" style={{ color: i < thinkingStep ? "rgba(232,160,0,.7)" : "rgba(255,255,255,.2)" }}>
                       {step}
                     </span>
                   </motion.div>
                 ))}
               </div>
               {/* Processing bar */}
-              <div className="mt-3 h-[2px] rounded-full overflow-hidden" style={{ background: "rgba(0,180,230,.1)" }}>
+              <div className="mt-3 h-[2px] rounded-full overflow-hidden" style={{ background: "rgba(232,160,0,.1)" }}>
                 <motion.div
                   className="h-full rounded-full"
-                  style={{ background: "linear-gradient(90deg, #00b4e6, #00e5ff)" }}
+                  style={{ background: "linear-gradient(90deg, #E8A000, #ffb800)" }}
                   initial={{ width: "0%" }}
                   animate={{ width: `${(thinkingStep / scenario.thinking.length) * 100}%` }}
                   transition={{ duration: 0.5 }}
@@ -300,8 +294,8 @@ function JouleLiveDemo() {
               transition={{ duration: 0.4 }}
               className="flex-1"
             >
-              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(0,229,255,.4)" }}>
-                <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#00e5ff", boxShadow: "0 0 8px rgba(0,229,255,.5)" }} />
+              <div className="text-[.6rem] font-mono uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: "rgba(232,160,0,.4)" }}>
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 8px rgba(232,160,0,.5)" }} />
                 AI Insight
               </div>
 
@@ -309,9 +303,9 @@ function JouleLiveDemo() {
               <div
                 className="p-4 rounded-lg mb-5"
                 style={{
-                  background: "rgba(0,180,230,.04)",
-                  border: "1px solid rgba(0,180,230,.12)",
-                  boxShadow: "0 0 20px rgba(0,180,230,.06)",
+                  background: "rgba(232,160,0,.04)",
+                  border: "1px solid rgba(232,160,0,.12)",
+                  boxShadow: "0 0 20px rgba(232,160,0,.06)",
                 }}
               >
                 <p className="text-[.82rem] font-mono leading-[1.7]" style={{ color: "rgba(255,255,255,.75)" }}>
@@ -319,7 +313,7 @@ function JouleLiveDemo() {
                   {phase === "answering" && (
                     <motion.span
                       className="inline-block w-[2px] h-[12px] ml-0.5 align-middle"
-                      style={{ background: "#00e5ff" }}
+                      style={{ background: "#E8A000" }}
                       animate={{ opacity: [1, 0] }}
                       transition={{ repeat: Infinity, duration: 0.6 }}
                     />
@@ -342,7 +336,7 @@ function JouleLiveDemo() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1, duration: 0.3 }}
                         className="text-center p-2 rounded-lg"
-                        style={{ background: "rgba(0,180,230,.04)", border: "1px solid rgba(0,180,230,.08)" }}
+                        style={{ background: "rgba(232,160,0,.04)", border: "1px solid rgba(232,160,0,.08)" }}
                       >
                         <div className="text-[.6rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.3)" }}>{m.label}</div>
                         <div className="text-[.85rem] font-bold font-mono mt-0.5" style={{ color: m.color }}>{m.value}</div>
@@ -351,14 +345,14 @@ function JouleLiveDemo() {
                   </div>
 
                   {/* Mini chart */}
-                  <div className="flex items-end justify-between p-3 rounded-lg" style={{ background: "rgba(0,180,230,.03)", border: "1px solid rgba(0,180,230,.06)" }}>
+                  <div className="flex items-end justify-between p-3 rounded-lg" style={{ background: "rgba(232,160,0,.03)", border: "1px solid rgba(232,160,0,.06)" }}>
                     <div>
                       <div className="text-[.55rem] font-mono uppercase mb-1" style={{ color: "rgba(255,255,255,.25)" }}>Trend</div>
                       <MiniChart data={scenario.chartData} />
                     </div>
                     <div className="text-right">
                       <div className="text-[.55rem] font-mono uppercase" style={{ color: "rgba(255,255,255,.25)" }}>Model</div>
-                      <div className="text-[.7rem] font-mono" style={{ color: "rgba(0,229,255,.6)" }}>Joule v2.4</div>
+                      <div className="text-[.7rem] font-mono" style={{ color: "rgba(232,160,0,.6)" }}>Joule v2.4</div>
                     </div>
                   </div>
                 </motion.div>
@@ -368,14 +362,14 @@ function JouleLiveDemo() {
         </AnimatePresence>
 
         {/* Scenario indicator dots */}
-        <div className="flex items-center justify-center gap-2 mt-5 pt-4" style={{ borderTop: "1px solid rgba(0,180,230,.06)" }}>
+        <div className="flex items-center justify-center gap-2 mt-5 pt-4" style={{ borderTop: "1px solid rgba(232,160,0,.06)" }}>
           {demoScenarios.map((_, i) => (
             <div
               key={i}
               className="w-1.5 h-1.5 rounded-full transition-all duration-500"
               style={{
-                background: scenarioIdx === i ? "#00e5ff" : "rgba(0,180,230,.2)",
-                boxShadow: scenarioIdx === i ? "0 0 8px rgba(0,229,255,.5)" : "none",
+                background: scenarioIdx === i ? "#E8A000" : "rgba(232,160,0,.2)",
+                boxShadow: scenarioIdx === i ? "0 0 8px rgba(232,160,0,.5)" : "none",
                 transform: scenarioIdx === i ? "scale(1.5)" : "scale(1)",
               }}
             />
@@ -388,33 +382,30 @@ function JouleLiveDemo() {
 
 export default function CultureSection() {
   return (
-    <section className="relative overflow-hidden" id="ai" style={{ background: "#070b10" }}>
+    <section className="relative overflow-hidden" id="ai" style={{ background: "#0c0c0c" }}>
       <NetworkNodes />
 
-      <div className="absolute top-[-200px] right-[-100px] w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,180,230,.15) 0%, transparent 65%)" }} />
-      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,220,255,.08) 0%, transparent 65%)" }} />
+      <div className="absolute top-[-200px] right-[-100px] w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.12) 0%, transparent 65%)" }} />
+      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.06) 0%, transparent 65%)" }} />
 
       <div className="section-container relative z-10 py-24 md:py-32">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Left — Text */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-            <div className="text-[.65rem] font-bold tracking-[.2em] uppercase mb-5 flex items-center gap-3" style={{ color: "#00b4e6" }}>
-              <span className="inline-block w-8 h-px" style={{ background: "#00b4e6" }} />
+            <div className="eyebrow">
               AI-Powered SAP
             </div>
 
-            <h2 className="font-bold leading-[1.08] tracking-tight mb-5" style={{ fontSize: "clamp(2rem, 3.8vw, 3.4rem)", color: "#f2f2f2" }}>
+            <h2 className="sec-h">
               AI-Powered SAP{" "}
-              <span className="italic" style={{ background: "linear-gradient(135deg, #00b4e6, #00e5ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                with Joule
-              </span>
+              <em>with Joule</em>
             </h2>
 
             <p className="text-[1.05rem] font-light leading-[1.8] mb-6" style={{ color: "rgba(255,255,255,.55)" }}>
               Unlock intelligent finance operations with SAP's AI copilot.
             </p>
 
-            <p className="text-[.9rem] font-light leading-[1.85] mb-8" style={{ color: "rgba(255,255,255,.4)" }}>
+            <p className="sec-p">
               SAP Joule introduces a new era of enterprise intelligence by embedding AI directly into SAP applications.
               Kannanware helps organizations integrate Joule into their SAP landscape to transform finance operations,
               automate complex processes, and generate real-time insights that drive better decisions.
@@ -423,7 +414,7 @@ export default function CultureSection() {
 
           {/* Right — Live Demo */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="relative">
-            <div className="absolute -inset-8 rounded-3xl blur-[80px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,180,230,.2) 0%, transparent 70%)" }} />
+            <div className="absolute -inset-8 rounded-3xl blur-[80px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.15) 0%, transparent 70%)" }} />
             <JouleLiveDemo />
           </motion.div>
         </div>
@@ -439,11 +430,11 @@ export default function CultureSection() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
               className="group relative p-6 rounded-xl cursor-none"
-              style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(0,180,230,.1)", transition: "border-color 0.3s, background 0.3s" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,180,230,.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,180,230,.04)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,180,230,.1)"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.02)"; }}
+              style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(232,160,0,.1)", transition: "border-color 0.3s, background 0.3s" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(232,160,0,.04)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.1)"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.02)"; }}
             >
-              <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full" style={{ background: "#00e5ff", boxShadow: "0 0 10px rgba(0,229,255,.4)" }} />
+              <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 10px rgba(232,160,0,.4)" }} />
               <div className="text-2xl mb-4">{cap.icon}</div>
               <h4 className="text-[.88rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
               <p className="text-[.78rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
