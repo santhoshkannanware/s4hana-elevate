@@ -16,6 +16,7 @@ import EaaSPage from "./pages/EaaSPage.tsx";
 import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
 import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
+import GeoRedirect from "./components/GeoRedirect.tsx";
 
 const queryClient = new QueryClient();
 
