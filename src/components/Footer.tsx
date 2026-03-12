@@ -12,6 +12,7 @@ const cols = [
 export default function Footer() {
   const { region } = useRegion();
   const contact = getContact(region);
+  const footer = getFooterContent(region);
 
   return (
     <footer style={{ background: "#0c0c0c" }}>
