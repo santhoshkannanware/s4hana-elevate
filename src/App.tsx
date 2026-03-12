@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { RegionProvider } from "@/contexts/RegionContext";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import S4HanaPage from "./pages/S4HanaPage.tsx";
@@ -18,6 +19,27 @@ import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
 
 const queryClient = new QueryClient();
 
+function RegionRoutes() {
+  return (
+    <RegionProvider>
+      <Routes>
+        <Route index element={<Index />} />
+        <Route path="product-expertise/s4hana" element={<S4HanaPage />} />
+        <Route path="product-expertise/btp" element={<BtpPage />} />
+        <Route path="capability/record-to-report" element={<RecordToReportPage />} />
+        <Route path="industry/energy" element={<EnergyPage />} />
+        <Route path="services/advisory" element={<AdvisoryPage />} />
+        <Route path="services/execution" element={<ExecutionPage />} />
+        <Route path="services/eaas" element={<EaaSPage />} />
+        <Route path="products/cv-optimiser" element={<CvOptimiserPage />} />
+        <Route path="products/ai-resume-builder" element={<AiResumeBuilderPage />} />
+        <Route path="products/talent-matcher" element={<TalentMatcherPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </RegionProvider>
+  );
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -25,19 +47,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/product-expertise/s4hana" element={<S4HanaPage />} />
-          <Route path="/product-expertise/btp" element={<BtpPage />} />
-          <Route path="/capability/record-to-report" element={<RecordToReportPage />} />
-          <Route path="/industry/energy" element={<EnergyPage />} />
-          <Route path="/services/advisory" element={<AdvisoryPage />} />
-          <Route path="/services/execution" element={<ExecutionPage />} />
-          <Route path="/services/eaas" element={<EaaSPage />} />
-          <Route path="/products/cv-optimiser" element={<CvOptimiserPage />} />
-          <Route path="/products/ai-resume-builder" element={<AiResumeBuilderPage />} />
-          <Route path="/products/talent-matcher" element={<TalentMatcherPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          {/* Redirect root to /us */}
+          <Route path="/" element={<Navigate to="/us" replace />} />
+          {/* Region-prefixed routes */}
+          <Route path="/:region/*" element={<RegionRoutes />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
