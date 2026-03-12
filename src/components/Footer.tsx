@@ -30,10 +30,10 @@ export default function Footer() {
         </div>
         {cols.map((col) => (
           <div key={col.title}>
-            <h5 className="text-[.75rem] font-bold tracking-[.2em] uppercase text-white/[0.22] mb-4">{col.title}</h5>
+            <h5 className="text-[.75rem] font-bold tracking-[.2em] uppercase text-white/40 mb-4">{col.title}</h5>
             <ul className="list-none space-y-1">
               {col.links.map((link) => (
-                <li key={link}><a href="#" className="text-[.9rem] text-white/45 no-underline font-light transition-all duration-300 hover:text-gold hover:translate-x-1 inline-block cursor-none">{link}</a></li>
+                <li key={link}><a href="#" className="text-[.9rem] text-white/65 no-underline font-light transition-all duration-300 hover:text-gold hover:translate-x-1 inline-block cursor-none">{link}</a></li>
               ))}
             </ul>
           </div>
