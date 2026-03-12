@@ -23,10 +23,13 @@ const logos = [
 ];
 
 export default function ClientLogos() {
+  const { region } = useRegion();
+  const tagline = getClientLogosTagline(region);
+
   return (
     <section className="py-10 bg-secondary/50 border-y border-border overflow-hidden">
       <p className="text-center text-xs uppercase tracking-[.2em] text-muted-foreground mb-8">
-        Trusted by Industry Leaders
+        {tagline}
       </p>
       <div className="relative">
         <div className="flex w-max" style={{ animation: "ticker 35s linear infinite" }}>
