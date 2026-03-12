@@ -1,51 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useRegion } from "@/contexts/RegionContext";
-import { getCFOHeader } from "@/data/regionContent";
-
-/* ─── Transformation Wheel Segments ─── */
-const wheelSegments = [
-  { label: "SAP Treasury &\nRisk Management", shortLabel: "Treasury & Risk", desc: "Comprehensive treasury operations including cash management, liquidity forecasting, and financial risk mitigation across global entities.", icon: "🏦" },
-  { label: "SAP Analytics\nCloud", shortLabel: "Analytics Cloud", desc: "Real-time insight into P&L, balance sheets, and forecasting with embedded AI-driven predictive analytics.", icon: "📊" },
-  { label: "SAP Group\nReporting", shortLabel: "Group Reporting", desc: "True consolidation with audit trails and disclosure support for multi-entity financial reporting.", icon: "📋" },
-  { label: "SAP Advanced\nFinancial Closing", shortLabel: "Financial Closing", desc: "Automated period-end closing orchestration that reduces cycle time and ensures compliance.", icon: "⏱️" },
-  { label: "SAP Document\nReporting Compliance", shortLabel: "Doc Compliance", desc: "Regulatory document management ensuring compliance across jurisdictions with automated workflows.", icon: "📄" },
-  { label: "SAP Billing &\nRevenue Innovation", shortLabel: "Billing & Revenue", desc: "Flexible billing models and revenue recognition aligned with IFRS 15 and ASC 606 standards.", icon: "💰" },
-];
-
-/* ─── Solution Table Data ─── */
-const solutions = [
-  {
-    title: "SAP FI/CO",
-    value: "End-to-end financial integrity, multi-entity consolidation",
-    kpis: ["Time to close", "Compliance rate", "Reconciliation time"],
-    accent: "hsl(var(--gold))",
-  },
-  {
-    title: "SAP Analytics Cloud (SAC)",
-    value: "Real-time insight into P&L, balance sheets, and forecasting",
-    kpis: ["Decision speed", "Forecast accuracy"],
-    accent: "hsl(var(--gold-light))",
-  },
-  {
-    title: "Group Reporting",
-    value: "True consolidation with audit trails and disclosure support",
-    kpis: ["Audit readiness", "Cycle time"],
-    accent: "hsl(var(--gold))",
-  },
-  {
-    title: "Intercompany Reconciliation",
-    value: "Automation across geographies/entities",
-    kpis: ["Manual effort reduction", "Error rates"],
-    accent: "hsl(var(--gold-light))",
-  },
-  {
-    title: "Fiori for Finance",
-    value: "Role-based user experience for CFO teams",
-    kpis: ["UX efficiency", "Adoption rates"],
-    accent: "hsl(var(--gold))",
-  },
-];
+import { getCFOHeader, getCFOWheelSegments, getCFOSolutions, type RegionWheelSegment } from "@/data/regionContent";
 
 /* ─── Interactive Transformation Wheel ─── */
 function TransformationWheel() {
