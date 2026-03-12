@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getCFOHeader } from "@/data/regionContent";
 
 /* ─── Transformation Wheel Segments ─── */
 const wheelSegments = [
