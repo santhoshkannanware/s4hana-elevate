@@ -20,8 +20,10 @@ export default function Footer() {
           <img src={LOGO_SVG} alt="Kannanware" className="h-10 w-auto block mb-4 opacity-90" />
           <p className="text-[.9rem] text-white/35 font-light leading-[1.7] mb-4">AI-First SAP Consulting & Implementation Partner. Advisory, Enterprise Performance, and Managed Solutions across the full SAP suite.</p>
           <div className="space-y-1.5 mt-4 pt-4 border-t border-white/[0.06]">
-            <div className="text-[.82rem] text-white/30 font-light">{contact.address}</div>
-            <div className="text-[.82rem] text-white/30 font-light">{contact.phone}</div>
+            {contact.address.split(" | ").map((addr, i) => (
+              <div key={i} className="text-[.82rem] text-white/30 font-light">{addr}</div>
+            ))}
+            <div className="text-[.82rem] text-white/30 font-light mt-2">{contact.phone}</div>
             <a href={`mailto:${contact.email}`} className="text-[.82rem] text-gold/60 hover:text-gold transition-colors no-underline font-light block">{contact.email}</a>
           </div>
         </div>
