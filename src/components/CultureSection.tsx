@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getCultureContent } from "@/data/regionContent";
 
 const capabilities = [
   {
