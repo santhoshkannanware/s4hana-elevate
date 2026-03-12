@@ -24,7 +24,7 @@ const logos = [
   { src: jkFenner, alt: "JK Fenner" },
 ];
 
-export default function ClientLogos() {
+export default function ClientLogos() { 
   const { region } = useRegion();
   const tagline = getClientLogosTagline(region);
 
