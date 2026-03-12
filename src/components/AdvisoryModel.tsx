@@ -72,10 +72,10 @@ export default function AdvisoryModel() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="eyebrow">GROW with SAP</div>
+            <div className="eyebrow">{header.eyebrow}</div>
             <h2 className="sec-h">
-              Scale with confidence.<br />
-              <em>Grow with SAP.</em>
+              {header.heading}<br />
+              <em>{header.headingAccent}</em>
             </h2>
           </motion.div>
 
