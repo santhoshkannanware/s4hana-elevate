@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-11 px-5 md:px-10 py-16 max-w-[1240px] mx-auto border-b border-white/[0.06]">
         <div>
           <img src={LOGO_SVG} alt="Kannanware" className="h-10 w-auto block mb-4 opacity-90" />
-          <p className="text-[.9rem] text-white/35 font-light leading-[1.7] mb-4">AI-First SAP Consulting & Implementation Partner. Advisory, Enterprise Performance, and Managed Solutions across the full SAP suite.</p>
+          <p className="text-[.9rem] text-white/35 font-light leading-[1.7] mb-4">{footer.tagline}</p>
           <div className="space-y-1.5 mt-4 pt-4 border-t border-white/[0.06]">
             {contact.address.split(" | ").map((addr, i) => (
               <div key={i} className="text-[.82rem] text-white/30 font-light">{addr}</div>

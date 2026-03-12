@@ -21,12 +21,12 @@ export default function IndustryFocus() {
     <section className="py-24 md:py-32 bg-card" id="industries">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
-          <div className="eyebrow">Industries</div>
+          <div className="eyebrow">{indHeader.eyebrow}</div>
           <h2 className="sec-h">
-            Deep experience<br /><em>across every sector.</em>
+            {indHeader.heading}<br /><em>{indHeader.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mt-4 font-light leading-relaxed">
-            We bring domain-specific SAP expertise to the industries that matter most — combining deep functional knowledge with proven delivery frameworks.
+            {indHeader.description}
           </p>
         </motion.div>
 

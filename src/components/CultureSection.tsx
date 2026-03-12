@@ -435,22 +435,20 @@ export default function CultureSection() {
           {/* Left — Text */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
             <div className="eyebrow">
-              AI-Powered SAP
+              {culture.eyebrow}
             </div>
 
             <h2 className="sec-h">
-              AI-Powered SAP{" "}
-              <em>with Joule</em>
+              {culture.heading}{" "}
+              <em>{culture.headingAccent}</em>
             </h2>
 
             <p className="text-[1.05rem] font-light leading-[1.8] mb-6" style={{ color: "rgba(255,255,255,.55)" }}>
-              Unlock intelligent finance operations with SAP's AI copilot.
+              {culture.subtitle}
             </p>
 
             <p className="sec-p">
-              SAP Joule introduces a new era of enterprise intelligence by embedding AI directly into SAP applications.
-              Kannanware helps organizations integrate Joule into their SAP landscape to transform finance operations,
-              automate complex processes, and generate real-time insights that drive better decisions.
+              {culture.body}
             </p>
           </motion.div>
 

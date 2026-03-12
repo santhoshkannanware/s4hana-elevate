@@ -86,10 +86,7 @@ export default function AdvisoryModel() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-[1rem] font-light leading-[1.85] text-muted-foreground">
-              Kannanware's GROW with SAP offering enables fast-growing mid-market businesses to adopt{" "}
-              <span className="text-foreground font-medium">SAP S/4HANA Cloud, Public Edition</span>{" "}
-              with speed, precision, and confidence. We deliver industry best practices, preconfigured processes,
-              and agile deployment to help you scale, compete, and innovate — without complexity.
+              {header.description}
             </p>
           </motion.div>
         </div>

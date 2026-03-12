@@ -70,12 +70,12 @@ export default function DeliveryModel() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-14 md:mb-20"
         >
-          <div className="eyebrow justify-center">SAP Activate Methodology</div>
+          <div className="eyebrow justify-center">{header.eyebrow}</div>
           <h2 className="sec-h">
-            How we deliver<br /><em>every time.</em>
+            {header.heading}<br /><em>{header.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mt-4 font-light leading-relaxed">
-            Our proven four-phase methodology combines SAP Activate best practices with AI-powered accelerators to deliver predictable outcomes.
+            {header.description}
           </p>
         </motion.div>
 

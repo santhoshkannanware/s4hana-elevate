@@ -30,12 +30,12 @@ export default function SolutionsSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-14 md:mb-20"
         >
-          <div className="eyebrow justify-center">Our Approach</div>
+          <div className="eyebrow justify-center">{header.eyebrow}</div>
           <h2 className="sec-h">
-            How Kannanware Delivers<br /><em>Transformation</em>
+            {header.heading}<br /><em>{header.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mt-4 font-light leading-relaxed">
-            We combine advisory insight, technical execution, and data intelligence to transform enterprise finance operations.
+            {header.description}
           </p>
         </motion.div>
 

@@ -1,3 +1,5 @@
+import { useRegion } from "@/contexts/RegionContext";
+import { getClientLogosTagline } from "@/data/regionContent";
 import choithrams from "@/assets/clients/choithrams.png";
 import sriGowrish from "@/assets/clients/sri-gowrish.png";
 import parrys from "@/assets/clients/parrys.png";
