@@ -4,7 +4,7 @@ import { useRegion } from "@/contexts/RegionContext";
 import { getCFOHeader, getCFOWheelSegments, getCFOSolutions, type RegionWheelSegment } from "@/data/regionContent";
 
 /* ─── Interactive Transformation Wheel ─── */
-function TransformationWheel() {
+function TransformationWheel({ wheelSegments }: { wheelSegments: RegionWheelSegment[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
