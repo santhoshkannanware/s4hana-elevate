@@ -1452,3 +1452,6 @@ export function getAdvisoryOfferings(region: Region) { return advisoryOfferings[
 export function getDeliveryPhases(region: Region) { return deliveryPhases[region]; }
 export function getCFOWheelSegments(region: Region) { return cfoWheelSegments[region]; }
 export function getCFOSolutions(region: Region) { return cfoSolutions[region]; }
+export function getS4HanaContent(region: Region) { return s4hanaContent[region]; }
+export function getR2RContent(region: Region) { return r2rContent[region]; }
+export function getEnergyContent(region: Region) { return energyContent[region]; }
