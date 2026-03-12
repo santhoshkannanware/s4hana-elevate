@@ -341,6 +341,8 @@ export default function CultureSection() {
   const [clickCount, setClickCount] = useState(0);
   const { region } = useRegion();
   const culture = getCultureContent(region);
+  const capabilities = getCapabilities(region);
+  const scenarios = getDemoScenarios(region);
 
   const handleCardClick = (idx: number) => {
     setActiveDemo(idx);
