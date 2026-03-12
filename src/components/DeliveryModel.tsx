@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Settings, Rocket, HeartHandshake, ChevronRight } from "lucide-react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getDeliveryHeader } from "@/data/regionContent";
 import methodDiscover from "@/assets/method-discover.jpg";
 import methodConfigure from "@/assets/method-configure.jpg";
 import methodDeploy from "@/assets/method-deploy.jpg";
@@ -52,6 +54,8 @@ const phases = [
 export default function DeliveryModel() {
   const [active, setActive] = useState(0);
   const phase = phases[active];
+  const { region } = useRegion();
+  const header = getDeliveryHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-card" id="approach">
@@ -66,12 +70,12 @@ export default function DeliveryModel() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-14 md:mb-20"
         >
-          <div className="eyebrow justify-center">SAP Activate Methodology</div>
+          <div className="eyebrow justify-center">{header.eyebrow}</div>
           <h2 className="sec-h">
-            How we deliver<br /><em>every time.</em>
+            {header.heading}<br /><em>{header.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mt-4 font-light leading-relaxed">
-            Our proven four-phase methodology combines SAP Activate best practices with AI-powered accelerators to deliver predictable outcomes.
+            {header.description}
           </p>
         </motion.div>
 

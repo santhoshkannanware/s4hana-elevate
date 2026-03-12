@@ -6,65 +6,27 @@ import industryFinance from "@/assets/industry-finance.jpg";
 import industryTech from "@/assets/industry-tech.jpg";
 import teamCollab from "@/assets/team-collab.jpg";
 import deliveryPhase from "@/assets/delivery-phase.jpg";
+import { useRegion } from "@/contexts/RegionContext";
+import { getIndustryHeader, getIndustryContent } from "@/data/regionContent";
 
-const industries = [
-  {
-    title: "Energy & Natural Resources",
-    image: industryEnergy,
-    desc: "Powering the future with intelligent SAP solutions for upstream, midstream, and downstream operations.",
-    challenges: ["JVA & production accounting", "Asset lifecycle management", "Commodity hedging & risk", "Regulatory & sustainability reporting"],
-    stat: "40+ energy clients served",
-  },
-  {
-    title: "Discrete Manufacturing",
-    image: industryManufacturing,
-    desc: "Driving operational excellence from shop floor to top floor with integrated SAP manufacturing solutions.",
-    challenges: ["Production planning & scheduling", "Cost controlling & variance analysis", "Integrated supply chain & QM", "Shop floor integration"],
-    stat: "30% avg. efficiency uplift",
-  },
-  {
-    title: "Financial Services",
-    image: industryFinance,
-    desc: "Transforming financial institutions with real-time analytics, compliance automation, and risk management.",
-    challenges: ["IFRS 9, 16 & 17 compliance", "Regulatory reporting automation", "Real-time risk analytics", "Treasury & cash management"],
-    stat: "100% audit compliance",
-  },
-  {
-    title: "Public Services",
-    image: industryTech,
-    desc: "Modernising public sector operations with transparent, citizen-centric SAP solutions.",
-    challenges: ["Fund management & grants", "IPSAS reporting standards", "Budget execution & monitoring", "Citizen service portals"],
-    stat: "15+ government agencies",
-  },
-  {
-    title: "Consumer & Retail",
-    image: teamCollab,
-    desc: "Enabling omnichannel excellence and demand-driven supply chains for modern retail.",
-    challenges: ["Trade promotion management", "D2C & omnichannel commerce", "Revenue recognition", "Demand-driven inventory"],
-    stat: "2x faster order fulfilment",
-  },
-  {
-    title: "Food & Beverage",
-    image: deliveryPhase,
-    desc: "Ensuring compliance, traceability, and profitability across the entire food value chain.",
-    challenges: ["Batch & shelf-life management", "COGS optimisation", "Compliance & traceability", "Recipe & formula management"],
-    stat: "99.9% traceability accuracy",
-  },
-];
+const industryImages = [industryEnergy, industryManufacturing, industryFinance, industryTech, teamCollab, deliveryPhase];
 
 export default function IndustryFocus() {
   const [active, setActive] = useState(0);
+  const { region } = useRegion();
+  const indHeader = getIndustryHeader(region);
+  const industries = getIndustryContent(region).map((ind, i) => ({ ...ind, image: industryImages[i % industryImages.length] }));
 
   return (
     <section className="py-24 md:py-32 bg-card" id="industries">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
-          <div className="eyebrow">Industries</div>
+          <div className="eyebrow">{indHeader.eyebrow}</div>
           <h2 className="sec-h">
-            Deep experience<br /><em>across every sector.</em>
+            {indHeader.heading}<br /><em>{indHeader.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mt-4 font-light leading-relaxed">
-            We bring domain-specific SAP expertise to the industries that matter most — combining deep functional knowledge with proven delivery frameworks.
+            {indHeader.description}
           </p>
         </motion.div>
 

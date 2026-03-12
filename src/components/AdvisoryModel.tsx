@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getAdvisoryHeader } from "@/data/regionContent";
 
 const offerings = [
   {
@@ -50,6 +52,8 @@ const cardVariants = {
 
 export default function AdvisoryModel() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const { region } = useRegion();
+  const header = getAdvisoryHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-background" id="grow">
@@ -68,10 +72,10 @@ export default function AdvisoryModel() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="eyebrow">GROW with SAP</div>
+            <div className="eyebrow">{header.eyebrow}</div>
             <h2 className="sec-h">
-              Scale with confidence.<br />
-              <em>Grow with SAP.</em>
+              {header.heading}<br />
+              <em>{header.headingAccent}</em>
             </h2>
           </motion.div>
 
@@ -82,10 +86,7 @@ export default function AdvisoryModel() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-[1rem] font-light leading-[1.85] text-muted-foreground">
-              Kannanware's GROW with SAP offering enables fast-growing mid-market businesses to adopt{" "}
-              <span className="text-foreground font-medium">SAP S/4HANA Cloud, Public Edition</span>{" "}
-              with speed, precision, and confidence. We deliver industry best practices, preconfigured processes,
-              and agile deployment to help you scale, compete, and innovate — without complexity.
+              {header.description}
             </p>
           </motion.div>
         </div>

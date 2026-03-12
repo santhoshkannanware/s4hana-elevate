@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getCFOHeader } from "@/data/regionContent";
 
 /* ─── Transformation Wheel Segments ─── */
 const wheelSegments = [
@@ -256,6 +258,8 @@ function TransformationWheel() {
 /* ─── Main Section ─── */
 export default function OfficeCFO() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const { region } = useRegion();
+  const cfoH = getCFOHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-background" id="cfo">
@@ -274,14 +278,13 @@ export default function OfficeCFO() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
-          <div className="eyebrow justify-center">Office of the CFO</div>
+          <div className="eyebrow justify-center">{cfoH.eyebrow}</div>
           <h2 className="sec-h">
-            How We Help the<br />
-            <em>Office of the CFO</em>
+            {cfoH.heading}<br />
+            <em>{cfoH.headingAccent}</em>
           </h2>
           <p className="sec-p mx-auto text-center">
-            Comprehensive SAP solutions that transform finance operations, accelerate close cycles,
-            and deliver real-time intelligence to the modern CFO.
+            {cfoH.description}
           </p>
         </motion.div>
 

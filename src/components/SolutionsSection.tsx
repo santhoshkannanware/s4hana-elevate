@@ -4,42 +4,17 @@ import { Lightbulb, Cog, Users, ChevronRight } from "lucide-react";
 import stepAdvisory from "@/assets/step-advisory.jpg";
 import stepExecution from "@/assets/step-execution.jpg";
 import stepExperts from "@/assets/step-experts.jpg";
+import { useRegion } from "@/contexts/RegionContext";
+import { getSolutionsHeader, getSolutionsSteps } from "@/data/regionContent";
 
-const steps = [
-  {
-    n: "01",
-    title: "Advisory",
-    subtitle: "Strategy & Blueprint",
-    desc: "We assess your SAP landscape, define transformation strategies, and build the blueprint for future-ready finance operations.",
-    detail: "Our advisory practice combines deep SAP expertise with industry knowledge to craft transformation strategies that deliver measurable business value. We work alongside your leadership to define priorities, assess risks, and design a roadmap that aligns technology investments with strategic goals.",
-    image: stepAdvisory,
-    deliverables: ["Current-state assessment", "Transformation roadmap", "Business case & ROI", "Change management plan"],
-    Icon: Lightbulb,
-  },
-  {
-    n: "02",
-    title: "Execution",
-    subtitle: "Implement & Deliver",
-    desc: "Our specialists deliver SAP implementation, rollout, and S/4HANA conversions with structured project governance.",
-    detail: "We bring certified consultants, proven accelerators, and rigorous governance to every engagement. From greenfield implementations to brownfield conversions, our execution teams deliver on time and on budget — with full transparency at every milestone.",
-    image: stepExecution,
-    deliverables: ["SAP S/4HANA implementation", "System integration & migration", "Project governance framework", "Quality assurance & testing"],
-    Icon: Cog,
-  },
-  {
-    n: "03",
-    title: "Experts as a Service",
-    subtitle: "On-Demand Talent",
-    desc: "Access specialized SAP experts on demand through flexible subscription-based engagement models.",
-    detail: "Scale your SAP capability instantly with our curated network of certified specialists. Whether you need a solution architect for a quarter or a full team for a year, our flexible engagement models let you access the right expertise at the right time — without the overhead of permanent hires.",
-    image: stepExperts,
-    deliverables: ["Certified SAP specialists", "Flexible engagement models", "Knowledge transfer built-in", "Seamless team integration"],
-    Icon: Users,
-  },
-];
+const Icons = [Lightbulb, Cog, Users];
+const images = [stepAdvisory, stepExecution, stepExperts];
 
 export default function SolutionsSection() {
   const [active, setActive] = useState(0);
+  const { region } = useRegion();
+  const header = getSolutionsHeader(region);
+  const steps = getSolutionsSteps(region).map((s, i) => ({ ...s, n: String(i + 1).padStart(2, "0"), image: images[i], Icon: Icons[i] }));
   const step = steps[active];
 
   return (
@@ -55,12 +30,12 @@ export default function SolutionsSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-14 md:mb-20"
         >
-          <div className="eyebrow justify-center">Our Approach</div>
+          <div className="eyebrow justify-center">{header.eyebrow}</div>
           <h2 className="sec-h">
-            How Kannanware Delivers<br /><em>Transformation</em>
+            {header.heading}<br /><em>{header.headingAccent}</em>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mt-4 font-light leading-relaxed">
-            We combine advisory insight, technical execution, and data intelligence to transform enterprise finance operations.
+            {header.description}
           </p>
         </motion.div>
 
