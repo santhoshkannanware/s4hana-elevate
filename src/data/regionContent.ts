@@ -84,20 +84,20 @@ const contactContent: Record<Region, RegionContact> = {
   us: {
     phone: "+1 (555) 234-5678",
     email: "us@kannanware.com",
-    address: "New York, NY — United States",
+    address: "Apartment 826, 401, S Coit Road, McKinney, TX 75072, USA | 1007 N Orange St #1382, 4th Floor, Wilmington, DE 19801, USA",
     currency: "USD",
   },
   in: {
     phone: "+91 44 4567 8900",
     email: "india@kannanware.com",
-    address: "Chennai, Tamil Nadu — India",
+    address: "Door No.3, Plot.52, 1st Floor, EB Colony, 4th 2nd Cross Street, Adambakkam, Chennai, Tamil Nadu 600088, India",
     currency: "INR",
   },
   emea: {
-    phone: "+44 20 7946 0958",
+    phone: "+971 4 123 4567",
     email: "emea@kannanware.com",
-    address: "London, United Kingdom",
-    currency: "EUR",
+    address: "Business Center1, M Floor, The Meydan Hotel, Nad Al Sheba, Dubai, UAE",
+    currency: "AED",
   },
 };
 

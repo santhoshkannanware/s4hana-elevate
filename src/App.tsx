@@ -48,8 +48,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Redirect root to /us */}
-          <Route path="/" element={<Navigate to="/us" replace />} />
+          {/* Auto-detect region from IP, fallback to /us */}
+          <Route path="/" element={<GeoRedirect />} />
           {/* Region-prefixed routes */}
           <Route path="/:region/*" element={<RegionRoutes />} />
         </Routes>
