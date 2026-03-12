@@ -1,45 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useRegion } from "@/contexts/RegionContext";
-import { getAdvisoryHeader } from "@/data/regionContent";
-
-const offerings = [
-  {
-    num: "01",
-    title: "Advisory & Readiness Assessment",
-    desc: "Cloud ERP adoption readiness evaluation to ensure your organisation is prepared for transformation.",
-    items: ["Business case validation", "Process and IT landscape review", "Cloud vs on-prem comparison", "Readiness checklist and transition roadmap"],
-    icon: "◈",
-  },
-  {
-    num: "02",
-    title: "Preconfigured Industry Templates",
-    desc: "Rapid time-to-value through industry-specific best-practice configurations.",
-    items: ["Manufacturing", "Automotive", "Agro", "Consumer Products"],
-    icon: "⬡",
-  },
-  {
-    num: "03",
-    title: "End-to-End Implementation",
-    desc: "Full lifecycle delivery using SAP Activate methodology with AI accelerators.",
-    items: ["Fit-to-standard workshops", "Data migration & integration", "Testing & quality assurance", "Go-live cutover management"],
-    icon: "◎",
-  },
-  {
-    num: "04",
-    title: "Training & Change Management",
-    desc: "Faster user adoption through structured enablement and organisational change programs.",
-    items: ["Role-based training", "Digital adoption platforms", "Change impact analysis", "Super-user programmes"],
-    icon: "◇",
-  },
-  {
-    num: "05",
-    title: "Post-Go-Live Support & Optimization",
-    desc: "Sustained value realisation tailored to your growth goals.",
-    items: ["Managed AMS support", "Continuous improvement cycles", "Performance tuning", "Feature adoption roadmap"],
-    icon: "◆",
-  },
-];
+import { getAdvisoryHeader, getAdvisoryOfferings } from "@/data/regionContent";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
