@@ -52,6 +52,8 @@ const cardVariants = {
 
 export default function AdvisoryModel() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const { region } = useRegion();
+  const header = getAdvisoryHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-background" id="grow">
