@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-
-const metrics = [
-  { target: 28, suffix: "+", label: "Delighted Customers Across Regions", sublabel: "Local Presence, Global Expertise", ghost: "28" },
-  { target: 50, suffix: "K", label: "Project Hours Experience", sublabel: "Maximized ROI", ghost: "50K" },
-  { target: 500, suffix: "", label: "Years Combined Domain Knowledge", sublabel: "Transformation Specialists", ghost: "500" },
-  { target: 75, suffix: "%", label: "SAP-Certified Consultants", sublabel: "Finance, Treasury & Analytics", ghost: "75" },
-  { target: 45, suffix: "+", label: "Multi-Regional Industry Experts", sublabel: "Innovation at Core", ghost: "45" },
-];
+import { useRegion } from "@/contexts/RegionContext";
+import { getMetrics } from "@/data/regionContent";
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -37,23 +31,19 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 }
 
 export default function WhyKannanware() {
+  const { region } = useRegion();
+  const metrics = getMetrics(region);
+
   return (
     <div className="relative overflow-hidden" style={{ background: "#0c0c0c" }}>
-      {/* Noise texture */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{
         backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")"
       }} />
-
-      {/* Top gold accent line */}
       <div className="h-[1px] w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.4), transparent)" }} />
-
       <div className="py-10">
         <div className="flex w-max" style={{ animation: "ticker 30s linear infinite" }}>
           {[...metrics, ...metrics].map((m, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center px-12 shrink-0 min-w-[260px]"
-            >
+            <div key={i} className="flex flex-col items-center px-12 shrink-0 min-w-[260px]">
               <div className="text-[3.2rem] font-bold text-white leading-none tracking-[-0.04em] mb-2">
                 <CountUp target={m.target} suffix={m.suffix} />
               </div>
@@ -63,8 +53,6 @@ export default function WhyKannanware() {
           ))}
         </div>
       </div>
-
-      {/* Bottom gold accent line */}
       <div className="h-[1px] w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,160,0,.4), transparent)" }} />
     </div>
   );
