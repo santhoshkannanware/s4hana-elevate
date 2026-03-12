@@ -258,6 +258,8 @@ function TransformationWheel() {
 /* ─── Main Section ─── */
 export default function OfficeCFO() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const { region } = useRegion();
+  const cfoH = getCFOHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-background" id="cfo">
