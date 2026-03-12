@@ -54,6 +54,8 @@ const phases = [
 export default function DeliveryModel() {
   const [active, setActive] = useState(0);
   const phase = phases[active];
+  const { region } = useRegion();
+  const header = getDeliveryHeader(region);
 
   return (
     <section className="relative overflow-hidden bg-card" id="approach">
