@@ -193,12 +193,12 @@ export default function Navbar() {
         boxShadow: scrolled ? "0 1px 0 rgba(255,255,255,.07)" : "none",
       }}
     >
-      <a href={regionPath("/")} className="flex items-center gap-3 no-underline cursor-none">
+      <Link to={regionPath("/")} className="flex items-center gap-3 no-underline cursor-none">
         <img src={LOGO_SVG} alt="Kannanware" className="h-9 w-auto block" />
         <span className="text-[.7rem] font-bold tracking-[.12em] uppercase text-gold border border-gold/35 px-2 py-0.5 ml-1">
           AI-First SAP
         </span>
-      </a>
+      </Link>
 
       <ul className="hidden lg:flex gap-7 list-none items-center">
         {navItems.map((item) =>

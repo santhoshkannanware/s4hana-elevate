@@ -38,18 +38,6 @@ const demoScenarios = [
     chartData: [42, 58, 65, 47, 38, 29, 35],
   },
   {
-    query: "Show me overdue invoices above $100K",
-    thinking: ["Querying accounts receivable…", "Filtering by amount > $100K…", "Sorting by days overdue…"],
-    answer: "Found 7 overdue invoices totaling $1.8M. Largest: $420K from Meridian Corp — 47 days past due.",
-    metrics: [
-      { label: "Total Due", value: "$1.8M", color: "#ff4d6a" },
-      { label: "Invoices", value: "7", color: "#E8A000" },
-      { label: "Oldest", value: "47 days", color: "#ffb800" },
-      { label: "Risk Level", value: "High", color: "#ff4d6a" },
-    ],
-    chartData: [420, 310, 280, 260, 210, 180, 140],
-  },
-  {
     query: "Forecast next quarter cash position",
     thinking: ["Analyzing cash flow patterns…", "Running ML prediction model…", "Factoring seasonal trends…"],
     answer: "Projected Q4 cash position: $14.2M. Operating cash flow expected to increase 12% driven by improved collections.",
@@ -60,6 +48,30 @@ const demoScenarios = [
       { label: "Accuracy", value: "91%", color: "#E8A000" },
     ],
     chartData: [10, 11, 10.5, 12, 13, 13.5, 14.2],
+  },
+  {
+    query: "Auto-reconcile intercompany transactions for March",
+    thinking: ["Loading IC transaction ledger…", "Matching entries across 12 entities…", "Flagging unmatched items…"],
+    answer: "Reconciled 1,247 of 1,260 transactions (98.9%). 13 items flagged for review totaling $89K — auto-journal entries posted for matched items.",
+    metrics: [
+      { label: "Matched", value: "98.9%", color: "#00ff88" },
+      { label: "Transactions", value: "1,247", color: "#E8A000" },
+      { label: "Flagged", value: "13", color: "#ffb800" },
+      { label: "Time Saved", value: "4.2 hrs", color: "#E8A000" },
+    ],
+    chartData: [85, 88, 91, 94, 96, 98, 99],
+  },
+  {
+    query: "Which cost centers exceeded budget this quarter?",
+    thinking: ["Querying cost center actuals…", "Comparing against approved budgets…", "Ranking by overspend amount…"],
+    answer: "3 cost centers exceeded budget: Marketing (+$340K, 18% over), R&D (+$210K, 9% over), Facilities (+$95K, 12% over). Root cause: unplanned contractor spend.",
+    metrics: [
+      { label: "Over Budget", value: "3 centers", color: "#ff4d6a" },
+      { label: "Total Excess", value: "$645K", color: "#ffb800" },
+      { label: "Top Driver", value: "Marketing", color: "#E8A000" },
+      { label: "Cause", value: "Contractors", color: "#E8A000" },
+    ],
+    chartData: [280, 340, 180, 210, 75, 95, 50],
   },
 ];
 
@@ -128,12 +140,26 @@ function NetworkNodes() {
 }
 
 // Joule Live Demo Component
-function JouleLiveDemo() {
+function JouleLiveDemo({ forcedScenario }: { forcedScenario: number | null }) {
   const [scenarioIdx, setScenarioIdx] = useState(0);
   const [phase, setPhase] = useState<"idle" | "typing" | "thinking" | "answering" | "complete">("idle");
   const [thinkingStep, setThinkingStep] = useState(0);
   const [inView, setInView] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
+
+  // When a card is clicked, jump to that scenario
+  useEffect(() => {
+    if (forcedScenario !== null) {
+      setAutoPlay(false);
+      setScenarioIdx(forcedScenario);
+      setPhase("idle");
+      setThinkingStep(0);
+      // Resume auto-play after full cycle
+      const t = setTimeout(() => setAutoPlay(true), 15000);
+      return () => clearTimeout(t);
+    }
+  }, [forcedScenario]);
 
   const scenario = demoScenarios[scenarioIdx];
   const typedQuery = useTypewriter(scenario.query, 35, phase === "typing");
@@ -182,13 +208,14 @@ function JouleLiveDemo() {
 
   useEffect(() => {
     if (phase !== "complete") return;
+    if (!autoPlay) return;
     const t = setTimeout(() => {
       setScenarioIdx((i) => (i + 1) % demoScenarios.length);
       setPhase("idle");
       setThinkingStep(0);
     }, 4000);
     return () => clearTimeout(t);
-  }, [phase]);
+  }, [phase, autoPlay]);
 
   return (
     <div ref={ref} className="relative rounded-2xl overflow-hidden" style={{ background: "#0c0a06", border: "1px solid rgba(232,160,0,.15)" }}>
@@ -381,6 +408,17 @@ function JouleLiveDemo() {
 }
 
 export default function CultureSection() {
+  const [activeDemo, setActiveDemo] = useState<number | null>(null);
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleCardClick = (idx: number) => {
+    setActiveDemo(idx);
+    setClickCount((c) => c + 1); // force re-trigger even if same card
+  };
+
+  // Use clickCount as part of the key to force reset on re-click
+  const forcedKey = activeDemo !== null ? `${activeDemo}-${clickCount}` : "auto";
+
   return (
     <section className="relative overflow-hidden" id="ai" style={{ background: "#0c0c0c" }}>
       <NetworkNodes />
@@ -415,30 +453,60 @@ export default function CultureSection() {
           {/* Right — Live Demo */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="relative">
             <div className="absolute -inset-8 rounded-3xl blur-[80px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.15) 0%, transparent 70%)" }} />
-            <JouleLiveDemo />
+            <JouleLiveDemo key={forcedKey} forcedScenario={activeDemo} />
           </motion.div>
         </div>
 
-        {/* Four capability cards */}
+        {/* Four capability cards — clickable to trigger demos */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-20">
           {capabilities.map((cap, i) => (
-            <motion.div
+            <motion.button
               key={cap.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
-              className="group relative p-6 rounded-xl cursor-none"
-              style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(232,160,0,.1)", transition: "border-color 0.3s, background 0.3s" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(232,160,0,.04)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.1)"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.02)"; }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleCardClick(i)}
+              className="group relative p-6 rounded-xl cursor-none text-left"
+              style={{
+                background: activeDemo === i ? "rgba(232,160,0,.08)" : "rgba(255,255,255,.02)",
+                border: activeDemo === i ? "1px solid rgba(232,160,0,.4)" : "1px solid rgba(232,160,0,.1)",
+                transition: "border-color 0.3s, background 0.3s",
+                boxShadow: activeDemo === i ? "0 0 24px rgba(232,160,0,.12)" : "none",
+              }}
+              onMouseEnter={(e) => {
+                if (activeDemo !== i) {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.3)";
+                  (e.currentTarget as HTMLElement).style.background = "rgba(232,160,0,.04)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeDemo !== i) {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,160,0,.1)";
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.02)";
+                }
+              }}
             >
-              <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full" style={{ background: "#E8A000", boxShadow: "0 0 10px rgba(232,160,0,.4)" }} />
+              <div className="absolute top-4 right-4 flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 rounded-full" style={{
+                  background: activeDemo === i ? "#E8A000" : "rgba(232,160,0,.4)",
+                  boxShadow: activeDemo === i ? "0 0 10px rgba(232,160,0,.6)" : "0 0 10px rgba(232,160,0,.4)",
+                }} />
+                {activeDemo === i && (
+                  <span className="text-[.65rem] font-mono uppercase tracking-wider" style={{ color: "rgba(232,160,0,.6)" }}>
+                    LIVE
+                  </span>
+                )}
+              </div>
               <div className="text-2xl mb-4">{cap.icon}</div>
-              <h4 className="text-[1rem] font-semibold mb-2" style={{ color: "#f2f2f2" }}>{cap.title}</h4>
+              <h4 className="text-[1rem] font-semibold mb-2" style={{ color: activeDemo === i ? "#ffcc00" : "#f2f2f2" }}>{cap.title}</h4>
               <p className="text-[.9rem] font-light leading-[1.7]" style={{ color: "rgba(255,255,255,.4)" }}>{cap.desc}</p>
-            </motion.div>
+              <div className="mt-3 text-[.75rem] font-mono uppercase tracking-wider" style={{ color: "rgba(232,160,0,.4)" }}>
+                ▶ Run Demo
+              </div>
+            </motion.button>
           ))}
         </div>
       </div>
