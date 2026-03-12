@@ -526,6 +526,332 @@ const footerContent: Record<Region, RegionFooterContent> = {
 };
 
 /* ═══════════════════════════════════════════════════════
+   JOULE DEMO SCENARIOS (CultureSection)
+   ═══════════════════════════════════════════════════════ */
+export interface RegionDemoScenario {
+  query: string;
+  thinking: string[];
+  answer: string;
+  metrics: { label: string; value: string; color: string }[];
+  chartData: number[];
+}
+
+export interface RegionCapability {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+const capabilitiesContent: Record<Region, RegionCapability[]> = {
+  us: [
+    { icon: "📊", title: "AI Financial Insights", desc: "Surface anomalies, variances, and trends across your US financial data with natural language queries — SOX-ready." },
+    { icon: "📈", title: "Predictive Forecasting", desc: "Leverage ML models in SAP to forecast USD cash flow, revenue, and demand across American operations." },
+    { icon: "⚙️", title: "Intelligent Process Automation", desc: "Automate SOX-compliant reconciliation, journal entries, and US regulatory workflows with AI orchestration." },
+    { icon: "💬", title: "Conversational Analytics", desc: "Ask questions in plain English and get instant, actionable answers from your SAP data across US entities." },
+  ],
+  in: [
+    { icon: "📊", title: "AI Financial Insights", desc: "Surface GST mismatches, TDS variances, and P&L trends across your Indian entities with natural language queries." },
+    { icon: "📈", title: "Predictive Forecasting", desc: "Forecast INR cash positions, seasonal demand, and working capital needs for Indian operations using embedded ML." },
+    { icon: "⚙️", title: "Intelligent Process Automation", desc: "Automate GST reconciliation, e-invoicing, TDS journal entries, and MCA compliance workflows with AI." },
+    { icon: "💬", title: "Conversational Analytics", desc: "Ask questions in English or Hindi and get instant insights from your SAP data across all Indian entities." },
+  ],
+  emea: [
+    { icon: "📊", title: "AI Financial Insights", desc: "Surface VAT discrepancies, multi-currency variances, and IFRS trends across GCC and EMEA entities instantly." },
+    { icon: "📈", title: "Predictive Forecasting", desc: "Forecast AED/SAR cash positions, oil price impacts, and demand across Middle East and EMEA operations." },
+    { icon: "⚙️", title: "Intelligent Process Automation", desc: "Automate VAT reconciliation, multi-currency journal entries, and GCC regulatory workflows with AI orchestration." },
+    { icon: "💬", title: "Conversational Analytics", desc: "Ask questions in English or Arabic and get instant, actionable answers from your SAP data across EMEA." },
+  ],
+};
+
+const demoScenariosContent: Record<Region, RegionDemoScenario[]> = {
+  us: [
+    {
+      query: "What is the biggest variance in Q3 revenue across US regions?",
+      thinking: ["Scanning US revenue ledger…", "Comparing Q3 actuals vs. forecast…", "Identifying top variance drivers…"],
+      answer: "Revenue decline of $2.4M detected in Southeast region due to delayed receivables — 68% linked to 3 key accounts in Texas and Florida.",
+      metrics: [
+        { label: "Variance", value: "-$2.4M", color: "#ff4d6a" },
+        { label: "Region", value: "Southeast", color: "#E8A000" },
+        { label: "Accounts", value: "3 flagged", color: "#ffb800" },
+        { label: "Confidence", value: "94%", color: "#E8A000" },
+      ],
+      chartData: [42, 58, 65, 47, 38, 29, 35],
+    },
+    {
+      query: "Forecast next quarter USD cash position",
+      thinking: ["Analyzing US cash flow patterns…", "Running ML prediction model…", "Factoring seasonal US demand…"],
+      answer: "Projected Q4 cash position: $14.2M. Operating cash flow expected to increase 12% driven by improved AR collections across US entities.",
+      metrics: [
+        { label: "Projected", value: "$14.2M", color: "#E8A000" },
+        { label: "Growth", value: "+12%", color: "#00ff88" },
+        { label: "Model", value: "ARIMA", color: "#E8A000" },
+        { label: "Accuracy", value: "91%", color: "#E8A000" },
+      ],
+      chartData: [10, 11, 10.5, 12, 13, 13.5, 14.2],
+    },
+    {
+      query: "Auto-reconcile intercompany transactions for March — US entities",
+      thinking: ["Loading US IC transaction ledger…", "Matching entries across 8 US entities…", "Flagging SOX exceptions…"],
+      answer: "Reconciled 1,247 of 1,260 US transactions (98.9%). 13 items flagged for SOX review totaling $89K — auto-journal entries posted for matched items.",
+      metrics: [
+        { label: "Matched", value: "98.9%", color: "#00ff88" },
+        { label: "Transactions", value: "1,247", color: "#E8A000" },
+        { label: "SOX Flagged", value: "13", color: "#ffb800" },
+        { label: "Time Saved", value: "4.2 hrs", color: "#E8A000" },
+      ],
+      chartData: [85, 88, 91, 94, 96, 98, 99],
+    },
+    {
+      query: "Which US cost centers exceeded budget this quarter?",
+      thinking: ["Querying US cost center actuals…", "Comparing against approved budgets…", "Ranking by USD overspend…"],
+      answer: "3 US cost centers exceeded budget: Marketing Dallas (+$340K, 18% over), R&D Austin (+$210K, 9% over), Facilities NY (+$95K, 12% over). Root cause: unplanned contractor spend.",
+      metrics: [
+        { label: "Over Budget", value: "3 centers", color: "#ff4d6a" },
+        { label: "Total Excess", value: "$645K", color: "#ffb800" },
+        { label: "Top Driver", value: "Dallas", color: "#E8A000" },
+        { label: "Cause", value: "Contractors", color: "#E8A000" },
+      ],
+      chartData: [280, 340, 180, 210, 75, 95, 50],
+    },
+  ],
+  in: [
+    {
+      query: "Show GST input credit mismatches for March across Indian entities",
+      thinking: ["Scanning GSTR-2A vs purchase register…", "Matching invoices across 5 Indian entities…", "Flagging ITC discrepancies…"],
+      answer: "GST ITC mismatch of ₹18.6L detected across 3 entities — 72% linked to vendor delays in GSTR-1 filing. Auto-reconciled ₹14.2L, ₹4.4L flagged for review.",
+      metrics: [
+        { label: "Mismatch", value: "₹18.6L", color: "#ff4d6a" },
+        { label: "Auto-Fixed", value: "₹14.2L", color: "#00ff88" },
+        { label: "Vendors", value: "28 flagged", color: "#ffb800" },
+        { label: "Confidence", value: "96%", color: "#E8A000" },
+      ],
+      chartData: [45, 52, 38, 61, 44, 35, 28],
+    },
+    {
+      query: "Forecast next quarter INR cash position for Chennai operations",
+      thinking: ["Analyzing INR cash flow patterns…", "Running ML model on Indian market data…", "Factoring festival season demand…"],
+      answer: "Projected Q4 cash position: ₹11.8Cr. Operating cash flow expected to increase 15% driven by Diwali season collections and improved MSME receivables.",
+      metrics: [
+        { label: "Projected", value: "₹11.8Cr", color: "#E8A000" },
+        { label: "Growth", value: "+15%", color: "#00ff88" },
+        { label: "Model", value: "ARIMA", color: "#E8A000" },
+        { label: "Accuracy", value: "93%", color: "#E8A000" },
+      ],
+      chartData: [8, 8.5, 9, 9.8, 10.5, 11, 11.8],
+    },
+    {
+      query: "Auto-reconcile TDS entries for Q3 across all Indian entities",
+      thinking: ["Loading TDS challan data from TRACES…", "Matching Form 26AS entries…", "Flagging TDS credit mismatches…"],
+      answer: "Reconciled 892 of 910 TDS entries (98%). 18 items flagged — ₹3.2L in TDS credits pending Form 16A from vendors. Auto-posted matched entries to GL.",
+      metrics: [
+        { label: "Matched", value: "98%", color: "#00ff88" },
+        { label: "Entries", value: "892", color: "#E8A000" },
+        { label: "Pending", value: "₹3.2L", color: "#ffb800" },
+        { label: "Time Saved", value: "6.5 hrs", color: "#E8A000" },
+      ],
+      chartData: [82, 86, 89, 93, 95, 97, 98],
+    },
+    {
+      query: "Which Indian plants exceeded production cost budget this quarter?",
+      thinking: ["Querying plant-wise cost center actuals…", "Comparing against approved budgets…", "Ranking by INR overspend…"],
+      answer: "2 plants exceeded budget: Pune Plant (+₹24L, 14% over due to raw material price hike), Hosur Plant (+₹18L, 11% over due to overtime labour). Recommended: renegotiate steel supplier contracts.",
+      metrics: [
+        { label: "Over Budget", value: "2 plants", color: "#ff4d6a" },
+        { label: "Total Excess", value: "₹42L", color: "#ffb800" },
+        { label: "Top Driver", value: "Pune", color: "#E8A000" },
+        { label: "Cause", value: "Raw Material", color: "#E8A000" },
+      ],
+      chartData: [180, 240, 150, 200, 120, 95, 80],
+    },
+  ],
+  emea: [
+    {
+      query: "Show VAT reconciliation status across GCC entities for Q3",
+      thinking: ["Scanning VAT returns across UAE, KSA, Oman…", "Matching input/output tax across 6 entities…", "Flagging FTA discrepancies…"],
+      answer: "VAT mismatch of AED 890K detected across 2 entities — 80% linked to free zone transactions. Auto-reconciled AED 720K, AED 170K flagged for FTA review.",
+      metrics: [
+        { label: "Mismatch", value: "AED 890K", color: "#ff4d6a" },
+        { label: "Auto-Fixed", value: "AED 720K", color: "#00ff88" },
+        { label: "Entities", value: "2 flagged", color: "#ffb800" },
+        { label: "Confidence", value: "95%", color: "#E8A000" },
+      ],
+      chartData: [50, 62, 55, 48, 42, 35, 30],
+    },
+    {
+      query: "Forecast next quarter AED cash position for Dubai operations",
+      thinking: ["Analyzing AED/USD cash flow patterns…", "Running ML model on GCC market data…", "Factoring oil price trends…"],
+      answer: "Projected Q4 cash position: AED 52M. Operating cash flow expected to increase 18% driven by new construction project milestones and improved LC collections.",
+      metrics: [
+        { label: "Projected", value: "AED 52M", color: "#E8A000" },
+        { label: "Growth", value: "+18%", color: "#00ff88" },
+        { label: "Model", value: "ARIMA", color: "#E8A000" },
+        { label: "Accuracy", value: "92%", color: "#E8A000" },
+      ],
+      chartData: [35, 38, 40, 43, 46, 49, 52],
+    },
+    {
+      query: "Auto-reconcile intercompany transactions across EMEA entities — March",
+      thinking: ["Loading IC ledger across UAE, KSA, UK entities…", "Matching multi-currency entries (AED/SAR/GBP)…", "Flagging transfer pricing exceptions…"],
+      answer: "Reconciled 680 of 695 EMEA transactions (97.8%). 15 items flagged for transfer pricing review totaling AED 340K — auto-journal entries posted in local currencies.",
+      metrics: [
+        { label: "Matched", value: "97.8%", color: "#00ff88" },
+        { label: "Transactions", value: "680", color: "#E8A000" },
+        { label: "TP Flagged", value: "15", color: "#ffb800" },
+        { label: "Time Saved", value: "5.8 hrs", color: "#E8A000" },
+      ],
+      chartData: [80, 84, 88, 92, 95, 97, 98],
+    },
+    {
+      query: "Which EMEA cost centers exceeded budget this quarter?",
+      thinking: ["Querying cost center actuals across GCC…", "Comparing against approved AED budgets…", "Ranking by overspend amount…"],
+      answer: "3 EMEA cost centers exceeded budget: Abu Dhabi Projects (+AED 1.2M, 16% over), Dubai Logistics (+AED 680K, 12% over), Riyadh Office (+SAR 450K, 9% over). Root cause: accelerated Expo-related project timelines.",
+      metrics: [
+        { label: "Over Budget", value: "3 centers", color: "#ff4d6a" },
+        { label: "Total Excess", value: "AED 2.3M", color: "#ffb800" },
+        { label: "Top Driver", value: "Abu Dhabi", color: "#E8A000" },
+        { label: "Cause", value: "Projects", color: "#E8A000" },
+      ],
+      chartData: [320, 380, 220, 280, 150, 120, 90],
+    },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════
+   ADVISORY / GROW OFFERINGS
+   ═══════════════════════════════════════════════════════ */
+export interface RegionOffering {
+  num: string;
+  title: string;
+  desc: string;
+  items: string[];
+  icon: string;
+}
+
+const advisoryOfferings: Record<Region, RegionOffering[]> = {
+  us: [
+    { num: "01", title: "Advisory & Readiness Assessment", desc: "US-focused cloud ERP readiness evaluation including SOX compliance and federal regulatory alignment.", items: ["SOX compliance validation", "US tax & regulatory review", "Cloud vs on-prem comparison", "Readiness checklist & transition roadmap"], icon: "◈" },
+    { num: "02", title: "Preconfigured Industry Templates", desc: "Rapid time-to-value through US industry-specific best-practice configurations.", items: ["Healthcare & Life Sciences", "Energy & Utilities", "Technology & SaaS", "Financial Services"], icon: "⬡" },
+    { num: "03", title: "End-to-End Implementation", desc: "Full lifecycle delivery with SOX-compliant governance and US-based project management.", items: ["Fit-to-standard workshops", "US data residency & migration", "SOX audit trail setup", "Go-live cutover management"], icon: "◎" },
+    { num: "04", title: "Training & Change Management", desc: "Faster user adoption across US teams with structured enablement and change programs.", items: ["Role-based training (US time zones)", "Digital adoption platforms", "Change impact analysis", "Super-user programmes"], icon: "◇" },
+    { num: "05", title: "Post-Go-Live Support & Optimization", desc: "Sustained value realisation with US-based AMS support and continuous improvement.", items: ["US business hours AMS support", "SOX compliance monitoring", "Performance tuning", "Quarterly business reviews"], icon: "◆" },
+  ],
+  in: [
+    { num: "01", title: "Advisory & Readiness Assessment", desc: "India-focused cloud ERP readiness evaluation including GST, e-invoicing, and statutory compliance.", items: ["GST & statutory compliance review", "India regulatory landscape mapping", "Cloud vs on-prem for Indian ops", "Readiness checklist & Make in India alignment"], icon: "◈" },
+    { num: "02", title: "Preconfigured Industry Templates", desc: "Rapid time-to-value through India-specific industry configurations with GST built in.", items: ["Discrete Manufacturing", "Automotive & Auto Components", "FMCG & Consumer Goods", "Agro & Food Processing"], icon: "⬡" },
+    { num: "03", title: "End-to-End Implementation", desc: "Full lifecycle delivery from our Chennai centre with India localisation and cost-effective governance.", items: ["GST & e-invoicing configuration", "India payroll & TDS setup", "Pan-India data migration", "Go-live with statutory readiness"], icon: "◎" },
+    { num: "04", title: "Training & Change Management", desc: "Faster adoption for Indian teams with multilingual enablement and India-specific change programs.", items: ["Hindi & regional language training", "Digital adoption platforms", "India workforce change analysis", "Factory floor super-user programmes"], icon: "◇" },
+    { num: "05", title: "Post-Go-Live Support & Optimization", desc: "Sustained value realisation with Chennai-based AMS support and continuous India-specific improvement.", items: ["IST business hours AMS support", "GST compliance monitoring", "India statutory update patches", "Quarterly optimisation reviews"], icon: "◆" },
+  ],
+  emea: [
+    { num: "01", title: "Advisory & Readiness Assessment", desc: "EMEA-focused cloud ERP readiness including VAT compliance, IFRS alignment, and free zone regulations.", items: ["VAT & IFRS compliance review", "GCC regulatory landscape mapping", "Free zone entity structure", "Readiness checklist & Vision 2030 alignment"], icon: "◈" },
+    { num: "02", title: "Preconfigured Industry Templates", desc: "Rapid time-to-value through GCC & EMEA industry-specific configurations.", items: ["Oil, Gas & Energy", "Construction & Real Estate", "Retail & Distribution", "Government & Public Sector"], icon: "⬡" },
+    { num: "03", title: "End-to-End Implementation", desc: "Full lifecycle delivery from our Dubai hub with Arabic localisation and multi-currency support.", items: ["VAT & Arabic localisation", "Multi-currency entity configuration", "Cross-border data migration", "Go-live with FTA compliance"], icon: "◎" },
+    { num: "04", title: "Training & Change Management", desc: "Faster adoption across EMEA with Arabic/English enablement and region-specific change programs.", items: ["Arabic & English training materials", "Digital adoption platforms", "GCC workforce change analysis", "Regional super-user programmes"], icon: "◇" },
+    { num: "05", title: "Post-Go-Live Support & Optimization", desc: "Sustained value realisation with Dubai-based AMS support and continuous EMEA-specific improvement.", items: ["GST+4 timezone AMS support", "VAT compliance monitoring", "EMEA regulatory update patches", "Quarterly optimisation reviews"], icon: "◆" },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════
+   DELIVERY MODEL PHASES (SAP Activate — 4 phases)
+   ═══════════════════════════════════════════════════════ */
+export interface RegionDeliveryPhase {
+  title: string;
+  subtitle: string;
+  desc: string;
+  detail: string;
+  deliverables: string[];
+}
+
+const deliveryPhases: Record<Region, RegionDeliveryPhase[]> = {
+  us: [
+    { title: "Explore", subtitle: "Design & Blueprint", desc: "Map US processes, identify opportunities, and design an SAP roadmap aligned to American regulatory and business priorities.", detail: "We immerse ourselves in your US business — interviewing stakeholders, auditing current systems, and mapping every process following SAP Activate's Explore phase. The result is a SOX-compliant blueprint that aligns technology to your American market strategy.", deliverables: ["US regulatory process maps", "SOX-aligned solution architecture", "Risk-prioritised roadmap", "US business case & ROI model"] },
+    { title: "Realise", subtitle: "Configure & Develop", desc: "Configure SAP to US best-practice standards with SOX compliance built into every milestone sign-off.", detail: "Our US-certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team. We leverage SAP Activate's Realise phase with US-specific accelerators including ASC 606, SOX controls, and US GAAP reporting.", deliverables: ["US GAAP design documents", "SOX-compliant SAP environment", "US integration specifications", "Data migration with data residency"] },
+    { title: "Deploy", subtitle: "Test & Go Live", desc: "AI-accelerated testing with US regulatory validation ensures zero surprises on cutover day.", detail: "We leverage AI-driven test automation to compress US testing cycles by 40%. Every SOX control point, ASC 606 scenario, and US regulatory requirement is validated before cutover — across all US entities.", deliverables: ["SOX control test suites", "US regulatory validation", "Hypercare team (US hours)", "Go-live certification"] },
+    { title: "Stabilize", subtitle: "& Support", desc: "Post go-live hypercare with US-based AMS support and continuous SOX-compliant optimisation.", detail: "Our US managed services team monitors, optimises, and evolves your SAP landscape — ensuring SOX compliance, US regulatory updates, and maximum value continuously with proactive SLA management across American time zones.", deliverables: ["US business hours AMS", "SOX compliance monitoring", "US regulatory release management", "Continuous improvement backlog"] },
+  ],
+  in: [
+    { title: "Explore", subtitle: "Design & Blueprint", desc: "Map Indian business processes, identify GST/statutory opportunities, and design an SAP roadmap for Indian enterprises.", detail: "We immerse ourselves in your Indian operations — interviewing stakeholders, auditing current systems, and mapping every process with India-specific regulatory requirements. The result is a GST-ready, Ind AS-compliant blueprint aligned to your Indian market strategy.", deliverables: ["India regulatory process maps", "GST & statutory architecture", "India risk-prioritised roadmap", "INR business case & ROI model"] },
+    { title: "Realise", subtitle: "Configure & Develop", desc: "Configure SAP with India localisations — GST, TDS, e-invoicing, and statutory compliance at every milestone.", detail: "Our Chennai-based architects translate your blueprint into a precise SAP configuration with India-specific localisations. We configure GST, e-invoicing, TDS, EPF/ESI, and MCA reporting — validated at every milestone with your Indian teams.", deliverables: ["India localisation documents", "GST & e-invoicing configuration", "India payroll & statutory setup", "Pan-India data migration strategy"] },
+    { title: "Deploy", subtitle: "Test & Go Live", desc: "AI-accelerated testing with India statutory validation ensures GST compliance from day one.", detail: "We leverage AI-driven test automation to compress testing cycles by 40%. Every GST scenario, e-invoicing workflow, TDS calculation, and India statutory requirement is validated before cutover across all Indian entities.", deliverables: ["India statutory test suites", "GST & e-Way bill validation", "Hypercare team (IST hours)", "India go-live certification"] },
+    { title: "Stabilize", subtitle: "& Support", desc: "Post go-live hypercare with Chennai-based AMS and continuous India statutory compliance.", detail: "Our Chennai managed services team monitors, optimises, and evolves your SAP landscape — ensuring GST compliance, India statutory updates, and maximum value continuously with cost-effective SLA management from our India delivery centre.", deliverables: ["IST business hours AMS", "GST compliance monitoring", "India statutory update patches", "Continuous improvement backlog"] },
+  ],
+  emea: [
+    { title: "Explore", subtitle: "Design & Blueprint", desc: "Map EMEA processes, identify VAT/IFRS opportunities, and design an SAP roadmap for GCC and regional enterprises.", detail: "We immerse ourselves in your EMEA operations — interviewing stakeholders, auditing current systems, and mapping every process with GCC regulatory requirements. The result is a VAT-compliant, IFRS-aligned blueprint designed for multi-currency, multi-entity operations across the region.", deliverables: ["GCC regulatory process maps", "VAT & IFRS architecture", "EMEA risk-prioritised roadmap", "AED/multi-currency ROI model"] },
+    { title: "Realise", subtitle: "Configure & Develop", desc: "Configure SAP with EMEA localisations — VAT, Arabic language, multi-currency, and free zone compliance.", detail: "Our Dubai-based architects translate your blueprint into a precise SAP configuration with EMEA-specific localisations. We configure VAT, Arabic UI, multi-currency (AED/SAR/GBP), free zone accounting, and IFRS reporting — validated at every milestone.", deliverables: ["EMEA localisation documents", "VAT & Arabic configuration", "Multi-currency entity setup", "Cross-border data migration"] },
+    { title: "Deploy", subtitle: "Test & Go Live", desc: "AI-accelerated testing with EMEA regulatory validation ensures VAT compliance across all GCC entities.", detail: "We leverage AI-driven test automation to compress EMEA testing cycles by 40%. Every VAT scenario, multi-currency workflow, IFRS consolidation, and FTA requirement is validated before cutover across all EMEA entities.", deliverables: ["EMEA regulatory test suites", "VAT & FTA validation", "Hypercare team (GST+4 hours)", "EMEA go-live certification"] },
+    { title: "Stabilize", subtitle: "& Support", desc: "Post go-live hypercare with Dubai-based AMS and continuous EMEA regulatory compliance.", detail: "Our Dubai managed services team monitors, optimises, and evolves your SAP landscape — ensuring VAT compliance, IFRS updates, and maximum value continuously with proactive SLA management across EMEA time zones.", deliverables: ["Dubai-based AMS coverage", "VAT compliance monitoring", "EMEA regulatory updates", "Continuous improvement backlog"] },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════
+   CFO WHEEL SEGMENTS & SOLUTIONS
+   ═══════════════════════════════════════════════════════ */
+export interface RegionWheelSegment {
+  label: string;
+  shortLabel: string;
+  desc: string;
+  icon: string;
+}
+
+export interface RegionCFOSolution {
+  title: string;
+  value: string;
+  kpis: string[];
+  accent: string;
+}
+
+const cfoWheelSegments: Record<Region, RegionWheelSegment[]> = {
+  us: [
+    { label: "SAP Treasury &\nRisk Management", shortLabel: "Treasury & Risk", desc: "Comprehensive US treasury operations including USD cash management, liquidity forecasting, and SOX-compliant financial risk mitigation.", icon: "🏦" },
+    { label: "SAP Analytics\nCloud", shortLabel: "Analytics Cloud", desc: "Real-time insight into US P&L, balance sheets, and forecasting with embedded AI-driven predictive analytics for American markets.", icon: "📊" },
+    { label: "SAP Group\nReporting", shortLabel: "Group Reporting", desc: "US GAAP consolidation with SOX audit trails and SEC disclosure support for multi-entity American operations.", icon: "📋" },
+    { label: "SAP Advanced\nFinancial Closing", shortLabel: "Financial Closing", desc: "Automated period-end closing orchestration that reduces cycle time and ensures SOX compliance across US entities.", icon: "⏱️" },
+    { label: "SAP Document\nReporting Compliance", shortLabel: "Doc Compliance", desc: "SEC and SOX document management ensuring compliance across US jurisdictions with automated audit workflows.", icon: "📄" },
+    { label: "SAP Billing &\nRevenue Innovation", shortLabel: "Billing & Revenue", desc: "Flexible billing models and revenue recognition aligned with ASC 606 standards for US enterprises.", icon: "💰" },
+  ],
+  in: [
+    { label: "SAP Treasury &\nRisk Management", shortLabel: "Treasury & Risk", desc: "Indian treasury operations including INR cash management, RBI compliance, and hedging for import/export businesses.", icon: "🏦" },
+    { label: "SAP Analytics\nCloud", shortLabel: "Analytics Cloud", desc: "Real-time insight into Indian P&L, GST analytics, and forecasting with AI-driven predictive analytics in INR.", icon: "📊" },
+    { label: "SAP Group\nReporting", shortLabel: "Group Reporting", desc: "Ind AS consolidation with MCA audit trails and statutory disclosure support for multi-entity Indian operations.", icon: "📋" },
+    { label: "SAP Advanced\nFinancial Closing", shortLabel: "Financial Closing", desc: "Automated period-end closing with GST reconciliation, TDS entries, and India statutory compliance built in.", icon: "⏱️" },
+    { label: "SAP Document\nReporting Compliance", shortLabel: "Doc Compliance", desc: "MCA, SEBI, and RBI document management ensuring Indian statutory compliance with automated e-filing workflows.", icon: "📄" },
+    { label: "SAP Billing &\nRevenue Innovation", shortLabel: "Billing & Revenue", desc: "GST-compliant billing, e-invoicing integration, and Ind AS 115 revenue recognition for Indian enterprises.", icon: "💰" },
+  ],
+  emea: [
+    { label: "SAP Treasury &\nRisk Management", shortLabel: "Treasury & Risk", desc: "Multi-currency treasury operations including AED/SAR cash management, LC processing, and commodity risk for GCC businesses.", icon: "🏦" },
+    { label: "SAP Analytics\nCloud", shortLabel: "Analytics Cloud", desc: "Real-time insight into EMEA P&L, VAT analytics, and forecasting with AI-driven predictive analytics across GCC currencies.", icon: "📊" },
+    { label: "SAP Group\nReporting", shortLabel: "Group Reporting", desc: "IFRS consolidation with multi-currency audit trails and regulatory disclosure for GCC and EMEA multi-entity operations.", icon: "📋" },
+    { label: "SAP Advanced\nFinancial Closing", shortLabel: "Financial Closing", desc: "Automated period-end closing with VAT reconciliation, multi-currency entries, and FTA compliance across EMEA.", icon: "⏱️" },
+    { label: "SAP Document\nReporting Compliance", shortLabel: "Doc Compliance", desc: "FTA, ADGM, and DIFC document management ensuring GCC regulatory compliance with automated Arabic/English workflows.", icon: "📄" },
+    { label: "SAP Billing &\nRevenue Innovation", shortLabel: "Billing & Revenue", desc: "VAT-compliant billing, multi-currency invoicing, and IFRS 15 revenue recognition for GCC and EMEA enterprises.", icon: "💰" },
+  ],
+};
+
+const cfoSolutions: Record<Region, RegionCFOSolution[]> = {
+  us: [
+    { title: "SAP FI/CO", value: "End-to-end US financial integrity, SOX-compliant multi-entity consolidation", kpis: ["Time to close", "SOX compliance rate", "US GAAP reconciliation"], accent: "hsl(var(--gold))" },
+    { title: "SAP Analytics Cloud (SAC)", value: "Real-time insight into US P&L, balance sheets, and USD forecasting", kpis: ["Decision speed", "US forecast accuracy"], accent: "hsl(var(--gold-light))" },
+    { title: "Group Reporting", value: "US GAAP consolidation with SEC audit trails and disclosure support", kpis: ["SEC audit readiness", "Close cycle time"], accent: "hsl(var(--gold))" },
+    { title: "Intercompany Reconciliation", value: "Automated IC reconciliation across US entities with SOX controls", kpis: ["Manual effort reduction", "SOX exception rates"], accent: "hsl(var(--gold-light))" },
+    { title: "Fiori for Finance", value: "Role-based experience for US CFO teams with mobile-first dashboards", kpis: ["UX efficiency", "US adoption rates"], accent: "hsl(var(--gold))" },
+  ],
+  in: [
+    { title: "SAP FI/CO", value: "End-to-end Indian financial integrity with GST, TDS, and Ind AS compliance", kpis: ["GST reconciliation time", "Ind AS compliance", "MCA filing accuracy"], accent: "hsl(var(--gold))" },
+    { title: "SAP Analytics Cloud (SAC)", value: "Real-time insight into Indian P&L, GST analytics, and INR forecasting", kpis: ["Decision speed", "India forecast accuracy"], accent: "hsl(var(--gold-light))" },
+    { title: "Group Reporting", value: "Ind AS consolidation with MCA audit trails and statutory disclosure", kpis: ["MCA audit readiness", "India close cycle time"], accent: "hsl(var(--gold))" },
+    { title: "Intercompany Reconciliation", value: "Automated IC reconciliation across Indian entities with GST matching", kpis: ["GST ITC matching rate", "TDS reconciliation time"], accent: "hsl(var(--gold-light))" },
+    { title: "Fiori for Finance", value: "Role-based experience for Indian CFO teams with GST dashboards", kpis: ["UX efficiency", "India adoption rates"], accent: "hsl(var(--gold))" },
+  ],
+  emea: [
+    { title: "SAP FI/CO", value: "Multi-currency financial integrity with VAT compliance and IFRS consolidation across EMEA", kpis: ["VAT reconciliation time", "IFRS compliance", "Multi-currency accuracy"], accent: "hsl(var(--gold))" },
+    { title: "SAP Analytics Cloud (SAC)", value: "Real-time insight into EMEA P&L, VAT analytics, and multi-currency forecasting", kpis: ["Decision speed", "GCC forecast accuracy"], accent: "hsl(var(--gold-light))" },
+    { title: "Group Reporting", value: "IFRS consolidation with FTA audit trails across GCC and EMEA entities", kpis: ["FTA audit readiness", "EMEA close cycle time"], accent: "hsl(var(--gold))" },
+    { title: "Intercompany Reconciliation", value: "Automated IC reconciliation across EMEA entities with transfer pricing controls", kpis: ["Transfer pricing compliance", "Multi-currency matching"], accent: "hsl(var(--gold-light))" },
+    { title: "Fiori for Finance", value: "Role-based experience for EMEA CFO teams with Arabic/English dashboards", kpis: ["UX efficiency", "EMEA adoption rates"], accent: "hsl(var(--gold))" },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════
    EXPORT FUNCTIONS
    ═══════════════════════════════════════════════════════ */
 export function getHeroContent(region: Region) { return heroContent[region]; }
@@ -542,3 +868,9 @@ export function getIndustryHeader(region: Region) { return industryHeader[region
 export function getIndustryContent(region: Region) { return industryContent[region]; }
 export function getClientLogosTagline(region: Region) { return clientLogosTagline[region]; }
 export function getFooterContent(region: Region) { return footerContent[region]; }
+export function getCapabilities(region: Region) { return capabilitiesContent[region]; }
+export function getDemoScenarios(region: Region) { return demoScenariosContent[region]; }
+export function getAdvisoryOfferings(region: Region) { return advisoryOfferings[region]; }
+export function getDeliveryPhases(region: Region) { return deliveryPhases[region]; }
+export function getCFOWheelSegments(region: Region) { return cfoWheelSegments[region]; }
+export function getCFOSolutions(region: Region) { return cfoSolutions[region]; }

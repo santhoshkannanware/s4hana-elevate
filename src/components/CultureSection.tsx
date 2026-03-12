@@ -1,81 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
 import { useRegion } from "@/contexts/RegionContext";
-import { getCultureContent } from "@/data/regionContent";
-
-const capabilities = [
-  {
-    icon: "📊",
-    title: "AI Financial Insights",
-    desc: "Surface anomalies, variances, and trends across your financial data with natural language queries.",
-  },
-  {
-    icon: "📈",
-    title: "Predictive Forecasting",
-    desc: "Leverage machine learning models embedded in SAP to forecast cash flow, revenue, and demand.",
-  },
-  {
-    icon: "⚙️",
-    title: "Intelligent Process Automation",
-    desc: "Automate reconciliation, journal entries, and compliance workflows with AI-driven orchestration.",
-  },
-  {
-    icon: "💬",
-    title: "Conversational Analytics",
-    desc: "Ask questions in plain English and get instant, actionable answers from your SAP data.",
-  },
-];
-
-const demoScenarios = [
-  {
-    query: "What is the biggest variance in Q3 revenue?",
-    thinking: ["Scanning revenue ledger…", "Comparing Q3 actuals vs. forecast…", "Identifying top variance drivers…"],
-    answer: "Revenue decline of $2.4M detected in Region A due to delayed receivables — 68% linked to 3 key accounts.",
-    metrics: [
-      { label: "Variance", value: "-$2.4M", color: "#ff4d6a" },
-      { label: "Region", value: "APAC-A", color: "#E8A000" },
-      { label: "Accounts", value: "3 flagged", color: "#ffb800" },
-      { label: "Confidence", value: "94%", color: "#E8A000" },
-    ],
-    chartData: [42, 58, 65, 47, 38, 29, 35],
-  },
-  {
-    query: "Forecast next quarter cash position",
-    thinking: ["Analyzing cash flow patterns…", "Running ML prediction model…", "Factoring seasonal trends…"],
-    answer: "Projected Q4 cash position: $14.2M. Operating cash flow expected to increase 12% driven by improved collections.",
-    metrics: [
-      { label: "Projected", value: "$14.2M", color: "#E8A000" },
-      { label: "Growth", value: "+12%", color: "#00ff88" },
-      { label: "Model", value: "ARIMA", color: "#E8A000" },
-      { label: "Accuracy", value: "91%", color: "#E8A000" },
-    ],
-    chartData: [10, 11, 10.5, 12, 13, 13.5, 14.2],
-  },
-  {
-    query: "Auto-reconcile intercompany transactions for March",
-    thinking: ["Loading IC transaction ledger…", "Matching entries across 12 entities…", "Flagging unmatched items…"],
-    answer: "Reconciled 1,247 of 1,260 transactions (98.9%). 13 items flagged for review totaling $89K — auto-journal entries posted for matched items.",
-    metrics: [
-      { label: "Matched", value: "98.9%", color: "#00ff88" },
-      { label: "Transactions", value: "1,247", color: "#E8A000" },
-      { label: "Flagged", value: "13", color: "#ffb800" },
-      { label: "Time Saved", value: "4.2 hrs", color: "#E8A000" },
-    ],
-    chartData: [85, 88, 91, 94, 96, 98, 99],
-  },
-  {
-    query: "Which cost centers exceeded budget this quarter?",
-    thinking: ["Querying cost center actuals…", "Comparing against approved budgets…", "Ranking by overspend amount…"],
-    answer: "3 cost centers exceeded budget: Marketing (+$340K, 18% over), R&D (+$210K, 9% over), Facilities (+$95K, 12% over). Root cause: unplanned contractor spend.",
-    metrics: [
-      { label: "Over Budget", value: "3 centers", color: "#ff4d6a" },
-      { label: "Total Excess", value: "$645K", color: "#ffb800" },
-      { label: "Top Driver", value: "Marketing", color: "#E8A000" },
-      { label: "Cause", value: "Contractors", color: "#E8A000" },
-    ],
-    chartData: [280, 340, 180, 210, 75, 95, 50],
-  },
-];
+import { getCultureContent, getCapabilities, getDemoScenarios } from "@/data/regionContent";
 
 // Animated mini bar chart
 function MiniChart({ data, color = "#E8A000" }: { data: number[]; color?: string }) {
@@ -142,7 +68,8 @@ function NetworkNodes() {
 }
 
 // Joule Live Demo Component
-function JouleLiveDemo({ forcedScenario }: { forcedScenario: number | null }) {
+function JouleLiveDemo({ forcedScenario, scenarios }: { forcedScenario: number | null; scenarios: ReturnType<typeof getDemoScenarios> }) {
+  const demoScenarios = scenarios;
   const [scenarioIdx, setScenarioIdx] = useState(0);
   const [phase, setPhase] = useState<"idle" | "typing" | "thinking" | "answering" | "complete">("idle");
   const [thinkingStep, setThinkingStep] = useState(0);
@@ -414,6 +341,8 @@ export default function CultureSection() {
   const [clickCount, setClickCount] = useState(0);
   const { region } = useRegion();
   const culture = getCultureContent(region);
+  const capabilities = getCapabilities(region);
+  const scenarios = getDemoScenarios(region);
 
   const handleCardClick = (idx: number) => {
     setActiveDemo(idx);
@@ -455,7 +384,7 @@ export default function CultureSection() {
           {/* Right — Live Demo */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="relative">
             <div className="absolute -inset-8 rounded-3xl blur-[80px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.15) 0%, transparent 70%)" }} />
-            <JouleLiveDemo key={forcedKey} forcedScenario={activeDemo} />
+            <JouleLiveDemo key={forcedKey} forcedScenario={activeDemo} scenarios={scenarios} />
           </motion.div>
         </div>
 
