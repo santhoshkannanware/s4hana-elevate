@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Settings, Rocket, HeartHandshake, ChevronRight } from "lucide-react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getDeliveryHeader } from "@/data/regionContent";
 import methodDiscover from "@/assets/method-discover.jpg";
 import methodConfigure from "@/assets/method-configure.jpg";
 import methodDeploy from "@/assets/method-deploy.jpg";
