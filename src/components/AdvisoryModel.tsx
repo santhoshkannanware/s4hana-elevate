@@ -16,6 +16,7 @@ export default function AdvisoryModel() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const { region } = useRegion();
   const header = getAdvisoryHeader(region);
+  const offerings = getAdvisoryOfferings(region);
 
   return (
     <section className="relative overflow-hidden bg-background" id="grow">

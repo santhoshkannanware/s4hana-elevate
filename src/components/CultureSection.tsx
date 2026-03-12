@@ -384,7 +384,7 @@ export default function CultureSection() {
           {/* Right — Live Demo */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="relative">
             <div className="absolute -inset-8 rounded-3xl blur-[80px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(232,160,0,.15) 0%, transparent 70%)" }} />
-            <JouleLiveDemo key={forcedKey} forcedScenario={activeDemo} />
+            <JouleLiveDemo key={forcedKey} forcedScenario={activeDemo} scenarios={scenarios} />
           </motion.div>
         </div>
 
