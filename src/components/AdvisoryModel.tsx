@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useRegion } from "@/contexts/RegionContext";
+import { getAdvisoryHeader } from "@/data/regionContent";
 
 const offerings = [
   {
