@@ -12,6 +12,9 @@ import EnergyPage from "./pages/EnergyPage.tsx";
 import AdvisoryPage from "./pages/AdvisoryPage.tsx";
 import ExecutionPage from "./pages/ExecutionPage.tsx";
 import EaaSPage from "./pages/EaaSPage.tsx";
+import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
+import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
+import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,9 @@ const App = () => (
           <Route path="/services/advisory" element={<AdvisoryPage />} />
           <Route path="/services/execution" element={<ExecutionPage />} />
           <Route path="/services/eaas" element={<EaaSPage />} />
+          <Route path="/products/cv-optimiser" element={<CvOptimiserPage />} />
+          <Route path="/products/ai-resume-builder" element={<AiResumeBuilderPage />} />
+          <Route path="/products/talent-matcher" element={<TalentMatcherPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
