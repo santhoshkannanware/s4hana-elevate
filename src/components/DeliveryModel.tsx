@@ -2,54 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Settings, Rocket, HeartHandshake, ChevronRight } from "lucide-react";
 import { useRegion } from "@/contexts/RegionContext";
-import { getDeliveryHeader } from "@/data/regionContent";
+import { getDeliveryHeader, getDeliveryPhases } from "@/data/regionContent";
 import methodDiscover from "@/assets/method-discover.jpg";
 import methodConfigure from "@/assets/method-configure.jpg";
 import methodDeploy from "@/assets/method-deploy.jpg";
 import methodOptimise from "@/assets/method-optimise.jpg";
 
-const phases = [
-  {
-    n: "01",
-    title: "Explore",
-    subtitle: "Design & Blueprint",
-    desc: "Map processes, identify opportunities, and design an SAP roadmap aligned to strategic priorities.",
-    detail: "We immerse ourselves in your business — interviewing stakeholders, auditing current systems, and mapping every process following SAP Activate's Explore phase. The result is a crystal-clear blueprint that aligns technology to your business strategy.",
-    image: methodDiscover,
-    deliverables: ["Process maps & gap analysis", "Solution architecture", "Risk-prioritised roadmap", "Business case & ROI model"],
-    Icon: Search,
-  },
-  {
-    n: "02",
-    title: "Realise",
-    subtitle: "Configure & Develop",
-    desc: "Configure SAP to best-practice standards with detailed solution design and milestone sign-offs.",
-    detail: "Our certified architects translate your blueprint into a precise SAP configuration — validated at every milestone with your team. We leverage SAP Activate's Realise phase and accelerators to compress timelines while ensuring quality.",
-    image: methodConfigure,
-    deliverables: ["Detailed design documents", "Configured SAP environment", "Integration specifications", "Data migration strategy"],
-    Icon: Settings,
-  },
-  {
-    n: "03",
-    title: "Deploy",
-    subtitle: "Test & Go Live",
-    desc: "AI-accelerated test automation ensures quality before every go-live. Zero surprises on cutover day.",
-    detail: "We leverage AI-driven test automation to compress cycles by 40%. Every scenario is validated before cutover — including end-to-end integration, performance, and user acceptance testing.",
-    image: methodDeploy,
-    deliverables: ["Automated test suites", "Cutover runbooks", "Hypercare team on standby", "Go-live certification"],
-    Icon: Rocket,
-  },
-  {
-    n: "04",
-    title: "Stabilize",
-    subtitle: "& Support",
-    desc: "Post go-live hypercare, AMS, and continuous optimisation delivering sustained SAP value.",
-    detail: "Our managed services team monitors, optimises, and evolves your SAP landscape — ensuring you extract maximum value continuously with proactive SLA management aligned with SAP Activate's Run phase.",
-    image: methodOptimise,
-    deliverables: ["24/7 AMS coverage", "Quarterly optimisation reviews", "Release management", "Continuous improvement backlog"],
-    Icon: HeartHandshake,
-  },
-];
+const PhaseIcons = [Search, Settings, Rocket, HeartHandshake];
+const phaseImages = [methodDiscover, methodConfigure, methodDeploy, methodOptimise];
 
 export default function DeliveryModel() {
   const [active, setActive] = useState(0);
