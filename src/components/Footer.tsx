@@ -40,8 +40,8 @@ export default function Footer() {
         ))}
       </div>
       <div className="flex items-center justify-between px-5 md:px-10 py-4 max-w-[1240px] mx-auto">
-        <div className="text-[.82rem] text-white/[0.22]">© 2025 Kannanware. All rights reserved.</div>
-        <div className="text-[.82rem] text-white/[0.22]">AI-First SAP Certified Consulting & Implementation Partner</div>
+        <div className="text-[.82rem] text-white/40">© 2025 Kannanware. All rights reserved.</div>
+        <div className="text-[.82rem] text-white/40">AI-First SAP Certified Consulting & Implementation Partner</div>
       </div>
     </footer>
   );
