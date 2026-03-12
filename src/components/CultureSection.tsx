@@ -68,7 +68,8 @@ function NetworkNodes() {
 }
 
 // Joule Live Demo Component
-function JouleLiveDemo({ forcedScenario }: { forcedScenario: number | null }) {
+function JouleLiveDemo({ forcedScenario, scenarios }: { forcedScenario: number | null; scenarios: ReturnType<typeof getDemoScenarios> }) {
+  const demoScenarios = scenarios;
   const [scenarioIdx, setScenarioIdx] = useState(0);
   const [phase, setPhase] = useState<"idle" | "typing" | "thinking" | "answering" | "complete">("idle");
   const [thinkingStep, setThinkingStep] = useState(0);
