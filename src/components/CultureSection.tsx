@@ -410,6 +410,8 @@ function JouleLiveDemo({ forcedScenario }: { forcedScenario: number | null }) {
 export default function CultureSection() {
   const [activeDemo, setActiveDemo] = useState<number | null>(null);
   const [clickCount, setClickCount] = useState(0);
+  const { region } = useRegion();
+  const culture = getCultureContent(region);
 
   const handleCardClick = (idx: number) => {
     setActiveDemo(idx);
