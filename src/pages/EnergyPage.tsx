@@ -4,6 +4,8 @@ import { ArrowRight, TrendingDown, Building2, ShieldCheck, Gauge, Flame, Wrench,
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import { useRegion } from "@/contexts/RegionContext";
+import { getEnergyContent } from "@/data/regionContent";
 import heroImg from "@/assets/industry-energy-hero.jpg";
 import consultingImg from "@/assets/energy-consulting.jpg";
 import transformImg from "@/assets/energy-transformation.jpg";
@@ -27,29 +29,27 @@ function CountUp({ end, suffix = "", prefix = "" }: { end: number; suffix?: stri
 
 /* ─── Section 1: Hero ─── */
 function HeroSection() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   return (
     <section className="relative min-h-[92vh] flex items-center overflow-hidden" style={{ background: "#0B0B0B" }}>
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(#F4B400 1px, transparent 1px), linear-gradient(90deg, #F4B400 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 md:px-10 grid lg:grid-cols-2 gap-16 items-center py-24">
         <motion.div initial="hidden" animate="visible" variants={stagger}>
-          <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-5" style={{ color: "#F4B400" }}>Industry — Energy & Natural Resources</motion.span>
+          <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-5" style={{ color: "#F4B400" }}>{c.hero.eyebrow}</motion.span>
           <motion.h1 variants={fadeUp} className="text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-[1.08] tracking-tight text-white mb-6">
-            Energy & Natural Resources Transformation with <span style={{ color: "#F4B400" }}>SAP</span>
+            {c.hero.headline} <span style={{ color: "#F4B400" }}>{c.hero.headlineAccent}</span>
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-[1.05rem] leading-relaxed mb-4" style={{ color: "#C9C9C9" }}>
-            Helping energy companies modernize finance operations, manage complex assets, and gain real-time intelligence through SAP-powered digital transformation.
-          </motion.p>
-          <motion.p variants={fadeUp} className="text-[.92rem] leading-relaxed mb-8" style={{ color: "#999" }}>
-            Energy and natural resource companies operate in dynamic markets with complex infrastructure, regulatory pressure, and volatile pricing. Kannanware enables energy enterprises to modernize financial operations, optimize asset performance, and drive data-driven decision making using SAP technologies.
-          </motion.p>
+          <motion.p variants={fadeUp} className="text-[1.05rem] leading-relaxed mb-4" style={{ color: "#C9C9C9" }}>{c.hero.desc1}</motion.p>
+          <motion.p variants={fadeUp} className="text-[.92rem] leading-relaxed mb-8" style={{ color: "#999" }}>{c.hero.desc2}</motion.p>
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-            <a href="#cta" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm text-black transition-all hover:scale-105" style={{ background: "#F4B400" }}>Talk to an Expert <ArrowRight size={16} /></a>
-            <a href="#solutions" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm text-white border transition-all hover:bg-white/5" style={{ borderColor: "rgba(244,180,0,.35)" }}>Explore SAP Solutions</a>
+            <a href="#cta" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm text-black transition-all hover:scale-105" style={{ background: "#F4B400" }}>{c.hero.cta1} <ArrowRight size={16} /></a>
+            <a href="#solutions" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm text-white border transition-all hover:bg-white/5" style={{ borderColor: "rgba(244,180,0,.35)" }}>{c.hero.cta2}</a>
           </motion.div>
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: .3 }} className="relative hidden lg:block">
           <div className="rounded-2xl overflow-hidden border" style={{ borderColor: "rgba(244,180,0,.12)" }}>
-            <motion.img src={heroImg} alt="Energy infrastructure at sunset" className="w-full h-[480px] object-cover" animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
+            <motion.img src={heroImg} alt="Energy infrastructure" className="w-full h-[480px] object-cover" animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
             <div className="absolute inset-0 rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(11,11,11,.4) 0%, transparent 60%)" }} />
           </div>
           <div className="absolute -inset-10 rounded-full blur-[100px] -z-10" style={{ background: "radial-gradient(circle, rgba(244,180,0,.08) 0%, transparent 70%)" }} />
@@ -61,14 +61,11 @@ function HeroSection() {
 
 /* ─── Section 2: Challenges ─── */
 function ChallengesSection() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const challenges = [
-    { icon: TrendingDown, title: "Market Volatility", desc: "Energy companies must manage fluctuating prices and unpredictable market conditions." },
-    { icon: Building2, title: "Complex Infrastructure", desc: "Managing large-scale physical assets across multiple regions requires advanced operational visibility." },
-    { icon: ShieldCheck, title: "Regulatory Compliance", desc: "Energy organizations must comply with strict environmental and financial regulations." },
-    { icon: Gauge, title: "Operational Efficiency", desc: "Energy companies must balance production efficiency with cost management." },
-  ];
+  const challengeIcons = [TrendingDown, Building2, ShieldCheck, Gauge];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
@@ -78,41 +75,38 @@ function ChallengesSection() {
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Key Challenges in the Energy Sector</motion.h2>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-6">
-          {challenges.map((c, i) => (
-            <motion.div key={c.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .12, duration: .6 }}
-              className="group rounded-xl p-7 border transition-all hover:border-[rgba(244,180,0,.3)]"
-              style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}
-            >
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5 transition-shadow group-hover:shadow-[0_0_24px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
-                <c.icon size={22} style={{ color: "#F4B400" }} />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{c.title}</h3>
-              <p className="text-[.9rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{c.desc}</p>
-            </motion.div>
-          ))}
+          {c.challenges.map((ch, i) => {
+            const Icon = challengeIcons[i];
+            return (
+              <motion.div key={ch.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .12, duration: .6 }}
+                className="group rounded-xl p-7 border transition-all hover:border-[rgba(244,180,0,.3)]" style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5 transition-shadow group-hover:shadow-[0_0_24px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
+                  <Icon size={22} style={{ color: "#F4B400" }} />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{ch.title}</h3>
+                <p className="text-[.9rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{ch.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── Section 3: Interactive Value Chain — cinematic auto-playing ─── */
+/* ─── Section 3: Value Chain ─── */
 function ValueChain() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [activeIdx, setActiveIdx] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
   const DURATION = 4000;
+  const stepIcons = [Flame, Wrench, Network, DollarSign, BarChart3];
+  const accents = ["#F4B400", "#FFD54F", "#FFA726", "#FFB74D", "#FFCA28"];
+  const steps = c.valueChain.map((s, i) => ({ ...s, icon: stepIcons[i], accent: accents[i], num: String(i + 1).padStart(2, "0") }));
 
-  const steps = [
-    { icon: Flame, title: "Exploration & Production", desc: "Energy generation and resource extraction across upstream operations. From seismic surveys to drilling programs, this phase captures the raw potential of natural resources.", num: "01", accent: "#F4B400" },
-    { icon: Wrench, title: "Asset Management", desc: "Monitoring infrastructure performance, predictive maintenance scheduling, and full lifecycle tracking across refineries, pipelines, and generation facilities.", num: "02", accent: "#FFD54F" },
-    { icon: Network, title: "Energy Distribution", desc: "Managing complex energy networks, transmission logistics, and supply chain coordination from source to end consumer across geographies.", num: "03", accent: "#FFA726" },
-    { icon: DollarSign, title: "Finance & Revenue", desc: "End-to-end financial operations including billing, hedging, trading, financial planning, and revenue recognition across volatile energy markets.", num: "04", accent: "#FFB74D" },
-    { icon: BarChart3, title: "Analytics & Forecasting", desc: "Predictive demand modeling, cost optimization, market trend analysis, and AI-driven scenario planning for strategic decision-making.", num: "05", accent: "#FFCA28" },
-  ];
-
-  // Auto-advance
   useEffect(() => {
     if (!inView || hovered !== null) return;
     const timer = setInterval(() => setActiveIdx(prev => (prev + 1) % steps.length), DURATION);
@@ -128,75 +122,37 @@ function ValueChain() {
           <motion.p variants={fadeUp} className="text-sm" style={{ color: "#999" }}>Hover any stage to explore • Auto-cycles through the full lifecycle</motion.p>
         </motion.div>
 
-        {/* ── Top: animated horizontal pipeline ── */}
         <div className="relative mb-16">
-          {/* Background pipeline track */}
           <motion.div initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ duration: 1.5, ease: "easeOut" }}
-            className="hidden md:block absolute top-[44px] left-[8%] right-[8%] h-[3px] origin-left rounded-full"
-            style={{ background: "rgba(244,180,0,.08)" }}
-          />
-          {/* Active progress line */}
-          <motion.div
-            className="hidden md:block absolute top-[44px] left-[8%] h-[3px] rounded-full origin-left"
-            animate={{ width: `${(activeIdx / (steps.length - 1)) * 84}%` }}
-            transition={{ duration: .6, ease: [.22, 1, .36, 1] }}
-            style={{ background: "linear-gradient(90deg, #F4B400, #FFD54F)", boxShadow: "0 0 20px rgba(244,180,0,.3)" }}
-          />
+            className="hidden md:block absolute top-[44px] left-[8%] right-[8%] h-[3px] origin-left rounded-full" style={{ background: "rgba(244,180,0,.08)" }} />
+          <motion.div className="hidden md:block absolute top-[44px] left-[8%] h-[3px] rounded-full origin-left"
+            animate={{ width: `${(activeIdx / (steps.length - 1)) * 84}%` }} transition={{ duration: .6, ease: [.22, 1, .36, 1] }}
+            style={{ background: "linear-gradient(90deg, #F4B400, #FFD54F)", boxShadow: "0 0 20px rgba(244,180,0,.3)" }} />
 
-          {/* Nodes */}
           <div className="relative flex flex-col md:flex-row items-start md:items-start justify-between gap-8 md:gap-0">
             {steps.map((s, i) => {
               const isActive = activeIdx === i;
               const isHover = hovered === i;
               const highlight = isActive || isHover;
               return (
-                <motion.div key={s.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: .3 + i * .1, duration: .7, ease: [.22, 1, .36, 1] }}
+                <motion.div key={s.title} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: .3 + i * .1, duration: .7, ease: [.22, 1, .36, 1] }}
                   className="relative flex-1 flex flex-col items-center text-center cursor-pointer z-10"
-                  onMouseEnter={() => { setHovered(i); setActiveIdx(i); }}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  {/* Glow ring behind node */}
-                  <motion.div
-                    animate={{ scale: highlight ? 1 : 0, opacity: highlight ? 1 : 0 }}
-                    transition={{ duration: .4 }}
-                    className="absolute top-0 w-[88px] h-[88px] rounded-full"
-                    style={{ background: `radial-gradient(circle, ${s.accent}20, transparent 70%)`, filter: "blur(12px)" }}
-                  />
-                  {/* Node circle */}
-                  <motion.div
-                    animate={{
-                      scale: highlight ? 1.12 : 1,
-                      borderColor: highlight ? s.accent : "rgba(244,180,0,.15)",
-                      background: highlight ? `${s.accent}25` : "rgba(244,180,0,.04)",
-                    }}
-                    transition={{ duration: .35, ease: "easeOut" }}
-                    className="relative w-[88px] h-[88px] rounded-full flex flex-col items-center justify-center mb-5 border-2"
-                    style={{ boxShadow: highlight ? `0 0 40px ${s.accent}30, inset 0 0 20px ${s.accent}10` : "none" }}
-                  >
+                  onMouseEnter={() => { setHovered(i); setActiveIdx(i); }} onMouseLeave={() => setHovered(null)}>
+                  <motion.div animate={{ scale: highlight ? 1 : 0, opacity: highlight ? 1 : 0 }} transition={{ duration: .4 }}
+                    className="absolute top-0 w-[88px] h-[88px] rounded-full" style={{ background: `radial-gradient(circle, ${s.accent}20, transparent 70%)`, filter: "blur(12px)" }} />
+                  <motion.div animate={{ scale: highlight ? 1.12 : 1, borderColor: highlight ? s.accent : "rgba(244,180,0,.15)", background: highlight ? `${s.accent}25` : "rgba(244,180,0,.04)" }}
+                    transition={{ duration: .35, ease: "easeOut" }} className="relative w-[88px] h-[88px] rounded-full flex flex-col items-center justify-center mb-5 border-2"
+                    style={{ boxShadow: highlight ? `0 0 40px ${s.accent}30, inset 0 0 20px ${s.accent}10` : "none" }}>
                     <motion.div animate={{ rotate: highlight ? 360 : 0 }} transition={{ duration: .6, ease: "easeOut" }}>
                       <s.icon size={26} style={{ color: highlight ? s.accent : "rgba(255,255,255,.35)" }} />
                     </motion.div>
                     <span className="text-[.55rem] font-bold tracking-wider mt-1" style={{ color: highlight ? s.accent : "rgba(255,255,255,.2)" }}>{s.num}</span>
                   </motion.div>
-                  {/* Title */}
-                  <motion.h3
-                    animate={{ color: highlight ? s.accent : "rgba(255,255,255,.8)" }}
-                    className="text-[.82rem] font-bold leading-tight max-w-[140px]"
-                  >{s.title}</motion.h3>
-                  {/* Active progress bar under node */}
+                  <motion.h3 animate={{ color: highlight ? s.accent : "rgba(255,255,255,.8)" }} className="text-[.82rem] font-bold leading-tight max-w-[140px]">{s.title}</motion.h3>
                   {isActive && (
                     <motion.div className="h-[2px] w-16 rounded-full mt-3 overflow-hidden" style={{ background: "rgba(255,255,255,.06)" }}>
-                      <motion.div
-                        key={`bar-${i}`}
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: hovered !== null ? 99999 : DURATION / 1000, ease: "linear" }}
-                        className="h-full rounded-full"
-                        style={{ background: s.accent }}
-                      />
+                      <motion.div key={`bar-${i}`} initial={{ width: "0%" }} animate={{ width: "100%" }}
+                        transition={{ duration: hovered !== null ? 99999 : DURATION / 1000, ease: "linear" }} className="h-full rounded-full" style={{ background: s.accent }} />
                     </motion.div>
                   )}
                 </motion.div>
@@ -205,19 +161,10 @@ function ValueChain() {
           </div>
         </div>
 
-        {/* ── Bottom: expanded detail panel ── */}
         <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIdx}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: .5, ease: [.22, 1, .36, 1] }}
-            className="rounded-2xl border overflow-hidden"
-            style={{ background: "rgba(255,255,255,.02)", borderColor: `${steps[activeIdx].accent}20` }}
-          >
+          <motion.div key={activeIdx} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: .5, ease: [.22, 1, .36, 1] }} className="rounded-2xl border overflow-hidden" style={{ background: "rgba(255,255,255,.02)", borderColor: `${steps[activeIdx].accent}20` }}>
             <div className="grid md:grid-cols-[auto_1fr] items-center">
-              {/* Left accent bar */}
               <div className="hidden md:block w-1.5 self-stretch" style={{ background: `linear-gradient(to bottom, ${steps[activeIdx].accent}, transparent)` }} />
               <div className="p-8 md:p-10">
                 <div className="flex items-center gap-4 mb-4">
@@ -237,8 +184,7 @@ function ValueChain() {
                     {steps.map((_, i) => (
                       <button key={i} onClick={() => { setActiveIdx(i); setHovered(i); setTimeout(() => setHovered(null), 100); }}
                         className="w-2 h-2 rounded-full transition-all"
-                        style={{ background: i === activeIdx ? steps[activeIdx].accent : "rgba(255,255,255,.15)", boxShadow: i === activeIdx ? `0 0 8px ${steps[activeIdx].accent}60` : "none" }}
-                      />
+                        style={{ background: i === activeIdx ? steps[activeIdx].accent : "rgba(255,255,255,.15)", boxShadow: i === activeIdx ? `0 0 8px ${steps[activeIdx].accent}60` : "none" }} />
                     ))}
                   </div>
                 </div>
@@ -251,16 +197,13 @@ function ValueChain() {
   );
 }
 
-/* ─── Section 4: How Kannanware Helps ─── */
+/* ─── Section 4: Capabilities ─── */
 function CapabilitiesSection() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const capabilities = [
-    { icon: DollarSign, title: "Finance Transformation", desc: "Modernize finance operations with SAP S/4HANA for real-time financial visibility and automated close processes." },
-    { icon: Eye, title: "Asset Lifecycle Visibility", desc: "Track infrastructure investments and operational costs across the entire asset lifecycle with integrated reporting." },
-    { icon: BarChart3, title: "Real-Time Operational Insights", desc: "Use analytics to monitor production performance, identify inefficiencies, and optimize energy output." },
-    { icon: ShieldCheck, title: "Compliance & Risk Management", desc: "Automate regulatory and financial reporting to meet environmental and industry compliance requirements." },
-  ];
+  const capIcons = [DollarSign, Eye, BarChart3, ShieldCheck];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
@@ -270,27 +213,26 @@ function CapabilitiesSection() {
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Driving Digital Transformation for Energy Enterprises</motion.h2>
         </motion.div>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left — image */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: .7 }} className="relative rounded-2xl overflow-hidden">
-            <img src={consultingImg} alt="Energy consulting control room" className="w-full h-[420px] object-cover rounded-2xl" />
+            <img src={consultingImg} alt="Energy consulting" className="w-full h-[420px] object-cover rounded-2xl" />
             <div className="absolute inset-0 rounded-2xl" style={{ background: "linear-gradient(to top, rgba(11,11,11,.6) 0%, transparent 50%)" }} />
           </motion.div>
-          {/* Right — capabilities */}
           <div className="space-y-6">
-            {capabilities.map((c, i) => (
-              <motion.div key={c.title} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .5 }}
-                className="group flex gap-5 items-start p-5 rounded-xl border transition-all hover:border-[rgba(244,180,0,.3)]"
-                style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}
-              >
-                <div className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 transition-shadow group-hover:shadow-[0_0_20px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
-                  <c.icon size={20} style={{ color: "#F4B400" }} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-white mb-1 group-hover:text-[#F4B400] transition-colors">{c.title}</h3>
-                  <p className="text-[.85rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{c.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+            {c.capabilities.map((cap, i) => {
+              const Icon = capIcons[i];
+              return (
+                <motion.div key={cap.title} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .5 }}
+                  className="group flex gap-5 items-start p-5 rounded-xl border transition-all hover:border-[rgba(244,180,0,.3)]" style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}>
+                  <div className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 transition-shadow group-hover:shadow-[0_0_20px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
+                    <Icon size={20} style={{ color: "#F4B400" }} />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white mb-1 group-hover:text-[#F4B400] transition-colors">{cap.title}</h3>
+                    <p className="text-[.85rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{cap.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -300,26 +242,20 @@ function CapabilitiesSection() {
 
 /* ─── Section 5: SAP Architecture ─── */
 function TechArchitecture() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [selected, setSelected] = useState<number | null>(null);
   const [rotation, setRotation] = useState(0);
   const animRef = useRef<number>(0);
   const pausedRef = useRef(false);
-
-  const nodes = [
-    { label: "SAP Asset Mgmt", desc: "Enterprise asset management for tracking infrastructure performance, maintenance, and lifecycle costs across energy operations.", color: "#F4B400" },
-    { label: "SAP BTP", desc: "Integration and innovation platform connecting cloud and on-premise systems with custom extensions and process automation.", color: "#FFD54F" },
-    { label: "SAP Datasphere", desc: "Unified enterprise data layer that harmonizes operational and financial data for trusted real-time business insights.", color: "#FFA726" },
-    { label: "SAP Analytics Cloud", desc: "Advanced financial analytics, forecasting, and planning capabilities for energy demand prediction and cost optimization.", color: "#FFB74D" },
-  ];
+  const colors = ["#F4B400", "#FFD54F", "#FFA726", "#FFB74D"];
+  const nodes = c.archNodes.map((n, i) => ({ ...n, color: colors[i] }));
 
   useEffect(() => {
     if (!inView) return;
-    const animate = () => {
-      if (!pausedRef.current) setRotation(prev => prev + 0.15);
-      animRef.current = requestAnimationFrame(animate);
-    };
+    const animate = () => { if (!pausedRef.current) setRotation(prev => prev + 0.15); animRef.current = requestAnimationFrame(animate); };
     animRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animRef.current);
   }, [inView]);
@@ -334,7 +270,6 @@ function TechArchitecture() {
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">SAP Technology for Energy Innovation</motion.h2>
           <motion.p variants={fadeUp} className="text-sm mt-3" style={{ color: "#999" }}>Hover to pause • Click a node to explore</motion.p>
         </motion.div>
-
         <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
           <div className="relative flex justify-center" onMouseEnter={() => { pausedRef.current = true; }} onMouseLeave={() => { pausedRef.current = false; }}>
             <div className="relative" style={{ width: r * 2 + 120, height: r * 2 + 120 }}>
@@ -352,10 +287,8 @@ function TechArchitecture() {
                 const isSelected = selected === i;
                 return (
                   <motion.div key={n.label} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: .5 + i * .1 }}
-                    className="absolute z-20 cursor-pointer"
-                    style={{ left: `calc(50% + ${x}px - 38px)`, top: `calc(50% + ${y}px - 38px)`, transition: "left 0.05s linear, top 0.05s linear" }}
-                    onClick={() => setSelected(isSelected ? null : i)}
-                  >
+                    className="absolute z-20 cursor-pointer" style={{ left: `calc(50% + ${x}px - 38px)`, top: `calc(50% + ${y}px - 38px)`, transition: "left 0.05s linear, top 0.05s linear" }}
+                    onClick={() => setSelected(isSelected ? null : i)}>
                     <svg className="absolute pointer-events-none" style={{ left: 38, top: 38, width: 1, height: 1, overflow: "visible" }}>
                       <line x1="0" y1="0" x2={-x} y2={-y} stroke={isSelected ? "rgba(244,180,0,.4)" : "rgba(244,180,0,.1)"} strokeWidth="1" />
                     </svg>
@@ -398,14 +331,11 @@ function TechArchitecture() {
 
 /* ─── Section 6: Business Impact ─── */
 function BusinessImpact() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const blocks = [
-    { icon: Clock, title: "Faster Financial Reporting", desc: "Accelerate financial close cycles across energy operations with automated reconciliation and parallel processing.", metric: "60%", metricLabel: "Faster Close" },
-    { icon: Eye, title: "Improved Asset Visibility", desc: "Gain real-time insights into infrastructure performance, maintenance schedules, and lifecycle costs.", metric: "95%", metricLabel: "Asset Visibility" },
-    { icon: Brain, title: "Better Decision Intelligence", desc: "Enable predictive analytics and forecasting for demand planning, cost optimization, and market analysis.", metric: "3x", metricLabel: "Forecast Accuracy" },
-    { icon: Target, title: "Operational Efficiency", desc: "Optimize production and operational costs through streamlined processes and intelligent automation.", metric: "40%", metricLabel: "Cost Reduction" },
-  ];
+  const impactIcons = [Clock, Eye, Brain, Target];
 
   return (
     <section ref={ref} className="py-28 px-6 md:px-10" style={{ background: "#111111" }}>
@@ -415,26 +345,27 @@ function BusinessImpact() {
           <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Business Outcomes for Energy Companies</motion.h2>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-6">
-          {blocks.map((b, i) => (
-            <motion.div key={b.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}
-              className="group rounded-xl p-8 border transition-all hover:border-[rgba(244,180,0,.3)]"
-              style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}
-            >
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-shadow group-hover:shadow-[0_0_24px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
-                  <b.icon size={22} style={{ color: "#F4B400" }} />
+          {c.impact.map((b, i) => {
+            const Icon = impactIcons[i];
+            return (
+              <motion.div key={b.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}
+                className="group rounded-xl p-8 border transition-all hover:border-[rgba(244,180,0,.3)]" style={{ background: "rgba(255,255,255,.02)", borderColor: "rgba(255,255,255,.06)" }}>
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center transition-shadow group-hover:shadow-[0_0_24px_rgba(244,180,0,.25)]" style={{ background: "rgba(244,180,0,.1)" }}>
+                    <Icon size={22} style={{ color: "#F4B400" }} />
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[2rem] font-bold leading-none" style={{ color: "#F4B400" }}>
+                      <CountUp end={parseInt(b.metric)} suffix={b.metric.replace(/\d+/, "")} />
+                    </span>
+                    <span className="block text-[.6rem] uppercase tracking-[.15em] mt-1" style={{ color: "rgba(255,255,255,.3)" }}>{b.metricLabel}</span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-[2rem] font-bold leading-none" style={{ color: "#F4B400" }}>
-                    <CountUp end={parseInt(b.metric)} suffix={b.metric.replace(/\d+/, "")} />
-                  </span>
-                  <span className="block text-[.6rem] uppercase tracking-[.15em] mt-1" style={{ color: "rgba(255,255,255,.3)" }}>{b.metricLabel}</span>
-                </div>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{b.title}</h3>
-              <p className="text-[.88rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{b.desc}</p>
-            </motion.div>
-          ))}
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#F4B400] transition-colors">{b.title}</h3>
+                <p className="text-[.88rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{b.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -443,13 +374,15 @@ function BusinessImpact() {
 
 /* ─── Section 7: Transformation Story ─── */
 function TransformationStory() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const panels = [
-    { label: "Challenge", color: "rgba(244,180,0,.08)", border: "rgba(244,180,0,.15)", text: "An energy organization struggled with fragmented reporting across multiple systems, leading to delayed financial close cycles and limited visibility into operational performance." },
-    { label: "Solution", color: "rgba(244,180,0,.12)", border: "rgba(244,180,0,.25)", text: "Kannanware implemented SAP S/4HANA Finance with integrated analytics platforms, consolidating data from upstream and downstream operations into a single source of truth." },
-    { label: "Outcome", color: "rgba(244,180,0,.06)", border: "rgba(244,180,0,.2)", text: "The organization achieved 60% faster reporting cycles, improved forecasting accuracy by 3x, and gained real-time operational visibility across all business units." },
+    { label: "Challenge", color: "rgba(244,180,0,.08)", border: "rgba(244,180,0,.15)", text: c.story.challenge },
+    { label: "Solution", color: "rgba(244,180,0,.12)", border: "rgba(244,180,0,.25)", text: c.story.solution },
+    { label: "Outcome", color: "rgba(244,180,0,.06)", border: "rgba(244,180,0,.2)", text: c.story.outcome },
   ];
 
   return (
@@ -457,18 +390,16 @@ function TransformationStory() {
       <div className="max-w-[1200px] mx-auto">
         <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className="text-center mb-16">
           <motion.span variants={fadeUp} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-4" style={{ color: "#F4B400" }}>Case Study</motion.span>
-          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Energy Finance Transformation Example</motion.h2>
+          <motion.h2 variants={fadeUp} className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white tracking-tight">Energy Finance Transformation</motion.h2>
         </motion.div>
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: .7 }} className="rounded-2xl overflow-hidden">
-            <img src={transformImg} alt="Energy finance transformation" className="w-full h-[380px] object-cover rounded-2xl" />
+            <img src={transformImg} alt="Energy transformation" className="w-full h-[380px] object-cover rounded-2xl" />
           </motion.div>
           <div className="space-y-5">
             {panels.map((p, i) => (
               <motion.div key={p.label} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * .15, duration: .6 }}
-                className="rounded-xl p-6 border"
-                style={{ background: p.color, borderColor: p.border }}
-              >
+                className="rounded-xl p-6 border" style={{ background: p.color, borderColor: p.border }}>
                 <span className="inline-block text-[.65rem] font-bold tracking-[.2em] uppercase mb-3" style={{ color: "#F4B400" }}>{p.label}</span>
                 <p className="text-[.9rem] leading-relaxed" style={{ color: "#C9C9C9" }}>{p.text}</p>
               </motion.div>
@@ -482,13 +413,15 @@ function TransformationStory() {
 
 /* ─── Section 8: CTA ─── */
 function CTASection() {
+  const { region } = useRegion();
+  const c = getEnergyContent(region);
   return (
     <section id="cta" className="relative py-28 px-6 md:px-10 overflow-hidden" style={{ background: "#0B0B0B" }}>
       <div className="absolute inset-0 flex items-center justify-center"><div className="w-[600px] h-[600px] rounded-full blur-[160px]" style={{ background: "radial-gradient(circle, rgba(244,180,0,.08), transparent 70%)" }} /></div>
       <div className="relative z-10 max-w-[800px] mx-auto text-center">
-        <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-5" style={{ color: "#F4B400" }}>Get Started</motion.span>
-        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-[clamp(1.8rem,4.5vw,3rem)] font-bold text-white tracking-tight mb-6">Transform Your Energy Operations with SAP</motion.h2>
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: .2 }} className="text-[1.05rem] leading-relaxed mb-10" style={{ color: "#C9C9C9" }}>Partner with Kannanware to modernize energy finance and operations through intelligent SAP-powered solutions.</motion.p>
+        <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="inline-block text-[.7rem] font-bold tracking-[.25em] uppercase mb-5" style={{ color: "#F4B400" }}>{c.cta.eyebrow}</motion.span>
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-[clamp(1.8rem,4.5vw,3rem)] font-bold text-white tracking-tight mb-6">{c.cta.headline}</motion.h2>
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: .2 }} className="text-[1.05rem] leading-relaxed mb-10" style={{ color: "#C9C9C9" }}>{c.cta.desc}</motion.p>
         <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .3 }} className="flex flex-wrap justify-center gap-4">
           <a href="#" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm text-black transition-all hover:scale-105" style={{ background: "#F4B400", boxShadow: "0 0 40px rgba(244,180,0,.3)" }}>Schedule a Consultation <ArrowRight size={16} /></a>
           <a href="#" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm text-white border transition-all hover:bg-white/5" style={{ borderColor: "rgba(244,180,0,.3)" }}>Contact Our Experts</a>
