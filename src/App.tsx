@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +16,7 @@ import EaaSPage from "./pages/EaaSPage.tsx";
 import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
 import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
+import GeoRedirect from "./components/GeoRedirect.tsx";
 
 const queryClient = new QueryClient();
 
@@ -47,8 +48,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Redirect root to /us */}
-          <Route path="/" element={<Navigate to="/us" replace />} />
+          {/* Auto-detect region from IP, fallback to /us */}
+          <Route path="/" element={<GeoRedirect />} />
           {/* Region-prefixed routes */}
           <Route path="/:region/*" element={<RegionRoutes />} />
         </Routes>
