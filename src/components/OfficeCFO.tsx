@@ -256,7 +256,7 @@ export default function OfficeCFO() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative pt-4"
           >
-            <TransformationWheel />
+            <TransformationWheel wheelSegments={wheelSegments} />
           </motion.div>
 
           {/* Right — Solution Value Table */}
