@@ -13,9 +13,10 @@ const phaseImages = [methodDiscover, methodConfigure, methodDeploy, methodOptimi
 
 export default function DeliveryModel() {
   const [active, setActive] = useState(0);
-  const phase = phases[active];
   const { region } = useRegion();
   const header = getDeliveryHeader(region);
+  const phases = getDeliveryPhases(region).map((p, i) => ({ ...p, n: String(i + 1).padStart(2, "0"), image: phaseImages[i], Icon: PhaseIcons[i] }));
+  const phase = phases[active];
 
   return (
     <section className="relative overflow-hidden bg-card" id="approach">
