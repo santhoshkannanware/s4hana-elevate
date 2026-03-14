@@ -43,7 +43,7 @@ const megaTabs: MegaTab[] = [
       { label: "Data & Analytics", href: "/products/data-analytics" },
       { label: "Cloud ERP Applications", href: "/products/cloud-erp/s4hana" },
       { label: "Technology Platform", href: "/products/technology-platform/btp" },
-      { label: "Transformation Management", href: "/products/transformation-management" },
+      { label: "Transformation Management", href: "/products/transformation-management/walkme-signavio" },
     ],
   },
   {
