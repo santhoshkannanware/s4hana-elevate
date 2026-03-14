@@ -173,17 +173,8 @@ export default function OurBusinessPage() {
 
       <StickySubNav active={activeSection} />
 
-      {/* ─── Metrics Band ─── */}
-      <section className="py-16 bg-card border-y border-border">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {metrics.map((m, i) => (
-            <Reveal key={m.label} delay={i * 0.1} className="text-center">
-              <span className="block text-[clamp(2rem,4vw,3.5rem)] font-bold text-primary leading-none">{m.value}</span>
-              <span className="text-sm text-muted-foreground tracking-widest uppercase mt-2 block">{m.label}</span>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+
+
 
       {/* ─── SAP Partnership Highlight ─── */}
       <section id="sap-partnership" className="py-24">
