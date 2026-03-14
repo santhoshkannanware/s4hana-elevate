@@ -543,6 +543,87 @@ function CTASection() {
   );
 }
 
+/* ─── FAQ Section ─── */
+const btpFaqs = [
+  { q: "What is SAP BTP (Business Technology Platform)?", a: "SAP BTP is a unified platform that combines database, analytics, integration, AI, and application development capabilities. It enables businesses to extend SAP applications, build custom solutions, and integrate across hybrid landscapes." },
+  { q: "How does BTP differ from traditional SAP development?", a: "BTP provides cloud-native development tools (SAP Build, CAP framework), low-code/no-code options, and pre-built integrations — enabling faster innovation cycles compared to traditional ABAP-only development." },
+  { q: "Can BTP integrate with non-SAP systems?", a: "Yes. SAP Integration Suite on BTP supports pre-built connectors for hundreds of SAP and non-SAP applications, enabling seamless data flow across your entire technology landscape." },
+  { q: "What AI capabilities does BTP offer?", a: "BTP includes SAP AI Core and SAP AI Launchpad for deploying machine learning models, plus pre-built AI services for document processing, recommendations, and predictive analytics." },
+  { q: "Is BTP suitable for small and mid-size enterprises?", a: "Absolutely. BTP's pay-as-you-go pricing and low-code tools like SAP Build Apps make it accessible for SMEs. Kannanware helps right-size BTP solutions to match your scale and budget." },
+  { q: "How does Kannanware implement BTP solutions?", a: "We follow a phased approach: Discovery (assess needs), Design (architect the solution), Build (develop & configure), and Deploy (go-live with hypercare). Our SAP-certified consultants ensure best practices throughout." },
+  { q: "What's the typical cost structure for BTP?", a: "BTP uses a consumption-based pricing model with cloud credits. Costs depend on the services used. Kannanware provides detailed TCO analysis and helps optimize your BTP spend." },
+];
+
+function BtpFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="py-24 md:py-28" style={{ background: "#0B0B0B" }}>
+      <div className="mx-auto w-full px-5 md:px-10 max-w-[900px]" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
+        >
+          <p className="eyebrow justify-center">FAQ</p>
+          <h2 className="sec-h">Frequently Asked <em>Questions</em></h2>
+          <p className="sec-p mx-auto text-center">Everything you need to know about SAP BTP and how we help you leverage it.</p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {btpFaqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="border rounded-sm overflow-hidden"
+                style={{ borderColor: isOpen ? "rgba(244,180,0,.3)" : "rgba(255,255,255,.08)", background: isOpen ? "rgba(244,180,0,.04)" : "rgba(255,255,255,.02)" }}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left bg-transparent border-none cursor-none group"
+                >
+                  <span className="text-[.95rem] font-semibold pr-4" style={{ color: isOpen ? "#F4B400" : "rgba(255,255,255,.85)" }}>
+                    {faq.q}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                    style={{ background: isOpen ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.06)" }}
+                  >
+                    <span className="text-sm leading-none" style={{ color: isOpen ? "#F4B400" : "rgba(255,255,255,.4)" }}>+</span>
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <p className="px-6 pb-5 text-[.9rem] leading-relaxed" style={{ color: "rgba(255,255,255,.55)" }}>
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Sub Nav Items ─── */
 const btpSubNavItems = [
   { id: "hero", label: "Overview" },
