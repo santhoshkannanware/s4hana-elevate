@@ -431,20 +431,63 @@ function CTASection() {
   );
 }
 
+/* ─── Sub Nav ─── */
+const energySubNavItems = [
+  { id: "hero", label: "Overview" },
+  { id: "challenges", label: "Challenges" },
+  { id: "value-chain", label: "Value Chain" },
+  { id: "capabilities", label: "Capabilities" },
+  { id: "architecture", label: "Architecture" },
+  { id: "impact", label: "Impact" },
+  { id: "story", label: "Transformation" },
+  { id: "cta", label: "Get Started" },
+];
+
+function StickySubNav() {
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const handleScroll = () => {
+      const offsets = energySubNavItems.map(item => { const el = document.getElementById(item.id); return { id: item.id, top: el ? el.getBoundingClientRect().top : Infinity }; });
+      const current = offsets.filter(o => o.top <= 160).pop();
+      if (current) setActive(current.id);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="fixed top-[72px] left-0 right-0 z-40 backdrop-blur-xl border-b" style={{ background: "rgba(11,11,11,.92)", borderColor: "rgba(244,180,0,.08)" }}>
+      <div className="max-w-[1320px] mx-auto px-6 flex items-center justify-center gap-1 overflow-x-auto scrollbar-none h-11">
+        {energySubNavItems.map(item => (
+          <button key={item.id} onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="relative whitespace-nowrap px-4 py-2.5 text-[.75rem] font-semibold tracking-wide transition-colors shrink-0"
+            style={{ color: active === item.id ? "#F4B400" : "rgba(255,255,255,.5)" }}>
+            {item.label}
+            {active === item.id && (
+              <motion.div layoutId="energy-subnav" className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full" style={{ background: "#F4B400" }} transition={{ type: "spring", stiffness: 400, damping: 30 }} />
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Page ─── */
 export default function EnergyPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
-      
       <Navbar />
-      <HeroSection />
-      <ChallengesSection />
-      <ValueChain />
-      <CapabilitiesSection />
-      <TechArchitecture />
-      <BusinessImpact />
-      <TransformationStory />
-      <CTASection />
+      <StickySubNav />
+      <div id="hero"><HeroSection /></div>
+      <div id="challenges"><ChallengesSection /></div>
+      <div id="value-chain"><ValueChain /></div>
+      <div id="capabilities"><CapabilitiesSection /></div>
+      <div id="architecture"><TechArchitecture /></div>
+      <div id="impact"><BusinessImpact /></div>
+      <div id="story"><TransformationStory /></div>
+      <div id="cta"><CTASection /></div>
       <Footer />
     </div>
   );
