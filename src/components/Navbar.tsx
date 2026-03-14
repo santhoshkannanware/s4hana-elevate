@@ -128,7 +128,7 @@ const megaTabs: MegaTab[] = [
     label: "Insights",
     type: "single",
     items: [
-      { label: "Blogs", href: "/insights/blogs" },
+      { label: "Blogs", href: "https://www.kannanware.com/insights/" },
       { label: "Case Studies", href: "/insights/case-studies" },
       { label: "Knowledge Base", href: "/insights/knowledge-base" },
     ],
