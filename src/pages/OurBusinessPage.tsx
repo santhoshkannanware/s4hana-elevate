@@ -303,8 +303,8 @@ export default function OurBusinessPage() {
 function ScrollSpy({ onUpdate }: { onUpdate: (id: string) => void }) {
   const ids = SUB_SECTIONS.map((s) => s.toLowerCase().replace(/\s+/g, "-"));
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
+  useEffect(() => {
+    const handler = () => {
       for (const id of [...ids].reverse()) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= 160) {
@@ -312,8 +312,10 @@ function ScrollSpy({ onUpdate }: { onUpdate: (id: string) => void }) {
           break;
         }
       }
-    }, { passive: true });
-  }
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, [ids, onUpdate]);
 
   return null;
 }
