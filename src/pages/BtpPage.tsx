@@ -552,6 +552,7 @@ const btpSubNavItems = [
   { id: "timeline", label: "Timeline" },
   { id: "architecture", label: "Architecture" },
   { id: "impact", label: "Impact" },
+  { id: "faq", label: "FAQ" },
   { id: "cta", label: "Get Started" },
 ];
 
