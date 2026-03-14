@@ -21,7 +21,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <CustomCursor />
+      
       <AnimatePresence>
         {loading && <LoadingScreen onComplete={handleLoadComplete} />}
       </AnimatePresence>

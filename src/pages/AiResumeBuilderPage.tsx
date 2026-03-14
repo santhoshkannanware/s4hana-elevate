@@ -408,7 +408,7 @@ export default function AiResumeBuilderPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <>
-      <CustomCursor />
+      
       <Navbar />
       <main>
         <HeroSection />

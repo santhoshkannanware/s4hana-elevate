@@ -18,6 +18,7 @@ import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
 import OurStoryPage from "./pages/OurStoryPage.tsx";
 import GeoRedirect from "./components/GeoRedirect.tsx";
+import CustomCursor from "./components/CustomCursor.tsx";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ function RegionRoutes() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <CustomCursor />
       <Toaster />
       <Sonner />
       <BrowserRouter>

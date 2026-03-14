@@ -408,7 +408,7 @@ export default function CvOptimiserPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <>
-      <CustomCursor />
+      
       <Navbar />
       <main>
         <HeroSection />

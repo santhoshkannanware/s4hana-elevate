@@ -435,7 +435,7 @@ function CTASection() {
 export default function EnergyPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
-      <CustomCursor />
+      
       <Navbar />
       <HeroSection />
       <ChallengesSection />

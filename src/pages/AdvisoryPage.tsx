@@ -371,7 +371,7 @@ export default function AdvisoryPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="bg-background text-foreground font-['Ubuntu',sans-serif]" style={{ cursor: "none" }}>
-      <CustomCursor />
+      
       <Navbar />
       <main>
         <HeroSection />

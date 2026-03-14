@@ -582,7 +582,7 @@ function StickySubNav() {
 export default function S4HanaPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
-      <CustomCursor />
+      
       <Navbar />
       <StickySubNav />
       <div id="hero"><HeroSection /></div>
