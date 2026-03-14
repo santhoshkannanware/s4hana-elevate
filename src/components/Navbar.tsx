@@ -39,10 +39,10 @@ const megaTabs: MegaTab[] = [
     label: "Products",
     type: "single",
     items: [
-      { label: "Artificial Intelligence", href: "/products/technology-platform/btp" },
+      { label: "Artificial Intelligence", href: "/products/artificial-intelligence/sap-business-ai" },
       { label: "Data & Analytics", href: "/products/data-analytics" },
       { label: "Cloud ERP Applications", href: "/products/cloud-erp/s4hana" },
-      { label: "Technology Platform", href: "/products/technology-platform" },
+      { label: "Technology Platform", href: "/products/technology-platform/btp" },
       { label: "Transformation Management", href: "/products/transformation-management" },
     ],
   },
