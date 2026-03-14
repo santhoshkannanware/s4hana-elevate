@@ -16,6 +16,7 @@ import EaaSPage from "./pages/EaaSPage.tsx";
 import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
 import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
+import OurStoryPage from "./pages/OurStoryPage.tsx";
 import GeoRedirect from "./components/GeoRedirect.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,8 @@ function RegionRoutes() {
         <Route path="kin-ai/cv-optimiser" element={<CvOptimiserPage />} />
         <Route path="kin-ai/ai-resume-builder" element={<AiResumeBuilderPage />} />
         <Route path="kin-ai/talent-matcher" element={<TalentMatcherPage />} />
+        {/* About */}
+        <Route path="about/our-story" element={<OurStoryPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RegionProvider>
