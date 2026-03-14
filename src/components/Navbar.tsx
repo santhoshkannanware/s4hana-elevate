@@ -179,7 +179,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
   const { regionPath } = useRegion();
 
   return (
-    <div className="absolute top-full left-0 right-0 z-50 bg-white border-t border-[#eee] shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
+    <div className="absolute top-full left-0 right-0 z-50 bg-[#0c0c0c] border-t border-[#262626] shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
       style={{ animation: "megaFadeIn 0.2s ease-out" }}
     >
       <div className="max-w-[1280px] mx-auto px-10 py-8">
@@ -188,7 +188,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
           <div className="grid grid-cols-3 gap-x-12 gap-y-8">
             {tab.columns.map((group) => (
               <div key={group.heading}>
-                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-[#0c0c0c] mb-3 pb-2 border-b border-[#eee]">
+                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-white mb-3 pb-2 border-b border-[#262626]">
                   {group.heading}
                 </h4>
                 <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
@@ -197,7 +197,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                       <Link
                         to={regionPath(item.href)}
                         onClick={onClose}
-                        className="block py-1.5 text-[.85rem] text-[#555] hover:text-[#0c0c0c] hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
                       >
                         {item.label}
                       </Link>
@@ -215,7 +215,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                 key={item.label}
                 to={regionPath(item.href)}
                 onClick={onClose}
-                className="block py-2.5 px-3 text-[.9rem] text-[#444] hover:text-[#0c0c0c] hover:bg-[#fafafa] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
               >
                 {item.label}
               </Link>
