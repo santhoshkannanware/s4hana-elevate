@@ -506,19 +506,92 @@ function CTASection() {
   );
 }
 
+/* ─── Sticky Sub-Header ─── */
+const subNavItems = [
+  { label: "Overview", id: "hero" },
+  { label: "Deployment", id: "deployment" },
+  { label: "Live Demo", id: "demo" },
+  { label: "Expertise", id: "expertise" },
+  { label: "Methodology", id: "methodology" },
+  { label: "Architecture", id: "architecture" },
+  { label: "Impact", id: "impact" },
+  { label: "Get Started", id: "cta" },
+];
+
+function StickySubNav() {
+  const [active, setActive] = useState("");
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show after scrolling past hero
+      setVisible(window.scrollY > 300);
+
+      // Determine active section
+      const offsets = subNavItems.map(item => {
+        const el = document.getElementById(item.id);
+        return { id: item.id, top: el ? el.getBoundingClientRect().top : Infinity };
+      });
+      const current = offsets.filter(o => o.top <= 160).pop();
+      if (current) setActive(current.id);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ y: -60 }}
+      animate={{ y: visible ? 0 : -60 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="fixed top-[72px] left-0 right-0 z-40 backdrop-blur-xl border-b"
+      style={{
+        background: "rgba(11,11,11,.92)",
+        borderColor: "rgba(244,180,0,.08)",
+      }}
+    >
+      <div className="max-w-[1320px] mx-auto px-6 flex items-center gap-1 overflow-x-auto scrollbar-none h-11">
+        {subNavItems.map(item => (
+          <button
+            key={item.id}
+            onClick={() => {
+              document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="relative whitespace-nowrap px-4 py-2.5 text-[.75rem] font-semibold tracking-wide transition-colors shrink-0"
+            style={{
+              color: active === item.id ? "#F4B400" : "rgba(255,255,255,.5)",
+            }}
+          >
+            {item.label}
+            {active === item.id && (
+              <motion.div
+                layoutId="subnav-indicator"
+                className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full"
+                style={{ background: "#F4B400" }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─── Page ─── */
 export default function S4HanaPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
       <CustomCursor />
       <Navbar />
-      <HeroSection />
-      <CloudToggle />
+      <StickySubNav />
+      <div id="hero"><HeroSection /></div>
+      <div id="deployment"><CloudToggle /></div>
       <LiveDemo />
-      <ExpertiseSection />
-      <TransformationTimeline />
-      <ArchitectureViz />
-      <BusinessImpact />
+      <div id="expertise"><ExpertiseSection /></div>
+      <div id="methodology"><TransformationTimeline /></div>
+      <div id="architecture"><ArchitectureViz /></div>
+      <div id="impact"><BusinessImpact /></div>
       <CTASection />
       <Footer />
     </div>
