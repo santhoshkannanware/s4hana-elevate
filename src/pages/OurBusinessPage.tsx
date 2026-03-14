@@ -14,6 +14,10 @@ import nttData from "@/assets/partners/ntt-data.png";
 import sriGowrish from "@/assets/partners/sri-gowrish.png";
 import alghanim from "@/assets/partners/alghanim.png";
 import dhaksha from "@/assets/partners/dhaksha.png";
+import parrys from "@/assets/partners/parrys.png";
+import kwik from "@/assets/partners/kwik.png";
+import winomechanic from "@/assets/partners/winomechanic.png";
+import jkFenner from "@/assets/partners/jk-fenner.png";
 
 /* ─── Reveal wrapper ─── */
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
