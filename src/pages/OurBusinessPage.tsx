@@ -110,12 +110,12 @@ export default function OurBusinessPage() {
       <Navbar />
 
       {/* ─── Hero ─── */}
-      <section ref={heroRef} id="overview" className="relative min-h-[70vh] flex items-center overflow-hidden">
+      <section ref={heroRef} id="overview" className="relative min-h-[80vh] flex items-center overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
-          <img src={sapPartnerHero} alt="Transformation with Kannanware" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/30 z-10" />
+          <img src={sapPartnerHero} alt="Transformation with Kannanware" className="w-full h-full object-cover object-center" />
         </motion.div>
-        <div className="relative z-20 max-w-7xl mx-auto px-6 py-32">
+        <div className="relative z-20 w-full px-8 md:px-16 lg:px-24 py-32">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[.2em] text-primary mb-4">
               <span className="w-8 h-px bg-primary" /> About Our Business
