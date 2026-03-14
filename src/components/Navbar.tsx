@@ -135,7 +135,7 @@ const megaTabs: MegaTab[] = [
   },
 ];
 
-/* ─── Region Selector (white-bg version) ─── */
+/* ─── Region Selector (dark-bg version) ─── */
 function RegionSelector() {
   const { region, setRegion } = useRegion();
   const [open, setOpen] = useState(false);
@@ -147,25 +147,25 @@ function RegionSelector() {
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button className="flex items-center gap-1.5 text-[.8rem] font-medium text-[#555] hover:text-[#0c0c0c] transition-colors cursor-none bg-transparent border border-[#ddd] rounded px-2.5 py-1.5 hover:border-[#999]">
+      <button className="flex items-center gap-1.5 text-[.8rem] font-medium text-[#aaa] hover:text-white transition-colors cursor-none bg-transparent border border-[#333] rounded px-2.5 py-1.5 hover:border-[#555]">
         <Globe className="w-3.5 h-3.5" />
         <span>{current.flag}</span>
         <span className="uppercase tracking-wider">{current.code}</span>
         <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute top-full right-0 mt-2 min-w-[180px] rounded-md py-1 shadow-xl z-50 bg-white border border-[#e5e5e5]">
+        <div className="absolute top-full right-0 mt-2 min-w-[180px] rounded-md py-1 shadow-xl z-50 bg-[#141414] border border-[#262626]">
           {REGIONS.map((r) => (
             <button
               key={r.code}
               onClick={() => { setRegion(r.code); setOpen(false); }}
               className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[.85rem] transition-colors cursor-none bg-transparent border-none text-left ${
-                r.code === region ? "text-[#0c0c0c] bg-[#f5f5f5] font-semibold" : "text-[#666] hover:text-[#0c0c0c] hover:bg-[#fafafa]"
+                r.code === region ? "text-white bg-[#1f1f1f] font-semibold" : "text-[#aaa] hover:text-white hover:bg-[#1a1a1a]"
               }`}
             >
               <span className="text-base">{r.flag}</span>
               <span>{r.label}</span>
-              {r.code === region && <span className="ml-auto text-[#0c0c0c] text-xs">●</span>}
+              {r.code === region && <span className="ml-auto text-[#E8A000] text-xs">●</span>}
             </button>
           ))}
         </div>
@@ -179,7 +179,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
   const { regionPath } = useRegion();
 
   return (
-    <div className="absolute top-full left-0 right-0 z-50 bg-white border-t border-[#eee] shadow-[0_16px_48px_rgba(0,0,0,0.08)]"
+    <div className="absolute top-full left-0 right-0 z-50 bg-[#0c0c0c] border-t border-[#262626] shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
       style={{ animation: "megaFadeIn 0.2s ease-out" }}
     >
       <div className="max-w-[1280px] mx-auto px-10 py-8">
@@ -188,7 +188,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
           <div className="grid grid-cols-3 gap-x-12 gap-y-8">
             {tab.columns.map((group) => (
               <div key={group.heading}>
-                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-[#0c0c0c] mb-3 pb-2 border-b border-[#eee]">
+                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-white mb-3 pb-2 border-b border-[#262626]">
                   {group.heading}
                 </h4>
                 <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
@@ -197,7 +197,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                       <Link
                         to={regionPath(item.href)}
                         onClick={onClose}
-                        className="block py-1.5 text-[.85rem] text-[#555] hover:text-[#0c0c0c] hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
                       >
                         {item.label}
                       </Link>
@@ -215,7 +215,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                 key={item.label}
                 to={regionPath(item.href)}
                 onClick={onClose}
-                className="block py-2.5 px-3 text-[.9rem] text-[#444] hover:text-[#0c0c0c] hover:bg-[#fafafa] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
               >
                 {item.label}
               </Link>
@@ -281,17 +281,17 @@ export default function Navbar() {
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-[1000] transition-all duration-300"
         style={{
-          background: "#fff",
+          background: "#0c0c0c",
           boxShadow: scrolled
-            ? "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)"
-            : "0 1px 0 rgba(0,0,0,0.06)",
+            ? "0 4px 20px rgba(0,0,0,0.5)"
+            : "0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
         {/* Top bar */}
         <div className="max-w-[1400px] mx-auto h-[72px] flex items-center px-6 lg:px-10">
           {/* Logo */}
           <Link to={regionPath("/")} className="flex items-center gap-3 no-underline cursor-none mr-10 shrink-0">
-            <img src={LOGO_SVG_DARK} alt="Kannanware" className="h-10 w-auto block" />
+            <img src={LOGO_SVG} alt="Kannanware" className="h-10 w-auto block" />
           </Link>
 
           {/* Desktop nav — left aligned */}
@@ -307,8 +307,8 @@ export default function Navbar() {
                   <button
                     className={`px-4 py-6 text-[.85rem] font-medium transition-colors duration-200 cursor-none bg-transparent border-none relative tracking-[.01em] ${
                       isActive
-                        ? "text-[#0c0c0c]"
-                        : "text-[#555] hover:text-[#0c0c0c]"
+                        ? "text-white"
+                        : "text-[#aaa] hover:text-white"
                     }`}
                   >
                     {tab.label}
@@ -329,7 +329,7 @@ export default function Navbar() {
             <RegionSelector />
             <button
               onClick={() => document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-5 py-2.5 bg-[#0c0c0c] text-white text-[.8rem] font-semibold tracking-[.04em] border-none cursor-none transition-all duration-200 hover:bg-[#333] rounded"
+              className="px-5 py-2.5 bg-white text-[#0c0c0c] text-[.8rem] font-semibold tracking-[.04em] border-none cursor-none transition-all duration-200 hover:bg-[#e5e5e5] rounded"
             >
               Contact Us
             </button>
@@ -337,7 +337,7 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 ml-auto" aria-label="Toggle menu">
-            {mobileOpen ? <X className="w-6 h-6 text-[#0c0c0c]" /> : <Menu className="w-6 h-6 text-[#0c0c0c]" />}
+            {mobileOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
           </button>
         </div>
 
@@ -350,10 +350,10 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-[#eee] max-h-[80vh] overflow-y-auto">
+          <div className="lg:hidden bg-[#0c0c0c] border-t border-[#262626] max-h-[80vh] overflow-y-auto">
             <div className="px-5 py-6 flex flex-col gap-1">
               {/* Mobile region selector */}
-              <div className="flex gap-2 mb-4 pb-4 border-b border-[#eee]">
+              <div className="flex gap-2 mb-4 pb-4 border-b border-[#262626]">
                 {REGIONS.map((r) => (
                   <MobileRegionButton key={r.code} r={r} />
                 ))}
@@ -363,7 +363,7 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => { document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" }); setMobileOpen(false); }}
-                className="mt-4 px-5 py-2.5 bg-[#0c0c0c] text-white text-xs font-semibold tracking-wider rounded"
+                className="mt-4 px-5 py-2.5 bg-white text-[#0c0c0c] text-xs font-semibold tracking-wider rounded"
               >
                 Contact Us
               </button>
@@ -383,8 +383,8 @@ function MobileRegionButton({ r }: { r: typeof REGIONS[number] }) {
       onClick={() => setRegion(r.code)}
       className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded text-xs font-medium transition-colors cursor-none bg-transparent border ${
         region === r.code
-          ? "border-[#0c0c0c] text-[#0c0c0c] bg-[#f5f5f5] font-semibold"
-          : "border-[#ddd] text-[#888] hover:text-[#0c0c0c]"
+          ? "border-[#E8A000] text-white bg-[#1f1f1f] font-semibold"
+          : "border-[#333] text-[#aaa] hover:text-white hover:border-[#555]"
       }`}
     >
       <span>{r.flag}</span>
@@ -402,20 +402,20 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
     : tab.items;
 
   return (
-    <div className="border-b border-[#f0f0f0]">
+    <div className="border-b border-[#262626]">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-3.5 text-sm font-semibold text-[#333] transition-colors bg-transparent border-none"
+        className="flex items-center justify-between w-full py-3.5 text-sm font-semibold text-white transition-colors bg-transparent border-none"
       >
         <span>{tab.label}</span>
-        <ChevronDown className={`w-4 h-4 text-[#999] transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-4 h-4 text-[#666] transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
         <div className="pl-3 pb-3 flex flex-col gap-0.5">
           {tab.type === "multi" ? (
             tab.columns.map((group) => (
               <div key={group.heading} className="mb-3">
-                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#999] mb-1 px-2">
+                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#666] mb-1 px-2">
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
@@ -423,7 +423,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                     key={item.label}
                     to={regionPath(item.href)}
                     onClick={onClose}
-                    className="block py-1.5 px-2 text-[.8rem] text-[#555] hover:text-[#0c0c0c] transition-colors no-underline"
+                    className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
                   >
                     {item.label}
                   </Link>
@@ -436,7 +436,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                 key={item.label}
                 to={regionPath(item.href)}
                 onClick={onClose}
-                className="block py-2 px-2 text-[.8rem] text-[#555] hover:text-[#0c0c0c] transition-colors no-underline"
+                className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
               >
                 {item.label}
               </Link>
