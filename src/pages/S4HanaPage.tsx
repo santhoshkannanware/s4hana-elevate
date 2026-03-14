@@ -586,6 +586,7 @@ export default function S4HanaPage() {
       <div id="methodology"><TransformationTimeline /></div>
       <div id="architecture"><ArchitectureViz /></div>
       <div id="impact"><BusinessImpact /></div>
+      <div id="faq"><S4HanaFAQ /></div>
       <CTASection />
       <Footer />
     </div>

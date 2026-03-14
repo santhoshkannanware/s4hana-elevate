@@ -623,6 +623,7 @@ export default function BtpPage() {
       <div id="timeline"><TransformationTimeline /></div>
       <div id="architecture"><ArchitectureViz /></div>
       <div id="impact"><BusinessImpact /></div>
+      <div id="faq"><BtpFAQ /></div>
       <div id="cta"><CTASection /></div>
       <Footer />
     </div>
