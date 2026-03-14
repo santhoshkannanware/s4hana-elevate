@@ -506,6 +506,87 @@ function CTASection() {
   );
 }
 
+/* ─── FAQ Section ─── */
+const s4hanaFaqs = [
+  { q: "What is SAP S/4HANA?", a: "SAP S/4HANA is SAP's next-generation intelligent ERP suite built on the SAP HANA in-memory database. It provides real-time analytics, simplified data models, and a modern user experience through SAP Fiori." },
+  { q: "What's the difference between S/4HANA Cloud and On-Premise?", a: "S/4HANA Cloud (Public Edition) is a SaaS solution with quarterly updates managed by SAP. S/4HANA Private Cloud and On-Premise editions offer more customization flexibility with customer-managed upgrade cycles." },
+  { q: "How long does an S/4HANA implementation typically take?", a: "Implementation timelines vary based on scope and complexity. A greenfield cloud deployment can take 3-6 months, while a brownfield migration from an existing SAP system typically takes 6-18 months." },
+  { q: "Can we migrate from SAP ECC to S/4HANA?", a: "Yes. Kannanware specializes in system conversions (brownfield), selective data migrations (bluefield), and fresh implementations (greenfield). We assess your landscape and recommend the optimal approach." },
+  { q: "What modules does Kannanware specialize in?", a: "Our core expertise is in SAP FICO (Finance & Controlling), but we also cover MM, SD, PP, and integrated analytics through our network of certified consultants." },
+  { q: "Does S/4HANA support real-time reporting?", a: "Yes. With the HANA in-memory database, S/4HANA eliminates the need for separate data warehouses for operational reporting, enabling real-time financial closes, profitability analysis, and predictive insights." },
+  { q: "What ROI can we expect from S/4HANA?", a: "Organizations typically see 20-30% reduction in total cost of ownership, 50% faster financial closes, and significant improvements in process efficiency. Kannanware helps you build a business case with projected ROI tailored to your operations." },
+];
+
+function S4HanaFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="py-24 md:py-28" style={{ background: "#0B0B0B" }}>
+      <div className="mx-auto w-full px-5 md:px-10 max-w-[900px]" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
+        >
+          <p className="eyebrow justify-center">FAQ</p>
+          <h2 className="sec-h">Frequently Asked <em>Questions</em></h2>
+          <p className="sec-p mx-auto text-center">Everything you need to know about SAP S/4HANA and our implementation approach.</p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {s4hanaFaqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="border rounded-sm overflow-hidden"
+                style={{ borderColor: isOpen ? "rgba(244,180,0,.3)" : "rgba(255,255,255,.08)", background: isOpen ? "rgba(244,180,0,.04)" : "rgba(255,255,255,.02)" }}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left bg-transparent border-none cursor-none group"
+                >
+                  <span className="text-[.95rem] font-semibold pr-4" style={{ color: isOpen ? "#F4B400" : "rgba(255,255,255,.85)" }}>
+                    {faq.q}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                    style={{ background: isOpen ? "rgba(244,180,0,.15)" : "rgba(255,255,255,.06)" }}
+                  >
+                    <span className="text-sm leading-none" style={{ color: isOpen ? "#F4B400" : "rgba(255,255,255,.4)" }}>+</span>
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <p className="px-6 pb-5 text-[.9rem] leading-relaxed" style={{ color: "rgba(255,255,255,.55)" }}>
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Sticky Sub-Header ─── */
 const subNavItems = [
   { label: "Overview", id: "hero" },
@@ -515,6 +596,7 @@ const subNavItems = [
   { label: "Methodology", id: "methodology" },
   { label: "Architecture", id: "architecture" },
   { label: "Impact", id: "impact" },
+  { label: "FAQ", id: "faq" },
   { label: "Get Started", id: "cta" },
 ];
 
@@ -585,6 +667,7 @@ export default function S4HanaPage() {
       <div id="methodology"><TransformationTimeline /></div>
       <div id="architecture"><ArchitectureViz /></div>
       <div id="impact"><BusinessImpact /></div>
+      <div id="faq"><S4HanaFAQ /></div>
       <CTASection />
       <Footer />
     </div>
