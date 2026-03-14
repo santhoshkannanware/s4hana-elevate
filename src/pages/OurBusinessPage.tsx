@@ -77,7 +77,7 @@ const metrics = [
   { value: "15+", label: "Years of SAP Excellence" },
   { value: "200+", label: "SAP Projects Delivered" },
   { value: "50+", label: "Enterprise Clients" },
-  { value: "9", label: "Strategic Partners" },
+  { value: "13", label: "Strategic Partners" },
 ];
 
 const strengths = [
