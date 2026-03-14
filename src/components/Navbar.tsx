@@ -40,7 +40,7 @@ const megaTabs: MegaTab[] = [
     type: "single",
     items: [
       { label: "Artificial Intelligence", href: "/products/artificial-intelligence/sap-business-ai" },
-      { label: "Data & Analytics", href: "/products/data-analytics" },
+      { label: "Data & Analytics", href: "/products/data-analytics/sap-business-data-cloud" },
       { label: "Cloud ERP Applications", href: "/products/cloud-erp/s4hana" },
       { label: "Technology Platform", href: "/products/technology-platform/btp" },
       { label: "Transformation Management", href: "/products/transformation-management/walkme-signavio" },
@@ -128,7 +128,7 @@ const megaTabs: MegaTab[] = [
     label: "Insights",
     type: "single",
     items: [
-      { label: "Blogs", href: "/insights/blogs" },
+      { label: "Blogs", href: "https://www.kannanware.com/insights/" },
       { label: "Case Studies", href: "/insights/case-studies" },
       { label: "Knowledge Base", href: "/insights/knowledge-base" },
     ],
@@ -194,13 +194,25 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                 <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
                   {group.items.map((item) => (
                     <li key={item.label}>
-                      <Link
-                        to={regionPath(item.href)}
-                        onClick={onClose}
-                        className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
-                      >
-                        {item.label}
-                      </Link>
+                      {item.href.startsWith("http") ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={onClose}
+                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={regionPath(item.href)}
+                          onClick={onClose}
+                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -211,14 +223,27 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
           /* Single column layout */
           <div className={`grid gap-0.5 ${tab.items.length > 5 ? "grid-cols-2 max-w-2xl" : "max-w-sm"}`}>
             {tab.items.map((item) => (
-              <Link
-                key={item.label}
-                to={regionPath(item.href)}
-                onClick={onClose}
-                className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
-              >
-                {item.label}
-              </Link>
+              item.href.startsWith("http") ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={regionPath(item.href)}
+                  onClick={onClose}
+                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </div>
         )}
@@ -419,27 +444,53 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={regionPath(item.href)}
-                    onClick={onClose}
-                    className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                  >
-                    {item.label}
-                  </Link>
+                  item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      to={regionPath(item.href)}
+                      onClick={onClose}
+                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ))}
               </div>
             ))
           ) : (
             allItems.map((item) => (
-              <Link
-                key={item.label}
-                to={regionPath(item.href)}
-                onClick={onClose}
-                className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-              >
-                {item.label}
-              </Link>
+              item.href.startsWith("http") ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={regionPath(item.href)}
+                  onClick={onClose}
+                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                >
+                  {item.label}
+                </Link>
+              )
             ))
           )}
         </div>
