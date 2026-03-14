@@ -171,10 +171,6 @@ const megaTabs: MegaTab[] = [
         sections: [
           {
             subHeading: "Individual Specialist",
-            items: [],
-          },
-          {
-            subHeading: "SAP Expertise",
             items: [
               { label: "SAP FICO", href: "/transform-manage/services/eaas#fico" },
               { label: "PP", href: "/transform-manage/services/eaas#pp" },
