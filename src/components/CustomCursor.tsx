@@ -32,9 +32,8 @@ export default function CustomCursor() {
     let raf: number;
     const loop = () => {
       const p = pos.current;
-      // Faster lerp factor (0.25 vs 0.14) for snappier feel
-      p.cx += (p.mx - p.cx) * 0.25;
-      p.cy += (p.my - p.cy) * 0.25;
+      p.cx += (p.mx - p.cx) * 0.45;
+      p.cy += (p.my - p.cy) * 0.45;
       el.style.transform = `translate3d(${p.cx}px, ${p.cy}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
