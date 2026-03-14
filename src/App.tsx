@@ -33,6 +33,7 @@ function RegionRoutes() {
         <Route path="products/cloud-erp/s4hana" element={<S4HanaPage />} />
         <Route path="products/artificial-intelligence/sap-business-ai" element={<SapBusinessAiPage />} />
         <Route path="products/technology-platform/btp" element={<BtpPage />} />
+        <Route path="products/transformation-management/walkme-signavio" element={<TransformationMgmtPage />} />
         {/* Industries */}
         <Route path="industries/energy" element={<EnergyPage />} />
         {/* Transform & Manage > Functions */}
