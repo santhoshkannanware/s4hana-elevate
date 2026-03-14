@@ -235,6 +235,172 @@ const megaTabs: MegaTab[] = [
     ],
   },
 ];
+
+/* ─── Region Selector (dark-bg version) ─── */
+function RegionSelector() {
+  const { region, setRegion } = useRegion();
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
+  const current = REGIONS.find((r) => r.code === region) || REGIONS[0];
+
+  const enter = () => { clearTimeout(timeout.current); setOpen(true); };
+  const leave = () => { timeout.current = setTimeout(() => setOpen(false), 150); };
+
+  return (
+    <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
+      <button className="flex items-center gap-1.5 text-[.8rem] font-medium text-[#aaa] hover:text-white transition-colors cursor-none bg-transparent border border-[#333] rounded px-2.5 py-1.5 hover:border-[#555]">
+        <Globe className="w-3.5 h-3.5" />
+        <span>{current.flag}</span>
+        <span className="uppercase tracking-wider">{current.code}</span>
+        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute top-full right-0 mt-2 min-w-[180px] rounded-md py-1 shadow-xl z-50 bg-[#141414] border border-[#262626]">
+          {REGIONS.map((r) => (
+            <button
+              key={r.code}
+              onClick={() => { setRegion(r.code); setOpen(false); }}
+              className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[.85rem] transition-colors cursor-none bg-transparent border-none text-left ${
+                r.code === region ? "text-white bg-[#1f1f1f] font-semibold" : "text-[#aaa] hover:text-white hover:bg-[#1a1a1a]"
+              }`}
+            >
+              <span className="text-base">{r.flag}</span>
+              <span>{r.label}</span>
+              {r.code === region && <span className="ml-auto text-[#E8A000] text-xs">●</span>}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── Helper: render a link (internal or external) ─── */
+function NavLink({ item, onClose, regionPath, className }: { item: SubItem; onClose: () => void; regionPath: (p: string) => string; className: string }) {
+  if (item.href.startsWith("http")) {
+    return (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClose} className={className}>
+        {item.label}
+      </a>
+    );
+  }
+  return (
+    <Link to={regionPath(item.href)} onClick={onClose} className={className}>
+      {item.label}
+    </Link>
+  );
+}
+
+/* ─── Mega Menu Panel ─── */
+function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) {
+  const { regionPath } = useRegion();
+  const linkClass = "block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none";
+  const singleLinkClass = "block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal";
+
+  return (
+    <div className="absolute top-full left-0 right-0 z-50 bg-[#0c0c0c] border-t border-[#262626] shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+      style={{ animation: "megaFadeIn 0.2s ease-out" }}
+    >
+      <div className="max-w-[1280px] mx-auto px-10 py-8">
+        {tab.type === "services" ? (
+          /* ── Services 3-column layout ── */
+          <div className="grid grid-cols-3 gap-x-16">
+            {tab.columns.map((col) => (
+              <div key={col.heading}>
+                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-[#E8A000] mb-4 pb-2 border-b border-[#262626]">
+                  {col.heading}
+                </h4>
+                {/* Top-level items (Advisory) */}
+                {col.topItems && (
+                  <ul className="list-none p-0 m-0 flex flex-col gap-0.5 mb-4">
+                    {col.topItems.map((item) => (
+                      <li key={item.label}>
+                        <NavLink item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {/* Grouped sub-sections (Execute, EaaS) */}
+                {col.sections && col.sections.map((sec) => (
+                  <div key={sec.subHeading} className="mb-3">
+                    <p className="text-[.75rem] font-semibold text-white mb-1 mt-1">{sec.subHeading}</p>
+                    {sec.items.length > 0 && (
+                      <ul className="list-none p-0 m-0 pl-3 flex flex-col gap-0">
+                        {sec.items.map((item) => (
+                          <li key={item.label}>
+                            <NavLink item={item} onClose={onClose} regionPath={regionPath} className="block py-1 text-[.8rem] text-[#888] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none" />
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : tab.type === "multi" ? (
+          /* Multi-column layout for Capabilities */
+          <div className="grid grid-cols-3 gap-x-12 gap-y-8">
+            {tab.columns.map((group) => (
+              <div key={group.heading}>
+                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-white mb-3 pb-2 border-b border-[#262626]">
+                  {group.heading}
+                </h4>
+                <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
+                  {group.items.map((item) => (
+                    <li key={item.label}>
+                      <NavLink item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ) : (
+          /* Single column layout */
+          <div className={`grid gap-0.5 ${tab.items.length > 5 ? "grid-cols-2 max-w-2xl" : "max-w-sm"}`}>
+            {tab.items.map((item) => (
+              <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={singleLinkClass} />
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Bottom accent line */}
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#E8A000]/40 to-transparent" />
+    </div>
+  );
+}
+
+/* ─── Main Navbar ─── */
+export default function Navbar() {
+  const { regionPath } = useRegion();
+  const [scrolled, setScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActiveTab(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleTabEnter = (label: string) => {
+    clearTimeout(timeout.current);
+    setActiveTab(label);
+  };
+
   const handleTabLeave = () => {
     timeout.current = setTimeout(() => setActiveTab(null), 200);
   };
@@ -373,9 +539,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
   const { regionPath } = useRegion();
   const [open, setOpen] = useState(false);
 
-  const allItems: SubItem[] = tab.type === "multi"
-    ? tab.columns.flatMap((col) => col.items)
-    : tab.items;
+  const linkClass = "block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline";
 
   return (
     <div className="border-b border-[#262626]">
@@ -388,60 +552,40 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
       </button>
       {open && (
         <div className="pl-3 pb-3 flex flex-col gap-0.5">
-          {tab.type === "multi" ? (
+          {tab.type === "services" ? (
+            /* Services mobile: show columns with sub-sections */
+            tab.columns.map((col) => (
+              <div key={col.heading} className="mb-3">
+                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#E8A000] mb-1 px-2">
+                  {col.heading}
+                </p>
+                {col.topItems?.map((item) => (
+                  <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
+                ))}
+                {col.sections?.map((sec) => (
+                  <div key={sec.subHeading} className="mt-1">
+                    <p className="text-[.7rem] font-semibold text-[#ccc] px-2 py-0.5">{sec.subHeading}</p>
+                    {sec.items.map((item) => (
+                      <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className="block py-1 px-4 text-[.75rem] text-[#888] hover:text-white transition-colors no-underline" />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : tab.type === "multi" ? (
             tab.columns.map((group) => (
               <div key={group.heading} className="mb-3">
                 <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#666] mb-1 px-2">
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
-                  item.href.startsWith("http") ? (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={onClose}
-                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={item.label}
-                      to={regionPath(item.href)}
-                      onClick={onClose}
-                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                    >
-                      {item.label}
-                    </Link>
-                  )
+                  <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
                 ))}
               </div>
             ))
           ) : (
-            allItems.map((item) => (
-              item.href.startsWith("http") ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={regionPath(item.href)}
-                  onClick={onClose}
-                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                >
-                  {item.label}
-                </Link>
-              )
+            tab.items.map((item) => (
+              <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline" />
             ))
           )}
         </div>
