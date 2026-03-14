@@ -194,13 +194,25 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                 <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
                   {group.items.map((item) => (
                     <li key={item.label}>
-                      <Link
-                        to={regionPath(item.href)}
-                        onClick={onClose}
-                        className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
-                      >
-                        {item.label}
-                      </Link>
+                      {item.href.startsWith("http") ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={onClose}
+                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={regionPath(item.href)}
+                          onClick={onClose}
+                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
