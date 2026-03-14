@@ -402,20 +402,20 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
     : tab.items;
 
   return (
-    <div className="border-b border-[#f0f0f0]">
+    <div className="border-b border-[#262626]">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-3.5 text-sm font-semibold text-[#333] transition-colors bg-transparent border-none"
+        className="flex items-center justify-between w-full py-3.5 text-sm font-semibold text-white transition-colors bg-transparent border-none"
       >
         <span>{tab.label}</span>
-        <ChevronDown className={`w-4 h-4 text-[#999] transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-4 h-4 text-[#666] transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
         <div className="pl-3 pb-3 flex flex-col gap-0.5">
           {tab.type === "multi" ? (
             tab.columns.map((group) => (
               <div key={group.heading} className="mb-3">
-                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#999] mb-1 px-2">
+                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#666] mb-1 px-2">
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
@@ -423,7 +423,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                     key={item.label}
                     to={regionPath(item.href)}
                     onClick={onClose}
-                    className="block py-1.5 px-2 text-[.8rem] text-[#555] hover:text-[#0c0c0c] transition-colors no-underline"
+                    className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
                   >
                     {item.label}
                   </Link>
@@ -436,7 +436,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                 key={item.label}
                 to={regionPath(item.href)}
                 onClick={onClose}
-                className="block py-2 px-2 text-[.8rem] text-[#555] hover:text-[#0c0c0c] transition-colors no-underline"
+                className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
               >
                 {item.label}
               </Link>
