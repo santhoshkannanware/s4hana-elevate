@@ -20,6 +20,7 @@ import OurStoryPage from "./pages/OurStoryPage.tsx";
 import SapBusinessAiPage from "./pages/SapBusinessAiPage.tsx";
 import TransformationMgmtPage from "./pages/TransformationMgmtPage.tsx";
 import SapBusinessDataCloudPage from "./pages/SapBusinessDataCloudPage.tsx";
+import OurBusinessPage from "./pages/OurBusinessPage.tsx";
 import GeoRedirect from "./components/GeoRedirect.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 
@@ -50,6 +51,7 @@ function RegionRoutes() {
         <Route path="kin-ai/talent-matcher" element={<TalentMatcherPage />} />
         {/* About */}
         <Route path="about/our-story" element={<OurStoryPage />} />
+        <Route path="about/our-business" element={<OurBusinessPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RegionProvider>
