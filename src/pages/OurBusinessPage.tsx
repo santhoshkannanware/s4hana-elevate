@@ -110,30 +110,62 @@ export default function OurBusinessPage() {
       <Navbar />
 
       {/* ─── Hero ─── */}
-      <section ref={heroRef} id="overview" className="relative min-h-[80vh] flex items-center overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/30 z-10" />
-          <img src={sapPartnerHero} alt="Transformation with Kannanware" className="w-full h-full object-cover object-center" />
-        </motion.div>
-        <div className="relative z-20 w-full px-8 md:px-16 lg:px-24 py-32">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[.2em] text-primary mb-4">
-              <span className="w-8 h-px bg-primary" /> About Our Business
+      <section ref={heroRef} id="overview" className="relative pt-32 pb-20 overflow-hidden">
+        {/* Subtle gradient bg */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+            {/* Badge */}
+            <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-[.15em] px-5 py-2 rounded-full mb-8">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Certified SAP Partner
             </span>
-            <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] max-w-2xl">
-              Transforming Enterprises<br />
-              <span className="text-primary">with SAP</span>
+
+            {/* Headline */}
+            <h1 className="text-[clamp(2.5rem,5.5vw,5rem)] font-bold leading-[1.05] tracking-[-0.03em]">
+              Transforming Enterprises,{" "}
+              <br className="hidden md:block" />
+              <span className="text-primary">Powering Growth with SAP.</span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-              As a certified SAP Partner, we deliver end-to-end digital transformation — from strategy to execution — empowering businesses to thrive in the intelligent enterprise era.
+
+            {/* Subtitle */}
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              End-to-end digital transformation — from strategy to execution — empowering businesses to thrive in the intelligent enterprise era.
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <a href="https://partnerfinder.sap.com/profile/0002787368" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold rounded-sm hover:brightness-110 transition">
+
+            {/* Feature pills */}
+            <div className="flex flex-wrap justify-center gap-3 mt-10">
+              {[
+                { icon: Award, label: "SAP Gold Partner" },
+                { icon: Shield, label: "150+ SAP Certifications" },
+                { icon: Globe, label: "Global Delivery Network" },
+              ].map((pill) => (
+                <div key={pill.label} className="inline-flex items-center gap-2.5 bg-card border border-border rounded-full px-5 py-2.5 text-sm">
+                  <pill.icon className="w-4 h-4 text-primary" />
+                  <span>{pill.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap justify-center gap-4 mt-10">
+              <a href="https://partnerfinder.sap.com/profile/0002787368" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-semibold rounded-full hover:brightness-110 transition">
                 View SAP Partner Profile <ExternalLink className="w-4 h-4" />
               </a>
-              <button onClick={() => document.getElementById("our-partners")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex items-center gap-2 border border-border px-6 py-3 text-sm font-semibold rounded-sm hover:bg-secondary transition">
+              <button onClick={() => document.getElementById("our-partners")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex items-center gap-2 bg-card border border-border px-8 py-3.5 text-sm font-semibold rounded-full hover:bg-secondary transition">
                 Our Partners <ChevronRight className="w-4 h-4" />
               </button>
+            </div>
+          </motion.div>
+
+          {/* Metrics band */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="mt-16 pt-10 border-t border-border">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {metrics.map((m) => (
+                <div key={m.label} className="text-center">
+                  <span className="block text-[clamp(2rem,4vw,3rem)] font-bold text-foreground leading-none">{m.value}</span>
+                  <span className="text-xs text-muted-foreground tracking-widest uppercase mt-2 block">{m.label}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
