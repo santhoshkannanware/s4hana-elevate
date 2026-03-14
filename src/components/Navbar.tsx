@@ -30,32 +30,32 @@ const megaTabs: MegaTab[] = [
       {
         label: "Cloud ERP",
         children: [
-          { label: "S/4HANA (Public & Private Cloud)", href: "/product-expertise/s4hana" },
-          { label: "SAP® ECC", href: "/product-expertise/ecc" },
-          { label: "Group Reporting", href: "/product-expertise/group-reporting" },
-          { label: "BRIM", href: "/product-expertise/brim" },
+          { label: "S/4HANA (Public & Private Cloud)", href: "/products/cloud-erp/s4hana" },
+          { label: "SAP® ECC", href: "/products/cloud-erp/ecc" },
+          { label: "Group Reporting", href: "/products/cloud-erp/group-reporting" },
+          { label: "BRIM", href: "/products/cloud-erp/brim" },
         ],
       },
       {
         label: "Data & Analytics",
         children: [
-          { label: "SAP Data Sphere", href: "/product-expertise/data-sphere" },
-          { label: "SAP Analytics Cloud", href: "/product-expertise/analytics-cloud" },
-          { label: "SAP BW/4HANA", href: "/product-expertise/bw4-hana" },
-          { label: "SAP Business Objects", href: "/product-expertise/business-objects" },
+          { label: "SAP Data Sphere", href: "/products/data-analytics/data-sphere" },
+          { label: "SAP Analytics Cloud", href: "/products/data-analytics/analytics-cloud" },
+          { label: "SAP BW/4HANA", href: "/products/data-analytics/bw4-hana" },
+          { label: "SAP Business Objects", href: "/products/data-analytics/business-objects" },
         ],
       },
       {
         label: "Technology Platform",
         children: [
-          { label: "SAP® BTP", href: "/product-expertise/btp" },
-          { label: "Multi Banking Connectivity", href: "/product-expertise/multi-banking" },
+          { label: "SAP® BTP", href: "/products/technology-platform/btp" },
+          { label: "Multi Banking Connectivity", href: "/products/technology-platform/multi-banking" },
         ],
       },
       {
         label: "Artificial Intelligence",
         children: [
-          { label: "Agentic AI with Joule", href: "/product-expertise/agentic-ai" },
+          { label: "Agentic AI with Joule", href: "/products/artificial-intelligence/agentic-ai" },
         ],
       },
     ],
@@ -63,13 +63,13 @@ const megaTabs: MegaTab[] = [
   {
     label: "Industries",
     categories: [
-      { label: "Energy & Natural Resources", href: "/industry/energy" },
-      { label: "Discrete Manufacturing", href: "#industries" },
-      { label: "Services Management", href: "#industries" },
-      { label: "Financial Services", href: "#industries" },
-      { label: "Public Services", href: "#industries" },
-      { label: "Consumer", href: "#industries" },
-      { label: "Food & Beverage", href: "#industries" },
+      { label: "Energy & Natural Resources", href: "/industries/energy" },
+      { label: "Discrete Manufacturing", href: "/industries/discrete-manufacturing" },
+      { label: "Services Management", href: "/industries/services-management" },
+      { label: "Financial Services", href: "/industries/financial-services" },
+      { label: "Public Services", href: "/industries/public-services" },
+      { label: "Consumer", href: "/industries/consumer" },
+      { label: "Food & Beverage", href: "/industries/food-beverage" },
     ],
   },
   {
@@ -78,20 +78,20 @@ const megaTabs: MegaTab[] = [
       {
         label: "Functions",
         children: [
-          { label: "Record to Report", href: "/capability/record-to-report" },
-          { label: "Source to Pay", href: "/capability/source-to-pay" },
-          { label: "Treasury", href: "/capability/treasury" },
-          { label: "Projects", href: "/capability/projects" },
-          { label: "Operate and Maintain", href: "/capability/operate-and-maintain" },
-          { label: "Order to Cash", href: "/capability/order-to-cash" },
+          { label: "Record to Report", href: "/transform-manage/functions/record-to-report" },
+          { label: "Source to Pay", href: "/transform-manage/functions/source-to-pay" },
+          { label: "Treasury", href: "/transform-manage/functions/treasury" },
+          { label: "Projects", href: "/transform-manage/functions/projects" },
+          { label: "Operate and Maintain", href: "/transform-manage/functions/operate-and-maintain" },
+          { label: "Order to Cash", href: "/transform-manage/functions/order-to-cash" },
         ],
       },
       {
         label: "Services",
         children: [
-          { label: "Advisory", href: "/services/advisory" },
-          { label: "Execution", href: "/services/execution" },
-          { label: "Experts as a Service (EaaS)", href: "/services/eaas" },
+          { label: "Advisory", href: "/transform-manage/services/advisory" },
+          { label: "Execution", href: "/transform-manage/services/execution" },
+          { label: "Experts as a Service (EaaS)", href: "/transform-manage/services/eaas" },
         ],
       },
     ],
@@ -99,18 +99,18 @@ const megaTabs: MegaTab[] = [
   {
     label: "Insights",
     categories: [
-      { label: "Blogs", href: "#insights" },
-      { label: "Case Studies", href: "#insights" },
-      { label: "Knowledge Base", href: "#insights" },
+      { label: "Blogs", href: "/insights/blogs" },
+      { label: "Case Studies", href: "/insights/case-studies" },
+      { label: "Knowledge Base", href: "/insights/knowledge-base" },
     ],
   },
   {
     label: "KIN AI",
     glow: true,
     categories: [
-      { label: "CV Optimiser", href: "/products/cv-optimiser" },
-      { label: "AI Resume Builder", href: "/products/ai-resume-builder" },
-      { label: "SAP Talent Matcher", href: "/products/talent-matcher" },
+      { label: "CV Optimiser", href: "/kin-ai/cv-optimiser" },
+      { label: "AI Resume Builder", href: "/kin-ai/ai-resume-builder" },
+      { label: "SAP Talent Matcher", href: "/kin-ai/talent-matcher" },
     ],
   },
 ];
