@@ -444,14 +444,27 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={regionPath(item.href)}
-                    onClick={onClose}
-                    className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                  >
-                    {item.label}
-                  </Link>
+                  item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      to={regionPath(item.href)}
+                      onClick={onClose}
+                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ))}
               </div>
             ))
