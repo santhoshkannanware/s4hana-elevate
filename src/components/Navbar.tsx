@@ -281,17 +281,17 @@ export default function Navbar() {
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-[1000] transition-all duration-300"
         style={{
-          background: "#fff",
+          background: "#0c0c0c",
           boxShadow: scrolled
-            ? "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)"
-            : "0 1px 0 rgba(0,0,0,0.06)",
+            ? "0 4px 20px rgba(0,0,0,0.5)"
+            : "0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
         {/* Top bar */}
         <div className="max-w-[1400px] mx-auto h-[72px] flex items-center px-6 lg:px-10">
           {/* Logo */}
           <Link to={regionPath("/")} className="flex items-center gap-3 no-underline cursor-none mr-10 shrink-0">
-            <img src={LOGO_SVG_DARK} alt="Kannanware" className="h-10 w-auto block" />
+            <img src={LOGO_SVG} alt="Kannanware" className="h-10 w-auto block" />
           </Link>
 
           {/* Desktop nav — left aligned */}
@@ -307,8 +307,8 @@ export default function Navbar() {
                   <button
                     className={`px-4 py-6 text-[.85rem] font-medium transition-colors duration-200 cursor-none bg-transparent border-none relative tracking-[.01em] ${
                       isActive
-                        ? "text-[#0c0c0c]"
-                        : "text-[#555] hover:text-[#0c0c0c]"
+                        ? "text-white"
+                        : "text-[#aaa] hover:text-white"
                     }`}
                   >
                     {tab.label}
@@ -329,7 +329,7 @@ export default function Navbar() {
             <RegionSelector />
             <button
               onClick={() => document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-5 py-2.5 bg-[#0c0c0c] text-white text-[.8rem] font-semibold tracking-[.04em] border-none cursor-none transition-all duration-200 hover:bg-[#333] rounded"
+              className="px-5 py-2.5 bg-white text-[#0c0c0c] text-[.8rem] font-semibold tracking-[.04em] border-none cursor-none transition-all duration-200 hover:bg-[#e5e5e5] rounded"
             >
               Contact Us
             </button>
@@ -337,7 +337,7 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 ml-auto" aria-label="Toggle menu">
-            {mobileOpen ? <X className="w-6 h-6 text-[#0c0c0c]" /> : <Menu className="w-6 h-6 text-[#0c0c0c]" />}
+            {mobileOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
           </button>
         </div>
 
@@ -350,10 +350,10 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-[#eee] max-h-[80vh] overflow-y-auto">
+          <div className="lg:hidden bg-[#0c0c0c] border-t border-[#262626] max-h-[80vh] overflow-y-auto">
             <div className="px-5 py-6 flex flex-col gap-1">
               {/* Mobile region selector */}
-              <div className="flex gap-2 mb-4 pb-4 border-b border-[#eee]">
+              <div className="flex gap-2 mb-4 pb-4 border-b border-[#262626]">
                 {REGIONS.map((r) => (
                   <MobileRegionButton key={r.code} r={r} />
                 ))}
@@ -363,7 +363,7 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => { document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" }); setMobileOpen(false); }}
-                className="mt-4 px-5 py-2.5 bg-[#0c0c0c] text-white text-xs font-semibold tracking-wider rounded"
+                className="mt-4 px-5 py-2.5 bg-white text-[#0c0c0c] text-xs font-semibold tracking-wider rounded"
               >
                 Contact Us
               </button>
