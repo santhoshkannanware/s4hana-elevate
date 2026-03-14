@@ -192,11 +192,9 @@ const megaTabs: MegaTab[] = [
           },
           {
             subHeading: "Expert Pods",
-            items: [],
-          },
-          {
-            subHeading: "Design Authority",
-            items: [],
+            items: [
+              { label: "Design Authority", href: "/transform-manage/services/eaas#design-authority" },
+            ],
           },
         ],
       },
