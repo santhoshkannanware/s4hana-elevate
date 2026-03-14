@@ -520,14 +520,9 @@ const subNavItems = [
 
 function StickySubNav() {
   const [active, setActive] = useState("");
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero
-      setVisible(window.scrollY > 300);
-
-      // Determine active section
       const offsets = subNavItems.map(item => {
         const el = document.getElementById(item.id);
         return { id: item.id, top: el ? el.getBoundingClientRect().top : Infinity };
@@ -536,21 +531,19 @@ function StickySubNav() {
       if (current) setActive(current.id);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.div
-      initial={{ y: -60 }}
-      animate={{ y: visible ? 0 : -60 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+    <div
       className="fixed top-[72px] left-0 right-0 z-40 backdrop-blur-xl border-b"
       style={{
         background: "rgba(11,11,11,.92)",
         borderColor: "rgba(244,180,0,.08)",
       }}
     >
-      <div className="max-w-[1320px] mx-auto px-6 flex items-center gap-1 overflow-x-auto scrollbar-none h-11">
+      <div className="max-w-[1320px] mx-auto px-6 flex items-center justify-center gap-1 overflow-x-auto scrollbar-none h-11">
         {subNavItems.map(item => (
           <button
             key={item.id}
@@ -574,7 +567,7 @@ function StickySubNav() {
           </button>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 

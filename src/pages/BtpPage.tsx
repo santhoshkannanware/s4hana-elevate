@@ -543,20 +543,86 @@ function CTASection() {
   );
 }
 
+/* ─── Sub Nav Items ─── */
+const btpSubNavItems = [
+  { id: "hero", label: "Overview" },
+  { id: "pillars", label: "Pillars" },
+  { id: "demo", label: "Live Demo" },
+  { id: "expertise", label: "Expertise" },
+  { id: "timeline", label: "Timeline" },
+  { id: "architecture", label: "Architecture" },
+  { id: "impact", label: "Impact" },
+  { id: "cta", label: "Get Started" },
+];
+
+function BtpSubNav() {
+  const [active, setActive] = useState("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offsets = btpSubNavItems.map(item => {
+        const el = document.getElementById(item.id);
+        return { id: item.id, top: el ? el.getBoundingClientRect().top : Infinity };
+      });
+      const current = offsets.filter(o => o.top <= 160).pop();
+      if (current) setActive(current.id);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      className="fixed top-[72px] left-0 right-0 z-40 backdrop-blur-xl border-b"
+      style={{
+        background: "rgba(11,11,11,.92)",
+        borderColor: "rgba(244,180,0,.08)",
+      }}
+    >
+      <div className="max-w-[1320px] mx-auto px-6 flex items-center justify-center gap-1 overflow-x-auto scrollbar-none h-11">
+        {btpSubNavItems.map(item => (
+          <button
+            key={item.id}
+            onClick={() => {
+              document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="relative whitespace-nowrap px-4 py-2.5 text-[.75rem] font-semibold tracking-wide transition-colors shrink-0"
+            style={{
+              color: active === item.id ? "#F4B400" : "rgba(255,255,255,.5)",
+            }}
+          >
+            {item.label}
+            {active === item.id && (
+              <motion.div
+                layoutId="btp-subnav-indicator"
+                className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full"
+                style={{ background: "#F4B400" }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Page ─── */
 export default function BtpPage() {
   return (
     <div className="min-h-screen" style={{ background: "#0B0B0B", fontFamily: "'Ubuntu', sans-serif" }}>
       
       <Navbar />
-      <HeroSection />
-      <PillarsToggle />
-      <LiveDemo />
-      <ExpertiseSection />
-      <TransformationTimeline />
-      <ArchitectureViz />
-      <BusinessImpact />
-      <CTASection />
+      <BtpSubNav />
+      <div id="hero"><HeroSection /></div>
+      <div id="pillars"><PillarsToggle /></div>
+      <div id="demo"><LiveDemo /></div>
+      <div id="expertise"><ExpertiseSection /></div>
+      <div id="timeline"><TransformationTimeline /></div>
+      <div id="architecture"><ArchitectureViz /></div>
+      <div id="impact"><BusinessImpact /></div>
+      <div id="cta"><CTASection /></div>
       <Footer />
     </div>
   );
