@@ -19,6 +19,21 @@ interface CapabilityGroup {
   items: SubItem[];
 }
 
+/** A sub-section inside a services column (e.g. "Deploy" with bullet items) */
+interface ServiceSubSection {
+  subHeading: string;
+  items: SubItem[];
+}
+
+/** A column in the Services mega menu */
+interface ServiceColumn {
+  heading: string;
+  /** Top-level items (no sub-heading) */
+  topItems?: SubItem[];
+  /** Grouped sub-sections */
+  sections?: ServiceSubSection[];
+}
+
 interface MegaTabSingle {
   label: string;
   type: "single";
@@ -31,7 +46,13 @@ interface MegaTabMultiCol {
   columns: CapabilityGroup[];
 }
 
-type MegaTab = MegaTabSingle | MegaTabMultiCol;
+interface MegaTabServices {
+  label: string;
+  type: "services";
+  columns: ServiceColumn[];
+}
+
+type MegaTab = MegaTabSingle | MegaTabMultiCol | MegaTabServices;
 
 /* ─── Navigation Data ─── */
 const megaTabs: MegaTab[] = [
@@ -106,11 +127,91 @@ const megaTabs: MegaTab[] = [
   },
   {
     label: "Services",
-    type: "single",
-    items: [
-      { label: "Advisory", href: "/transform-manage/services/advisory" },
-      { label: "Execution", href: "/transform-manage/services/execution" },
-      { label: "Expert as a Service", href: "/transform-manage/services/eaas" },
+    type: "services",
+    columns: [
+      {
+        heading: "Advisory",
+        topItems: [
+          { label: "BPSR", href: "/transform-manage/services/advisory#bpsr" },
+          { label: "SPAR", href: "/transform-manage/services/advisory#spar" },
+          { label: "Audit & Assurance", href: "/transform-manage/services/advisory#audit" },
+        ],
+      },
+      {
+        heading: "Execute",
+        sections: [
+          {
+            subHeading: "Deploy",
+            items: [
+              { label: "Greenfield", href: "/transform-manage/services/execution#greenfield" },
+              { label: "Bluefield", href: "/transform-manage/services/execution#bluefield" },
+              { label: "Brownfield", href: "/transform-manage/services/execution#brownfield" },
+            ],
+          },
+          {
+            subHeading: "Implementation",
+            items: [
+              { label: "S/4HANA Cloud Implementation", href: "/transform-manage/services/execution#s4hana-cloud" },
+              { label: "Treasury Implementation", href: "/transform-manage/services/execution#treasury" },
+              { label: "Plant Maintenance", href: "/transform-manage/services/execution#plant-maintenance" },
+            ],
+          },
+          {
+            subHeading: "Elevate",
+            items: [
+              { label: "Data Migration", href: "/transform-manage/services/execution#data-migration" },
+              { label: "Rollouts", href: "/transform-manage/services/execution#rollouts" },
+              { label: "Fiori Transportation", href: "/transform-manage/services/execution#fiori" },
+            ],
+          },
+          {
+            subHeading: "Maintenance",
+            items: [],
+          },
+          {
+            subHeading: "Support",
+            items: [
+              { label: "S/4HANA Support", href: "/transform-manage/services/execution#s4hana-support" },
+              { label: "Financial Support", href: "/transform-manage/services/execution#financial-support" },
+              { label: "Supply Chain Support", href: "/transform-manage/services/execution#supply-chain-support" },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Expert as a Service",
+        sections: [
+          {
+            subHeading: "Individual Specialist",
+            items: [],
+          },
+          {
+            subHeading: "SAP Expertise",
+            items: [
+              { label: "SAP FICO", href: "/transform-manage/services/eaas#fico" },
+              { label: "PP", href: "/transform-manage/services/eaas#pp" },
+              { label: "MM", href: "/transform-manage/services/eaas#mm" },
+              { label: "SD", href: "/transform-manage/services/eaas#sd" },
+              { label: "Project Management", href: "/transform-manage/services/eaas#pm" },
+            ],
+          },
+          {
+            subHeading: "SWAT Team",
+            items: [
+              { label: "Functional Specialists", href: "/transform-manage/services/eaas#functional" },
+              { label: "Technical Specialists", href: "/transform-manage/services/eaas#technical" },
+            ],
+          },
+          {
+            subHeading: "Expert Pods",
+            items: [],
+          },
+          {
+            subHeading: "Design Authority",
+            items: [],
+          },
+        ],
+      },
     ],
   },
   {
@@ -174,16 +275,70 @@ function RegionSelector() {
   );
 }
 
+/* ─── Helper: render a link (internal or external) ─── */
+function NavLink({ item, onClose, regionPath, className }: { item: SubItem; onClose: () => void; regionPath: (p: string) => string; className: string }) {
+  if (item.href.startsWith("http")) {
+    return (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClose} className={className}>
+        {item.label}
+      </a>
+    );
+  }
+  return (
+    <Link to={regionPath(item.href)} onClick={onClose} className={className}>
+      {item.label}
+    </Link>
+  );
+}
+
 /* ─── Mega Menu Panel ─── */
 function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) {
   const { regionPath } = useRegion();
+  const linkClass = "block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none";
+  const singleLinkClass = "block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal";
 
   return (
     <div className="absolute top-full left-0 right-0 z-50 bg-[#0c0c0c] border-t border-[#262626] shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
       style={{ animation: "megaFadeIn 0.2s ease-out" }}
     >
       <div className="max-w-[1280px] mx-auto px-10 py-8">
-        {tab.type === "multi" ? (
+        {tab.type === "services" ? (
+          /* ── Services 3-column layout ── */
+          <div className="grid grid-cols-3 gap-x-16">
+            {tab.columns.map((col) => (
+              <div key={col.heading}>
+                <h4 className="text-[.7rem] uppercase tracking-[.18em] font-bold text-[#E8A000] mb-4 pb-2 border-b border-[#262626]">
+                  {col.heading}
+                </h4>
+                {/* Top-level items (Advisory) */}
+                {col.topItems && (
+                  <ul className="list-none p-0 m-0 flex flex-col gap-0.5 mb-4">
+                    {col.topItems.map((item) => (
+                      <li key={item.label}>
+                        <NavLink item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {/* Grouped sub-sections (Execute, EaaS) */}
+                {col.sections && col.sections.map((sec) => (
+                  <div key={sec.subHeading} className="mb-3">
+                    <p className="text-[.75rem] font-semibold text-white mb-1 mt-1">{sec.subHeading}</p>
+                    {sec.items.length > 0 && (
+                      <ul className="list-none p-0 m-0 pl-3 flex flex-col gap-0">
+                        {sec.items.map((item) => (
+                          <li key={item.label}>
+                            <NavLink item={item} onClose={onClose} regionPath={regionPath} className="block py-1 text-[.8rem] text-[#888] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none" />
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : tab.type === "multi" ? (
           /* Multi-column layout for Capabilities */
           <div className="grid grid-cols-3 gap-x-12 gap-y-8">
             {tab.columns.map((group) => (
@@ -194,25 +349,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
                 <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
                   {group.items.map((item) => (
                     <li key={item.label}>
-                      {item.href.startsWith("http") ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={onClose}
-                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link
-                          to={regionPath(item.href)}
-                          onClick={onClose}
-                          className="block py-1.5 text-[.85rem] text-[#aaa] hover:text-white hover:translate-x-0.5 transition-all duration-200 no-underline cursor-none"
-                        >
-                          {item.label}
-                        </Link>
-                      )}
+                      <NavLink item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
                     </li>
                   ))}
                 </ul>
@@ -223,27 +360,7 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
           /* Single column layout */
           <div className={`grid gap-0.5 ${tab.items.length > 5 ? "grid-cols-2 max-w-2xl" : "max-w-sm"}`}>
             {tab.items.map((item) => (
-              item.href.startsWith("http") ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={regionPath(item.href)}
-                  onClick={onClose}
-                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
-                >
-                  {item.label}
-                </Link>
-              )
+              <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={singleLinkClass} />
             ))}
           </div>
         )}
@@ -422,9 +539,7 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
   const { regionPath } = useRegion();
   const [open, setOpen] = useState(false);
 
-  const allItems: SubItem[] = tab.type === "multi"
-    ? tab.columns.flatMap((col) => col.items)
-    : tab.items;
+  const linkClass = "block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline";
 
   return (
     <div className="border-b border-[#262626]">
@@ -437,60 +552,40 @@ function MobileTabAccordion({ tab, onClose }: { tab: MegaTab; onClose: () => voi
       </button>
       {open && (
         <div className="pl-3 pb-3 flex flex-col gap-0.5">
-          {tab.type === "multi" ? (
+          {tab.type === "services" ? (
+            /* Services mobile: show columns with sub-sections */
+            tab.columns.map((col) => (
+              <div key={col.heading} className="mb-3">
+                <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#E8A000] mb-1 px-2">
+                  {col.heading}
+                </p>
+                {col.topItems?.map((item) => (
+                  <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
+                ))}
+                {col.sections?.map((sec) => (
+                  <div key={sec.subHeading} className="mt-1">
+                    <p className="text-[.7rem] font-semibold text-[#ccc] px-2 py-0.5">{sec.subHeading}</p>
+                    {sec.items.map((item) => (
+                      <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className="block py-1 px-4 text-[.75rem] text-[#888] hover:text-white transition-colors no-underline" />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : tab.type === "multi" ? (
             tab.columns.map((group) => (
               <div key={group.heading} className="mb-3">
                 <p className="text-[.65rem] uppercase tracking-[.15em] font-bold text-[#666] mb-1 px-2">
                   {group.heading}
                 </p>
                 {group.items.map((item) => (
-                  item.href.startsWith("http") ? (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={onClose}
-                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={item.label}
-                      to={regionPath(item.href)}
-                      onClick={onClose}
-                      className="block py-1.5 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                    >
-                      {item.label}
-                    </Link>
-                  )
+                  <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className={linkClass} />
                 ))}
               </div>
             ))
           ) : (
-            allItems.map((item) => (
-              item.href.startsWith("http") ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={regionPath(item.href)}
-                  onClick={onClose}
-                  className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline"
-                >
-                  {item.label}
-                </Link>
-              )
+            tab.items.map((item) => (
+              <NavLink key={item.label} item={item} onClose={onClose} regionPath={regionPath} className="block py-2 px-2 text-[.8rem] text-[#aaa] hover:text-white transition-colors no-underline" />
             ))
           )}
         </div>
