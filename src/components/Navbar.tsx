@@ -149,14 +149,6 @@ const megaTabs: MegaTab[] = [
             ],
           },
           {
-            subHeading: "Implementation",
-            items: [
-              { label: "S/4HANA Cloud Implementation", href: "/transform-manage/services/execution#s4hana-cloud" },
-              { label: "Treasury Implementation", href: "/transform-manage/services/execution#treasury" },
-              { label: "Plant Maintenance", href: "/transform-manage/services/execution#plant-maintenance" },
-            ],
-          },
-          {
             subHeading: "Elevate",
             items: [
               { label: "Data Migration", href: "/transform-manage/services/execution#data-migration" },
@@ -165,11 +157,7 @@ const megaTabs: MegaTab[] = [
             ],
           },
           {
-            subHeading: "Maintenance",
-            items: [],
-          },
-          {
-            subHeading: "Support",
+            subHeading: "Prime Care",
             items: [
               { label: "S/4HANA Support", href: "/transform-manage/services/execution#s4hana-support" },
               { label: "Financial Support", href: "/transform-manage/services/execution#financial-support" },
@@ -204,11 +192,9 @@ const megaTabs: MegaTab[] = [
           },
           {
             subHeading: "Expert Pods",
-            items: [],
-          },
-          {
-            subHeading: "Design Authority",
-            items: [],
+            items: [
+              { label: "Design Authority", href: "/transform-manage/services/eaas#design-authority" },
+            ],
           },
         ],
       },
