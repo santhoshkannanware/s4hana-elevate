@@ -17,6 +17,7 @@ import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
 import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
 import OurStoryPage from "./pages/OurStoryPage.tsx";
+import SapBusinessAiPage from "./pages/SapBusinessAiPage.tsx";
 import GeoRedirect from "./components/GeoRedirect.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 
@@ -29,6 +30,7 @@ function RegionRoutes() {
         <Route index element={<Index />} />
         {/* Products */}
         <Route path="products/cloud-erp/s4hana" element={<S4HanaPage />} />
+        <Route path="products/artificial-intelligence/sap-business-ai" element={<SapBusinessAiPage />} />
         <Route path="products/technology-platform/btp" element={<BtpPage />} />
         {/* Industries */}
         <Route path="industries/energy" element={<EnergyPage />} />
