@@ -25,16 +25,21 @@ function RegionRoutes() {
     <RegionProvider>
       <Routes>
         <Route index element={<Index />} />
-        <Route path="product-expertise/s4hana" element={<S4HanaPage />} />
-        <Route path="product-expertise/btp" element={<BtpPage />} />
-        <Route path="capability/record-to-report" element={<RecordToReportPage />} />
-        <Route path="industry/energy" element={<EnergyPage />} />
-        <Route path="services/advisory" element={<AdvisoryPage />} />
-        <Route path="services/execution" element={<ExecutionPage />} />
-        <Route path="services/eaas" element={<EaaSPage />} />
-        <Route path="products/cv-optimiser" element={<CvOptimiserPage />} />
-        <Route path="products/ai-resume-builder" element={<AiResumeBuilderPage />} />
-        <Route path="products/talent-matcher" element={<TalentMatcherPage />} />
+        {/* Products */}
+        <Route path="products/cloud-erp/s4hana" element={<S4HanaPage />} />
+        <Route path="products/technology-platform/btp" element={<BtpPage />} />
+        {/* Industries */}
+        <Route path="industries/energy" element={<EnergyPage />} />
+        {/* Transform & Manage > Functions */}
+        <Route path="transform-manage/functions/record-to-report" element={<RecordToReportPage />} />
+        {/* Transform & Manage > Services */}
+        <Route path="transform-manage/services/advisory" element={<AdvisoryPage />} />
+        <Route path="transform-manage/services/execution" element={<ExecutionPage />} />
+        <Route path="transform-manage/services/eaas" element={<EaaSPage />} />
+        {/* KIN AI */}
+        <Route path="kin-ai/cv-optimiser" element={<CvOptimiserPage />} />
+        <Route path="kin-ai/ai-resume-builder" element={<AiResumeBuilderPage />} />
+        <Route path="kin-ai/talent-matcher" element={<TalentMatcherPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RegionProvider>
