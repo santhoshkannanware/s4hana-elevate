@@ -383,8 +383,8 @@ function MobileRegionButton({ r }: { r: typeof REGIONS[number] }) {
       onClick={() => setRegion(r.code)}
       className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded text-xs font-medium transition-colors cursor-none bg-transparent border ${
         region === r.code
-          ? "border-[#0c0c0c] text-[#0c0c0c] bg-[#f5f5f5] font-semibold"
-          : "border-[#ddd] text-[#888] hover:text-[#0c0c0c]"
+          ? "border-[#E8A000] text-white bg-[#1f1f1f] font-semibold"
+          : "border-[#333] text-[#aaa] hover:text-white hover:border-[#555]"
       }`}
     >
       <span>{r.flag}</span>
