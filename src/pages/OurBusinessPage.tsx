@@ -66,6 +66,10 @@ const partners = [
   { src: sriGowrish, name: "Sri Gowrish CNC", desc: "Precision manufacturing and CNC solutions" },
   { src: alghanim, name: "Alghanim Industries", desc: "Multi-industry conglomerate across the Middle East" },
   { src: dhaksha, name: "Dhaksha Drones", desc: "Autonomous aerial systems and drone technology" },
+  { src: parrys, name: "Parrys", desc: "Diversified industrial group with deep heritage" },
+  { src: kwik, name: "KwiK", desc: "Retail and consumer services solutions" },
+  { src: winomechanic, name: "Winomechanic", desc: "Industrial automation and mechanical engineering" },
+  { src: jkFenner, name: "JK Fenner", desc: "Power transmission and automotive components" },
 ];
 
 /* ─── Metrics ─── */
