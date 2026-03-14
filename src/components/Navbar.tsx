@@ -135,7 +135,7 @@ const megaTabs: MegaTab[] = [
   },
 ];
 
-/* ─── Region Selector (white-bg version) ─── */
+/* ─── Region Selector (dark-bg version) ─── */
 function RegionSelector() {
   const { region, setRegion } = useRegion();
   const [open, setOpen] = useState(false);
@@ -147,25 +147,25 @@ function RegionSelector() {
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button className="flex items-center gap-1.5 text-[.8rem] font-medium text-[#555] hover:text-[#0c0c0c] transition-colors cursor-none bg-transparent border border-[#ddd] rounded px-2.5 py-1.5 hover:border-[#999]">
+      <button className="flex items-center gap-1.5 text-[.8rem] font-medium text-[#aaa] hover:text-white transition-colors cursor-none bg-transparent border border-[#333] rounded px-2.5 py-1.5 hover:border-[#555]">
         <Globe className="w-3.5 h-3.5" />
         <span>{current.flag}</span>
         <span className="uppercase tracking-wider">{current.code}</span>
         <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute top-full right-0 mt-2 min-w-[180px] rounded-md py-1 shadow-xl z-50 bg-white border border-[#e5e5e5]">
+        <div className="absolute top-full right-0 mt-2 min-w-[180px] rounded-md py-1 shadow-xl z-50 bg-[#141414] border border-[#262626]">
           {REGIONS.map((r) => (
             <button
               key={r.code}
               onClick={() => { setRegion(r.code); setOpen(false); }}
               className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[.85rem] transition-colors cursor-none bg-transparent border-none text-left ${
-                r.code === region ? "text-[#0c0c0c] bg-[#f5f5f5] font-semibold" : "text-[#666] hover:text-[#0c0c0c] hover:bg-[#fafafa]"
+                r.code === region ? "text-white bg-[#1f1f1f] font-semibold" : "text-[#aaa] hover:text-white hover:bg-[#1a1a1a]"
               }`}
             >
               <span className="text-base">{r.flag}</span>
               <span>{r.label}</span>
-              {r.code === region && <span className="ml-auto text-[#0c0c0c] text-xs">●</span>}
+              {r.code === region && <span className="ml-auto text-[#E8A000] text-xs">●</span>}
             </button>
           ))}
         </div>
