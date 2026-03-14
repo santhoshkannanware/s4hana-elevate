@@ -41,6 +41,8 @@ function RegionRoutes() {
         <Route path="kin-ai/cv-optimiser" element={<CvOptimiserPage />} />
         <Route path="kin-ai/ai-resume-builder" element={<AiResumeBuilderPage />} />
         <Route path="kin-ai/talent-matcher" element={<TalentMatcherPage />} />
+        {/* About */}
+        <Route path="about/our-story" element={<OurStoryPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RegionProvider>
