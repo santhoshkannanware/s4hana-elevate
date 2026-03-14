@@ -35,6 +35,7 @@ function RegionRoutes() {
         <Route path="products/artificial-intelligence/sap-business-ai" element={<SapBusinessAiPage />} />
         <Route path="products/technology-platform/btp" element={<BtpPage />} />
         <Route path="products/transformation-management/walkme-signavio" element={<TransformationMgmtPage />} />
+        <Route path="products/data-analytics/sap-business-data-cloud" element={<SapBusinessDataCloudPage />} />
         {/* Industries */}
         <Route path="industries/energy" element={<EnergyPage />} />
         {/* Transform & Manage > Functions */}
