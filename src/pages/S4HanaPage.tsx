@@ -515,6 +515,7 @@ const subNavItems = [
   { label: "Methodology", id: "methodology" },
   { label: "Architecture", id: "architecture" },
   { label: "Impact", id: "impact" },
+  { label: "FAQ", id: "faq" },
   { label: "Get Started", id: "cta" },
 ];
 
