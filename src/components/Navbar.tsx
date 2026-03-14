@@ -223,14 +223,27 @@ function MegaMenuPanel({ tab, onClose }: { tab: MegaTab; onClose: () => void }) 
           /* Single column layout */
           <div className={`grid gap-0.5 ${tab.items.length > 5 ? "grid-cols-2 max-w-2xl" : "max-w-sm"}`}>
             {tab.items.map((item) => (
-              <Link
-                key={item.label}
-                to={regionPath(item.href)}
-                onClick={onClose}
-                className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
-              >
-                {item.label}
-              </Link>
+              item.href.startsWith("http") ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={regionPath(item.href)}
+                  onClick={onClose}
+                  className="block py-2.5 px-3 text-[.9rem] text-[#aaa] hover:text-white hover:bg-[#141414] rounded transition-all duration-200 no-underline cursor-none font-normal"
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </div>
         )}
