@@ -17,6 +17,7 @@ import CvOptimiserPage from "./pages/CvOptimiserPage.tsx";
 import AiResumeBuilderPage from "./pages/AiResumeBuilderPage.tsx";
 import TalentMatcherPage from "./pages/TalentMatcherPage.tsx";
 import OurStoryPage from "./pages/OurStoryPage.tsx";
+import SapBusinessAiPage from "./pages/SapBusinessAiPage.tsx";
 import GeoRedirect from "./components/GeoRedirect.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 
