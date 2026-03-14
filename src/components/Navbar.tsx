@@ -56,7 +56,7 @@ const megaTabs: MegaTab[] = [
       { label: "Mill Products", href: "/industries/mill-products" },
       { label: "Professional Services", href: "/industries/professional-services" },
       { label: "Retail", href: "/industries/retail" },
-      { label: "Utilities", href: "/industries/energy" },
+      { label: "Energy", href: "/industries/energy" },
     ],
   },
   {
